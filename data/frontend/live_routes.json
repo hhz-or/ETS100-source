@@ -1,0 +1,350 @@
+{
+ "count": 69,
+ "routes": [
+  {
+   "path": "/jkPage",
+   "name": "jkPage",
+   "component": "JKPage-a549c006.js"
+  },
+  {
+   "path": "/homeworkList",
+   "name": "homeworkList",
+   "component": "HomeworkList-fcfb7b07.js"
+  },
+  {
+   "path": "/listeningSpeakingSynchronousDetail",
+   "name": "listeningSpeakingSynchronousDetail",
+   "component": "Practice-06d8d973.js"
+  },
+  {
+   "path": "/listeningSpeakingSynchronousComprehensive",
+   "name": "listeningSpeakingSynchronousComprehensive",
+   "component": "Comprehensive-0abf64f4.js"
+  },
+  {
+   "path": "/eduLogin",
+   "name": "eduLogin",
+   "component": "EduLogin-73c31a78.js"
+  },
+  {
+   "path": "/eduSwLogin",
+   "name": "eduSwLogin",
+   "component": "EduSwLogin-4ed4fe34.js"
+  },
+  {
+   "path": "/mockExamList",
+   "name": "mockExamList",
+   "component": "MockExamList-25c4143d.js"
+  },
+  {
+   "path": "/mockExamDetail",
+   "name": "mockExamDetail",
+   "component": "MockExamDetails-78614a2b.js"
+  },
+  {
+   "path": "/mockExamResult",
+   "name": "mockExamResult",
+   "component": "MockExamResult-e6fb13e0.js"
+  },
+  {
+   "path": "/modelTestMode",
+   "name": "modelTestMode",
+   "component": "Examine-f27ec270.js"
+  },
+  {
+   "path": "/readingWritingList",
+   "name": "readingWritingList",
+   "component": "ReadingWritingList-ad3abf8a.js"
+  },
+  {
+   "path": "/readingWritingStart",
+   "name": "readingWritingStart",
+   "component": "ReadingWritingStart-8ee9bcb4.js"
+  },
+  {
+   "path": "/readingWritingDetails",
+   "name": "readingWritingDetails",
+   "component": "ReadingWritingDetails-a2a8de69.js"
+  },
+  {
+   "path": "/readingWritingResult",
+   "name": "readingWritingResult",
+   "component": "ReadingWritingResult-2e305f97.js"
+  },
+  {
+   "path": "/ecard-list",
+   "name": "ecardList",
+   "component": "EcardList-3c38c163.js"
+  },
+  {
+   "path": "/ecard-parent-buy",
+   "name": "ecardParentBuy",
+   "component": "EcardParentBuy-d5fa2d21.js"
+  },
+  {
+   "path": "/ecard-introduce",
+   "name": "ecardIntroduce",
+   "component": "EcardIntroduce-59cb4d2d.js"
+  },
+  {
+   "path": "/phonetic",
+   "name": "phonetic",
+   "component": "PhoneticView-4742fba6.js"
+  },
+  {
+   "path": "/phoneticDetail",
+   "name": "phoneticDetail",
+   "component": "PhoneticDetailView-90901ed6.js"
+  },
+  {
+   "path": "/phoneticPractice",
+   "name": "phoneticPractice",
+   "component": "PhoneticPracticeView-b5515c2e.js"
+  },
+  {
+   "path": "/phoneticNew",
+   "name": "phoneticNew",
+   "component": "PhoneticNewView-4ab36d35.js"
+  },
+  {
+   "path": "/phoneticNewDetail",
+   "name": "phoneticNewDetail",
+   "component": "PhoneticNewDetailView-9769eb6c.js"
+  },
+  {
+   "path": "/phoneticNewFinished",
+   "name": "phoneticNewFinished",
+   "component": "PhoneticNewFinishedView-dd13b0fb.js"
+  },
+  {
+   "path": "/phoneticNewPractice",
+   "name": "phoneticNewPractice",
+   "component": "PhoneticNewPracticeView-4681a432.js"
+  },
+  {
+   "path": "/phoneticNewResult",
+   "name": "phoneticNewResult",
+   "component": "PhoneticNewResultView-781b8be1.js"
+  },
+  {
+   "path": "/pkMatch",
+   "name": "pkMatch",
+   "component": "PKMatch-3b21d9b8.js"
+  },
+  {
+   "path": "/pkMatch_resource",
+   "name": "pkMatch_resource",
+   "component": "PKMatch-ae6925c3.js"
+  },
+  {
+   "path": "/pk",
+   "name": "pk",
+   "component": "PK-97724b3a.js"
+  },
+  {
+   "path": "/pkRank",
+   "name": "pkRank",
+   "component": "PKRank-cb2cfd32.js"
+  },
+  {
+   "path": "/pkResult",
+   "name": "pkResult",
+   "component": "PKResult-5826f7f9.js"
+  },
+  {
+   "path": "/recommendDub",
+   "name": "recommendDub",
+   "component": "DubHomePage-4839703b.js"
+  },
+  {
+   "path": "/dubDetailPage",
+   "name": "dubDetailPage",
+   "component": "DubDetailPage-0c80c887.js"
+  },
+  {
+   "path": "/dubPlayingPage",
+   "name": "dubPlayingPage",
+   "component": "DubPlayingPage-0017b0d6.js"
+  },
+  {
+   "path": "/dubFinishSavePage",
+   "name": "dubFinishSavePage",
+   "component": "DubFinishSavePage-dcd2a7d4.js"
+  },
+  {
+   "path": "/referenceBookList",
+   "name": "referenceBookList",
+   "component": "ReferenceBookList-d81c4987.js"
+  },
+  {
+   "path": "/referenceBookDetail",
+   "name": "referenceBookDetail",
+   "component": "ReferenceBookDetail-d076a9df.js"
+  },
+  {
+   "path": "/referenceBookTopicPreview",
+   "name": "referenceBookTopicPreview",
+   "component": "ReferenceBookTopicPreview-236df5f3.js"
+  },
+  {
+   "path": "/speakListenLesson",
+   "name": "speakListenLesson",
+   "component": "index-0be937b4.js"
+  },
+  {
+   "path": "/specialList",
+   "name": "specialList",
+   "component": "SpecialListView-38695221.js"
+  },
+  {
+   "path": "/specialReadingWritingStart",
+   "name": "specialReadingWritingStart",
+   "component": "SpecialReadingWritingStart-bd8e19e5.js"
+  },
+  {
+   "path": "/studyPlanDetail",
+   "name": "studyPlanDetail",
+   "component": "studyPlanDetail-d4b9a7af.js"
+  },
+  {
+   "path": "/studyPlanHistoryDetail",
+   "name": "studyPlanHistoryDetail",
+   "component": "studyPlanDetail-d4b9a7af.js"
+  },
+  {
+   "path": "/textCourse",
+   "name": "textCourse",
+   "component": "index-62bff6b1.js"
+  },
+  {
+   "path": "/textInfo",
+   "name": "textInfo",
+   "component": "textInfo-1be6bded.js"
+  },
+  {
+   "path": "/readSentence",
+   "name": "readSentence",
+   "component": "readSentence-a8cded72.js"
+  },
+  {
+   "path": "/readSentenceScoreInfo",
+   "name": "readSentenceScoreInfo",
+   "component": "readSentenceScoreInfo-20f8f45a.js"
+  },
+  {
+   "path": "/readAloud",
+   "name": "readAloud",
+   "component": "readAloud-7c86f494.js"
+  },
+  {
+   "path": "/textCourse_resource",
+   "name": "textCourse_resource",
+   "component": "index-85cbaae4.js"
+  },
+  {
+   "path": "/textInfo_resource",
+   "name": "textInfo_resource",
+   "component": "textInfo-b0b62b17.js"
+  },
+  {
+   "path": "/readSentence_resource",
+   "name": "readSentence_resource",
+   "component": "readSentence-331639e8.js"
+  },
+  {
+   "path": "/readSentenceScoreInfo_resource",
+   "name": "readSentenceScoreInfo_resource",
+   "component": "readSentenceScoreInfo-587c753e.js"
+  },
+  {
+   "path": "/readAloud_resource",
+   "name": "readAloud_resource",
+   "component": "readAloud-58a66f95.js"
+  },
+  {
+   "path": "/wordStudy",
+   "name": "wordStudy",
+   "component": "WordStudy-1f49082a.js"
+  },
+  {
+   "path": "/wordPractice",
+   "name": "wordPractice",
+   "component": "WordPractice-8d0209aa.js"
+  },
+  {
+   "path": "/wordPracticeResult",
+   "name": "wordPracticeResult",
+   "component": "WordPracticeResult-2383d4fa.js"
+  },
+  {
+   "path": "/wordQuestion",
+   "name": "wordQuestion",
+   "component": "WordQuestion-b14a59b7.js"
+  },
+  {
+   "path": "/homeworkWordQuestion",
+   "name": "homeworkWordQuestion",
+   "component": "HomeworkWordQuestion-0176bb0a.js"
+  },
+  {
+   "path": "/homeworkWordQuestionResult",
+   "name": "homeworkWordQuestionResult",
+   "component": "HomeworkWordQuestionResult-6dbbbe72.js"
+  },
+  {
+   "path": "/wordQuestionResult",
+   "name": "wordQuestionResult",
+   "component": "WordQuestionResult-34e63def.js"
+  },
+  {
+   "path": "/wordList",
+   "name": "wordList",
+   "component": "WordList-bcf43dd5.js"
+  },
+  {
+   "path": "/wordList_resource",
+   "name": "wordList_resource",
+   "component": "WordList-81977402.js"
+  },
+  {
+   "path": "/wordPractice_resource",
+   "name": "wordPractice_resource",
+   "component": "WordPractice-d0b845cb.js"
+  },
+  {
+   "path": "/wordQuestion_resource",
+   "name": "wordQuestion_resource",
+   "component": "WordQuestion-0e4b92ce.js"
+  },
+  {
+   "path": "/wordQuestionResult_resource",
+   "name": "wordQuestionResult_resource",
+   "component": "WordQuestionResult-4b370b1e.js"
+  },
+  {
+   "path": "/wordPracticeResult_resource",
+   "name": "wordPracticeResult_resource",
+   "component": "WordPracticeResult-af1120b8.js"
+  },
+  {
+   "path": "/setGoalOne",
+   "name": "setGoalOne",
+   "component": "SetGoalOnePage-90c4c591.js"
+  },
+  {
+   "path": "/setGoalTwo",
+   "name": "setGoalTwo",
+   "component": "SetGoalTwoPage-4f0599f8.js"
+  },
+  {
+   "path": "/ecardBind",
+   "name": "ecardBind",
+   "component": "EcardBind-d0abccb8.js"
+  },
+  {
+   "path": "/studyMaterialList",
+   "name": "studyMaterialList",
+   "component": "StudyMaterialList-529b5e5c.js"
+  }
+ ]
+}

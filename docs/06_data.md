@@ -164,7 +164,7 @@ LevelDB 记录 22 条。键值编码（实测）：
 | key（origin 均为 `https://statics.ets100.com`，另有一条 teacher 域空 META） | 值编码 | 大小 | 内容/用途 | 敏感 |
 |---|---|---|---|---|
 | `VERSION` | — | 1 | 本地存储格式版本 `1` | |
-| `appLogin` | utf-8 | 78 | `{"phone":"***","pwd":"<8字节混淆串>","rememberPwd":true,"autoLogin":true}`：**记住密码/自动登录**（密码为应用级混淆，非明文） | ★ |
+| `appLogin` | utf-8 | 78 | `{"phone":"SHM*******","pwd":"<8字节混淆串>","rememberPwd":true,"autoLogin":true}`：**记住密码/自动登录**（密码为应用级混淆，非明文） | ★ |
 | `userInfo` | utf-16 | 378,151 | 用户信息大对象（`userInfo.recent_account_id` 等，含账号相关字段） | ★ |
 | `appConfig` | utf-16 | 2,803 | 设备/环境：`AppTitle=讯飞E听说`、`ClientType`、`HDSerial`、`IP`、`MAC`、`Name`(机器名)、`OS/OSBit`、`Version=1.0.0.1` 等 | ★ |
 | `clientConfig` | utf-8 | 99 | §2.2 的 `C_Version/Update_Version/Skip/EnvType/TestVersion/Port` 镜像 | |
@@ -476,7 +476,7 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 - 更新请求（`update_info.h:28`，body 为 base64）：
 
 ```json
-[{"r":"client/mobile-update","params":{"client_version":5079,"os_type":"10","tag":"pc_refactor","sn":"***"}}]
+[{"r":"client/mobile-update","params":{"client_version":5079,"os_type":"10","tag":"pc_refactor","sn":"test"}}]
 ```
 
 - 更新响应（`update_info.h:29`）：

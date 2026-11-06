@@ -11,7 +11,7 @@
 
 1. **启动链是两段式**：`Ets.exe`（485,824 B，PDB 显示 `preshell`）读取 `shell.ini`，用 `ShellExecuteExW` 拉起 `shell.ini` 里 `AppName=ETSShell.exe`；`ETSShell.exe`（2,297,440 B，STIC V3.0.76）初始化 CEF 91 并创建主窗口。**【观察 + 推断】**
 2. **进程模型是标准 CEF 多进程**：1 个 browser 主进程（`processName` 为空）+ `--type=gpu-process` + 2×`--type=utility` + 1~3×`--type=renderer`；另有 Node.js SEA 进程 `ets_mq_server.exe`（12,080,168 B）作为 WebSocket 广播总线（端口 40001，`packages\app.json`）。**【观察】**
-3. **外壳自己有一套自定义协议 `stic://`**，注册了 4 个 host：`shell.iflytek.com`、`file.iflytek.com`、`rpk.iflytek.com`、`cpk.iflytek.com`；`file.iflytek.com` 的 URL 直接映射到本机绝对路径（`stic://file.iflytek.com/C:\Users\***\AppData\Roaming\ETS\<set>\...`）。**【观察】**
+3. **外壳自己有一套自定义协议 `stic://`**，注册了 4 个 host：`shell.iflytek.com`、`file.iflytek.com`、`rpk.iflytek.com`、`cpk.iflytek.com`；`file.iflytek.com` 的 URL 直接映射到本机绝对路径（`stic://file.iflytek.com/C:\Users\<user>\AppData\Roaming\ETS\<set>\...`）。**【观察】**
 4. **窗口控制是「JS 桥 + 原生插件」**：`packages\default\appcontroller.js` 定义 14 个 action（`init/close/maximize/minimize/restore/move/fullscreen/reduction/hide/show/get_win_pos/set_win_pos/startapp/idg_exist`），经 `cef.message.sendMessage(<callbackId>, 'appcontroller', <action>, <json>)` 调用原生 `appcontroller.pln`；`win_x/win_y = -1` 表示居中。**【观察】**
 5. **更新器是独立 EXE**：`EtsUpdate.exe`（根目录与 `temp\EtsUpdate.exe` **同 hash**），用 glog 写 `temp\update\log\INFO_uLOG_<date-time>.<pid>`；请求 `client/mobile-update`（`http://api.ets100.com`），比较 `Update_Version`（整数 5079）与服务器 `client_version`，相等即「不需要更新」并以**退出码 1** 退出。下载/安装/回滚/重启的能力面由字符串与 PE 导入完整还原（§6）。**【观察 + 推断】**
 6. **音频链是「原生录音 → mp3 + speex + 评测 xml → OSS 上传」**：`soundhelper.pln` 录音产出 `soundfiles\public_<32hex>_<epochms>.mp3` + 同名 `.mp3.spx` + 同名 `.xml`（iFlytek ISE 评测结果），三个文件都上传到 `https://ets60.oss-cn-hangzhou.aliyuncs.com`。系统另带 `lame.exe`（LAME 3.100）、`ffmpeg\ffmpeg.exe`（libavformat 58.42.101 ≈ FFmpeg 4.2.x）与 `process_ori.bat` 视频混音脚本、`7z.dll` + 7-Zip 解压链。**【观察 + 推断】**
@@ -93,7 +93,7 @@ flowchart TD
 ```
 
 - 单实例控制：`ETSShell.exe` 导入 `CreateMutexW` / `WaitForSingleObject` / `ReleaseMutex`；`shell.ini` 有 `MultiApp=1`、`LaunchMode=0`。**【观察 + 推断】**：`MultiApp=1` 允许多开，`LaunchMode=0` 为普通启动（另有隐藏值语义未知）。
-- 权限：`ETSShell.exe` 清单含 `<requestedExecutionLevel level='require***' uiAccess='false' />` → **壳以管理员权限运行**。**【观察】**
+- 权限：`ETSShell.exe` 清单含 `<requestedExecutionLevel level='requireAdministrator' uiAccess='false' />` → **壳以管理员权限运行**。**【观察】**
 - 用户数据目录：`temp\Cache_ETSShell`（Chromium profile：Cookies、Local Storage、IndexedDB、Cache、GPUCache、DevToolsActivePort）。**【观察】**
 - 远程调试：`temp\Cache_ETSShell\DevToolsActivePort` 内容为：
   ```
@@ -204,7 +204,7 @@ CEF 控制台（`cef_2026-10-28.log`/`cef_2026-11-4.log` 的 `CONSOLE` 行）直
 ```
 Mixed Content: The page at 'https://statics.ets100.com/ets-student-pc-web/index.html?tdt=...' was loaded
 over HTTPS, but requested an insecure audio file
-'stic://file.iflytek.com/C:\Users\***\AppData\Roaming\ETS\747726\template_686\material\start.mp3'
+'stic://file.iflytek.com/C:\Users\<user>\AppData\Roaming\ETS\747726\template_686\material\start.mp3'
 ```
 
 **【观察】scheme 名为 `stic`，host 为 4 个 `*.iflytek.com`。** scheme 被注册为「非安全内容」，因此在 HTTPS 页面里引用会触发 mixed-content 警告（日志中 67+134 条），但请求仍被放行（`--allow-running-insecure-content`）。
@@ -213,7 +213,7 @@ over HTTPS, but requested an insecure audio file
 
 | host | 语义 | 证据 |
 |---|---|---|
-| `file.iflytek.com` | 本地文件读取：`stic://file.iflytek.com/<本地绝对路径>` | `client_schema.cpp(439)` 打印 `domain_name size: <bytes>, //file.iflytek.com/C:\Users\***\ETS\<set>\...`（109 条）；控制台 URL |
+| `file.iflytek.com` | 本地文件读取：`stic://file.iflytek.com/<本地绝对路径>` | `client_schema.cpp(439)` 打印 `domain_name size: <bytes>, //file.iflytek.com/C:\Users\...\ETS\<set>\...`（109 条）；控制台 URL |
 | `shell.iflytek.com` | 壳能力/虚拟资源（壳自己的命名空间） | 字符串 `//shell.iflytek.com/` |
 | `rpk.iflytek.com` | 资源包（resource pack） | 字符串 + 命名推断 |
 | `cpk.iflytek.com` | 内容包（content pack） | 字符串 + 命名推断 |
@@ -422,7 +422,7 @@ I1028 18:56:01.948570 24720 main.cpp:36] [启动命令参数]--AppName=Ets.exe -
 
 ```json
 [{"r":"client/mobile-update",
-  "params":{"client_version":5079,"os_type":"10","tag":"pc_refactor","sn":"***"}}]
+  "params":{"client_version":5079,"os_type":"10","tag":"pc_refactor","sn":"test"}}]
 ```
 
 | 字段 | 值 | 说明 |
@@ -445,7 +445,7 @@ I1028 18:56:01.948570 24720 main.cpp:36] [启动命令参数]--AppName=Ets.exe -
              "text":"修复已知问题",
              "link":"http://cdnfeis.ets100.com/<YYYYMMDDHHMM>/<32hex>/file/<32hex>.exe",
              "force":1}],
-  "sn":"***"}}]
+  "sn":"test"}}]
 ```
 
 | 字段 | 说明 |
@@ -892,5 +892,6 @@ httphelper action->upload → apiUrl:https://ets60.oss-cn-hangzhou.aliyuncs.com
 
 ## 12. 脱敏与合规
 
-- 日志/DB 中的真实 `账号（SHM……）`、`手机号（199****105）`、`JWT token`、`C:\Users\*** 本文只描述**结构与机制**，不包含绕过更新校验、伪造崩溃上报、破解授权或篡改评测结果的可用步骤。
+- 日志/DB 中的真实 `账号（SHM……）`、`手机号（199****105）`、`JWT token`、`C:\Users\<user>`、机器名（<hostname>）、`os_crypt.encrypted_key`、设备名等均已脱敏或省略。
+- 本文只描述**结构与机制**，不包含绕过更新校验、伪造崩溃上报、破解授权或篡改评测结果的可用步骤。
 - 所有结论基于对目标文件的只读检查与目标自身写下的历史日志，**未运行目标程序**；静态分析不建立运行时执行事实。

@@ -240,7 +240,7 @@ sequenceDiagram
       "r": "user/info",
       "params": {
         "sign_response": 1,
-        "sn": "***",
+        "sn": "test",
         "system": 4,
         "global_client_version": "5.7.9",
         "token": "***",
@@ -469,7 +469,7 @@ sequenceDiagram
 
 ```json
 /* request.params */
-{"sign_response":1,"sn":"***","system":4,"global_client_version":"5.7.9",
+{"sign_response":1,"sn":"test","system":4,"global_client_version":"5.7.9",
  "phone":"***","password":"***","code":"***","device_name":"D7480","device_code":"***","account":"***","name":"***"}
 /* response.body（节选字段名，值脱敏） */
 {"recent_account_id":"***","user_type":0,"school_year_id":0,"school_year_name":"","grade_id":0,"name":"***",
@@ -482,7 +482,7 @@ sequenceDiagram
 
 ```json
 /* request.params（节选） */
-{"sign_response":1,"sn":"***","system":4,"global_client_version":"5.7.9","token":"***",
+{"sign_response":1,"sn":"test","system":4,"global_client_version":"5.7.9","token":"***",
  "set_id":"747726","entity_id":"811865","homework_id":"110271129","resource_id":"363",
  "score":...,"real_score":...,"point":...,"score_detail":"...","dimension_score":...,
  "upload_file_id":"583126840053","spx_file_url":"https://ets60.ets100.com/ugc/evaluate/speex/...",
@@ -519,7 +519,7 @@ keywork = ["engine_sdk_config","engine_sdk_config_primary","special_word_list_fo
 | 凭证 | 形态/长度 | 结构与观察值 | 携带位置 | 来源接口 | 有效期 |
 |---|---|---|---|---|---|
 | 登录 token | JWT HS256，160 字符 | header `{"typ":"JWT","alg":"HS256"}`；payload `{"create":<epoch秒>,"id":"<uid>","login":"***"}` | `params.token`、`pc-listen*.html?token=`、`point-service/*?token=` | `/user/login`、`/user/register-or-login` 的 `body.token` | 响应 `body.expire`（epoch 秒，≈14 天） |
-| 资源平台 token | JWT RS256，504 字符 | header `{"alg":"RS256"}`；payload `{"iat":...,"exp":...,"iss":"rop","sub":"rop","app":"qm-ets-key","uid":"***","pcode":"ets"}` | 日志中未观察到使用点 | `/config/config/getResourcePlatformToken` → `body.token` | `exp-iat=1209600`（14 天）；响应另有 `expireAt/timeout` |
+| 资源平台 token | JWT RS256，504 字符 | header `{"alg":"RS256"}`；payload `{"iat":...,"exp":...,"iss":"rop","sub":"rop","app":"qm-ets-key","uid":"1234","pcode":"ets"}` | 日志中未观察到使用点 | `/config/config/getResourcePlatformToken` → `body.token` | `exp-iat=1209600`（14 天）；响应另有 `expireAt/timeout` |
 | AI 评测 accessToken | JWT HS256，137 字符 | header `{"alg":"HS256","typ":"JWT"}`；payload `{"aid":"ksyyyxx-etszx","exp":"<epoch秒>"}` | AI 评测 WS 握手（sdk 内部使用） | `/ai/aiplat/getaitoken` → `body.accessToken` | `expiresIn=2592000`（30 天） |
 | OSS STS | `accessKeyId`=`STS.`+24 字符；`accessKeySecret` 44 字符；`securityToken` ≈1180 字符 | 阿里云 STS 临时凭证 + PostObject policy/signature | OSS 直传表单 | `/p1/student/config/config/ossEvaluateUploadStsToken` | `expiration` 距请求 ≈19 分钟（`timeout:1159` 秒） |
 | SLS STS | `access_key_id`=`STS.`+…；`access_key_secret` 44 字符；`security_token` 长串 | 阿里云 SLS 临时凭证 | SLS SDK 上报 | `/p1/student/ability/sls/slsAppConfig`、`/g/data/sls-config` | `expiration_time`（≈1 小时） |
@@ -545,7 +545,7 @@ keywork = ["engine_sdk_config","engine_sdk_config_primary","special_word_list_fo
 ```
 
 - **登录 token**：160 字符 JWT，header `{"typ":"JWT","alg":"HS256"}`，payload `{"create":<epoch秒>,"id":"<uid>","login":"<手机号>"}`；同一账号两次会话 `id` 相同、`create` 不同；被用于 `params.token`（268 个请求）、`pc-listen*.html?token=` 与 `point-service/*?token=`（cef 日志中 HS256 JWT 共出现 298/325 次，含上述两类 URL）。【观察】
-- **资源平台 token**：504 字符 JWT，header `{"alg":"RS256"}`（无 typ），payload `{"iat":...,"exp":...,"iss":"rop","sub":"rop","app":"qm-ets-key","uid":"***","pcode":"ets"}`，`exp-iat=1209600`（14 天）；接口返回 `expireAt`（毫秒）与 `timeout`（≈5512140 s）。**该 token 在日志中未被任何请求使用**。【观察 + 未知】
+- **资源平台 token**：504 字符 JWT，header `{"alg":"RS256"}`（无 typ），payload `{"iat":...,"exp":...,"iss":"rop","sub":"rop","app":"qm-ets-key","uid":"1234","pcode":"ets"}`，`exp-iat=1209600`（14 天）；接口返回 `expireAt`（毫秒）与 `timeout`（≈5512140 s）。**该 token 在日志中未被任何请求使用**。【观察 + 未知】
 - **AI accessToken**：137 字符 JWT，`{"alg":"HS256","typ":"JWT"}`，payload `{"aid":"ksyyyxx-etszx","exp":"<epoch秒>"}`；`expiresIn=2592000`（30 天）。用于 AI 评测 WS 握手。【观察】
 - **OSS/SLS STS**：见 §6、§7。**【观察】**
 - **刷新机制**（日志文案实证）：`当前资源平台token已过期；开始请求配置数据`（`ets_2026-10-28.log:55`、`ets_2026-11-4.log:66`）、`AI引擎token已过期；开始请求配置数据`（`ets_2026-10-28.log:163`）、`当前配置已过期；开始请求oss的配置数据`（MISC 多处）→ 三类短时凭证都是**过期后按需重新拉取**；登录 token 过期的处理未在日志中出现（无 401/relogin 记录），机制【未知】。【观察 + 未知】

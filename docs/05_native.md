@@ -352,7 +352,7 @@ cef.message.setProxy(server)
 | N5 | `EtsUpdate/bugreport/mq_server` 的签名者主体 | 仅知有 PKCS#7 | 用 REA `inspect_pe_certificates` 解析（本次未做，输出较大） |
 | N6 | `GetAsyncKeyState/SetWindowsHookExW` 的实际调用点 | 仅见导入 | Ghidra 交叉引用确认是否来自 DuiLib/输入法库 |
 | N7 | 壳是否在别处校验插件哈希/版本 | 加载器未见 | 搜索 `CryptHashData`/文件校验相关导入（ETSShell 无 crypt32，需看自研实现） |
-| N8 | `stic://` 协议对任意本地路径的访问边界 | 见日志可读 `C:\Users\***\*.mp3` | 分析 `ClientSchemeHandler` 的路径校验逻辑（在 Ghidra） |
+| N8 | `stic://` 协议对任意本地路径的访问边界 | 见日志可读 `C:\Users\...\*.mp3` | 分析 `ClientSchemeHandler` 的路径校验逻辑（在 Ghidra） |
 
 ---
 

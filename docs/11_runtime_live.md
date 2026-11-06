@@ -132,3 +132,23 @@ CDP 返回 `Chrome/91.0.4472.124`、协议 1.3，与 `libcef.dll` 版本一致�
 3. 新增模块：Word 系列、PKMatch、readAloud/readSentence、networkSpeedWorker、textInfo（此前缓存缺失）。
 4. GET 直连路径携带 token，不参与签名。
 5. `mpvjs.node` pepper 插件被声明但文件不存在（不影响主流程）。
+
+---
+
+## 九、补齐的模块说明（此前缓存缺失）
+
+在线 chunk 全量下载后，新增可分析的模块（`work/runtime/new_modules_analysis.json`）：
+
+| 模块 | 大小 | 功能（依据页面文案与 API 调用） |
+|---|---|---|
+| `WordList` | 5.2 KB | 单元单词列表：全部/已掌握/未掌握、单词设置、重新练习提示、单元掌握完成提示、单词 PK 入口 |
+| `WordPractice` | 4.1 KB | 单词学习：单词认识、例句、认识/不认识、上一词/下一题 |
+| `WordQuestion` | 8.0 KB | 单词练习四题型：词义辨析、单词听说、单词拼写；音效开关；退出保存进度 |
+| `WordPracticeResult` / `WordQuestionResult` | 0.9/2.2 KB | 练习结束页：掌握单词数、继续练习未掌握单词 |
+| `PKMatch` | 3.9 KB | 单词 PK 匹配：资源版取题、匹配/重新匹配、对手被抢、不对齐拦截 |
+| `readAloud` | 35.3 KB | 全文朗读练习：录音、评分中、原文试听、拉伸后/原始录音时长、补交与截止限制 |
+| `readSentence` + `readSentenceScoreInfo` + `textInfo` | 21.2/9.8/18.5 KB | 逐句跟读：完整度/准确度/流畅度评分说明、单句重做限制、原文/分句试听、提交确认 |
+| `networkSpeedWorker` | 0.6 KB | 网络测速 Web Worker |
+| `index-62bff6b1` / `index-85cbaae4` | 7.0/5.1 KB | 模块索引（完成度、数据异常兜底） |
+
+在线路由表复核：主 bundle 可解析出 **69 条带 component 的路由**，与缓存 `routes.json` 的路径集合**无新增差异**；另有 6 个壳级路径（`/app-start`、`/startup`、`/error`、`/system-message`、`/bypass`、`/:catchAll(.*)`）。→ 路由结构稳定，变化只在打包哈希与 chunk 拆分。
