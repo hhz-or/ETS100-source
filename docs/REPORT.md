@@ -130,6 +130,7 @@ v1: PID_PREFIX="grlx",  KEY="355ffbe95ccf4e9535a110170b445ab8"
 - **在线版本与缓存版本**：主 bundle 同为 3,481,698 B，仅懒加载 chunk 哈希重新打包；签名密钥、AES 密钥、RSA 私钥、协议结构逐字一致。
 - **活体协议验证**：新会话 72 请求/75 响应，带签名请求 **68/68** 命中 08 的公式；发现 4 条 GET 直连请求（token 在 query，无签名）。
 - **插件 JS 封装层**：9 个通道、115 个 (plugin, action) 的权威清单，精确 pluginKey 为 `EtsHelper`/`FileHelper`/`HttpHelper`/`SevenZip`/`ShellHelper`/`SysConfig`（首字母大写）与 `appcontroller`/`soundhelper`/`sqlitepln`（小写）。
+- **原生 oracle**：在真实页面直接调用 `EtsHelper.encode_api_body_v2`，原生返回的 sign 与 08 的公式**逐字节一致**（`work/runtime/sign_oracle.json`）；并对 `getpcinfo/getconfig/getvolume/checkadapter/getroomid/get_appdata_path/check_update` 等只读 action 做了运行时探针（参数 schema 与真实返回已记录）。
 - 详见 `11_runtime_live.md`。
 
 ### 4.8 源码仓库（GitHub）

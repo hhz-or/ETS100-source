@@ -10,7 +10,7 @@
 |---|---|---|---|---|
 | U1 | 前端未缓存 chunk | 中 | **已解决（2026-11-06 运行时）**：在线 CDN 可直连，已下载全部 **188 个 chunk**（旧 routes 191 个中 186 个按基名映射成功，其余 5 个为 Vue SFC 虚拟模块名，内联在其它 chunk）；含此前缺失的 Word/PKMatch/readAloud 等 14 个模块。详见 `11_runtime_live.md` | —（`work/runtime/chunks_full/`） |
 | U2 | 服务端业务逻辑（判分、班级、作业下发规则） | 中 | 黑盒，仅见请求/响应 | 需授权账号做受控请求记录；本报告只还原客户端 |
-| U3 | `encode_api_resp` 响应校验的运行时样本 | 低 | 341 条响应中无 `sign` 字段（服务端未回签名） | 需服务端开启 `sign_response` 或构造响应验证 |
+| U3 | `encode_api_resp` 响应校验的运行时样本 | 低 | **部分解决（2026-11-06）**：运行时 oracle 调用 `encode_api_resp_v2({response:"W10=",time})` 返回 `{key_id,pid,sign:"6d3d8217…",sign_version:"2"}`，证明响应签名存在；但**前端无调用点**（未触发服务端响应校验），且其 canonical 拼接尚未匹配（与 v1 一样为未用路径） | 继续用 oracle 变化入参反推拼接；或抓取服务端真实签名响应 |
 | U4 | v1 签名路径（`pid=grlx`）的运行时样本 | 低 | 本安装全部走 v2；v1 仅代码路径存在 | 强制让 `encode_api_body_v2` 失败（如改插件）观察降级 |
 | U5 | 更新器 `EtsUpdate.exe` 的下载包校验 | 中 | **签名已解决**：`MD5("grlx"+time秒+base64(body)+"555ffbe95ccf4e9535a110170b445ab8")`，3/3 真实样本命中（`08_signature.md` §五）；**仍未知**：下载的 exe/update.dat 是否做 MD5/数字签名校验 | 反编译 `EtsUpdate.exe` 的下载/安装分支（产物已有）；或触发一次真实更新观察 |
 | U6 | `bugreport.exe` 上传地址/协议 | 低 | 二进制内无明文 URL（可能运行时拼接/加密） | 字符串+反编译；或断网抓包 |

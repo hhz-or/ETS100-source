@@ -152,3 +152,48 @@ CDP 返回 `Chrome/91.0.4472.124`、协议 1.3，与 `libcef.dll` 版本一致�
 | `index-62bff6b1` / `index-85cbaae4` | 7.0/5.1 KB | 模块索引（完成度、数据异常兜底） |
 
 在线路由表复核：主 bundle 可解析出 **69 条带 component 的路由**，与缓存 `routes.json` 的路径集合**无新增差异**；另有 6 个壳级路径（`/app-start`、`/startup`、`/error`、`/system-message`、`/bypass`、`/:catchAll(.*)`）。→ 路由结构稳定，变化只在打包哈希与 chunk 拆分。
+
+---
+
+## 十、原生 action 运行时探针（cef.message 直调）
+
+方法：在页面 `Runtime.evaluate` 中直接用 `cef.message.createGuid / setMessageCallback / sendMessage` 对**只读** action 发起调用（2–2.5 s 超时），不依赖前端封装模块。脚本：`work/scripts/probe_native.js`、`probe_native2.js`；原始返回：`work/runtime/native_probe_*.json`。
+
+### 10.1 签名 oracle（决定性运行时证据）
+
+| 调用 | 入参 | 原生返回 | 结论 |
+|---|---|---|---|
+| `EtsHelper.encode_api_body_v2` | `{body:"W3siciI6InN5c3RlbS90aW1lIiwicGFyYW1zIjp7InNuIjoidGVzdCJ9fV0=", time:"1793971732563"}` | `{"key_id":"202608","pid":"pcWin","sign":"7960a6bda26ffa4b2ec84725036488e0","sign_version":"2"}` | 与公式 `md5("pcWin"+time+body_b64+"94cf…")` **完全一致**（`work/runtime/sign_oracle.json`，match=true） |
+| `EtsHelper.encode_api_body`（v1） | 同上 | 32 hex `b0eb949d3f1bc869751594fc013099cb` | v1 为遗留路径，输入拼接未闭合（本客户端不使用） |
+| `EtsHelper.encode_api_resp_v2` | `{response:"W10=", time:"…"}` | `{"key_id":"202608","pid":"pcWin","sign":"6d3d82172ce30999a4b3890a022619bb","sign_version":"2"}` | 响应签名**确实存在**；但前端无调用点，canonical 拼接未匹配（U3） |
+| `EtsHelper.encode_api_resp`（v1） | 同上 | 32 hex `086a94f6c8b8638b93c02023336ec2f2` | 同上 |
+
+> 这是比"日志回放"更强的证据：请求-响应对由本次实时调用产生，公式逐字节吻合。
+
+### 10.2 只读能力探针（节选，真实值已脱敏）
+
+| 插件.action | 返回（摘要） | 说明 |
+|---|---|---|
+| `ShellHelper.getpcinfo` | 30+ 字段设备指纹：`AppTitle/ClientType/CopyRight/CPU/内存/物理内存/磁盘总量与剩余/HDD 卷/网卡 MAC/内网 IP/系统版本/输入输出设备/WPS/Python/防火墙/投屏` | 用于客户端环境采集与上报 |
+| `ShellHelper.getconfig` | 壳配置：`AppTitle/ClientType/CopyRight/FullScreen/HDSerial/LogoTitle/Name/OS/OSBit/Version` | OS 固定返回 "Microsoft Windows 8"（实际 Win11，兼容字段）；MAC 归零 |
+| `ShellHelper.getvolume` / `setvolume` | `{"volume":70}` / 设置成功 | 探针曾设为 50，已还原 70 |
+| `ShellHelper.getroomid` | `{rncode:0, rnmsg:"{\"roomId\":\"\"}"}` | 录播/直播房间号 |
+| `ShellHelper.checkadapter` | `{rncode:1, rnmsg:"网卡正常."}` | 网络适配器自检 |
+| `EtsHelper.get_appdata_path` | `C:\Users\***\AppData\Roaming` | 用户数据根 |
+| `EtsHelper.check_update` | `{rncode:0, rnmsg:"no newer version"}` | 更新检查 |
+| `FileHelper.getfoledersize` | `{errorCode:0, errorMsg:"get dir size ok", flag:…}` | 接受 `{filePath}` |
+| `FileHelper.getbase64` | `"ok"` | 读取并转 Base64（参数 schema 待定） |
+| `HttpHelper.isrpkexist` | `{code:0, filePath:""}` | 本地 rpk 包检查 |
+| `appcontroller.get_win_pos` | 字段值异常（win_width 负数） | 需先 `init` 建立窗口上下文 |
+| `SysConfig.init` | `"OnTaskAction InteralErr。"` | 厂商拼写错误原样；需特定参数 |
+
+### 10.3 参数 schema 观察
+
+- 绝大多数 action 期望 **JSON 字符串**；`get_appdata_path`、`check_update`、`getpcinfo`、`getvolume`、`checkadapter`、`getroomid` 可传空串或 `{}`。
+- `getfoledersize` 接受 `{"filePath":"..."}`；但 `existfileorfolder` 用 `{path}` / `{filePath}` 均返回空 path/false，说明其 JSON 结构还有额外字段（待定，见 U8）。
+- 部分 action 依赖前置状态（`appcontroller` 需 init；`SysConfig.init` 需要配置对象）。
+
+### 10.4 副作用与还原
+
+- 探针仅调用只读 action；唯一写操作是 `setvolume`（系统音量 70→50），已立即 `setvolume(70)` 还原。
+- 未写文件、未发起业务写请求、未修改页面状态。

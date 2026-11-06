@@ -114,6 +114,7 @@ sign = MD5( PID_PREFIX  +  time_ms_string  +  base64(JSON.stringify(body))  +  K
 | 唯一不中 | `ets_2026-11-4.log:55` → `POST /user/login` |
 | 原因 | 日志脱敏函数对 `user/login` 强制把 `params.password` 置空（`LoggerUtils.desensitization`），而**签名是对"含密文密码的真实 body"计算的**，故脱敏后的 body 无法复现签名。属预期差异，非算法错误。 |
 | **运行时复核（2026-11-06 live）** | 新会话日志 68 条带 `head.sign` 的请求：**68 / 68 命中**（在线版本 core 代码与缓存一致，见 `11_runtime_live.md`） |
+| **运行时原生 oracle（2026-11-06 live）** | 在真实页面直接调用 `EtsHelper.encode_api_body_v2({body,time})`，原生返回 `sign=7960a6bd…`；本公式计算值**逐字节一致**（`work/runtime/sign_oracle.json`，match=true） |
 
 复现命令：
 
