@@ -1,0 +1,579 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\appcontroller\\appcontroller.pln",
+ "functions": [
+  {
+   "rva": "0x00002100",
+   "va": "0x10002100",
+   "insn_count": 16,
+   "strings": [
+    "logs\\shell.log"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002140",
+   "va": "0x10002140",
+   "insn_count": 2,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002150",
+   "va": "0x10002150",
+   "insn_count": 76,
+   "strings": [
+    "WLOG",
+    "EXEC_CALLBACK"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000023B0",
+   "va": "0x100023B0",
+   "insn_count": 343,
+   "strings": [
+    ".log",
+    "D:\\code\\STIC\\stic-pro_ets\\src\\common\\StiCorePlugin.h",
+    "=============================================",
+    "========StiCorePlugin.log starting==========="
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002C20",
+   "va": "0x10002C20",
+   "insn_count": 64,
+   "strings": [
+    "jjjj"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002CC0",
+   "va": "0x10002CC0",
+   "insn_count": 285,
+   "strings": [
+    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "[appcontroller::OnGetCurWinHandle] arguments: ",
+    "win_name",
+    "win_class"
+   ],
+   "log_handlers": [
+    {
+     "class": "appcontroller",
+     "method": "OnGetCurWinHandle",
+     "text": "[appcontroller::OnGetCurWinHandle] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x000030E0",
+   "va": "0x100030E0",
+   "insn_count": 350,
+   "strings": [
+    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "[appcontroller::OnInitAction] arguments: ",
+    "[appcontroller::OnInitAction] appcontroller/init error:get id fail.",
+    "error_callback_id"
+   ],
+   "log_handlers": [
+    {
+     "class": "appcontroller",
+     "method": "OnInitAction",
+     "text": "[appcontroller::OnInitAction] arguments: "
+    },
+    {
+     "class": "appcontroller",
+     "method": "OnInitAction",
+     "text": "[appcontroller::OnInitAction] appcontroller/init error:get id fail."
+    }
+   ]
+  },
+  {
+   "rva": "0x000038A0",
+   "va": "0x100038A0",
+   "insn_count": 491,
+   "strings": [
+    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "[appcontroller::SetWinPos] arguments: ",
+    "[appcontroller::SetWinPos] utf8_args ",
+    "[appcontroller::SetWinPos] device scale: ",
+    ", width: ",
+    ", height: ",
+    "[appcontroller::SetWinPos] reset pos",
+    "[appcontroller::SetWinPos] left: ",
+    ", top: "
+   ],
+   "log_handlers": [
+    {
+     "class": "appcontroller",
+     "method": "SetWinPos",
+     "text": "[appcontroller::SetWinPos] arguments: "
+    },
+    {
+     "class": "appcontroller",
+     "method": "SetWinPos",
+     "text": "[appcontroller::SetWinPos] utf8_args "
+    },
+    {
+     "class": "appcontroller",
+     "method": "SetWinPos",
+     "text": "[appcontroller::SetWinPos] device scale: "
+    },
+    {
+     "class": "appcontroller",
+     "method": "SetWinPos",
+     "text": "[appcontroller::SetWinPos] reset pos"
+    },
+    {
+     "class": "appcontroller",
+     "method": "SetWinPos",
+     "text": "[appcontroller::SetWinPos] left: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00004020",
+   "va": "0x10004020",
+   "insn_count": 227,
+   "strings": [
+    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "[appcontroller::ResizeForm] arguments: ",
+    "height",
+    "width"
+   ],
+   "log_handlers": [
+    {
+     "class": "appcontroller",
+     "method": "ResizeForm",
+     "text": "[appcontroller::ResizeForm] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00004340",
+   "va": "0x10004340",
+   "insn_count": 433,
+   "strings": [
+    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "[appcontroller::MoveWindows] arguments: ",
+    "startPoint",
+    "endPoint"
+   ],
+   "log_handlers": [
+    {
+     "class": "appcontroller",
+     "method": "MoveWindows",
+     "text": "[appcontroller::MoveWindows] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00004BD0",
+   "va": "0x10004BD0",
+   "insn_count": 482,
+   "strings": [
+    "appFile",
+    "appParams",
+    "workDir",
+    "isWait",
+    "waitTime",
+    "isHide",
+    "appexit_callback_id"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00005260",
+   "va": "0x10005260",
+   "insn_count": 1699,
+   "strings": [
+    "init",
+    "close",
+    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "maximize",
+    "minimize",
+    "restore",
+    "restore_max",
+    "move",
+    "fullscreen",
+    "reduction",
+    "hide",
+    "show",
+    "get_win_pos",
+    "win_x",
+    "win_y",
+    "win_width",
+    "win_height",
+    "[appcontroller::get_win_pos] return string: ",
+    "set_win_pos",
+    "resize_window",
+    "startapp"
+   ],
+   "log_handlers": [
+    {
+     "class": "appcontroller",
+     "method": "get_win_pos",
+     "text": "[appcontroller::get_win_pos] return string: "
+    }
+   ]
+  },
+  {
+   "rva": "0x000072A0",
+   "va": "0x100072A0",
+   "insn_count": 44,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00007730",
+   "va": "0x10007730",
+   "insn_count": 76,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000082B0",
+   "va": "0x100082B0",
+   "insn_count": 98,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00008920",
+   "va": "0x10008920",
+   "insn_count": 111,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00009DF0",
+   "va": "0x10009DF0",
+   "insn_count": 230,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000B0E0",
+   "va": "0x1000B0E0",
+   "insn_count": 207,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000C0C0",
+   "va": "0x1000C0C0",
+   "insn_count": 203,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000C3C0",
+   "va": "0x1000C3C0",
+   "insn_count": 336,
+   "strings": [
+    "UNKNOWN",
+    "VERBOSE"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000D2B0",
+   "va": "0x1000D2B0",
+   "insn_count": 62,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00013400",
+   "va": "0x10013400",
+   "insn_count": 55,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00013480",
+   "va": "0x10013480",
+   "insn_count": 190,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00014710",
+   "va": "0x10014710",
+   "insn_count": 55,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00014D30",
+   "va": "0x10014D30",
+   "insn_count": 88,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00015C00",
+   "va": "0x10015C00",
+   "insn_count": 78,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00015D10",
+   "va": "0x10015D10",
+   "insn_count": 103,
+   "strings": [
+    "jjjj"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00015FF0",
+   "va": "0x10015FF0",
+   "insn_count": 72,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00025C40",
+   "va": "0x10025C40",
+   "insn_count": 5,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00025C50",
+   "va": "0x10025C50",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00025C90",
+   "va": "0x10025C90",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00025CD0",
+   "va": "0x10025CD0",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000273C0",
+   "va": "0x100273C0",
+   "insn_count": 38,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00027790",
+   "va": "0x10027790",
+   "insn_count": 12,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000277B0",
+   "va": "0x100277B0",
+   "insn_count": 26,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00027800",
+   "va": "0x10027800",
+   "insn_count": 158,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00027DC0",
+   "va": "0x10027DC0",
+   "insn_count": 96,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00027EE0",
+   "va": "0x10027EE0",
+   "insn_count": 29,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00027F30",
+   "va": "0x10027F30",
+   "insn_count": 18,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00028EE1",
+   "va": "0x10028EE1",
+   "insn_count": 59,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00028EEF",
+   "va": "0x10028EEF",
+   "insn_count": 7,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00028F20",
+   "va": "0x10028F20",
+   "insn_count": 38,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00045CBA",
+   "va": "0x10045CBA",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00046987",
+   "va": "0x10046987",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  }
+ ],
+ "action_candidates": [],
+ "log_handlers": [
+  "MoveWindows",
+  "OnGetCurWinHandle",
+  "OnInitAction",
+  "ResizeForm",
+  "SetWinPos",
+  "get_win_pos"
+ ],
+ "plnonprocess": {
+  "rva": "0x00005260",
+  "insn_count": 1699,
+  "extent_stop": "0x10069400",
+  "string_refs": [
+   {
+    "va": "0x10076E44",
+    "string": "init"
+   },
+   {
+    "va": "0x10076E4C",
+    "string": "close"
+   },
+   {
+    "va": "0x10076A80",
+    "string": "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp"
+   },
+   {
+    "va": "0x10076E84",
+    "string": "maximize"
+   },
+   {
+    "va": "0x10076EC4",
+    "string": "minimize"
+   },
+   {
+    "va": "0x10076F04",
+    "string": "restore"
+   },
+   {
+    "va": "0x10076F3C",
+    "string": "restore_max"
+   },
+   {
+    "va": "0x10076FC4",
+    "string": "move"
+   },
+   {
+    "va": "0x10076FCC",
+    "string": "fullscreen"
+   },
+   {
+    "va": "0x10076FD8",
+    "string": "reduction"
+   },
+   {
+    "va": "0x10076FE4",
+    "string": "hide"
+   },
+   {
+    "va": "0x10076FEC",
+    "string": "show"
+   },
+   {
+    "va": "0x10076FF4",
+    "string": "get_win_pos"
+   },
+   {
+    "va": "0x10076B68",
+    "string": "win_x"
+   },
+   {
+    "va": "0x10076B70",
+    "string": "win_y"
+   },
+   {
+    "va": "0x10076B78",
+    "string": "win_width"
+   },
+   {
+    "va": "0x10076B84",
+    "string": "win_height"
+   },
+   {
+    "va": "0x10077000",
+    "string": "[appcontroller::get_win_pos] return string: "
+   },
+   {
+    "va": "0x10077030",
+    "string": "set_win_pos"
+   },
+   {
+    "va": "0x1007703C",
+    "string": "resize_window"
+   },
+   {
+    "va": "0x10077084",
+    "string": "startapp"
+   }
+  ],
+  "action_candidates": [
+   "close",
+   "fullscreen",
+   "get_win_pos",
+   "hide",
+   "init",
+   "maximize",
+   "minimize",
+   "move",
+   "reduction",
+   "resize_window",
+   "restore",
+   "restore_max",
+   "set_win_pos",
+   "show",
+   "startapp",
+   "win_height",
+   "win_width",
+   "win_x",
+   "win_y"
+  ]
+ },
+ "stats": {
+  "exports": 4,
+  "funcs": 44,
+  "discovered": 123,
+  "bad_decode": 0,
+  "strings_indexed": 3317
+ }
+}

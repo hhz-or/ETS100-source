@@ -1,0 +1,126 @@
+{
+ "ETSShell.exe": {
+  "size": 2297440,
+  "sha256": "2dbdc3248538f2b0a7879b1806ad02fef004d7563c8cdc24d9244d8a6ce9dd79"
+ },
+ "Ets.exe": {
+  "size": 485824,
+  "sha256": "38b0865cf805dfe211a10e63c719ea5cf947716e555f97ce3974afff1006d200"
+ },
+ "EtsUpdate.exe": {
+  "size": 2079784,
+  "sha256": "6ecd0568d8bbe7f176e3f8e0ce71b18cbd6fc0c45af695ee5d5619e6dda9103f"
+ },
+ "Uninstall.exe": {
+  "size": 1741527,
+  "sha256": "34394745af16d990f7d71eebc9d2044d2dd7d082bb462636388fa5db57e58f31"
+ },
+ "libcef.dll": {
+  "size": 132696576,
+  "sha256": "306de5b27f38f3582a47067429bc3719fd68b00045139d3666a7b4f9d1795c5e"
+ },
+ "chrome_100_percent.pak": {
+  "size": 786449,
+  "sha256": "25a528a71ab2d2e8bf1d7099168a435464ea488ec3d7df138a3068c601b2d858"
+ },
+ "chrome_200_percent.pak": {
+  "size": 1358046,
+  "sha256": "190332dc1800e928ff7b0c52f05a03a06c5e4985733e11bdd042a796b08a5b65"
+ },
+ "chrome_elf.dll": {
+  "size": 945664,
+  "sha256": "60db307236990c1df1d2aa55dbccae042675e29930e1f16d80d443e4d2da289a"
+ },
+ "d3dcompiler_47.dll": {
+  "size": 3657992,
+  "sha256": "8bf0eeb5081d8397e2f84f69449c8a80d9c0cdcf82bcef7a484309046adcb081"
+ },
+ "resources.pak": {
+  "size": 6977374,
+  "sha256": "ac4871c34dc637dad3e32122d47d953928c419cd3a819099738ed447f9980b45"
+ },
+ "icudtl.dat": {
+  "size": 10413488,
+  "sha256": "6e0b6b0d9e14c905f2278dbf25b7bb58cc0622b7680e3b6ff617a1d42348736b"
+ },
+ "snapshot_blob.bin": {
+  "size": 48495,
+  "sha256": "ace5be19020e9a456a9f7b986c75d90a124fd2466e0ae06e0857a45874d1dcab"
+ },
+ "v8_context_snapshot.bin": {
+  "size": 165673,
+  "sha256": "2a0e3257fea9ac2a1ad21da31d910998f1fcfba6e94289b45c04c255419921ac"
+ },
+ "sqlite3.dll": {
+  "size": 833024,
+  "sha256": "0c58bad1fc6caf17c3e1510cea65053abcf09b1366507fe7fd35bf393406ba4b"
+ },
+ "7z.dll": {
+  "size": 950272,
+  "sha256": "15e619a80aab71f718f9ee291e7cdc20eca6caa047f7373cc2ca7c2c940ed36d"
+ },
+ "lame.exe": {
+  "size": 341960,
+  "sha256": "9f693c1b96987df7604870e6a229fa2ea8126f509c35cb4a596404c67b042031"
+ },
+ "shell.ini": {
+  "size": 376,
+  "sha256": "6de63790fdec1eaee4f797382a4e858f7bfe676990a7ba2cbb6b697820ad2d7c"
+ },
+ "plugins/appcontroller/appcontroller.pln": {
+  "size": 552448,
+  "sha256": "c90f70338cbc39446ae5bfb2d47263f78ec315572bd391fa343cf6933845c2f3"
+ },
+ "plugins/etshelper/etshelper.pln": {
+  "size": 497664,
+  "sha256": "accb7e462a292b4cc143b0c4cf85eece2d2c7a1dfd7e070a903cf03397c32c8c"
+ },
+ "plugins/filehelper/filehelper.pln": {
+  "size": 674304,
+  "sha256": "d83f497de20a946062f92af274cb77a23208aedd02651a3ee18338d928d98b61"
+ },
+ "plugins/httphelper/httphelper.pln": {
+  "size": 1730560,
+  "sha256": "49f00a8dd15944d929548159e2eca51db1923e07f08de8ca1e4eb7bb1a81f9ad"
+ },
+ "plugins/sevenzip/sevenzip.pln": {
+  "size": 467456,
+  "sha256": "00a7d17d6c4ea737710ec65efd59396a1896bd9e3a3c2c872c4811a750372bb9"
+ },
+ "plugins/shellhelper/shellhelper.pln": {
+  "size": 2117632,
+  "sha256": "73b0e0f708607fd29814eef707e26972a5bbd156e4ea29db4ad3099bce08dda6"
+ },
+ "plugins/soundhelper/soundhelper.pln": {
+  "size": 3175936,
+  "sha256": "52c4e5d923cb0e873e9d15952d163a1969e06eca0cbca1c2ad4ce22ed20595f5"
+ },
+ "plugins/sqlitepln/sqlitepln.pln": {
+  "size": 345088,
+  "sha256": "77cefe026ce01e06e90b249f0aecd193bc50bd52d5e8b9168b8c4a9d0c8b763c"
+ },
+ "plugins/window_control/window_control.pln": {
+  "size": 436736,
+  "sha256": "be0ca19b45fa6ba178754506b2bcdfc4afeceb52ad84bfbddab2f4ab1c1d9fc4"
+ },
+ "bugreport/bugreport.exe": {
+  "size": 3614240,
+  "sha256": "090a5ef72d75783af4b96deffb56160cd2929d85f5470b9e447a1386e264a7b7"
+ },
+ "mq_server/ets_mq_server.exe": {
+  "size": 12080168,
+  "sha256": "0d38ecdbc42c54c42ba36f0a60c3260c2522e31e3deee8168e4f614aa9a2c67f"
+ },
+ "localdata/ETS.db": {
+  "size": 12288,
+  "sha256": "0301422dfef7ebe811bb2a8c2b8e9f7a9a853e643024042fb61e4348df7df712"
+ },
+ "temp/Cache_ETSShell/Cookies": {
+  "size": 20480,
+  "sha256": "9929765e546efbb692f66d603422635ca5419da636626e41f61f4e44164c158d"
+ },
+ "temp/Cache_ETSShell/databases/Databases.db": {
+  "size": 28672,
+  "sha256": "4ed3ecc79883e5c9a3d3aec94acd8d00cd5d88c311b5101e82639c258a2816f0"
+ }
+}

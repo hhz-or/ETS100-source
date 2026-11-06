@@ -1,0 +1,653 @@
+[
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_clientDB.js.js",
+  "classes": [],
+  "actions": []
+ },
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_stic_appcontroller.js.js",
+  "classes": [],
+  "actions": [
+   {
+    "plugin": "appcontroller",
+    "action": "init",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "close",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "maximize",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "minimize",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "restore",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "move",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "move",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "fullscreen",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "reduction",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "hide",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "show",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "get_win_pos",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "set_win_pos",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "startapp",
+    "args": "JSON"
+   },
+   {
+    "plugin": "appcontroller",
+    "action": "idg_exist",
+    "args": "JSON"
+   }
+  ]
+ },
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_stic_etshelper.js.js",
+  "classes": [
+   "EtsHelper"
+  ],
+  "actions": [
+   {
+    "plugin": "EtsHelper",
+    "action": "init",
+    "args": "JSON"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "dub_merge",
+    "args": "JSON"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "get_appdata_path",
+    "args": "empty"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "log_data",
+    "args": "JSON"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "check_update",
+    "args": "empty"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "check_update_force",
+    "args": "empty"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "test_crash",
+    "args": "empty"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "encode_api_body",
+    "args": "JSON"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "encode_api_resp",
+    "args": "JSON"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "open_url_by_def_browser",
+    "args": "JSON"
+   },
+   {
+    "plugin": "EtsHelper",
+    "action": "run_update",
+    "args": "JSON"
+   }
+  ]
+ },
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_stic_filehelper.js.js",
+  "classes": [
+   "FileHelper"
+  ],
+  "actions": [
+   {
+    "plugin": "FileHelper",
+    "action": "init",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "readfile",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "readbinaryfile",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "writefile",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "writefilewithbinary",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "savefiledialog",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "openfiledialog",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "existfileorfolder",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "copyfileordirectory",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "deletefileordirectory",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "getfoledersize",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "createfolder",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "renamefolder",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "removefiletootherpath",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "ergodicfiles",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "ergodicfiles",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "savefiledialog",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "readrpk_kqlx",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "readrpk_kqlx",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "getbase64",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "getmd5",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "aliyun_oss_md5",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "getcode",
+    "args": "JSON"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "closeshell",
+    "args": "empty"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "ncttools",
+    "args": "empty"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "openbrowsedialog",
+    "args": "empty"
+   },
+   {
+    "plugin": "FileHelper",
+    "action": "cleardir",
+    "args": "JSON"
+   }
+  ]
+ },
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_stic_httphelper.js.js",
+  "classes": [
+   "HttpHelper"
+  ],
+  "actions": [
+   {
+    "plugin": "HttpHelper",
+    "action": "init",
+    "args": "JSON"
+   },
+   {
+    "plugin": "HttpHelper",
+    "action": "upload",
+    "args": "JSON"
+   },
+   {
+    "plugin": "HttpHelper",
+    "action": "download",
+    "args": "JSON"
+   },
+   {
+    "plugin": "HttpHelper",
+    "action": "isrpkexist",
+    "args": "JSON"
+   },
+   {
+    "plugin": "HttpHelper",
+    "action": "downloadresource",
+    "args": "JSON"
+   },
+   {
+    "plugin": "HttpHelper",
+    "action": "downloadsdk",
+    "args": "JSON"
+   },
+   {
+    "plugin": "HttpHelper",
+    "action": "monitornetspeed",
+    "args": "JSON"
+   },
+   {
+    "plugin": "HttpHelper",
+    "action": "stopdownload",
+    "args": "empty"
+   }
+  ]
+ },
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_stic_sevenzip.js.js",
+  "classes": [],
+  "actions": [
+   {
+    "plugin": "SevenZip",
+    "action": "init",
+    "args": "JSON"
+   },
+   {
+    "plugin": "SevenZip",
+    "action": "unzip",
+    "args": "JSON"
+   },
+   {
+    "plugin": "SevenZip",
+    "action": "zip",
+    "args": "JSON"
+   },
+   {
+    "plugin": "SevenZip",
+    "action": "test",
+    "args": "JSON"
+   }
+  ]
+ },
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_stic_shellhelper.js.js",
+  "classes": [
+   "ShellHelper"
+  ],
+  "actions": [
+   {
+    "plugin": "ShellHelper",
+    "action": "init",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "getroomid",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "executecmd",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "executeexe",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "executebat",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "startprocess",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "stopprocess",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "processexist",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "CheckAudio",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "setvolume",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "getvolume",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "setmute",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "setmute",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "checkadapter",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "getpcinfo",
+    "args": "e"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "getconfig",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "cmd",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "netcheck",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "padkeyboardup",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "closewin7padkeyboardup",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "getuniqueid",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "initActAuth",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "unInitActAuth",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "actauth",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "getactauth",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "gettoken",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "destroy",
+    "args": "empty"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "setsuspensionballconfig",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "getsysytemlocalpath",
+    "args": "JSON"
+   },
+   {
+    "plugin": "ShellHelper",
+    "action": "clipboard",
+    "args": "JSON"
+   }
+  ]
+ },
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_stic_sndhelper.js.js",
+  "classes": [],
+  "actions": [
+   {
+    "plugin": "soundhelper",
+    "action": "init",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "destroy",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "record",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "trace",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "checkwovfile",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "checkvoice",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "loadfile",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "play",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "pause",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "continue",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "stop",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "convertfile",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "aqcwavfile",
+    "args": "JSON"
+   },
+   {
+    "plugin": "soundhelper",
+    "action": "combineandconvertwavtomp3",
+    "args": "JSON"
+   }
+  ]
+ },
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_stic_sqlitepln.js.js",
+  "classes": [
+   "SqlitePln"
+  ],
+  "actions": [
+   {
+    "plugin": "sqlitepln",
+    "action": "init",
+    "args": "JSON"
+   },
+   {
+    "plugin": "sqlitepln",
+    "action": "connect",
+    "args": "JSON"
+   },
+   {
+    "plugin": "sqlitepln",
+    "action": "disconnect",
+    "args": "JSON"
+   },
+   {
+    "plugin": "sqlitepln",
+    "action": "execQuery",
+    "args": "JSON"
+   },
+   {
+    "plugin": "sqlitepln",
+    "action": "execDML",
+    "args": "JSON"
+   },
+   {
+    "plugin": "sqlitepln",
+    "action": "destroy",
+    "args": "empty"
+   }
+  ]
+ },
+ {
+  "file": "statics.ets100.com_ets-student-pc-web_plugins_stic_sysconfig.js.js",
+  "classes": [
+   "SysConfig"
+  ],
+  "actions": [
+   {
+    "plugin": "SysConfig",
+    "action": "init",
+    "args": "JSON"
+   }
+  ]
+ }
+]

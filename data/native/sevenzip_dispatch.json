@@ -1,0 +1,254 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\sevenzip\\sevenzip.pln",
+ "functions": [
+  {
+   "rva": "0x00001F20",
+   "va": "0x10001F20",
+   "insn_count": 34,
+   "strings": [
+    "logs\\shell.log"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00001FA0",
+   "va": "0x10001FA0",
+   "insn_count": 5,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00001FD0",
+   "va": "0x10001FD0",
+   "insn_count": 82,
+   "strings": [
+    "WLOG",
+    "EXEC_CALLBACK"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002200",
+   "va": "0x10002200",
+   "insn_count": 191,
+   "strings": [
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "=============================================",
+    "========StiCorePlugin.log starting==========="
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002660",
+   "va": "0x10002660",
+   "insn_count": 183,
+   "strings": [
+    "sevenzip.cpp",
+    "unzip",
+    "test"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002980",
+   "va": "0x10002980",
+   "insn_count": 605,
+   "strings": [
+    "sevenzip.cpp",
+    "[sevenzip::OnZip] arguments: ",
+    "zipFile",
+    "passWord",
+    "recurse",
+    "filePaths"
+   ],
+   "log_handlers": [
+    {
+     "class": "sevenzip",
+     "method": "OnZip",
+     "text": "[sevenzip::OnZip] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00003260",
+   "va": "0x10003260",
+   "insn_count": 495,
+   "strings": [
+    "sevenzip.cpp",
+    "[sevenzip::OnUnzip] arguments: ",
+    "zipFile",
+    "destPath",
+    "passWord",
+    "filter"
+   ],
+   "log_handlers": [
+    {
+     "class": "sevenzip",
+     "method": "OnUnzip",
+     "text": "[sevenzip::OnUnzip] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00003990",
+   "va": "0x10003990",
+   "insn_count": 314,
+   "strings": [
+    "sevenzip.cpp",
+    "[sevenzip::OnTestZip] arguments: ",
+    "zipFile",
+    "passWord"
+   ],
+   "log_handlers": [
+    {
+     "class": "sevenzip",
+     "method": "OnTestZip",
+     "text": "[sevenzip::OnTestZip] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00003E00",
+   "va": "0x10003E00",
+   "insn_count": 25,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003E60",
+   "va": "0x10003E60",
+   "insn_count": 13,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003F30",
+   "va": "0x10003F30",
+   "insn_count": 11,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003F80",
+   "va": "0x10003F80",
+   "insn_count": 22,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003FE0",
+   "va": "0x10003FE0",
+   "insn_count": 14,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00006790",
+   "va": "0x10006790",
+   "insn_count": 105,
+   "strings": [
+    "string too long"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00008450",
+   "va": "0x10008450",
+   "insn_count": 171,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00008780",
+   "va": "0x10008780",
+   "insn_count": 187,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00008A60",
+   "va": "0x10008A60",
+   "insn_count": 39,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00008AD0",
+   "va": "0x10008AD0",
+   "insn_count": 41,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000B1B0",
+   "va": "0x1000B1B0",
+   "insn_count": 37,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000B2B0",
+   "va": "0x1000B2B0",
+   "insn_count": 218,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00012B70",
+   "va": "0x10012B70",
+   "insn_count": 10,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001BDCD",
+   "va": "0x1001BDCD",
+   "insn_count": 58,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001BF8C",
+   "va": "0x1001BF8C",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  }
+ ],
+ "action_candidates": [],
+ "log_handlers": [
+  "OnTestZip",
+  "OnUnzip",
+  "OnZip"
+ ],
+ "plnonprocess": {
+  "rva": "0x00002660",
+  "insn_count": 183,
+  "extent_stop": "0x10054800",
+  "string_refs": [
+   {
+    "va": "0x1005ADF8",
+    "string": "sevenzip.cpp"
+   },
+   {
+    "va": "0x1005AE0C",
+    "string": "unzip"
+   },
+   {
+    "va": "0x1005AE14",
+    "string": "test"
+   }
+  ],
+  "action_candidates": [
+   "test",
+   "unzip"
+  ]
+ },
+ "stats": {
+  "exports": 4,
+  "funcs": 23,
+  "discovered": 71,
+  "bad_decode": 0,
+  "strings_indexed": 2867
+ }
+}

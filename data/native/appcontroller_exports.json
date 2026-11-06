@@ -1,0 +1,39 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\appcontroller\\appcontroller.pln",
+ "sha256": "c90f70338cbc39446ae5bfb2d47263f78ec315572bd391fa343cf6933845c2f3",
+ "image_base": "0x10000000",
+ "export_dir": {
+  "name": "appcontroller.pln",
+  "dll_name_raw": 528096
+ },
+ "exports": [
+  {
+   "ordinal": 1,
+   "name": "PlnInitiliaze",
+   "rva": "0x00002100",
+   "va": "0x10002100",
+   "forwarder": null
+  },
+  {
+   "ordinal": 2,
+   "name": "PlnOnProcessMessage",
+   "rva": "0x00005260",
+   "va": "0x10005260",
+   "forwarder": null
+  },
+  {
+   "ordinal": 3,
+   "name": "PlnSetParam",
+   "rva": "0x00002150",
+   "va": "0x10002150",
+   "forwarder": null
+  },
+  {
+   "ordinal": 4,
+   "name": "PlnUnInitialize",
+   "rva": "0x00002140",
+   "va": "0x10002140",
+   "forwarder": null
+  }
+ ]
+}

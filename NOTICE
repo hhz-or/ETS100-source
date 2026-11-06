@@ -1,0 +1,15 @@
+NOTICE
+======
+
+This repository contains independent reverse-engineering research materials
+about the "E听说" (E-TingShuo / ETS100) PC client.
+
+- Original software, trademarks, and third-party code fragments (including the
+  JavaScript plugin wrappers under runtime/plugin_js_stubs/) remain the property
+  of their respective owners. They are included solely for protocol
+  interoperability and research commentary. They will be removed promptly upon
+  a justified request from the rights holder.
+- No original installer, no raw log files, no personal data, and no bulk
+  decompiled binaries are included.
+- Use at your own risk. Nothing here is intended for circumventing payment,
+  examination scoring, licensing, or any other protected interest.

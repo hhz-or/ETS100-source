@@ -1,0 +1,242 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\soundhelper\\soundhelper.pln",
+ "sha256": "52c4e5d923cb0e873e9d15952d163a1969e06eca0cbca1c2ad4ce22ed20595f5",
+ "image_base": "0x10000000",
+ "export_dir": {
+  "name": "soundhelper.pln",
+  "dll_name_raw": 3004082
+ },
+ "exports": [
+  {
+   "ordinal": 1,
+   "name": "PlnInitiliaze",
+   "rva": "0x00017860",
+   "va": "0x10017860",
+   "forwarder": null
+  },
+  {
+   "ordinal": 2,
+   "name": "PlnOnProcessMessage",
+   "rva": "0x00024300",
+   "va": "0x10024300",
+   "forwarder": null
+  },
+  {
+   "ordinal": 3,
+   "name": "PlnSetParam",
+   "rva": "0x00017900",
+   "va": "0x10017900",
+   "forwarder": null
+  },
+  {
+   "ordinal": 4,
+   "name": "PlnUnInitialize",
+   "rva": "0x000178D0",
+   "va": "0x100178D0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 5,
+   "name": "sndAppendFile",
+   "rva": "0x00054490",
+   "va": "0x10054490",
+   "forwarder": null
+  },
+  {
+   "ordinal": 6,
+   "name": "sndAudiocheck",
+   "rva": "0x00054050",
+   "va": "0x10054050",
+   "forwarder": null
+  },
+  {
+   "ordinal": 7,
+   "name": "sndChannelfile",
+   "rva": "0x00054260",
+   "va": "0x10054260",
+   "forwarder": null
+  },
+  {
+   "ordinal": 8,
+   "name": "sndContinue",
+   "rva": "0x00053E70",
+   "va": "0x10053E70",
+   "forwarder": null
+  },
+  {
+   "ordinal": 9,
+   "name": "sndConvertfile",
+   "rva": "0x00054120",
+   "va": "0x10054120",
+   "forwarder": null
+  },
+  {
+   "ordinal": 10,
+   "name": "sndConvertfileA",
+   "rva": "0x00054170",
+   "va": "0x10054170",
+   "forwarder": null
+  },
+  {
+   "ordinal": 11,
+   "name": "sndCopyFile",
+   "rva": "0x00054430",
+   "va": "0x10054430",
+   "forwarder": null
+  },
+  {
+   "ordinal": 12,
+   "name": "sndCreateInstance",
+   "rva": "0x00053D60",
+   "va": "0x10053D60",
+   "forwarder": null
+  },
+  {
+   "ordinal": 13,
+   "name": "sndCutFile",
+   "rva": "0x000543C0",
+   "va": "0x100543C0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 14,
+   "name": "sndDeleteFile",
+   "rva": "0x00054340",
+   "va": "0x10054340",
+   "forwarder": null
+  },
+  {
+   "ordinal": 15,
+   "name": "sndDestoryInstance",
+   "rva": "0x00053D90",
+   "va": "0x10053D90",
+   "forwarder": null
+  },
+  {
+   "ordinal": 16,
+   "name": "sndGetFileDetail",
+   "rva": "0x00054590",
+   "va": "0x10054590",
+   "forwarder": null
+  },
+  {
+   "ordinal": 17,
+   "name": "sndGetParam",
+   "rva": "0x00053DC0",
+   "va": "0x10053DC0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 18,
+   "name": "sndGetVAD",
+   "rva": "0x00054090",
+   "va": "0x10054090",
+   "forwarder": null
+  },
+  {
+   "ordinal": 19,
+   "name": "sndMergeFile",
+   "rva": "0x000544F0",
+   "va": "0x100544F0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 20,
+   "name": "sndNormalizefile",
+   "rva": "0x000541C0",
+   "va": "0x100541C0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 21,
+   "name": "sndNormalizefileA",
+   "rva": "0x00054210",
+   "va": "0x10054210",
+   "forwarder": null
+  },
+  {
+   "ordinal": 22,
+   "name": "sndPause",
+   "rva": "0x00053E80",
+   "va": "0x10053E80",
+   "forwarder": null
+  },
+  {
+   "ordinal": 23,
+   "name": "sndPlay",
+   "rva": "0x00053EB0",
+   "va": "0x10053EB0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 24,
+   "name": "sndPlayA",
+   "rva": "0x00053EE0",
+   "va": "0x10053EE0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 25,
+   "name": "sndPlayBinary",
+   "rva": "0x00053F20",
+   "va": "0x10053F20",
+   "forwarder": null
+  },
+  {
+   "ordinal": 26,
+   "name": "sndPlayData",
+   "rva": "0x00053E90",
+   "va": "0x10053E90",
+   "forwarder": null
+  },
+  {
+   "ordinal": 27,
+   "name": "sndRecord",
+   "rva": "0x00054020",
+   "va": "0x10054020",
+   "forwarder": null
+  },
+  {
+   "ordinal": 28,
+   "name": "sndScanfile",
+   "rva": "0x00053F60",
+   "va": "0x10053F60",
+   "forwarder": null
+  },
+  {
+   "ordinal": 29,
+   "name": "sndScanfileA",
+   "rva": "0x00053FA0",
+   "va": "0x10053FA0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 30,
+   "name": "sndScanfileBinary",
+   "rva": "0x00053FF0",
+   "va": "0x10053FF0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 31,
+   "name": "sndSetParam",
+   "rva": "0x00053D20",
+   "va": "0x10053D20",
+   "forwarder": null
+  },
+  {
+   "ordinal": 32,
+   "name": "sndSliceFile",
+   "rva": "0x000542C0",
+   "va": "0x100542C0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 33,
+   "name": "sndStop",
+   "rva": "0x00053E60",
+   "va": "0x10053E60",
+   "forwarder": null
+  }
+ ]
+}

@@ -1,0 +1,428 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\window_control\\window_control.pln",
+ "functions": [
+  {
+   "rva": "0x00001D60",
+   "va": "0x10001D60",
+   "insn_count": 32,
+   "strings": [
+    "logs\\shell.log"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00001DD0",
+   "va": "0x10001DD0",
+   "insn_count": 5,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00001DF0",
+   "va": "0x10001DF0",
+   "insn_count": 82,
+   "strings": [
+    "WLOG",
+    "EXEC_CALLBACK"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002010",
+   "va": "0x10002010",
+   "insn_count": 193,
+   "strings": [
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "=============================================",
+    "========StiCorePlugin.log starting==========="
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000022D0",
+   "va": "0x100022D0",
+   "insn_count": 309,
+   "strings": [
+    "window_control.cpp",
+    "[window_control::OnInitAction] params parse error: ",
+    "window_control/init error:get id fail.",
+    "error_callback_id"
+   ],
+   "log_handlers": [
+    {
+     "class": "window_control",
+     "method": "OnInitAction",
+     "text": "[window_control::OnInitAction] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00002740",
+   "va": "0x10002740",
+   "insn_count": 427,
+   "strings": [
+    "window_control.cpp",
+    "[window_control::MoveWindows] params parse error: ",
+    "startPoint",
+    "endPoint"
+   ],
+   "log_handlers": [
+    {
+     "class": "window_control",
+     "method": "MoveWindows",
+     "text": "[window_control::MoveWindows] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00002D20",
+   "va": "0x10002D20",
+   "insn_count": 569,
+   "strings": [
+    "init",
+    "window_control.cpp",
+    "[window_control::PlnOnProcessMessage] init.",
+    "close",
+    "[window_control::PlnOnProcessMessage] close.",
+    "hWnd-0: ",
+    "maximize",
+    "[window_control::PlnOnProcessMessage] maximize.",
+    "minimize",
+    "[window_control::PlnOnProcessMessage] minimize.",
+    "restore",
+    "[window_control::PlnOnProcessMessage] restore.",
+    "move",
+    "fullscreen",
+    "reduction",
+    "hide"
+   ],
+   "log_handlers": [
+    {
+     "class": "window_control",
+     "method": "PlnOnProcessMessage",
+     "text": "[window_control::PlnOnProcessMessage] init."
+    },
+    {
+     "class": "window_control",
+     "method": "PlnOnProcessMessage",
+     "text": "[window_control::PlnOnProcessMessage] close."
+    },
+    {
+     "class": "window_control",
+     "method": "PlnOnProcessMessage",
+     "text": "[window_control::PlnOnProcessMessage] maximize."
+    },
+    {
+     "class": "window_control",
+     "method": "PlnOnProcessMessage",
+     "text": "[window_control::PlnOnProcessMessage] minimize."
+    },
+    {
+     "class": "window_control",
+     "method": "PlnOnProcessMessage",
+     "text": "[window_control::PlnOnProcessMessage] restore."
+    }
+   ]
+  },
+  {
+   "rva": "0x000036B0",
+   "va": "0x100036B0",
+   "insn_count": 25,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003720",
+   "va": "0x10003720",
+   "insn_count": 13,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000037F0",
+   "va": "0x100037F0",
+   "insn_count": 150,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003A80",
+   "va": "0x10003A80",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003B00",
+   "va": "0x10003B00",
+   "insn_count": 14,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00005070",
+   "va": "0x10005070",
+   "insn_count": 109,
+   "strings": [
+    "string too long"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00006C90",
+   "va": "0x10006C90",
+   "insn_count": 193,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00006FF0",
+   "va": "0x10006FF0",
+   "insn_count": 39,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00007060",
+   "va": "0x10007060",
+   "insn_count": 41,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000070C0",
+   "va": "0x100070C0",
+   "insn_count": 29,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000086E0",
+   "va": "0x100086E0",
+   "insn_count": 37,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000087E0",
+   "va": "0x100087E0",
+   "insn_count": 224,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001C670",
+   "va": "0x1001C670",
+   "insn_count": 24,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001C700",
+   "va": "0x1001C700",
+   "insn_count": 15,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001C790",
+   "va": "0x1001C790",
+   "insn_count": 31,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001C7F0",
+   "va": "0x1001C7F0",
+   "insn_count": 26,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001C840",
+   "va": "0x1001C840",
+   "insn_count": 36,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001C8A0",
+   "va": "0x1001C8A0",
+   "insn_count": 96,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001C9F0",
+   "va": "0x1001C9F0",
+   "insn_count": 29,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001CA40",
+   "va": "0x1001CA40",
+   "insn_count": 18,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001F3A0",
+   "va": "0x1001F3A0",
+   "insn_count": 5,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001F3B0",
+   "va": "0x1001F3B0",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001F3F0",
+   "va": "0x1001F3F0",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001F430",
+   "va": "0x1001F430",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001F470",
+   "va": "0x1001F470",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000202DD",
+   "va": "0x100202DD",
+   "insn_count": 58,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0002049C",
+   "va": "0x1002049C",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00020EC1",
+   "va": "0x10020EC1",
+   "insn_count": 15,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0004911A",
+   "va": "0x1004911A",
+   "insn_count": 1,
+   "strings": [],
+   "log_handlers": []
+  }
+ ],
+ "action_candidates": [],
+ "log_handlers": [
+  "MoveWindows",
+  "OnInitAction",
+  "PlnOnProcessMessage"
+ ],
+ "plnonprocess": {
+  "rva": "0x00002D20",
+  "insn_count": 569,
+  "extent_stop": "0x10052200",
+  "string_refs": [
+   {
+    "va": "0x10056CD4",
+    "string": "init"
+   },
+   {
+    "va": "0x10056C2C",
+    "string": "window_control.cpp"
+   },
+   {
+    "va": "0x10056CDC",
+    "string": "[window_control::PlnOnProcessMessage] init."
+   },
+   {
+    "va": "0x10056D08",
+    "string": "close"
+   },
+   {
+    "va": "0x10056D10",
+    "string": "[window_control::PlnOnProcessMessage] close."
+   },
+   {
+    "va": "0x10056D40",
+    "string": "hWnd-0: "
+   },
+   {
+    "va": "0x10056D4C",
+    "string": "maximize"
+   },
+   {
+    "va": "0x10056D58",
+    "string": "[window_control::PlnOnProcessMessage] maximize."
+   },
+   {
+    "va": "0x10056D8C",
+    "string": "minimize"
+   },
+   {
+    "va": "0x10056D98",
+    "string": "[window_control::PlnOnProcessMessage] minimize."
+   },
+   {
+    "va": "0x10056DC8",
+    "string": "restore"
+   },
+   {
+    "va": "0x10056DD0",
+    "string": "[window_control::PlnOnProcessMessage] restore."
+   },
+   {
+    "va": "0x10056E00",
+    "string": "move"
+   },
+   {
+    "va": "0x10056E08",
+    "string": "fullscreen"
+   },
+   {
+    "va": "0x10056E14",
+    "string": "reduction"
+   },
+   {
+    "va": "0x10056E20",
+    "string": "hide"
+   }
+  ],
+  "action_candidates": [
+   "close",
+   "fullscreen",
+   "hide",
+   "init",
+   "maximize",
+   "minimize",
+   "move",
+   "reduction",
+   "restore"
+  ]
+ },
+ "stats": {
+  "exports": 4,
+  "funcs": 36,
+  "discovered": 87,
+  "bad_decode": 0,
+  "strings_indexed": 2612
+ }
+}

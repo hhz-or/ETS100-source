@@ -1,0 +1,39 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\sqlitepln\\sqlitepln.pln",
+ "sha256": "77cefe026ce01e06e90b249f0aecd193bc50bd52d5e8b9168b8c4a9d0c8b763c",
+ "image_base": "0x10000000",
+ "export_dir": {
+  "name": "sqlitepln.pln",
+  "dll_name_raw": 317136
+ },
+ "exports": [
+  {
+   "ordinal": 1,
+   "name": "PlnInitiliaze",
+   "rva": "0x000029E0",
+   "va": "0x100029E0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 2,
+   "name": "PlnOnProcessMessage",
+   "rva": "0x000052A0",
+   "va": "0x100052A0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 3,
+   "name": "PlnSetParam",
+   "rva": "0x00002A80",
+   "va": "0x10002A80",
+   "forwarder": null
+  },
+  {
+   "ordinal": 4,
+   "name": "PlnUnInitialize",
+   "rva": "0x00002A60",
+   "va": "0x10002A60",
+   "forwarder": null
+  }
+ ]
+}

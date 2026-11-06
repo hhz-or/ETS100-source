@@ -1,0 +1,83 @@
+{
+ "file": "D:\\ets-rea\\ETS\\localdata\\ETS.db",
+ "size": 12288,
+ "tables": {
+  "Config": {
+   "columns": [
+    "Section",
+    "Entry",
+    "Value",
+    "UpdateTime",
+    "Common"
+   ],
+   "rowcount": 7,
+   "rows": [
+    {
+     "Section": "System",
+     "Entry": "C_Version",
+     "Value": "5.7.9",
+     "UpdateTime": "2024-04-17 18:52:04",
+     "Common": "客户端版本号"
+    },
+    {
+     "Section": "System",
+     "Entry": "Update_Version",
+     "Value": "5079",
+     "UpdateTime": "2024-04-17 18:52:04",
+     "Common": "更新版本号"
+    },
+    {
+     "Section": "UpdatePop",
+     "Entry": "Skip",
+     "Value": "0",
+     "UpdateTime": "2024-04-17 18:52:04",
+     "Common": "是否跳过更新提示, 0-不跳过, 1-跳过"
+    },
+    {
+     "Section": "System",
+     "Entry": "EnvType",
+     "Value": "1",
+     "UpdateTime": "2024-04-17 18:52:04",
+     "Common": "1-正式, 2-灰度, 3-测试"
+    },
+    {
+     "Section": "System",
+     "Entry": "TestVersion",
+     "Value": "0",
+     "UpdateTime": "2024-04-24 10:12:07",
+     "Common": "测试版本号"
+    },
+    {
+     "Section": "System",
+     "Entry": "Port",
+     "Value": "",
+     "UpdateTime": "2024-04-24 10:12:07",
+     "Common": "主链接端口号，默认空"
+    },
+    {
+     "Section": "UpdateLoginInfo",
+     "Entry": "LoginInfo",
+     "Value": "xxx",
+     "UpdateTime": null,
+     "Common": null
+    }
+   ]
+  }
+ },
+ "sqlite_master": [
+  {
+   "type": "index",
+   "name": "unique_ley",
+   "tbl_name": "Config",
+   "rootpage": 3,
+   "sql": "CREATE UNIQUE INDEX [unique_ley] ON [Config] ([Section], [Entry])"
+  },
+  {
+   "type": "table",
+   "name": "Config",
+   "tbl_name": "Config",
+   "rootpage": 2,
+   "sql": "CREATE TABLE [Config] (\r\n  [Section] VARCHAR(64), \r\n  [Entry] VARCHAR(64), \r\n  [Value] VARCHAR(256), \r\n  [UpdateTime] DATETIME, \r\n  [Common] varchar(128))"
+  }
+ ]
+}

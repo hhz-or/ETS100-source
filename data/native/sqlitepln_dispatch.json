@@ -1,0 +1,388 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\sqlitepln\\sqlitepln.pln",
+ "functions": [
+  {
+   "rva": "0x000016E0",
+   "va": "0x100016E0",
+   "insn_count": 29,
+   "strings": [
+    "Unable to close database",
+    "CPPSQLITE_ERROR",
+    "%s[%d]: %s"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002560",
+   "va": "0x10002560",
+   "insn_count": 58,
+   "strings": [
+    "ios_base::badbit set",
+    "ios_base::failbit set",
+    "ios_base::eofbit set"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000029E0",
+   "va": "0x100029E0",
+   "insn_count": 34,
+   "strings": [
+    "logs\\shell.log"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002A60",
+   "va": "0x10002A60",
+   "insn_count": 5,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002A80",
+   "va": "0x10002A80",
+   "insn_count": 82,
+   "strings": [
+    "WLOG",
+    "EXEC_CALLBACK"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002CB0",
+   "va": "0x10002CB0",
+   "insn_count": 192,
+   "strings": [
+    "logs\\shell_",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "=============================================",
+    "========StiCorePlugin.log starting==========="
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000033F0",
+   "va": "0x100033F0",
+   "insn_count": 274,
+   "strings": [
+    "sqlitepln.cpp",
+    "[sqlitepln::OnInitAction] arguments: ",
+    "error_callback_id"
+   ],
+   "log_handlers": [
+    {
+     "class": "sqlitepln",
+     "method": "OnInitAction",
+     "text": "[sqlitepln::OnInitAction] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x000037B0",
+   "va": "0x100037B0",
+   "insn_count": 427,
+   "strings": [
+    "sqlitepln.cpp",
+    "[sqlitepln::OnConnectAction] arguments: ",
+    "dbpath",
+    "password",
+    "[sqlitepln::OnPublishAction]get message error, strPassword: ",
+    "connect ok!",
+    "[sqlitepln::OnPublishAction]get channel error, strDbPath: ",
+    "dbpath is empty or error!"
+   ],
+   "log_handlers": [
+    {
+     "class": "sqlitepln",
+     "method": "OnConnectAction",
+     "text": "[sqlitepln::OnConnectAction] arguments: "
+    },
+    {
+     "class": "sqlitepln",
+     "method": "OnPublishAction",
+     "text": "[sqlitepln::OnPublishAction]get message error, strPassword: "
+    },
+    {
+     "class": "sqlitepln",
+     "method": "OnPublishAction",
+     "text": "[sqlitepln::OnPublishAction]get channel error, strDbPath: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00003D90",
+   "va": "0x10003D90",
+   "insn_count": 95,
+   "strings": [
+    "disconnect ok!",
+    "Unable to close database",
+    "CPPSQLITE_ERROR",
+    "%s[%d]: %s"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003EC0",
+   "va": "0x10003EC0",
+   "insn_count": 687,
+   "strings": [
+    "sqlitepln.cpp",
+    "[sqlitepln::OnQueryAction] arguments: ",
+    "query_result_callback",
+    ", dbpwd:",
+    "[sqlite::OnQueryAction]db ",
+    "Null Virtual Machine pointer",
+    "CPPSQLITE_ERROR",
+    "%s[%d]: %s",
+    "Invalid field index requested",
+    "query ok!",
+    "result is back async!",
+    "[sqlitepln::OnQueryAction]get sql error, strSQL: ",
+    "sql is empty or error!"
+   ],
+   "log_handlers": [
+    {
+     "class": "sqlitepln",
+     "method": "OnQueryAction",
+     "text": "[sqlitepln::OnQueryAction] arguments: "
+    },
+    {
+     "class": "sqlite",
+     "method": "OnQueryAction",
+     "text": "[sqlite::OnQueryAction]db "
+    },
+    {
+     "class": "sqlitepln",
+     "method": "OnQueryAction",
+     "text": "[sqlitepln::OnQueryAction]get sql error, strSQL: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00004B80",
+   "va": "0x10004B80",
+   "insn_count": 438,
+   "strings": [
+    "sqlitepln.cpp",
+    "[sqlitepln::OnDMLAction] arguments: ",
+    ", dbpwd:",
+    "[sqlite::OnDMLAction]db ",
+    "[sqlite::OnDMLAction]",
+    "DML ok!",
+    "[sqlitepln::OnDMLAction]get sql error, strSQL: ",
+    "sql is empty or error!"
+   ],
+   "log_handlers": [
+    {
+     "class": "sqlitepln",
+     "method": "OnDMLAction",
+     "text": "[sqlitepln::OnDMLAction] arguments: "
+    },
+    {
+     "class": "sqlite",
+     "method": "OnDMLAction",
+     "text": "[sqlite::OnDMLAction]db "
+    },
+    {
+     "class": "sqlite",
+     "method": "OnDMLAction",
+     "text": "[sqlite::OnDMLAction]"
+    },
+    {
+     "class": "sqlitepln",
+     "method": "OnDMLAction",
+     "text": "[sqlitepln::OnDMLAction]get sql error, strSQL: "
+    }
+   ]
+  },
+  {
+   "rva": "0x000052A0",
+   "va": "0x100052A0",
+   "insn_count": 303,
+   "strings": [
+    "init",
+    "init ok.",
+    "connect",
+    "disconnect",
+    "execquery",
+    "execdml",
+    "destroy",
+    "sqlitepln.cpp",
+    "[sqlitepln::PlnOnProcessMessage]destroy.",
+    "destroy ok."
+   ],
+   "log_handlers": [
+    {
+     "class": "sqlitepln",
+     "method": "PlnOnProcessMessage",
+     "text": "[sqlitepln::PlnOnProcessMessage]destroy."
+    }
+   ]
+  },
+  {
+   "rva": "0x000058B0",
+   "va": "0x100058B0",
+   "insn_count": 25,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00005910",
+   "va": "0x10005910",
+   "insn_count": 13,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00005A00",
+   "va": "0x10005A00",
+   "insn_count": 22,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00005A90",
+   "va": "0x10005A90",
+   "insn_count": 18,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00005D70",
+   "va": "0x10005D70",
+   "insn_count": 100,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000082B0",
+   "va": "0x100082B0",
+   "insn_count": 105,
+   "strings": [
+    "string too long"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000A180",
+   "va": "0x1000A180",
+   "insn_count": 187,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000A460",
+   "va": "0x1000A460",
+   "insn_count": 41,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000A4C0",
+   "va": "0x1000A4C0",
+   "insn_count": 39,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000B760",
+   "va": "0x1000B760",
+   "insn_count": 37,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000B910",
+   "va": "0x1000B910",
+   "insn_count": 218,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00023B76",
+   "va": "0x10023B76",
+   "insn_count": 58,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00023B85",
+   "va": "0x10023B85",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  }
+ ],
+ "action_candidates": [],
+ "log_handlers": [
+  "OnConnectAction",
+  "OnDMLAction",
+  "OnInitAction",
+  "OnPublishAction",
+  "OnQueryAction",
+  "PlnOnProcessMessage"
+ ],
+ "plnonprocess": {
+  "rva": "0x000052A0",
+  "insn_count": 303,
+  "extent_stop": "0x1003F600",
+  "string_refs": [
+   {
+    "va": "0x10043AB8",
+    "string": "init"
+   },
+   {
+    "va": "0x10043AC0",
+    "string": "init ok."
+   },
+   {
+    "va": "0x10043AD4",
+    "string": "connect"
+   },
+   {
+    "va": "0x10043ADC",
+    "string": "disconnect"
+   },
+   {
+    "va": "0x10043AE8",
+    "string": "execquery"
+   },
+   {
+    "va": "0x10043AF4",
+    "string": "execdml"
+   },
+   {
+    "va": "0x10043AFC",
+    "string": "destroy"
+   },
+   {
+    "va": "0x100436C4",
+    "string": "sqlitepln.cpp"
+   },
+   {
+    "va": "0x10043B04",
+    "string": "[sqlitepln::PlnOnProcessMessage]destroy."
+   },
+   {
+    "va": "0x10043B30",
+    "string": "destroy ok."
+   }
+  ],
+  "action_candidates": [
+   "connect",
+   "destroy",
+   "disconnect",
+   "execdml",
+   "execquery",
+   "init"
+  ]
+ },
+ "stats": {
+  "exports": 4,
+  "funcs": 25,
+  "discovered": 89,
+  "bad_decode": 0,
+  "strings_indexed": 2222
+ }
+}

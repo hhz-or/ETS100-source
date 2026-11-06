@@ -1,0 +1,927 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\shellhelper\\shellhelper.pln",
+ "functions": [
+  {
+   "rva": "0x00001830",
+   "va": "0x10001830",
+   "insn_count": 36,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00001940",
+   "va": "0x10001940",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00001A00",
+   "va": "0x10001A00",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00001C10",
+   "va": "0x10001C10",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00001C70",
+   "va": "0x10001C70",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003720",
+   "va": "0x10003720",
+   "insn_count": 217,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003AC0",
+   "va": "0x10003AC0",
+   "insn_count": 7,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00004330",
+   "va": "0x10004330",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00007C80",
+   "va": "0x10007C80",
+   "insn_count": 36,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00008550",
+   "va": "0x10008550",
+   "insn_count": 8,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000ABE0",
+   "va": "0x1000ABE0",
+   "insn_count": 236,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000E1F0",
+   "va": "0x1000E1F0",
+   "insn_count": 42,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000E280",
+   "va": "0x1000E280",
+   "insn_count": 11,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000F450",
+   "va": "0x1000F450",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000F470",
+   "va": "0x1000F470",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000F4B0",
+   "va": "0x1000F4B0",
+   "insn_count": 30,
+   "strings": [
+    "logs\\shell.log"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000F520",
+   "va": "0x1000F520",
+   "insn_count": 7,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000F550",
+   "va": "0x1000F550",
+   "insn_count": 104,
+   "strings": [
+    "WLOG",
+    "EXEC_CALLBACK"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000F7E0",
+   "va": "0x1000F7E0",
+   "insn_count": 220,
+   "strings": [
+    "logs\\shell_",
+    ".log",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "=============================================",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "========StiCorePlugin.log starting===========",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "============================================="
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00010B40",
+   "va": "0x10010B40",
+   "insn_count": 666,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::PlnOnProcessMessage] action->",
+    "init",
+    "destroy",
+    "getconfig",
+    "getroomid",
+    "executecmd",
+    "executeexe",
+    "executebat",
+    "startprocess",
+    "processexist",
+    "stopprocess",
+    "checkaudio",
+    "setvolume",
+    "getvolume",
+    "setmute",
+    "getmute",
+    "checkadapter",
+    "getpcinfo",
+    "getusbinfo",
+    "getofficeversion",
+    "netcheck"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "PlnOnProcessMessage",
+     "text": "[shellhelper::PlnOnProcessMessage] action->"
+    }
+   ]
+  },
+  {
+   "rva": "0x000118D0",
+   "va": "0x100118D0",
+   "insn_count": 847,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnGetConfig] get local ip fail",
+    "Server",
+    "MyMac",
+    "Server",
+    "Address",
+    "Server",
+    "Room",
+    "roomId",
+    "Address",
+    "SystemName",
+    "OSBit",
+    "HDSerial",
+    "ClientType",
+    "Name",
+    "FullScreen",
+    "AppTitle",
+    "LogoTitle",
+    "CopyRight",
+    "Version"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnGetConfig",
+     "text": "[shellhelper::OnGetConfig] get local ip fail"
+    }
+   ]
+  },
+  {
+   "rva": "0x00012780",
+   "va": "0x10012780",
+   "insn_count": 338,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnCheckAudioAction]",
+    "shellhelper.cpp",
+    "[shellhelper::OnCheckAudioAction]",
+    "shellhelper.cpp",
+    "[shellhelper::OnCheckAudioAction]",
+    "shellhelper.cpp",
+    "[shellhelper::OnCheckAudioAction]",
+    "rncode",
+    "rnmsg",
+    "vol_list"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnCheckAudioAction",
+     "text": "[shellhelper::OnCheckAudioAction]"
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnCheckAudioAction",
+     "text": "[shellhelper::OnCheckAudioAction]"
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnCheckAudioAction",
+     "text": "[shellhelper::OnCheckAudioAction]"
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnCheckAudioAction",
+     "text": "[shellhelper::OnCheckAudioAction]"
+    }
+   ]
+  },
+  {
+   "rva": "0x00012D50",
+   "va": "0x10012D50",
+   "insn_count": 245,
+   "strings": [
+    "shellhelper.cpp",
+    "Error allocating memory needed to call GetAdaptersinfo",
+    "shellhelper.cpp",
+    "Error allocating memory needed to call GetAdaptersinfo",
+    "shellhelper.cpp",
+    "[shellhelper::OnCheckAudioAction]",
+    "shellhelper.cpp",
+    "[shellhelper::OnCheckAudioAction]"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnCheckAudioAction",
+     "text": "[shellhelper::OnCheckAudioAction]"
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnCheckAudioAction",
+     "text": "[shellhelper::OnCheckAudioAction]"
+    }
+   ]
+  },
+  {
+   "rva": "0x00013140",
+   "va": "0x10013140",
+   "insn_count": 221,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnGetVolume] arguments: ",
+    "type",
+    "shellhelper.cpp",
+    "[shellhelper::OnGetVolume]error:get type fail.",
+    "volume"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnGetVolume",
+     "text": "[shellhelper::OnGetVolume] arguments: "
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnGetVolume",
+     "text": "[shellhelper::OnGetVolume]error:get type fail."
+    }
+   ]
+  },
+  {
+   "rva": "0x00013520",
+   "va": "0x10013520",
+   "insn_count": 214,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnSetVolume] arguments: ",
+    "type",
+    "volume",
+    "volume"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnSetVolume",
+     "text": "[shellhelper::OnSetVolume] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x000138A0",
+   "va": "0x100138A0",
+   "insn_count": 221,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnGetMute] arguments: ",
+    "type",
+    "shellhelper.cpp",
+    "[shellhelper::OnGetMute]error:get type fail.",
+    "mute"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnGetMute",
+     "text": "[shellhelper::OnGetMute] arguments: "
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnGetMute",
+     "text": "[shellhelper::OnGetMute]error:get type fail."
+    }
+   ]
+  },
+  {
+   "rva": "0x00013C40",
+   "va": "0x10013C40",
+   "insn_count": 200,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnSetMute] arguments: ",
+    "type",
+    "mute",
+    "mute"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnSetMute",
+     "text": "[shellhelper::OnSetMute] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00013F80",
+   "va": "0x10013F80",
+   "insn_count": 384,
+   "strings": [
+    "msgc\\config.ini",
+    "Leader",
+    "Room",
+    "room_",
+    "Room",
+    "roomId",
+    "shellhelper.cpp",
+    "[shellhelper::OnGetRoomId]roomId"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnGetRoomId",
+     "text": "[shellhelper::OnGetRoomId]roomId"
+    }
+   ]
+  },
+  {
+   "rva": "0x00014610",
+   "va": "0x10014610",
+   "insn_count": 1442,
+   "strings": [
+    "computername",
+    "SystemVersion",
+    "ProcessName",
+    "ProcessType",
+    "DwNum",
+    "DwMaxClockSpeed",
+    "PhysicalSize",
+    "VirtualSize",
+    "TotalSize",
+    "FreeSize",
+    "volume:",
+    "WVS3",
+    "totalSize",
+    "freeSize",
+    "install-volume",
+    "install-volume",
+    "Description",
+    "Mixing",
+    "InputDefault",
+    "InputDevice",
+    "OutputDefault",
+    "OutputDevice",
+    "SoftwareInfo",
+    "ProcessisExist",
+    "FirewallInfo",
+    "SystemZone",
+    "OsBit",
+    "HDSerial",
+    "ClientType",
+    "Name",
+    "FullScreen",
+    "AppTitle",
+    "LogoTitle",
+    "CopyRight",
+    "Version",
+    "3.8.7",
+    "office",
+    "python"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00016540",
+   "va": "0x10016540",
+   "insn_count": 131,
+   "strings": [
+    "3.8.7",
+    "office",
+    "python"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00016750",
+   "va": "0x10016750",
+   "insn_count": 764,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnExecuteCmd] arguments: ",
+    "upgradefile",
+    "cmd_hide",
+    "upgrade",
+    "upgrade\\AUC.exe",
+    "SHELL",
+    "shellhelper.cpp",
+    "shellhelper.cpp",
+    "upgrade_qiniu",
+    "SHELL",
+    "start_http",
+    "shellhelper.cpp",
+    "[shellhelper::executecmd]",
+    "start ",
+    "shellhelper.cpp",
+    "key:",
+    "shellhelper.cpp",
+    "value:",
+    "shellhelper.cpp",
+    "Size:",
+    "start ",
+    "execute success."
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnExecuteCmd",
+     "text": "[shellhelper::OnExecuteCmd] arguments: "
+    },
+    {
+     "class": "shellhelper",
+     "method": "executecmd",
+     "text": "[shellhelper::executecmd]"
+    }
+   ]
+  },
+  {
+   "rva": "0x00017430",
+   "va": "0x10017430",
+   "insn_count": 367,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnExecuteExe] arguments: ",
+    "cmdline",
+    "waitexit",
+    "isshow",
+    "shellhelper.cpp",
+    "OnExecuteExe szCmdline: ",
+    "execute error, CreateProcess fail."
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnExecuteExe",
+     "text": "[shellhelper::OnExecuteExe] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00017A50",
+   "va": "0x10017A50",
+   "insn_count": 304,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnExecuteBat] arguments: ",
+    "batfile",
+    "batDir",
+    "shellhelper.cpp",
+    "OnExecuteBat:",
+    "cmd.exe"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnExecuteBat",
+     "text": "[shellhelper::OnExecuteBat] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00017F70",
+   "va": "0x10017F70",
+   "insn_count": 521,
+   "strings": [
+    "shellhelper.cpp",
+    "[filehelper::OnRenameFile] params parse error: ",
+    "appFile",
+    "appParams",
+    "workDir",
+    "isWait",
+    "waitTime",
+    "isHide",
+    "reStart",
+    "shellhelper.cpp",
+    "[shellhelper::OnStartProcess] reStart: ",
+    "wait for process; ",
+    "process exit; ",
+    "shellhelper.cpp",
+    "[shellhelper::OnStartProcess::GetExitCodeProcess]error, code: ",
+    "return ."
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnRenameFile",
+     "text": "[filehelper::OnRenameFile] params parse error: "
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnStartProcess",
+     "text": "[shellhelper::OnStartProcess] reStart: "
+    },
+    {
+     "class": "shellhelper::OnStartProcess",
+     "method": "GetExitCodeProcess",
+     "text": "[shellhelper::OnStartProcess::GetExitCodeProcess]error, code: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00018830",
+   "va": "0x10018830",
+   "insn_count": 311,
+   "strings": [
+    "shellhelper.cpp",
+    "[filehelper::OnStopProcess] params parse error: ",
+    "process_list",
+    "open",
+    "cmd.exe",
+    "/c taskkill /f /im ",
+    "shellhelper.cpp",
+    "[shellhelper::OnStopProcess] stop process, "
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnStopProcess",
+     "text": "[filehelper::OnStopProcess] params parse error: "
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnStopProcess",
+     "text": "[shellhelper::OnStopProcess] stop process, "
+    }
+   ]
+  },
+  {
+   "rva": "0x00018D90",
+   "va": "0x10018D90",
+   "insn_count": 199,
+   "strings": [
+    "shellhelper.cpp",
+    "[filehelper::OnProcessExist] params parse error: ",
+    "processName",
+    "shellhelper.cpp",
+    "OnProcessExist:",
+    "false"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnProcessExist",
+     "text": "[filehelper::OnProcessExist] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x000190B0",
+   "va": "0x100190B0",
+   "insn_count": 225,
+   "strings": [
+    "shellhelper.cpp",
+    ", errCode: ",
+    "[shellhelper::OnInitAction] arguments: ",
+    "error_callback_id",
+    "shellhelper.cpp",
+    "[shellhelper::OnInitAction]ok."
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnInitAction",
+     "text": "[shellhelper::OnInitAction] arguments: "
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnInitAction",
+     "text": "[shellhelper::OnInitAction]ok."
+    }
+   ]
+  },
+  {
+   "rva": "0x00019470",
+   "va": "0x10019470",
+   "insn_count": 64,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::OnDestroyAction]"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "OnDestroyAction",
+     "text": "[shellhelper::OnDestroyAction]"
+    }
+   ]
+  },
+  {
+   "rva": "0x00019580",
+   "va": "0x10019580",
+   "insn_count": 217,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::ExecuteCmd] arguments: ",
+    "winExePln execute ok."
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "ExecuteCmd",
+     "text": "[shellhelper::ExecuteCmd] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00019AF0",
+   "va": "0x10019AF0",
+   "insn_count": 202,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::NetCheck] arguments: ",
+    "ping ok",
+    "ping faile"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "NetCheck",
+     "text": "[shellhelper::NetCheck] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00019E00",
+   "va": "0x10019E00",
+   "insn_count": 430,
+   "strings": [
+    "shellhelper.cpp",
+    "[shellhelper::USBDevCheck] arguments: ",
+    "dev_list",
+    "shellhelper.cpp",
+    "[shellhelper::USBDevCheck] SetupDiGetClassDevs Error, ",
+    "shellhelper.cpp",
+    "[shellhelper::USBDevCheck] get vid&pid Error, ",
+    "dev_list_result"
+   ],
+   "log_handlers": [
+    {
+     "class": "shellhelper",
+     "method": "USBDevCheck",
+     "text": "[shellhelper::USBDevCheck] arguments: "
+    },
+    {
+     "class": "shellhelper",
+     "method": "USBDevCheck",
+     "text": "[shellhelper::USBDevCheck] SetupDiGetClassDevs Error, "
+    },
+    {
+     "class": "shellhelper",
+     "method": "USBDevCheck",
+     "text": "[shellhelper::USBDevCheck] get vid&pid Error, "
+    }
+   ]
+  },
+  {
+   "rva": "0x00025390",
+   "va": "0x10025390",
+   "insn_count": 43,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000292D0",
+   "va": "0x100292D0",
+   "insn_count": 2,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000292F0",
+   "va": "0x100292F0",
+   "insn_count": 36,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00029490",
+   "va": "0x10029490",
+   "insn_count": 174,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00031C80",
+   "va": "0x10031C80",
+   "insn_count": 10,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x001359CC",
+   "va": "0x101359CC",
+   "insn_count": 58,
+   "strings": [],
+   "log_handlers": []
+  }
+ ],
+ "action_candidates": [],
+ "log_handlers": [
+  "ExecuteCmd",
+  "GetExitCodeProcess",
+  "NetCheck",
+  "OnCheckAudioAction",
+  "OnDestroyAction",
+  "OnExecuteBat",
+  "OnExecuteCmd",
+  "OnExecuteExe",
+  "OnGetConfig",
+  "OnGetMute",
+  "OnGetRoomId",
+  "OnGetVolume",
+  "OnInitAction",
+  "OnProcessExist",
+  "OnRenameFile",
+  "OnSetMute",
+  "OnSetVolume",
+  "OnStartProcess",
+  "OnStopProcess",
+  "PlnOnProcessMessage",
+  "USBDevCheck",
+  "executecmd"
+ ],
+ "plnonprocess": {
+  "rva": "0x00010B40",
+  "insn_count": 666,
+  "extent_stop": "0x1017CC00",
+  "string_refs": [
+   {
+    "va": "0x101A958C",
+    "string": "shellhelper.cpp"
+   },
+   {
+    "va": "0x101A9560",
+    "string": "[shellhelper::PlnOnProcessMessage] action->"
+   },
+   {
+    "va": "0x101A959C",
+    "string": "init"
+   },
+   {
+    "va": "0x101A95A4",
+    "string": "destroy"
+   },
+   {
+    "va": "0x101A95AC",
+    "string": "getconfig"
+   },
+   {
+    "va": "0x101A95B8",
+    "string": "getroomid"
+   },
+   {
+    "va": "0x101A95C4",
+    "string": "executecmd"
+   },
+   {
+    "va": "0x101A95D0",
+    "string": "executeexe"
+   },
+   {
+    "va": "0x101A95DC",
+    "string": "executebat"
+   },
+   {
+    "va": "0x101A95E8",
+    "string": "startprocess"
+   },
+   {
+    "va": "0x101A95F8",
+    "string": "processexist"
+   },
+   {
+    "va": "0x101A9608",
+    "string": "stopprocess"
+   },
+   {
+    "va": "0x101A9614",
+    "string": "checkaudio"
+   },
+   {
+    "va": "0x101A9620",
+    "string": "setvolume"
+   },
+   {
+    "va": "0x101A962C",
+    "string": "getvolume"
+   },
+   {
+    "va": "0x101A9638",
+    "string": "setmute"
+   },
+   {
+    "va": "0x101A9640",
+    "string": "getmute"
+   },
+   {
+    "va": "0x101A9648",
+    "string": "checkadapter"
+   },
+   {
+    "va": "0x101A9658",
+    "string": "getpcinfo"
+   },
+   {
+    "va": "0x101A9664",
+    "string": "getusbinfo"
+   },
+   {
+    "va": "0x101A9670",
+    "string": "getofficeversion"
+   },
+   {
+    "va": "0x101A9688",
+    "string": "netcheck"
+   }
+  ],
+  "action_candidates": [
+   "checkadapter",
+   "checkaudio",
+   "destroy",
+   "executebat",
+   "executecmd",
+   "executeexe",
+   "getconfig",
+   "getmute",
+   "getofficeversion",
+   "getpcinfo",
+   "getroomid",
+   "getusbinfo",
+   "getvolume",
+   "init",
+   "netcheck",
+   "processexist",
+   "setmute",
+   "setvolume",
+   "startprocess",
+   "stopprocess"
+  ]
+ },
+ "stats": {
+  "exports": 4,
+  "funcs": 47,
+  "discovered": 262,
+  "bad_decode": 0,
+  "strings_indexed": 10634
+ }
+}

@@ -1,0 +1,698 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\httphelper\\httphelper.pln",
+ "functions": [
+  {
+   "rva": "0x00003330",
+   "va": "0x10003330",
+   "insn_count": 25,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003390",
+   "va": "0x10003390",
+   "insn_count": 13,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00007560",
+   "va": "0x10007560",
+   "insn_count": 171,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00007790",
+   "va": "0x10007790",
+   "insn_count": 187,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000095C0",
+   "va": "0x100095C0",
+   "insn_count": 41,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00009820",
+   "va": "0x10009820",
+   "insn_count": 34,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000098A0",
+   "va": "0x100098A0",
+   "insn_count": 5,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000098C0",
+   "va": "0x100098C0",
+   "insn_count": 82,
+   "strings": [
+    "WLOG",
+    "EXEC_CALLBACK"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00009AF0",
+   "va": "0x10009AF0",
+   "insn_count": 191,
+   "strings": [
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "=============================================",
+    "========StiCorePlugin.log starting==========="
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000B1B0",
+   "va": "0x1000B1B0",
+   "insn_count": 416,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::OnInitAction] arguments: ",
+    "error_callback_id",
+    "download_callback_id",
+    "upload_callback_id",
+    "httpload_progress_callback_id",
+    "httphelper init ok."
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "OnInitAction",
+     "text": "[httphelper::OnInitAction] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000B7D0",
+   "va": "0x1000B7D0",
+   "insn_count": 48,
+   "strings": [
+    "httphelper uninit ok."
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000B870",
+   "va": "0x1000B870",
+   "insn_count": 1502,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::OnUpload] arguments: ",
+    "timeout",
+    "connecttimeout",
+    "retrycount",
+    "localFile",
+    "[httphelper::OnUpload] error:get localFile fail.",
+    "httphelper::upload error:get localFile fail.",
+    "[httphelper::OnUpload] error:get url fail.",
+    "httphelper::upload error:get url fail.",
+    "appType",
+    "cystorage",
+    "[httphelper::OnUpload] cystorage is selected.",
+    "qiniu",
+    "[httphelper::OnUpload]qiniu is selected.",
+    "scope",
+    "[httphelper::OnUpload] error:get scope fail.",
+    "httphelper::upload error:get scope fail.",
+    "host",
+    "[httphelper::OnUpload] error:get host fail.",
+    "[httphelper::OnUpload] error:get remoteFile fail.",
+    "httphelper::upload error:get remoteFile fail.",
+    "token",
+    "[httphelper::OnUpload]error:get token fail.",
+    "[httphelper::OnUpload] general way is selected."
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload] arguments: "
+    },
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload] error:get localFile fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload] error:get url fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload] cystorage is selected."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload]qiniu is selected."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload] error:get scope fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload] error:get host fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload] error:get remoteFile fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload]error:get token fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnUpload",
+     "text": "[httphelper::OnUpload] general way is selected."
+    }
+   ]
+  },
+  {
+   "rva": "0x0000D1A0",
+   "va": "0x1000D1A0",
+   "insn_count": 1616,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::OnDownload] arguments: ",
+    "timeout",
+    "connecttimeout",
+    "retrycount",
+    "[httphelper::OnDownload] error:get url fail.",
+    "httphelper/download error:get url fail.",
+    "localFile",
+    "[httphelper::OnDownload]error:get localFile fail.",
+    "httphelper/download error:get localFile fail.",
+    "appType",
+    "cystorage",
+    "[httphelper::OnDownload] cystorage is selected.",
+    "qiniu",
+    "dynamicInfo",
+    "[httphelper::OnDownload]error:get contextId fail.",
+    "[httphelper::OnDownload] error:get e fail.",
+    "token",
+    "[httphelper::OnDownload]error:get token fail.",
+    "wsiphost",
+    "[httphelper::OnDownload] error:get wsiphost fail.",
+    "httphelper::OnDownload, general way is selected.",
+    "[httphelper::OnDownload]makeDir failed, fileDir:",
+    "[httphelper::OnDownload] "
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload] arguments: "
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload] error:get url fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload]error:get localFile fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload] cystorage is selected."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload]error:get contextId fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload] error:get e fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload]error:get token fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload] error:get wsiphost fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload]makeDir failed, fileDir:"
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownload",
+     "text": "[httphelper::OnDownload] "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000EA40",
+   "va": "0x1000EA40",
+   "insn_count": 692,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::OnHttpGet] arguments: ",
+    "[httphelper::OnHttpGet]httphelper/OnHttpGet error:get url fail.",
+    "localFile",
+    "[httphelper::OnHttpGet] error:get localFile fail.",
+    "httphelper/OnHttpGet error:get localFile fail.",
+    "[httphelper::OnHttpGet] makeDir failed, fileDir:"
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "OnHttpGet",
+     "text": "[httphelper::OnHttpGet] arguments: "
+    },
+    {
+     "class": "httphelper",
+     "method": "OnHttpGet",
+     "text": "[httphelper::OnHttpGet]httphelper/OnHttpGet error:get url fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnHttpGet",
+     "text": "[httphelper::OnHttpGet] error:get localFile fail."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnHttpGet",
+     "text": "[httphelper::OnHttpGet] makeDir failed, fileDir:"
+    }
+   ]
+  },
+  {
+   "rva": "0x0000F440",
+   "va": "0x1000F440",
+   "insn_count": 330,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::OnHttpPost] arguments: ",
+    "httphelper/OnHttpPost error:get url fail.",
+    "httphelper/OnHttpPost error:get url fail.",
+    "httppost ok"
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "OnHttpPost",
+     "text": "[httphelper::OnHttpPost] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000F8C0",
+   "va": "0x1000F8C0",
+   "insn_count": 1360,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::OnIsRpkFileExist] arguments: ",
+    "[httphelper::OnIsRpkFileExist] begin.",
+    "papercode",
+    "paperversion",
+    "userid",
+    "sliceLength",
+    "temp\\resources\\",
+    "localFilePath",
+    "localFileName",
+    "localFile: ",
+    "code",
+    "filePath",
+    "[httphelpe::OnIsRpkFileExist] end,  "
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "OnIsRpkFileExist",
+     "text": "[httphelper::OnIsRpkFileExist] arguments: "
+    },
+    {
+     "class": "httphelper",
+     "method": "OnIsRpkFileExist",
+     "text": "[httphelper::OnIsRpkFileExist] begin."
+    },
+    {
+     "class": "httphelpe",
+     "method": "OnIsRpkFileExist",
+     "text": "[httphelpe::OnIsRpkFileExist] end,  "
+    }
+   ]
+  },
+  {
+   "rva": "0x00010CA0",
+   "va": "0x10010CA0",
+   "insn_count": 2115,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::OnDownloadResource] begin.",
+    "[httphelper::OnDownloadResource] arguments: ",
+    "prefix",
+    "suffix",
+    "papercode",
+    "paperversion",
+    "userid",
+    "loaclFileName",
+    "temp\\resources\\",
+    "localFilePath",
+    "[httphelpe::OnDownloadResource]=====localFile=====",
+    "[httphelper::OnDownloadResource]makeDir failed, fileDir:",
+    "[httphelper::OnDownloadResource]",
+    "timeout",
+    "connecttimeout",
+    "retrycount",
+    "successed.",
+    "failed.",
+    "[httphelper::OnDownloadResource]DeleteFile ,localFile_u2g:",
+    "downloadFile cancel.",
+    "[httphelper::OnDownloadResource]rename failed.",
+    "[httphelper::OnDownloadResource] end, resStr"
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "OnDownloadResource",
+     "text": "[httphelper::OnDownloadResource] begin."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadResource",
+     "text": "[httphelper::OnDownloadResource] arguments: "
+    },
+    {
+     "class": "httphelpe",
+     "method": "OnDownloadResource",
+     "text": "[httphelpe::OnDownloadResource]=====localFile====="
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadResource",
+     "text": "[httphelper::OnDownloadResource]makeDir failed, fileDir:"
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadResource",
+     "text": "[httphelper::OnDownloadResource]"
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadResource",
+     "text": "[httphelper::OnDownloadResource]DeleteFile ,localFile_u2g:"
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadResource",
+     "text": "[httphelper::OnDownloadResource]rename failed."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadResource",
+     "text": "[httphelper::OnDownloadResource] end, resStr"
+    }
+   ]
+  },
+  {
+   "rva": "0x00012CA0",
+   "va": "0x10012CA0",
+   "insn_count": 1190,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::OnDownloadSdk] begin.",
+    "[httphelper::OnDownloadSdk] arguments: ",
+    "filePath",
+    "[httphelper::OnDownloadSdk]=====localFile=====",
+    "[httphelper::OnDownloadSdk] makeDir:",
+    "[httphelper::OnDownloadSdk] makeDir failed, fileDir:",
+    "[httphelper::OnDownloadSdk] ",
+    "timeout",
+    "connecttimeout",
+    "retrycount",
+    "http download resource failed",
+    "fileName",
+    "fileSize",
+    "[httphelper::OnDownloadSdk] end, resStr"
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "OnDownloadSdk",
+     "text": "[httphelper::OnDownloadSdk] begin."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadSdk",
+     "text": "[httphelper::OnDownloadSdk] arguments: "
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadSdk",
+     "text": "[httphelper::OnDownloadSdk]=====localFile====="
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadSdk",
+     "text": "[httphelper::OnDownloadSdk] makeDir:"
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadSdk",
+     "text": "[httphelper::OnDownloadSdk] makeDir failed, fileDir:"
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadSdk",
+     "text": "[httphelper::OnDownloadSdk] "
+    },
+    {
+     "class": "httphelper",
+     "method": "OnDownloadSdk",
+     "text": "[httphelper::OnDownloadSdk] end, resStr"
+    }
+   ]
+  },
+  {
+   "rva": "0x00013EA0",
+   "va": "0x10013EA0",
+   "insn_count": 186,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::OnStopDownload] begin.",
+    "\\Pbk",
+    "\\Pbk",
+    "[httphelper::OnStopDownload] end, resStr"
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "OnStopDownload",
+     "text": "[httphelper::OnStopDownload] begin."
+    },
+    {
+     "class": "httphelper",
+     "method": "OnStopDownload",
+     "text": "[httphelper::OnStopDownload] end, resStr"
+    }
+   ]
+  },
+  {
+   "rva": "0x00014100",
+   "va": "0x10014100",
+   "insn_count": 300,
+   "strings": [
+    "httphelper.cpp",
+    "[httphelper::PlnOnProcessMessage] action->",
+    "stopdownload",
+    "init",
+    "destroy",
+    "upload",
+    "download",
+    "downloadsdk",
+    "httpget",
+    "httppost",
+    "downloadresource",
+    "isrpkexist"
+   ],
+   "log_handlers": [
+    {
+     "class": "httphelper",
+     "method": "PlnOnProcessMessage",
+     "text": "[httphelper::PlnOnProcessMessage] action->"
+    }
+   ]
+  },
+  {
+   "rva": "0x000146B0",
+   "va": "0x100146B0",
+   "insn_count": 22,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00014710",
+   "va": "0x10014710",
+   "insn_count": 11,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00016DF0",
+   "va": "0x10016DF0",
+   "insn_count": 105,
+   "strings": [
+    "string too long"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00019660",
+   "va": "0x10019660",
+   "insn_count": 39,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001CB90",
+   "va": "0x1001CB90",
+   "insn_count": 39,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001CCD0",
+   "va": "0x1001CCD0",
+   "insn_count": 210,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00024E00",
+   "va": "0x10024E00",
+   "insn_count": 10,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0006D894",
+   "va": "0x1006D894",
+   "insn_count": 58,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0006DA53",
+   "va": "0x1006DA53",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  }
+ ],
+ "action_candidates": [],
+ "log_handlers": [
+  "OnDownload",
+  "OnDownloadResource",
+  "OnDownloadSdk",
+  "OnHttpGet",
+  "OnHttpPost",
+  "OnInitAction",
+  "OnIsRpkFileExist",
+  "OnStopDownload",
+  "OnUpload",
+  "PlnOnProcessMessage"
+ ],
+ "plnonprocess": {
+  "rva": "0x00014100",
+  "insn_count": 300,
+  "extent_stop": "0x10139200",
+  "string_refs": [
+   {
+    "va": "0x1017DC98",
+    "string": "httphelper.cpp"
+   },
+   {
+    "va": "0x1017EC9C",
+    "string": "[httphelper::PlnOnProcessMessage] action->"
+   },
+   {
+    "va": "0x1017ECC8",
+    "string": "stopdownload"
+   },
+   {
+    "va": "0x1017ECD8",
+    "string": "init"
+   },
+   {
+    "va": "0x1017ECE0",
+    "string": "destroy"
+   },
+   {
+    "va": "0x1017ECE8",
+    "string": "upload"
+   },
+   {
+    "va": "0x1017ECF0",
+    "string": "download"
+   },
+   {
+    "va": "0x1017ECFC",
+    "string": "downloadsdk"
+   },
+   {
+    "va": "0x1017ED08",
+    "string": "httpget"
+   },
+   {
+    "va": "0x1017ED10",
+    "string": "httppost"
+   },
+   {
+    "va": "0x1017ED1C",
+    "string": "downloadresource"
+   },
+   {
+    "va": "0x1017ED30",
+    "string": "isrpkexist"
+   }
+  ],
+  "action_candidates": [
+   "destroy",
+   "download",
+   "downloadresource",
+   "downloadsdk",
+   "httpget",
+   "httppost",
+   "init",
+   "isrpkexist",
+   "stopdownload",
+   "upload"
+  ]
+ },
+ "stats": {
+  "exports": 4,
+  "funcs": 29,
+  "discovered": 137,
+  "bad_decode": 0,
+  "strings_indexed": 19532
+ }
+}

@@ -1,0 +1,39 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\httphelper\\httphelper.pln",
+ "sha256": "49f00a8dd15944d929548159e2eca51db1923e07f08de8ca1e4eb7bb1a81f9ad",
+ "image_base": "0x10000000",
+ "export_dir": {
+  "name": "httphelper.pln",
+  "dll_name_raw": 1615984
+ },
+ "exports": [
+  {
+   "ordinal": 1,
+   "name": "PlnInitiliaze",
+   "rva": "0x00009820",
+   "va": "0x10009820",
+   "forwarder": null
+  },
+  {
+   "ordinal": 2,
+   "name": "PlnOnProcessMessage",
+   "rva": "0x00014100",
+   "va": "0x10014100",
+   "forwarder": null
+  },
+  {
+   "ordinal": 3,
+   "name": "PlnSetParam",
+   "rva": "0x000098C0",
+   "va": "0x100098C0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 4,
+   "name": "PlnUnInitialize",
+   "rva": "0x000098A0",
+   "va": "0x100098A0",
+   "forwarder": null
+  }
+ ]
+}

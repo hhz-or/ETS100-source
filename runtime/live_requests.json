@@ -1,0 +1,653 @@
+{
+ "note": "仅元数据；原始请求/响应体含个人信息，未发布",
+ "requests": [
+  {
+   "url": "https://api.ets100.com//announcement/list",
+   "path": "//announcement/list",
+   "method": "POST",
+   "sign": "145cc517cb6fb186c09e97f0eb5f77d6",
+   "pid": "pcWin",
+   "time": "1793970966209",
+   "body_len": 143
+  },
+  {
+   "url": "https://api.ets100.com/g/data/sls-config",
+   "path": "/g/data/sls-config",
+   "method": "POST",
+   "sign": "c02004d5a44d546a6a1cd41699b01164",
+   "pid": "pcWin",
+   "time": "1793970967088",
+   "body_len": 294
+  },
+  {
+   "url": "https://api.ets100.com/p1/student/ability/sls/slsAppConfig",
+   "path": "/p1/student/ability/sls/slsAppConfig",
+   "method": "POST",
+   "sign": "0e2819e5dc9b7708558ddc6d57018d14",
+   "pid": "pcWin",
+   "time": "1793970967088",
+   "body_len": 312
+  },
+  {
+   "url": "https://api.ets100.com/p1/student/config/config/ossEvaluateUploadStsToken",
+   "path": "/p1/student/config/config/ossEvaluateUploadStsToken",
+   "method": "POST",
+   "sign": "4c27c0a7af3cc425edd6f06fcbd9019c",
+   "pid": "pcWin",
+   "time": "1793970967092",
+   "body_len": 327
+  },
+  {
+   "url": "https://api.ets100.com//config/config/getResourcePlatformToken",
+   "path": "//config/config/getResourcePlatformToken",
+   "method": "POST",
+   "sign": "bb793c8072602d428f7ac605a7fac127",
+   "pid": "pcWin",
+   "time": "1793970967093",
+   "body_len": 316
+  },
+  {
+   "url": "https://api.ets100.com/file/download",
+   "path": "/file/download",
+   "method": "POST",
+   "sign": "80c6538c2c4312e64966ecc8e8e659f7",
+   "pid": "pcWin",
+   "time": "1793970967104",
+   "body_len": 335
+  },
+  {
+   "url": "https://api.ets100.com/system/config",
+   "path": "/system/config",
+   "method": "POST",
+   "sign": "521f103e02e6d245f15566cad10957ff",
+   "pid": "pcWin",
+   "time": "1793970967104",
+   "body_len": 138
+  },
+  {
+   "url": "https://api.ets100.com/m/ecard/list",
+   "path": "/m/ecard/list",
+   "method": "POST",
+   "sign": "2bbaf22128bba61144967fd9760dc700",
+   "pid": "pcWin",
+   "time": "1793970967104",
+   "body_len": 349
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/grade-list",
+   "path": "/g/resource/grade-list",
+   "method": "POST",
+   "sign": "fdd6955a9c575b253b8a80214b2f8265",
+   "pid": "pcWin",
+   "time": "1793970967289",
+   "body_len": 327
+  },
+  {
+   "url": "https://api.ets100.com/file/download",
+   "path": "/file/download",
+   "method": "POST",
+   "sign": "f8731cea95f494bb9683438d36090a30",
+   "pid": "pcWin",
+   "time": "1793970968114",
+   "body_len": 328
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/book-list",
+   "path": "/g/resource/book-list",
+   "method": "POST",
+   "sign": "cb356dba06f507c344f4d6a02fa7e4d9",
+   "pid": "pcWin",
+   "time": "1793970969118",
+   "body_len": 326
+  },
+  {
+   "url": "https://api.ets100.com/g/set/unit-list",
+   "path": "/g/set/unit-list",
+   "method": "POST",
+   "sign": "3e19cd1ad9b11da1176c92500a94cb26",
+   "pid": "pcWin",
+   "time": "1793970969187",
+   "body_len": 349
+  },
+  {
+   "url": "https://api.ets100.com/g/set/unit-info",
+   "path": "/g/set/unit-info",
+   "method": "POST",
+   "sign": "559a0f440a2ae3f159b0312ca22d1b51",
+   "pid": "pcWin",
+   "time": "1793970969289",
+   "body_len": 367
+  },
+  {
+   "url": "https://api.ets100.com/user/info",
+   "path": "/user/info",
+   "method": "POST",
+   "sign": "ef4b6d0d0a3763ce4d53e93fd20c2683",
+   "pid": "pcWin",
+   "time": "1793970969295",
+   "body_len": 286
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/grade-list",
+   "path": "/g/resource/grade-list",
+   "method": "POST",
+   "sign": "ce177c00e53067ef859d124b3ff12913",
+   "pid": "pcWin",
+   "time": "1793970969608",
+   "body_len": 327
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/book-list",
+   "path": "/g/resource/book-list",
+   "method": "POST",
+   "sign": "c993a092a72e2e608d78f8df8919a879",
+   "pid": "pcWin",
+   "time": "1793970969618",
+   "body_len": 326
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/expand-module",
+   "path": "/g/resource/expand-module",
+   "method": "POST",
+   "sign": "21a9e2a87b37a0bfe2b48930a5a0e7df",
+   "pid": "pcWin",
+   "time": "1793970969820",
+   "body_len": 382
+  },
+  {
+   "url": "https://api.ets100.com/m/mistake/summary",
+   "path": "/m/mistake/summary",
+   "method": "POST",
+   "sign": "9367521facdb9c31acc918a8073edfd3",
+   "pid": "pcWin",
+   "time": "1793970969820",
+   "body_len": 328
+  },
+  {
+   "url": "https://api.ets100.com/m/advertisement/list",
+   "path": "/m/advertisement/list",
+   "method": "POST",
+   "sign": "e31cf2f0b527a1ebf1e15c94775d7747",
+   "pid": "pcWin",
+   "time": "1793970969820",
+   "body_len": 330
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/priority-instruction-book",
+   "path": "/g/resource/priority-instruction-book",
+   "method": "POST",
+   "sign": "7056f8112d983509ee29dadb5c30a6cc",
+   "pid": "pcWin",
+   "time": "1793970969820",
+   "body_len": 392
+  },
+  {
+   "url": "https://api.ets100.com/g/set/list",
+   "path": "/g/set/list",
+   "method": "POST",
+   "sign": "8690f0440e585edecfa3f707f4946c3e",
+   "pid": "pcWin",
+   "time": "1793970969823",
+   "body_len": 368
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/grade-list",
+   "path": "/g/resource/grade-list",
+   "method": "POST",
+   "sign": "6064dab859aa92ec8501618885c16cb7",
+   "pid": "pcWin",
+   "time": "1793970969632",
+   "body_len": 327
+  },
+  {
+   "url": "https://api.ets100.com/user/get-record",
+   "path": "/user/get-record",
+   "method": "POST",
+   "sign": "74b1f36ddd49becc47d7e5576e90bef8",
+   "pid": "pcWin",
+   "time": "1793970969824",
+   "body_len": 374
+  },
+  {
+   "url": "https://api.ets100.com/g/homework/list",
+   "path": "/g/homework/list",
+   "method": "POST",
+   "sign": "ca3ab939573be6dd1d0037dc5b7a1293",
+   "pid": "pcWin",
+   "time": "1793970969825",
+   "body_len": 557
+  },
+  {
+   "url": "https://api.ets100.com/g/set/list",
+   "path": "/g/set/list",
+   "method": "POST",
+   "sign": "465191568690a3aa23cff4cd118f408d",
+   "pid": "pcWin",
+   "time": "1793970969826",
+   "body_len": 368
+  },
+  {
+   "url": "https://api.ets100.com/user/get-record",
+   "path": "/user/get-record",
+   "method": "POST",
+   "sign": "4544fef5864b7e7bc779b8041176975b",
+   "pid": "pcWin",
+   "time": "1793970969826",
+   "body_len": 374
+  },
+  {
+   "url": "https://api.ets100.com/g/set/column-v2",
+   "path": "/g/set/column-v2",
+   "method": "POST",
+   "sign": "64877ba849fa4e57c41e8e46636a5427",
+   "pid": "pcWin",
+   "time": "1793970969826",
+   "body_len": 346
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/expand-module",
+   "path": "/g/resource/expand-module",
+   "method": "POST",
+   "sign": "ceac733ea46d9d3e6a34fca1e6a80ae2",
+   "pid": "pcWin",
+   "time": "1793970969827",
+   "body_len": 382
+  },
+  {
+   "url": "https://api.ets100.com/m/mistake/summary",
+   "path": "/m/mistake/summary",
+   "method": "POST",
+   "sign": "43c421d1bbfd2cd1ca8c68ea7330db6b",
+   "pid": "pcWin",
+   "time": "1793970969827",
+   "body_len": 328
+  },
+  {
+   "url": "https://api.ets100.com/m/advertisement/list",
+   "path": "/m/advertisement/list",
+   "method": "POST",
+   "sign": "ab1ee97cf9713c174db2f2143ac54190",
+   "pid": "pcWin",
+   "time": "1793970969827",
+   "body_len": 330
+  },
+  {
+   "url": "https://api.ets100.com/system/time",
+   "path": "/system/time",
+   "method": "POST",
+   "sign": "ee472ef436a6edfc126e64cc3c25f7cb",
+   "pid": "pcWin",
+   "time": "1793970969835",
+   "body_len": 288
+  },
+  {
+   "url": "https://api.ets100.com/g/set/unit-info",
+   "path": "/g/set/unit-info",
+   "method": "POST",
+   "sign": "579c1d6bbd6d949317c0bfd4b63e7379",
+   "pid": "pcWin",
+   "time": "1793970969835",
+   "body_len": 367
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/priority-instruction-book",
+   "path": "/g/resource/priority-instruction-book",
+   "method": "POST",
+   "sign": "3501594f7773be852b9618a938c2dd25",
+   "pid": "pcWin",
+   "time": "1793970969836",
+   "body_len": 392
+  },
+  {
+   "url": "https://api.ets100.com/g/homework/list",
+   "path": "/g/homework/list",
+   "method": "POST",
+   "sign": "4b1815ec6f4db643255ab64a3d1d5b96",
+   "pid": "pcWin",
+   "time": "1793970969836",
+   "body_len": 557
+  },
+  {
+   "url": "https://api.ets100.com/g/set/module-list",
+   "path": "/g/set/module-list",
+   "method": "POST",
+   "sign": "519960dc691d38b048fc69e786fff2bc",
+   "pid": "pcWin",
+   "time": "1793970969925",
+   "body_len": 397
+  },
+  {
+   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=275389909&token=<JWT>",
+   "path": "/point-service/account/trail",
+   "method": "POST",
+   "sign": null,
+   "pid": null,
+   "time": null,
+   "body_len": 4
+  },
+  {
+   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=275389909&token=<JWT>",
+   "path": "/point-service/account/trail",
+   "method": "POST",
+   "sign": null,
+   "pid": null,
+   "time": null,
+   "body_len": 4
+  },
+  {
+   "url": "https://api.ets100.com/ai/aiplat/getaitoken",
+   "path": "/ai/aiplat/getaitoken",
+   "method": "POST",
+   "sign": "6ba6e068b4b9e318ea3afe8f581f8ef8",
+   "pid": "pcWin",
+   "time": "1793970970219",
+   "body_len": 297
+  },
+  {
+   "url": "https://api.ets100.com/g/set/module-list",
+   "path": "/g/set/module-list",
+   "method": "POST",
+   "sign": "d274b1c5d2fdbecc8bc7e90fa5505d29",
+   "pid": "pcWin",
+   "time": "1793970970336",
+   "body_len": 397
+  },
+  {
+   "url": "https://api.ets100.com/g/set/column-v2",
+   "path": "/g/set/column-v2",
+   "method": "POST",
+   "sign": "9d2127a89f10f4095edac3799f7e976d",
+   "pid": "pcWin",
+   "time": "1793970970338",
+   "body_len": 346
+  },
+  {
+   "url": "https://api.ets100.com/g/set/unit-list",
+   "path": "/g/set/unit-list",
+   "method": "POST",
+   "sign": "af220160e94431376ddb9a3c0d63178e",
+   "pid": "pcWin",
+   "time": "1793970970345",
+   "body_len": 349
+  },
+  {
+   "url": "https://api.ets100.com/g/set/column-v2",
+   "path": "/g/set/column-v2",
+   "method": "POST",
+   "sign": "305d89d727eb98df5302eeeb6c397b60",
+   "pid": "pcWin",
+   "time": "1793970970375",
+   "body_len": 346
+  },
+  {
+   "url": "https://api.ets100.com/g/set/unit-info",
+   "path": "/g/set/unit-info",
+   "method": "POST",
+   "sign": "bf1fdce0a5e6d7fd9f7527d079c484a4",
+   "pid": "pcWin",
+   "time": "1793970970465",
+   "body_len": 367
+  },
+  {
+   "url": "https://api.ets100.com/g/set/module-list",
+   "path": "/g/set/module-list",
+   "method": "POST",
+   "sign": "300bc41960bb04a4c6c823ff2bd996c0",
+   "pid": "pcWin",
+   "time": "1793970970736",
+   "body_len": 397
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/grade-list",
+   "path": "/g/resource/grade-list",
+   "method": "POST",
+   "sign": "29a94bfc9609a928e0c3f1e188f0e328",
+   "pid": "pcWin",
+   "time": "1793971249514",
+   "body_len": 327
+  },
+  {
+   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=275389909&token=<JWT>",
+   "path": "/point-service/account/trail",
+   "method": "POST",
+   "sign": null,
+   "pid": null,
+   "time": null,
+   "body_len": 4
+  },
+  {
+   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=275389909&token=<JWT>",
+   "path": "/point-service/account/trail",
+   "method": "POST",
+   "sign": null,
+   "pid": null,
+   "time": null,
+   "body_len": 4
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/book-list",
+   "path": "/g/resource/book-list",
+   "method": "POST",
+   "sign": "801877d0f69561cbd9b5ae935d29327e",
+   "pid": "pcWin",
+   "time": "1793971249525",
+   "body_len": 326
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/grade-list",
+   "path": "/g/resource/grade-list",
+   "method": "POST",
+   "sign": "24664e0799d2344cb64079fb16e513d4",
+   "pid": "pcWin",
+   "time": "1793971249576",
+   "body_len": 327
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/expand-module",
+   "path": "/g/resource/expand-module",
+   "method": "POST",
+   "sign": "018b9a09e38e1faab7507978c47fcc6f",
+   "pid": "pcWin",
+   "time": "1793971249768",
+   "body_len": 382
+  },
+  {
+   "url": "https://api.ets100.com/m/mistake/summary",
+   "path": "/m/mistake/summary",
+   "method": "POST",
+   "sign": "aa3849bda6f09242b4adc5968a3c750e",
+   "pid": "pcWin",
+   "time": "1793971249769",
+   "body_len": 328
+  },
+  {
+   "url": "https://api.ets100.com/m/advertisement/list",
+   "path": "/m/advertisement/list",
+   "method": "POST",
+   "sign": "69660d2ffebbcb03091b1dfbfb7219e9",
+   "pid": "pcWin",
+   "time": "1793971249769",
+   "body_len": 330
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/priority-instruction-book",
+   "path": "/g/resource/priority-instruction-book",
+   "method": "POST",
+   "sign": "1037310d4421c34ccf5b1ed053a884b8",
+   "pid": "pcWin",
+   "time": "1793971249769",
+   "body_len": 392
+  },
+  {
+   "url": "https://api.ets100.com/g/set/list",
+   "path": "/g/set/list",
+   "method": "POST",
+   "sign": "e25566a36bf4607a932dcd01aac13084",
+   "pid": "pcWin",
+   "time": "1793971249773",
+   "body_len": 368
+  },
+  {
+   "url": "https://api.ets100.com/user/get-record",
+   "path": "/user/get-record",
+   "method": "POST",
+   "sign": "eea52af1806775dc65b8970f6063b8d6",
+   "pid": "pcWin",
+   "time": "1793971249773",
+   "body_len": 374
+  },
+  {
+   "url": "https://api.ets100.com/g/homework/list",
+   "path": "/g/homework/list",
+   "method": "POST",
+   "sign": "5833a83d33c4a7c0cd4fd54829ef5168",
+   "pid": "pcWin",
+   "time": "1793971249776",
+   "body_len": 557
+  },
+  {
+   "url": "https://api.ets100.com/g/set/list",
+   "path": "/g/set/list",
+   "method": "POST",
+   "sign": "9f481a05efd33d91ae9ac253ab874e0e",
+   "pid": "pcWin",
+   "time": "1793971249776",
+   "body_len": 368
+  },
+  {
+   "url": "https://api.ets100.com/user/get-record",
+   "path": "/user/get-record",
+   "method": "POST",
+   "sign": "7572907fdd509909194af9e1e6e0653e",
+   "pid": "pcWin",
+   "time": "1793971249776",
+   "body_len": 374
+  },
+  {
+   "url": "https://api.ets100.com/g/set/column-v2",
+   "path": "/g/set/column-v2",
+   "method": "POST",
+   "sign": "72eeb2dc15f1f22717e1054ed4deff1e",
+   "pid": "pcWin",
+   "time": "1793971249777",
+   "body_len": 346
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/expand-module",
+   "path": "/g/resource/expand-module",
+   "method": "POST",
+   "sign": "91d307696fc3231d331637a7bb3bc665",
+   "pid": "pcWin",
+   "time": "1793971249778",
+   "body_len": 382
+  },
+  {
+   "url": "https://api.ets100.com/m/mistake/summary",
+   "path": "/m/mistake/summary",
+   "method": "POST",
+   "sign": "3d8df6188592b0077efe679e12d46914",
+   "pid": "pcWin",
+   "time": "1793971249780",
+   "body_len": 328
+  },
+  {
+   "url": "https://api.ets100.com/m/advertisement/list",
+   "path": "/m/advertisement/list",
+   "method": "POST",
+   "sign": "d84e64fec4f4a0c3bc3353189ea64f04",
+   "pid": "pcWin",
+   "time": "1793971249780",
+   "body_len": 330
+  },
+  {
+   "url": "https://api.ets100.com/system/time",
+   "path": "/system/time",
+   "method": "POST",
+   "sign": "ac3416702b84de3720188bc25cc3d712",
+   "pid": "pcWin",
+   "time": "1793971249791",
+   "body_len": 288
+  },
+  {
+   "url": "https://api.ets100.com/g/set/unit-info",
+   "path": "/g/set/unit-info",
+   "method": "POST",
+   "sign": "3464838a59dd83b3f6daf3e6823019d8",
+   "pid": "pcWin",
+   "time": "1793971249792",
+   "body_len": 367
+  },
+  {
+   "url": "https://api.ets100.com/g/resource/priority-instruction-book",
+   "path": "/g/resource/priority-instruction-book",
+   "method": "POST",
+   "sign": "7b1f1aca093b955abea8406a8a4aa24e",
+   "pid": "pcWin",
+   "time": "1793971249792",
+   "body_len": 392
+  },
+  {
+   "url": "https://api.ets100.com/g/homework/list",
+   "path": "/g/homework/list",
+   "method": "POST",
+   "sign": "44bf297d847dbbd7cb2faac3aae56cb6",
+   "pid": "pcWin",
+   "time": "1793971249792",
+   "body_len": 557
+  },
+  {
+   "url": "https://api.ets100.com/g/set/column-v2",
+   "path": "/g/set/column-v2",
+   "method": "POST",
+   "sign": "5c9281be848d539b9fa6ce675455abba",
+   "pid": "pcWin",
+   "time": "1793971250488",
+   "body_len": 346
+  },
+  {
+   "url": "https://api.ets100.com/g/set/unit-list",
+   "path": "/g/set/unit-list",
+   "method": "POST",
+   "sign": "9b1ca2a1726a75c3a0de6d29535cc0d5",
+   "pid": "pcWin",
+   "time": "1793971250492",
+   "body_len": 349
+  },
+  {
+   "url": "https://api.ets100.com/g/set/column-v2",
+   "path": "/g/set/column-v2",
+   "method": "POST",
+   "sign": "4d6e7c9880d700a6d1448a9b4de53d88",
+   "pid": "pcWin",
+   "time": "1793971250542",
+   "body_len": 346
+  },
+  {
+   "url": "https://api.ets100.com/g/set/unit-info",
+   "path": "/g/set/unit-info",
+   "method": "POST",
+   "sign": "f7bea8b9156b4905705e537c2f7fe3e3",
+   "pid": "pcWin",
+   "time": "1793971250937",
+   "body_len": 367
+  },
+  {
+   "url": "https://api.ets100.com/g/set/module-list",
+   "path": "/g/set/module-list",
+   "method": "POST",
+   "sign": "42767bfbc6a8d4b8a5f8d3d6951c22a9",
+   "pid": "pcWin",
+   "time": "1793971250965",
+   "body_len": 397
+  },
+  {
+   "url": "https://api.ets100.com/g/set/module-list",
+   "path": "/g/set/module-list",
+   "method": "POST",
+   "sign": "282017daabc3085a0a7a17c9f0324304",
+   "pid": "pcWin",
+   "time": "1793971251109",
+   "body_len": 397
+  }
+ ]
+}

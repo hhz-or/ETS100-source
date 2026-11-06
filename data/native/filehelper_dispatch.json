@@ -1,0 +1,1228 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\filehelper\\filehelper.pln",
+ "functions": [
+  {
+   "rva": "0x00003990",
+   "va": "0x10003990",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003A20",
+   "va": "0x10003A20",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003A40",
+   "va": "0x10003A40",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003A60",
+   "va": "0x10003A60",
+   "insn_count": 30,
+   "strings": [
+    "logs\\shell.log"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003AD0",
+   "va": "0x10003AD0",
+   "insn_count": 7,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003B00",
+   "va": "0x10003B00",
+   "insn_count": 104,
+   "strings": [
+    "WLOG",
+    "EXEC_CALLBACK"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003D90",
+   "va": "0x10003D90",
+   "insn_count": 217,
+   "strings": [
+    "logs\\shell_",
+    ".log",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "=============================================",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "========StiCorePlugin.log starting===========",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "============================================="
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00005B10",
+   "va": "0x10005B10",
+   "insn_count": 819,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::PlnOnProcessMessage] action->",
+    "copyfileordirectory",
+    "readfile",
+    "readbinaryfile",
+    "writefile",
+    "writefilewithbinary",
+    "existfileorfolder",
+    "deletefileordirectory",
+    "getfoledersize",
+    "createfolder",
+    "renamefolder",
+    "removefiletootherpath",
+    "ergodic",
+    "savefiledialog",
+    "openfiledialog",
+    "readnpk",
+    "getbase64",
+    "getmd5",
+    "aliyun_oss_md5",
+    "getcode",
+    "closeshell",
+    "ncttools",
+    "openbrowsedialog",
+    "cleardir",
+    "readrpk_kqlx",
+    "renamefile",
+    "ergodicfiles",
+    "createnewfile",
+    "isfileexisted",
+    "getsystemdirs",
+    "isfileuse"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "PlnOnProcessMessage",
+     "text": "[filehelper::PlnOnProcessMessage] action->"
+    }
+   ]
+  },
+  {
+   "rva": "0x00006AA0",
+   "va": "0x10006AA0",
+   "insn_count": 615,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetFileContent] params parse error: ",
+    "error",
+    "filepath",
+    "readfile_callback",
+    "j?hD",
+    "filehelper.cpp",
+    "[filehelper::OnGetFileContent] open file failed, file:",
+    "error",
+    "data",
+    "fail",
+    "flagMsg",
+    "data",
+    "success",
+    "flagMsg"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetFileContent",
+     "text": "[filehelper::OnGetFileContent] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetFileContent",
+     "text": "[filehelper::OnGetFileContent] open file failed, file:"
+    }
+   ]
+  },
+  {
+   "rva": "0x00007760",
+   "va": "0x10007760",
+   "insn_count": 242,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetFileContentBinary] params parse error: ",
+    "filepath"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetFileContentBinary",
+     "text": "[filehelper::OnGetFileContentBinary] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00007B40",
+   "va": "0x10007B40",
+   "insn_count": 447,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnSetFileContent] params parse error: ",
+    "filepath",
+    "content",
+    "mode",
+    "filehelper.cpp",
+    "[filehelper::OnSetFileContent]makeDir failed, fileDir:",
+    "filehelper.cpp",
+    "[filehelper::OnSetFileContent] open file failed, file:"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnSetFileContent",
+     "text": "[filehelper::OnSetFileContent] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnSetFileContent",
+     "text": "[filehelper::OnSetFileContent]makeDir failed, fileDir:"
+    },
+    {
+     "class": "filehelper",
+     "method": "OnSetFileContent",
+     "text": "[filehelper::OnSetFileContent] open file failed, file:"
+    }
+   ]
+  },
+  {
+   "rva": "0x000083F0",
+   "va": "0x100083F0",
+   "insn_count": 525,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnSaveContentWithBinary] params parse error: ",
+    "filepath",
+    "content",
+    "mode",
+    "base64,",
+    "filehelper.cpp",
+    "[filehelper::OnSaveContentWithBinary] filepath: ",
+    "filehelper.cpp",
+    "[filehelper::OnSaveContentWithBinary]makeDir failed, fileDir:",
+    "filehelper.cpp",
+    "[filehelper::OnSaveContentWithBinary] open file failed, file:"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnSaveContentWithBinary",
+     "text": "[filehelper::OnSaveContentWithBinary] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnSaveContentWithBinary",
+     "text": "[filehelper::OnSaveContentWithBinary] filepath: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnSaveContentWithBinary",
+     "text": "[filehelper::OnSaveContentWithBinary]makeDir failed, fileDir:"
+    },
+    {
+     "class": "filehelper",
+     "method": "OnSaveContentWithBinary",
+     "text": "[filehelper::OnSaveContentWithBinary] open file failed, file:"
+    }
+   ]
+  },
+  {
+   "rva": "0x00008DD0",
+   "va": "0x10008DD0",
+   "insn_count": 421,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnExistFileOrFolder] params parse error: ",
+    "destPath",
+    "filehelper.cpp",
+    ", error : ",
+    ", stat-retVal : ",
+    ", stat-size: ",
+    "[filehelper::OnExistFileOrFolder] filePath: ",
+    "filehelper.cpp",
+    ", error: ",
+    "[filehelper::OnExistFileOrFolder] file is not exist, filePath: ",
+    "path",
+    "ExistFileOrFolder",
+    "optype",
+    "size",
+    "result"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnExistFileOrFolder",
+     "text": "[filehelper::OnExistFileOrFolder] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnExistFileOrFolder",
+     "text": "[filehelper::OnExistFileOrFolder] filePath: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnExistFileOrFolder",
+     "text": "[filehelper::OnExistFileOrFolder] file is not exist, filePath: "
+    }
+   ]
+  },
+  {
+   "rva": "0x000094F0",
+   "va": "0x100094F0",
+   "insn_count": 288,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetFileContent] params parse error: ",
+    "sourceDir",
+    "targetDir",
+    "filehelper.cpp",
+    " targetDir=",
+    "[OnCopyFileOrDirectory] sourceDir=",
+    "true",
+    "false"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetFileContent",
+     "text": "[filehelper::OnGetFileContent] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x000099C0",
+   "va": "0x100099C0",
+   "insn_count": 341,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnDeleteFileOrFolder] params parse error: ",
+    "filePath",
+    "filehelper.cpp",
+    "[shellhelper::OnDeleteFileOrFolder] DeleteDirectory,  ",
+    "filePath",
+    "DeleteFileOrFolder",
+    "optype",
+    "result"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnDeleteFileOrFolder",
+     "text": "[filehelper::OnDeleteFileOrFolder] params parse error: "
+    },
+    {
+     "class": "shellhelper",
+     "method": "OnDeleteFileOrFolder",
+     "text": "[shellhelper::OnDeleteFileOrFolder] DeleteDirectory,  "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000A050",
+   "va": "0x1000A050",
+   "insn_count": 160,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetFolederSize] params parse error: ",
+    "dirpath",
+    "get dir size ok"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetFolederSize",
+     "text": "[filehelper::OnGetFolederSize] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000A2B0",
+   "va": "0x1000A2B0",
+   "insn_count": 320,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnCreateFolder] params parse error: ",
+    "destPath",
+    "path",
+    "CreateFolder",
+    "optype",
+    "result"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnCreateFolder",
+     "text": "[filehelper::OnCreateFolder] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000A830",
+   "va": "0x1000A830",
+   "insn_count": 663,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnRenameFolder] params parse error: ",
+    "srcPath",
+    "destPath",
+    "srcPath",
+    "destPath",
+    "RenameFolder",
+    "optype",
+    "result"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnRenameFolder",
+     "text": "[filehelper::OnRenameFolder] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000B410",
+   "va": "0x1000B410",
+   "insn_count": 538,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnRemoveFileToOtherPath] params parse error: ",
+    "filehelper.cpp",
+    "Check failed: dic_value. ",
+    "oldPath",
+    "newPath",
+    "filehelper.cpp",
+    "filehelper.cpp",
+    "wsOldPath, ",
+    "filehelper.cpp",
+    "wsNewPath, ",
+    "filehelper.cpp",
+    "MoveFile, "
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnRemoveFileToOtherPath",
+     "text": "[filehelper::OnRemoveFileToOtherPath] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000BD40",
+   "va": "0x1000BD40",
+   "insn_count": 470,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnErgoDic] begin, arguments: ",
+    "filehelper.cpp",
+    "[filehelper::OnErgoDic] params parse error: ",
+    "folder",
+    "dirset_callback",
+    "subFolder",
+    "filehelper.cpp",
+    "[filehelper::OnErgoDic] dirs is too big, length: ",
+    "ergodic asyn callback.",
+    "ergodic return ok!",
+    "filehelper.cpp",
+    "[filehelper::OnErgoDic] end, asynStr: "
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnErgoDic",
+     "text": "[filehelper::OnErgoDic] begin, arguments: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnErgoDic",
+     "text": "[filehelper::OnErgoDic] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnErgoDic",
+     "text": "[filehelper::OnErgoDic] dirs is too big, length: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnErgoDic",
+     "text": "[filehelper::OnErgoDic] end, asynStr: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000C5B0",
+   "va": "0x1000C5B0",
+   "insn_count": 266,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnSaveFileDir] params parse error: ",
+    "dlgTitle",
+    "fileName",
+    "fileFilter"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnSaveFileDir",
+     "text": "[filehelper::OnSaveFileDir] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000CA40",
+   "va": "0x1000CA40",
+   "insn_count": 170,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::ClearDir] params parse error: ",
+    "clear dir ok"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "ClearDir",
+     "text": "[filehelper::ClearDir] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000D7F0",
+   "va": "0x1000D7F0",
+   "insn_count": 299,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetOpenFile] params parse error: ",
+    "dlgTitle",
+    "fileName",
+    "fileFilter"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetOpenFile",
+     "text": "[filehelper::OnGetOpenFile] params parse error: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0000E070",
+   "va": "0x1000E070",
+   "insn_count": 394,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetNpkContent] begin",
+    "filehelper.cpp",
+    "[filehelper::OnGetNpkContent] params parse error: ",
+    "npkpath",
+    "filepath",
+    "npkPassword",
+    "filehelper.cpp",
+    "[filehelper::OnGetNpkContent] end"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetNpkContent",
+     "text": "[filehelper::OnGetNpkContent] begin"
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetNpkContent",
+     "text": "[filehelper::OnGetNpkContent] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetNpkContent",
+     "text": "[filehelper::OnGetNpkContent] end"
+    }
+   ]
+  },
+  {
+   "rva": "0x0000E710",
+   "va": "0x1000E710",
+   "insn_count": 532,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetRpkContent_KQLX] begin",
+    "filehelper.cpp",
+    "[filehelper::OnGetRpkContent_KQLX] params parse error: ",
+    "big_msg_callback",
+    "rpkpath",
+    "filepath",
+    "rpkcode",
+    "rpksalt",
+    "filehelper.cpp",
+    "[filehelper::OnGetRpkContent_KQLX]file is not exist, filepath: ",
+    "filehelper.cpp",
+    "[filehelper::OnGetRpkContent_KQLX] end"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetRpkContent_KQLX",
+     "text": "[filehelper::OnGetRpkContent_KQLX] begin"
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetRpkContent_KQLX",
+     "text": "[filehelper::OnGetRpkContent_KQLX] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetRpkContent_KQLX",
+     "text": "[filehelper::OnGetRpkContent_KQLX]file is not exist, filepath: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetRpkContent_KQLX",
+     "text": "[filehelper::OnGetRpkContent_KQLX] end"
+    }
+   ]
+  },
+  {
+   "rva": "0x0000F020",
+   "va": "0x1000F020",
+   "insn_count": 633,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnRenameFile] params parse error: ",
+    "srcFile",
+    "desFile",
+    "filehelper.cpp",
+    "[filehelper::OnRenameFile]srcfile or desfile is empty...",
+    "code",
+    "srcfile or desfile is empty...",
+    "resInfo",
+    "filehelper.cpp",
+    "[filehelper::OnRenameFile]srcFile is not exist...",
+    "code",
+    "srcFile is not exist..",
+    "resInfo",
+    "filehelper.cpp",
+    "[filehelper::OnRenameFile]failed...",
+    "code",
+    "rename file failed..",
+    "resInfo",
+    "code",
+    "rename file successed..",
+    "resInfo",
+    "filehelper.cpp",
+    "[filehelper::OnRenameFile]successed..."
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnRenameFile",
+     "text": "[filehelper::OnRenameFile] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnRenameFile",
+     "text": "[filehelper::OnRenameFile]srcfile or desfile is empty..."
+    },
+    {
+     "class": "filehelper",
+     "method": "OnRenameFile",
+     "text": "[filehelper::OnRenameFile]srcFile is not exist..."
+    },
+    {
+     "class": "filehelper",
+     "method": "OnRenameFile",
+     "text": "[filehelper::OnRenameFile]failed..."
+    },
+    {
+     "class": "filehelper",
+     "method": "OnRenameFile",
+     "text": "[filehelper::OnRenameFile]successed..."
+    }
+   ]
+  },
+  {
+   "rva": "0x0000FF20",
+   "va": "0x1000FF20",
+   "insn_count": 489,
+   "strings": [
+    "filehelper.cpp",
+    "OnErgodicFiles begin, request: ",
+    "filehelper.cpp",
+    "[filehelper::OnErgodicFiles] params parse error: ",
+    "folder",
+    "recursive",
+    "depth",
+    "fileset_callback",
+    "filehelper.cpp",
+    "[filehelper::OnErgodicFiles] folder is empty..",
+    "code",
+    "folder is empty..",
+    "resInfo",
+    "fileset_callback ok!",
+    "filehelper.cpp",
+    "OnErgodicFiles end. response: "
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnErgodicFiles",
+     "text": "[filehelper::OnErgodicFiles] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnErgodicFiles",
+     "text": "[filehelper::OnErgodicFiles] folder is empty.."
+    }
+   ]
+  },
+  {
+   "rva": "0x00010770",
+   "va": "0x10010770",
+   "insn_count": 336,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnIsFileUse] begin, arguments: ",
+    "filehelper.cpp",
+    "[filehelper::OnIsFileUse] params parse error: ",
+    "destPath",
+    "path",
+    "IsFileUse",
+    "optype",
+    "result",
+    "filehelper.cpp",
+    "[filehelper::OnIsFileUse] end, resWstr: "
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnIsFileUse",
+     "text": "[filehelper::OnIsFileUse] begin, arguments: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnIsFileUse",
+     "text": "[filehelper::OnIsFileUse] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnIsFileUse",
+     "text": "[filehelper::OnIsFileUse] end, resWstr: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00010D00",
+   "va": "0x10010D00",
+   "insn_count": 401,
+   "strings": [
+    "ModuleFileName",
+    "CurrentDirectory",
+    "SystemDirectory",
+    "TempPath",
+    "LocalAppdata",
+    "Desktop",
+    "DesktopDirectory",
+    "MyDocuments",
+    "ProgramFiles",
+    "Programs",
+    "Windows"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00011390",
+   "va": "0x10011390",
+   "insn_count": 25,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000113F0",
+   "va": "0x100113F0",
+   "insn_count": 71,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00011530",
+   "va": "0x10011530",
+   "insn_count": 492,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetMd5] begin",
+    "filehelper.cpp",
+    "[filehelper::OnGetMd5] params parse error: ",
+    "filepath",
+    "filehelper.cpp",
+    "[filehelper::OnGetMd5] file is not exist, filepath: ",
+    "filehelper.cpp",
+    ", LastError: ",
+    ", checkCnt: ",
+    "[filehelper::OnGetMd5] can't read file: ",
+    "filehelper.cpp",
+    "[filehelper::OnGetMd5] file is being used, file: ",
+    "filehelper.cpp",
+    "[filehelper::OnGetMd5] end, md5: "
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetMd5",
+     "text": "[filehelper::OnGetMd5] begin"
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetMd5",
+     "text": "[filehelper::OnGetMd5] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetMd5",
+     "text": "[filehelper::OnGetMd5] file is not exist, filepath: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetMd5",
+     "text": "[filehelper::OnGetMd5] can't read file: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetMd5",
+     "text": "[filehelper::OnGetMd5] file is being used, file: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetMd5",
+     "text": "[filehelper::OnGetMd5] end, md5: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00011D80",
+   "va": "0x10011D80",
+   "insn_count": 428,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetAliyunMd5] params parse error: ",
+    "filepath",
+    "filehelper.cpp",
+    "[filehelper::OnGetAliyunMd5] file is not exist, filepath: ",
+    "filehelper.cpp",
+    ", filePath: ",
+    "MD5: ",
+    "filehelper.cpp",
+    "[filehelper::OnGetAliyunMd5] Base64Encode, outStr is empty!",
+    "filehelper.cpp",
+    "outStr: "
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetAliyunMd5",
+     "text": "[filehelper::OnGetAliyunMd5] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetAliyunMd5",
+     "text": "[filehelper::OnGetAliyunMd5] file is not exist, filepath: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetAliyunMd5",
+     "text": "[filehelper::OnGetAliyunMd5] Base64Encode, outStr is empty!"
+    }
+   ]
+  },
+  {
+   "rva": "0x000124B0",
+   "va": "0x100124B0",
+   "insn_count": 474,
+   "strings": [
+    "filehelper.cpp",
+    "[filehelper::OnGetBase64] begin",
+    "filehelper.cpp",
+    "[filehelper::OnGetBase64] params parse error: ",
+    "filepath",
+    "base64_callback",
+    "filehelper.cpp",
+    "[filehelper::OnGetBase64] filepath: ",
+    "filehelper.cpp",
+    "[filehelper::OnGetBase64] file is not exist, filepath: ",
+    "filehelper.cpp",
+    "[filehelper::OnGetBase64] end"
+   ],
+   "log_handlers": [
+    {
+     "class": "filehelper",
+     "method": "OnGetBase64",
+     "text": "[filehelper::OnGetBase64] begin"
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetBase64",
+     "text": "[filehelper::OnGetBase64] params parse error: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetBase64",
+     "text": "[filehelper::OnGetBase64] filepath: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetBase64",
+     "text": "[filehelper::OnGetBase64] file is not exist, filepath: "
+    },
+    {
+     "class": "filehelper",
+     "method": "OnGetBase64",
+     "text": "[filehelper::OnGetBase64] end"
+    }
+   ]
+  },
+  {
+   "rva": "0x00012CD0",
+   "va": "0x10012CD0",
+   "insn_count": 95,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00012E40",
+   "va": "0x10012E40",
+   "insn_count": 18,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00012FF0",
+   "va": "0x10012FF0",
+   "insn_count": 36,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00013130",
+   "va": "0x10013130",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00013490",
+   "va": "0x10013490",
+   "insn_count": 42,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00013590",
+   "va": "0x10013590",
+   "insn_count": 36,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000136D0",
+   "va": "0x100136D0",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00013810",
+   "va": "0x10013810",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00013830",
+   "va": "0x10013830",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00021590",
+   "va": "0x10021590",
+   "insn_count": 8,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000229A0",
+   "va": "0x100229A0",
+   "insn_count": 217,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00022D30",
+   "va": "0x10022D30",
+   "insn_count": 236,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00023140",
+   "va": "0x10023140",
+   "insn_count": 43,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000231D0",
+   "va": "0x100231D0",
+   "insn_count": 11,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00024EE0",
+   "va": "0x10024EE0",
+   "insn_count": 7,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00031330",
+   "va": "0x10031330",
+   "insn_count": 2,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00031350",
+   "va": "0x10031350",
+   "insn_count": 36,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00031480",
+   "va": "0x10031480",
+   "insn_count": 164,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00039750",
+   "va": "0x10039750",
+   "insn_count": 10,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0004B533",
+   "va": "0x1004B533",
+   "insn_count": 58,
+   "strings": [],
+   "log_handlers": []
+  }
+ ],
+ "action_candidates": [],
+ "log_handlers": [
+  "ClearDir",
+  "OnCreateFolder",
+  "OnDeleteFileOrFolder",
+  "OnErgoDic",
+  "OnErgodicFiles",
+  "OnExistFileOrFolder",
+  "OnGetAliyunMd5",
+  "OnGetBase64",
+  "OnGetFileContent",
+  "OnGetFileContentBinary",
+  "OnGetFolederSize",
+  "OnGetMd5",
+  "OnGetNpkContent",
+  "OnGetOpenFile",
+  "OnGetRpkContent_KQLX",
+  "OnIsFileUse",
+  "OnRemoveFileToOtherPath",
+  "OnRenameFile",
+  "OnRenameFolder",
+  "OnSaveContentWithBinary",
+  "OnSaveFileDir",
+  "OnSetFileContent",
+  "PlnOnProcessMessage"
+ ],
+ "plnonprocess": {
+  "rva": "0x00005B10",
+  "insn_count": 819,
+  "extent_stop": "0x10083C00",
+  "string_refs": [
+   {
+    "va": "0x1008A0CC",
+    "string": "filehelper.cpp"
+   },
+   {
+    "va": "0x1008A0A0",
+    "string": "[filehelper::PlnOnProcessMessage] action->"
+   },
+   {
+    "va": "0x1008A0DC",
+    "string": "copyfileordirectory"
+   },
+   {
+    "va": "0x1008A0F0",
+    "string": "readfile"
+   },
+   {
+    "va": "0x1008A0FC",
+    "string": "readbinaryfile"
+   },
+   {
+    "va": "0x1008A10C",
+    "string": "writefile"
+   },
+   {
+    "va": "0x1008A118",
+    "string": "writefilewithbinary"
+   },
+   {
+    "va": "0x1008A12C",
+    "string": "existfileorfolder"
+   },
+   {
+    "va": "0x1008A140",
+    "string": "deletefileordirectory"
+   },
+   {
+    "va": "0x1008A158",
+    "string": "getfoledersize"
+   },
+   {
+    "va": "0x1008A168",
+    "string": "createfolder"
+   },
+   {
+    "va": "0x1008A178",
+    "string": "renamefolder"
+   },
+   {
+    "va": "0x1008A188",
+    "string": "removefiletootherpath"
+   },
+   {
+    "va": "0x1008A1A0",
+    "string": "ergodic"
+   },
+   {
+    "va": "0x1008A1A8",
+    "string": "savefiledialog"
+   },
+   {
+    "va": "0x1008A1B8",
+    "string": "openfiledialog"
+   },
+   {
+    "va": "0x1008A1C8",
+    "string": "readnpk"
+   },
+   {
+    "va": "0x1008A1D0",
+    "string": "getbase64"
+   },
+   {
+    "va": "0x1008A1DC",
+    "string": "getmd5"
+   },
+   {
+    "va": "0x1008A1E4",
+    "string": "aliyun_oss_md5"
+   },
+   {
+    "va": "0x1008A1F4",
+    "string": "getcode"
+   },
+   {
+    "va": "0x1008A1FC",
+    "string": "closeshell"
+   },
+   {
+    "va": "0x1008A208",
+    "string": "ncttools"
+   },
+   {
+    "va": "0x1008A214",
+    "string": "openbrowsedialog"
+   },
+   {
+    "va": "0x1008A228",
+    "string": "cleardir"
+   },
+   {
+    "va": "0x1008A234",
+    "string": "readrpk_kqlx"
+   },
+   {
+    "va": "0x1008A244",
+    "string": "renamefile"
+   },
+   {
+    "va": "0x1008A250",
+    "string": "ergodicfiles"
+   },
+   {
+    "va": "0x1008A260",
+    "string": "createnewfile"
+   },
+   {
+    "va": "0x1008A270",
+    "string": "isfileexisted"
+   },
+   {
+    "va": "0x1008A280",
+    "string": "getsystemdirs"
+   },
+   {
+    "va": "0x1008A290",
+    "string": "isfileuse"
+   }
+  ],
+  "action_candidates": [
+   "aliyun_oss_md5",
+   "cleardir",
+   "closeshell",
+   "copyfileordirectory",
+   "createfolder",
+   "createnewfile",
+   "deletefileordirectory",
+   "ergodic",
+   "ergodicfiles",
+   "existfileorfolder",
+   "getbase64",
+   "getcode",
+   "getfoledersize",
+   "getmd5",
+   "getsystemdirs",
+   "isfileexisted",
+   "isfileuse",
+   "ncttools",
+   "openbrowsedialog",
+   "openfiledialog",
+   "readbinaryfile",
+   "readfile",
+   "readnpk",
+   "readrpk_kqlx",
+   "removefiletootherpath",
+   "renamefile",
+   "renamefolder",
+   "savefiledialog",
+   "writefile",
+   "writefilewithbinary"
+  ]
+ },
+ "stats": {
+  "exports": 4,
+  "funcs": 54,
+  "discovered": 243,
+  "bad_decode": 0,
+  "strings_indexed": 3361
+ }
+}

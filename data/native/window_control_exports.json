@@ -1,0 +1,39 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\window_control\\window_control.pln",
+ "sha256": "be0ca19b45fa6ba178754506b2bcdfc4afeceb52ad84bfbddab2f4ab1c1d9fc4",
+ "image_base": "0x10000000",
+ "export_dir": {
+  "name": "window_control.pln",
+  "dll_name_raw": 405312
+ },
+ "exports": [
+  {
+   "ordinal": 1,
+   "name": "PlnInitiliaze",
+   "rva": "0x00001D60",
+   "va": "0x10001D60",
+   "forwarder": null
+  },
+  {
+   "ordinal": 2,
+   "name": "PlnOnProcessMessage",
+   "rva": "0x00002D20",
+   "va": "0x10002D20",
+   "forwarder": null
+  },
+  {
+   "ordinal": 3,
+   "name": "PlnSetParam",
+   "rva": "0x00001DF0",
+   "va": "0x10001DF0",
+   "forwarder": null
+  },
+  {
+   "ordinal": 4,
+   "name": "PlnUnInitialize",
+   "rva": "0x00001DD0",
+   "va": "0x10001DD0",
+   "forwarder": null
+  }
+ ]
+}

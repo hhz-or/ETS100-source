@@ -1,0 +1,496 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\etshelper\\etshelper.pln",
+ "functions": [
+  {
+   "rva": "0x00002A70",
+   "va": "0x10002A70",
+   "insn_count": 16,
+   "strings": [
+    "logs\\shell.log"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002AB0",
+   "va": "0x10002AB0",
+   "insn_count": 1,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00002C60",
+   "va": "0x10002C60",
+   "insn_count": 326,
+   "strings": [
+    "logs\\shell_",
+    ".log",
+    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\common\\StiCorePlugin.h",
+    "=============================================",
+    "========StiCorePlugin.log starting==========="
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00005870",
+   "va": "0x10005870",
+   "insn_count": 378,
+   "strings": [
+    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "[etshelper::OnInitAction] arguments: ",
+    "[etshelper::OnInitAction] etshelper/init error:get id fail.",
+    "[etshelper::OnInitAction] etshelper/init success.",
+    "error_callback_id"
+   ],
+   "log_handlers": [
+    {
+     "class": "etshelper",
+     "method": "OnInitAction",
+     "text": "[etshelper::OnInitAction] arguments: "
+    },
+    {
+     "class": "etshelper",
+     "method": "OnInitAction",
+     "text": "[etshelper::OnInitAction] etshelper/init error:get id fail."
+    },
+    {
+     "class": "etshelper",
+     "method": "OnInitAction",
+     "text": "[etshelper::OnInitAction] etshelper/init success."
+    }
+   ]
+  },
+  {
+   "rva": "0x00009210",
+   "va": "0x10009210",
+   "insn_count": 28,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00009270",
+   "va": "0x10009270",
+   "insn_count": 314,
+   "strings": [
+    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "[etshelper::OnLogData] arguments: ",
+    "type",
+    "[ETS]"
+   ],
+   "log_handlers": [
+    {
+     "class": "etshelper",
+     "method": "OnLogData",
+     "text": "[etshelper::OnLogData] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x000096F0",
+   "va": "0x100096F0",
+   "insn_count": 402,
+   "strings": [
+    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "[etshelper::OnVideoMerge] invalid arguments: ",
+    "[etshelper::OnVideoMerge] GenerateMergeCommand fail ",
+    "[etshelper::OnVideoMerge] copy erasure video file fail ",
+    "[etshelper::OnVideoMerge] dub merge success: "
+   ],
+   "log_handlers": [
+    {
+     "class": "etshelper",
+     "method": "OnVideoMerge",
+     "text": "[etshelper::OnVideoMerge] invalid arguments: "
+    },
+    {
+     "class": "etshelper",
+     "method": "OnVideoMerge",
+     "text": "[etshelper::OnVideoMerge] GenerateMergeCommand fail "
+    },
+    {
+     "class": "etshelper",
+     "method": "OnVideoMerge",
+     "text": "[etshelper::OnVideoMerge] copy erasure video file fail "
+    },
+    {
+     "class": "etshelper",
+     "method": "OnVideoMerge",
+     "text": "[etshelper::OnVideoMerge] dub merge success: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00009D60",
+   "va": "0x10009D60",
+   "insn_count": 76,
+   "strings": [
+    "has newer version",
+    "no newer version"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00009E60",
+   "va": "0x10009E60",
+   "insn_count": 375,
+   "strings": [
+    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "[etshelper::OnEncodeAPIResp] invalid arguments.",
+    "response",
+    "[etshelper::OnEncodeAPIResp] invalid params: response",
+    "[etshelper::OnEncodeAPIResp] signature request rejected.",
+    "test",
+    "[etshelper::OnEncodeAPIResp] signature generation failed.",
+    "[etshelper::OnEncodeAPIResp] success"
+   ],
+   "log_handlers": [
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIResp",
+     "text": "[etshelper::OnEncodeAPIResp] invalid arguments."
+    },
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIResp",
+     "text": "[etshelper::OnEncodeAPIResp] invalid params: response"
+    },
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIResp",
+     "text": "[etshelper::OnEncodeAPIResp] signature request rejected."
+    },
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIResp",
+     "text": "[etshelper::OnEncodeAPIResp] signature generation failed."
+    },
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIResp",
+     "text": "[etshelper::OnEncodeAPIResp] success"
+    }
+   ]
+  },
+  {
+   "rva": "0x0000A410",
+   "va": "0x1000A410",
+   "insn_count": 400,
+   "strings": [
+    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "[etshelper::OnEncodeAPIBody] invalid json format.",
+    "time",
+    "body",
+    "[etshelper::OnEncodeAPIBody] signature request rejected.",
+    "[etshelper::OnEncodeAPIBody] signature generation failed.",
+    "[etshelper::OnEncodeAPIBody] success",
+    "[etshelper::OnEncodeAPIBody] invalid params: body",
+    "[etshelper::OnEncodeAPIBody] invalid params: time"
+   ],
+   "log_handlers": [
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIBody",
+     "text": "[etshelper::OnEncodeAPIBody] invalid json format."
+    },
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIBody",
+     "text": "[etshelper::OnEncodeAPIBody] signature request rejected."
+    },
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIBody",
+     "text": "[etshelper::OnEncodeAPIBody] signature generation failed."
+    },
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIBody",
+     "text": "[etshelper::OnEncodeAPIBody] success"
+    },
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIBody",
+     "text": "[etshelper::OnEncodeAPIBody] invalid params: body"
+    },
+    {
+     "class": "etshelper",
+     "method": "OnEncodeAPIBody",
+     "text": "[etshelper::OnEncodeAPIBody] invalid params: time"
+    }
+   ]
+  },
+  {
+   "rva": "0x0000AA70",
+   "va": "0x1000AA70",
+   "insn_count": 634,
+   "strings": [
+    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "[etshelper::PlnOnProcessMessage] action->",
+    "init",
+    "dub_merge",
+    "get_appdata_path",
+    "get_appdata_path: ",
+    "log_data",
+    "check_ets_server",
+    "check_update",
+    "check_update_force",
+    "test_crash",
+    "encode_api_body",
+    "grlx",
+    "encode_api_resp",
+    "encode_api_body_v2",
+    "pcWin",
+    "encode_api_resp_v2"
+   ],
+   "log_handlers": [
+    {
+     "class": "etshelper",
+     "method": "PlnOnProcessMessage",
+     "text": "[etshelper::PlnOnProcessMessage] action->"
+    }
+   ]
+  },
+  {
+   "rva": "0x0000D140",
+   "va": "0x1000D140",
+   "insn_count": 44,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000D2B0",
+   "va": "0x1000D2B0",
+   "insn_count": 26,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000D3F0",
+   "va": "0x1000D3F0",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000E3E0",
+   "va": "0x1000E3E0",
+   "insn_count": 106,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000E830",
+   "va": "0x1000E830",
+   "insn_count": 99,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000E930",
+   "va": "0x1000E930",
+   "insn_count": 144,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000F350",
+   "va": "0x1000F350",
+   "insn_count": 225,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000FB10",
+   "va": "0x1000FB10",
+   "insn_count": 41,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00010880",
+   "va": "0x10010880",
+   "insn_count": 203,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00011160",
+   "va": "0x10011160",
+   "insn_count": 48,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00016F10",
+   "va": "0x10016F10",
+   "insn_count": 147,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00018FC0",
+   "va": "0x10018FC0",
+   "insn_count": 44,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000191F0",
+   "va": "0x100191F0",
+   "insn_count": 174,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00019490",
+   "va": "0x10019490",
+   "insn_count": 321,
+   "strings": [
+    "UNKNOWN",
+    "VERBOSE"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00019850",
+   "va": "0x10019850",
+   "insn_count": 101,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001A210",
+   "va": "0x1001A210",
+   "insn_count": 103,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0002E801",
+   "va": "0x1002E801",
+   "insn_count": 59,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0002E80F",
+   "va": "0x1002E80F",
+   "insn_count": 7,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00039EC6",
+   "va": "0x10039EC6",
+   "insn_count": 17,
+   "strings": [],
+   "log_handlers": []
+  }
+ ],
+ "action_candidates": [],
+ "log_handlers": [
+  "OnEncodeAPIBody",
+  "OnEncodeAPIResp",
+  "OnInitAction",
+  "OnLogData",
+  "OnVideoMerge",
+  "PlnOnProcessMessage"
+ ],
+ "plnonprocess": {
+  "rva": "0x0000AA70",
+  "insn_count": 634,
+  "extent_stop": "0x1005A800",
+  "string_refs": [
+   {
+    "va": "0x10067AD8",
+    "string": "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp"
+   },
+   {
+    "va": "0x100684C8",
+    "string": "[etshelper::PlnOnProcessMessage] action->"
+   },
+   {
+    "va": "0x100684F4",
+    "string": "init"
+   },
+   {
+    "va": "0x100684FC",
+    "string": "dub_merge"
+   },
+   {
+    "va": "0x10068508",
+    "string": "get_appdata_path"
+   },
+   {
+    "va": "0x1006851C",
+    "string": "get_appdata_path: "
+   },
+   {
+    "va": "0x10068530",
+    "string": "log_data"
+   },
+   {
+    "va": "0x1006853C",
+    "string": "check_ets_server"
+   },
+   {
+    "va": "0x10068550",
+    "string": "check_update"
+   },
+   {
+    "va": "0x10068560",
+    "string": "check_update_force"
+   },
+   {
+    "va": "0x10068574",
+    "string": "test_crash"
+   },
+   {
+    "va": "0x10068580",
+    "string": "encode_api_body"
+   },
+   {
+    "va": "0x10068590",
+    "string": "grlx"
+   },
+   {
+    "va": "0x100685BC",
+    "string": "encode_api_resp"
+   },
+   {
+    "va": "0x100685CC",
+    "string": "encode_api_body_v2"
+   },
+   {
+    "va": "0x100685E0",
+    "string": "pcWin"
+   },
+   {
+    "va": "0x10068610",
+    "string": "encode_api_resp_v2"
+   }
+  ],
+  "action_candidates": [
+   "check_ets_server",
+   "check_update",
+   "check_update_force",
+   "dub_merge",
+   "encode_api_body",
+   "encode_api_body_v2",
+   "encode_api_resp",
+   "encode_api_resp_v2",
+   "get_appdata_path",
+   "grlx",
+   "init",
+   "log_data",
+   "pcWin",
+   "test_crash"
+  ]
+ },
+ "stats": {
+  "exports": 4,
+  "funcs": 30,
+  "discovered": 98,
+  "bad_decode": 0,
+  "strings_indexed": 3328
+ }
+}

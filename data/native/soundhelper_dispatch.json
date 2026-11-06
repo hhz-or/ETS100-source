@@ -1,0 +1,1501 @@
+{
+ "file": "D:\\ets-rea\\ETS\\plugins\\soundhelper\\soundhelper.pln",
+ "functions": [
+  {
+   "rva": "0x00002680",
+   "va": "0x10002680",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003540",
+   "va": "0x10003540",
+   "insn_count": 36,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000035C0",
+   "va": "0x100035C0",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00003620",
+   "va": "0x10003620",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000063F0",
+   "va": "0x100063F0",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00009070",
+   "va": "0x10009070",
+   "insn_count": 217,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00009320",
+   "va": "0x10009320",
+   "insn_count": 236,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000A2D0",
+   "va": "0x1000A2D0",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000A2F0",
+   "va": "0x1000A2F0",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000D3C0",
+   "va": "0x1000D3C0",
+   "insn_count": 11,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000D810",
+   "va": "0x1000D810",
+   "insn_count": 13,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000D9F0",
+   "va": "0x1000D9F0",
+   "insn_count": 7,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000ECE0",
+   "va": "0x1000ECE0",
+   "insn_count": 42,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000EDE0",
+   "va": "0x1000EDE0",
+   "insn_count": 36,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000EF20",
+   "va": "0x1000EF20",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0000F040",
+   "va": "0x1000F040",
+   "insn_count": 9,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00014C40",
+   "va": "0x10014C40",
+   "insn_count": 16,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00017060",
+   "va": "0x10017060",
+   "insn_count": 152,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000174C0",
+   "va": "0x100174C0",
+   "insn_count": 125,
+   "strings": [
+    "flag",
+    "data",
+    "errorCode",
+    "errorMsg"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00017860",
+   "va": "0x10017860",
+   "insn_count": 30,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000178D0",
+   "va": "0x100178D0",
+   "insn_count": 7,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00017900",
+   "va": "0x10017900",
+   "insn_count": 104,
+   "strings": [
+    "WLOG",
+    "EXEC_CALLBACK"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00017B90",
+   "va": "0x10017B90",
+   "insn_count": 218,
+   "strings": [
+    "logs\\shell_",
+    ".log",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "=============================================",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "========StiCorePlugin.log starting===========",
+    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "============================================="
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001B5A0",
+   "va": "0x1001B5A0",
+   "insn_count": 852,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnInitAction] arguments: ",
+    "soundhelper.cpp",
+    "option",
+    "clearandnew",
+    "error_callback_id",
+    "waveform_callback_id",
+    "energy_callback_id",
+    "datastream_callback_id",
+    "playbegin_callback_id",
+    "playend_callback_id",
+    "recordbegin_callback_id",
+    "recordend_callback_id",
+    "curplaypos_callback_id",
+    "scanfilebegin_callback_id",
+    "scanfileend_callback_id",
+    "aqcresult_callback_id",
+    "checkHardware",
+    "soundhelper.cpp",
+    "[soundhelper::OnInitAction] init completed!"
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnInitAction",
+     "text": "[soundhelper::OnInitAction] arguments: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnInitAction",
+     "text": "[soundhelper::OnInitAction] init completed!"
+    }
+   ]
+  },
+  {
+   "rva": "0x0001C610",
+   "va": "0x1001C610",
+   "insn_count": 246,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnUnInitAction] arguments: ",
+    "soundhelper.cpp",
+    "sndUtil/uninit error:get id fail."
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnUnInitAction",
+     "text": "[soundhelper::OnUnInitAction] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0001CA00",
+   "va": "0x1001CA00",
+   "insn_count": 650,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnLoadFileAction] arguments: ",
+    "soundhelper.cpp",
+    "filepath",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "soundhelper.cpp"
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnLoadFileAction",
+     "text": "[soundhelper::OnLoadFileAction] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0001D5D0",
+   "va": "0x1001D5D0",
+   "insn_count": 1098,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnPlayAction] arguments: ",
+    "soundhelper.cpp",
+    "filepath",
+    "soundhelper.cpp",
+    "begpos",
+    "endpos",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    ", sndFile:",
+    "soundhelper.cpp",
+    "[soundhelper::OnPlayAction] upk file, file is not exist or content empty.",
+    ".mp3",
+    "temp\\upkmp3.mp3",
+    ".wav",
+    "lame.exe",
+    "-b 256 --resample 16 -m m --decode \"",
+    "soundhelper.cpp",
+    ", sndFile:"
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnPlayAction",
+     "text": "[soundhelper::OnPlayAction] arguments: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnPlayAction",
+     "text": "[soundhelper::OnPlayAction] upk file, file is not exist or content empty."
+    }
+   ]
+  },
+  {
+   "rva": "0x0001E9D0",
+   "va": "0x1001E9D0",
+   "insn_count": 285,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnPauseAction] arguments: ",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "soundhelper.cpp"
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnPauseAction",
+     "text": "[soundhelper::OnPauseAction] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0001EE50",
+   "va": "0x1001EE50",
+   "insn_count": 285,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnContinueAction] arguments: ",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "soundhelper.cpp"
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnContinueAction",
+     "text": "[soundhelper::OnContinueAction] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x0001F2D0",
+   "va": "0x1001F2D0",
+   "insn_count": 282,
+   "strings": [
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "soundhelper.cpp"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0001F750",
+   "va": "0x1001F750",
+   "insn_count": 959,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnRecordAction] arguments: ",
+    "soundhelper.cpp",
+    "type",
+    "filePath",
+    "soundhelper.cpp",
+    "recordTime",
+    "soundhelper.cpp",
+    "dataStreamType",
+    "datastreamtype",
+    "saveSpxFile",
+    "soundhelper.cpp",
+    "datastreamtype",
+    "spxQuality",
+    "soundhelper.cpp",
+    "spxQuality:",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    ", filePath:",
+    "soundhelper.cpp",
+    ", filePath:"
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnRecordAction",
+     "text": "[soundhelper::OnRecordAction] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00020820",
+   "va": "0x10020820",
+   "insn_count": 1023,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckAudio] arguments: ",
+    "soundhelper.cpp",
+    "filePath",
+    "soundhelper.cpp",
+    ".wav",
+    ".wov",
+    "sndconverter.exe",
+    ".mp3",
+    "lame.exe",
+    "-b 256 --resample 16 -m m --decode \"",
+    "check_audio.DLL",
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckAudio] loss check_audio.dll",
+    "check_wav_process",
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckAudio] delete failed, despath: ",
+    "soundhelper.cpp",
+    "wavFile:",
+    "soundhelper.cpp",
+    "iCode:",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckAudio] delete failed, desPath: "
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnCheckAudio",
+     "text": "[soundhelper::OnCheckAudio] arguments: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCheckAudio",
+     "text": "[soundhelper::OnCheckAudio] loss check_audio.dll"
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCheckAudio",
+     "text": "[soundhelper::OnCheckAudio] delete failed, despath: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCheckAudio",
+     "text": "[soundhelper::OnCheckAudio] delete failed, desPath: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00021A40",
+   "va": "0x10021A40",
+   "insn_count": 564,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckWovFile] arguments: ",
+    "wovPath",
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckWovFile] wovFilePath is empty!",
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckWovFile] file is not exist, ",
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckWovFile] Failed to open file, ",
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckWovFile] fileSieze: ",
+    "soundhelper.cpp",
+    "[soundhelper::OnCheckWovFile] no wov header, "
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnCheckWovFile",
+     "text": "[soundhelper::OnCheckWovFile] arguments: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCheckWovFile",
+     "text": "[soundhelper::OnCheckWovFile] wovFilePath is empty!"
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCheckWovFile",
+     "text": "[soundhelper::OnCheckWovFile] file is not exist, "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCheckWovFile",
+     "text": "[soundhelper::OnCheckWovFile] Failed to open file, "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCheckWovFile",
+     "text": "[soundhelper::OnCheckWovFile] fileSieze: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCheckWovFile",
+     "text": "[soundhelper::OnCheckWovFile] no wov header, "
+    }
+   ]
+  },
+  {
+   "rva": "0x000223C0",
+   "va": "0x100223C0",
+   "insn_count": 1021,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnAQCWavfile] arguments: ",
+    "wavPath",
+    "type",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "[soundhelper::OnAQCWavfile] file is not exist, ",
+    ".wov",
+    "soundhelper.cpp",
+    "[soundhelper::OnAQCWavfile] start convert wov to wav: ",
+    "sndconverter.exe",
+    "soundhelper.cpp",
+    "[soundhelper::OnAQCWavfile] convert wov to wav end: ",
+    "soundhelper.cpp",
+    "[soundhelper::OnWovToWav] filePath is not exist, filePath:",
+    "lame.exe",
+    "-b 256 --resample 16 -m m --decode \"",
+    "soundhelper.cpp",
+    "[soundhelper::OnAQCWavfile] start aqc: ",
+    "aqc40",
+    "soundhelper.cpp",
+    ", retCode: ",
+    "[soundhelper::OnAQCWavfile] aqc result: ",
+    "soundhelper.cpp",
+    "[soundhelper::OnAQCWavfile] delete failed, despath: "
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnAQCWavfile",
+     "text": "[soundhelper::OnAQCWavfile] arguments: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnAQCWavfile",
+     "text": "[soundhelper::OnAQCWavfile] file is not exist, "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnAQCWavfile",
+     "text": "[soundhelper::OnAQCWavfile] start convert wov to wav: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnAQCWavfile",
+     "text": "[soundhelper::OnAQCWavfile] convert wov to wav end: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnWovToWav",
+     "text": "[soundhelper::OnWovToWav] filePath is not exist, filePath:"
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnAQCWavfile",
+     "text": "[soundhelper::OnAQCWavfile] start aqc: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnAQCWavfile",
+     "text": "[soundhelper::OnAQCWavfile] aqc result: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnAQCWavfile",
+     "text": "[soundhelper::OnAQCWavfile] delete failed, despath: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00023550",
+   "va": "0x10023550",
+   "insn_count": 443,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnConvertfile] arguments: ",
+    "soundhelper.cpp",
+    "srcFile",
+    "soundhelper.cpp",
+    "desFile",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    " -> "
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnConvertfile",
+     "text": "[soundhelper::OnConvertfile] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00023D40",
+   "va": "0x10023D40",
+   "insn_count": 345,
+   "strings": [
+    "soundhelper.cpp",
+    "Check failed: dic_value. ",
+    "h| +",
+    "soundhelper.cpp",
+    "waveform/stop error:get id fail.",
+    "value",
+    "soundhelper.cpp",
+    "waveform/SetParam error:get value fail.",
+    "soundhelper.cpp",
+    "id = ",
+    "soundhelper.cpp",
+    "val = ",
+    "h$!+"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00024300",
+   "va": "0x10024300",
+   "insn_count": 742,
+   "strings": [
+    "soundhelper.cpp",
+    ", args->",
+    "init",
+    "loadfile",
+    "play",
+    "play ok.",
+    "pause",
+    "pause ok.",
+    "continue",
+    "continue ok.",
+    "stop",
+    "h$\"+",
+    "stop ok.",
+    "record",
+    "hD\"+",
+    "record ok.",
+    "trace",
+    "hl\"+",
+    "recordtrace ok.",
+    "convertfile",
+    "hx\"+",
+    "checkvoice",
+    "aqcwavfile",
+    "checkwovfile",
+    "destroy",
+    "hH#+",
+    "soundhelper.cpp",
+    "soundhelper.cpp",
+    "setvolume",
+    "hT#+",
+    "getvolume",
+    "h`#+",
+    "setvolzoom",
+    "combineandconvertwavtomp3"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00025010",
+   "va": "0x10025010",
+   "insn_count": 21,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000252C0",
+   "va": "0x100252C0",
+   "insn_count": 176,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnGetVolume] arguments: ",
+    "type",
+    "soundhelper.cpp"
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnGetVolume",
+     "text": "[soundhelper::OnGetVolume] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00025570",
+   "va": "0x10025570",
+   "insn_count": 153,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnSetVolume] arguments: ",
+    "volume"
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnSetVolume",
+     "text": "[soundhelper::OnSetVolume] arguments: "
+    }
+   ]
+  },
+  {
+   "rva": "0x00026B40",
+   "va": "0x10026B40",
+   "insn_count": 605,
+   "strings": [
+    "soundhelper.cpp",
+    "[soundhelper::OnCombineAndConvertWavToMp3] excute.",
+    "soundhelper.cpp",
+    "[soundhelper::OnCombineAndConvertWavToMp3] arguments: ",
+    "desFile",
+    "srcFiles",
+    "h|(+",
+    "soundhelper.cpp",
+    "[soundhelper::OnCombineAndConvertWavToMp3] filePath is not exist, filePath:",
+    "-y -filter_complex [0:0]concat=n=",
+    ":v=0:a=1[out] -map [out] ",
+    "soundhelper.cpp",
+    "[soundhelper::OnCombineAndConvertWavToMp3] params:",
+    "ffmpeg.exe",
+    "soundhelper.cpp",
+    ", ret:",
+    "[soundhelper::OnCombineAndConvertWavToMp3] GetLastError:"
+   ],
+   "log_handlers": [
+    {
+     "class": "soundhelper",
+     "method": "OnCombineAndConvertWavToMp3",
+     "text": "[soundhelper::OnCombineAndConvertWavToMp3] excute."
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCombineAndConvertWavToMp3",
+     "text": "[soundhelper::OnCombineAndConvertWavToMp3] arguments: "
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCombineAndConvertWavToMp3",
+     "text": "[soundhelper::OnCombineAndConvertWavToMp3] filePath is not exist, filePath:"
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCombineAndConvertWavToMp3",
+     "text": "[soundhelper::OnCombineAndConvertWavToMp3] params:"
+    },
+    {
+     "class": "soundhelper",
+     "method": "OnCombineAndConvertWavToMp3",
+     "text": "[soundhelper::OnCombineAndConvertWavToMp3] GetLastError:"
+    }
+   ]
+  },
+  {
+   "rva": "0x000284D0",
+   "va": "0x100284D0",
+   "insn_count": 11,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0002B0D0",
+   "va": "0x1002B0D0",
+   "insn_count": 8,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00030040",
+   "va": "0x10030040",
+   "insn_count": 43,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0003CAA0",
+   "va": "0x1003CAA0",
+   "insn_count": 2,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0003CAC0",
+   "va": "0x1003CAC0",
+   "insn_count": 39,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0003CC70",
+   "va": "0x1003CC70",
+   "insn_count": 174,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00040770",
+   "va": "0x10040770",
+   "insn_count": 10,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053C60",
+   "va": "0x10053C60",
+   "insn_count": 65,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053D20",
+   "va": "0x10053D20",
+   "insn_count": 21,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053D60",
+   "va": "0x10053D60",
+   "insn_count": 19,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053D90",
+   "va": "0x10053D90",
+   "insn_count": 16,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053DC0",
+   "va": "0x10053DC0",
+   "insn_count": 57,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053E60",
+   "va": "0x10053E60",
+   "insn_count": 8,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053E70",
+   "va": "0x10053E70",
+   "insn_count": 41,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053E80",
+   "va": "0x10053E80",
+   "insn_count": 41,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053E90",
+   "va": "0x10053E90",
+   "insn_count": 11,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053EB0",
+   "va": "0x10053EB0",
+   "insn_count": 22,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053EE0",
+   "va": "0x10053EE0",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053F20",
+   "va": "0x10053F20",
+   "insn_count": 24,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053F60",
+   "va": "0x10053F60",
+   "insn_count": 23,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053FA0",
+   "va": "0x10053FA0",
+   "insn_count": 28,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00053FF0",
+   "va": "0x10053FF0",
+   "insn_count": 20,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054020",
+   "va": "0x10054020",
+   "insn_count": 19,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054050",
+   "va": "0x10054050",
+   "insn_count": 22,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054090",
+   "va": "0x10054090",
+   "insn_count": 50,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054120",
+   "va": "0x10054120",
+   "insn_count": 26,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054170",
+   "va": "0x10054170",
+   "insn_count": 26,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000541C0",
+   "va": "0x100541C0",
+   "insn_count": 26,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054210",
+   "va": "0x10054210",
+   "insn_count": 26,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054260",
+   "va": "0x10054260",
+   "insn_count": 32,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000542C0",
+   "va": "0x100542C0",
+   "insn_count": 43,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054340",
+   "va": "0x10054340",
+   "insn_count": 43,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000543C0",
+   "va": "0x100543C0",
+   "insn_count": 37,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054430",
+   "va": "0x10054430",
+   "insn_count": 32,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054490",
+   "va": "0x10054490",
+   "insn_count": 35,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x000544F0",
+   "va": "0x100544F0",
+   "insn_count": 50,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00054590",
+   "va": "0x10054590",
+   "insn_count": 34,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00056D20",
+   "va": "0x10056D20",
+   "insn_count": 202,
+   "strings": [
+    "_PLAYERIMPL_",
+    "_RECORDERIMPL_",
+    "sndUtil"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00057080",
+   "va": "0x10057080",
+   "insn_count": 115,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00057900",
+   "va": "0x10057900",
+   "insn_count": 2122,
+   "strings": [
+    "The input data is illegal!",
+    "The values is not 0 or 1.",
+    " CVolumeCtrlInstance.SetRecordVolume::Set up the system for recording volume failure!",
+    "Application settings for recording volume failure!",
+    "Left data is illegal digital!",
+    "Right data is illegal digital!",
+    "The value is not 0 or 1.",
+    "The values is not 0 or 1."
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00059770",
+   "va": "0x10059770",
+   "insn_count": 601,
+   "strings": [
+    "Gets the application for recording volume failure!",
+    "{\"left_mix\":\"",
+    "\",\"right_mix\":\""
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005A400",
+   "va": "0x1005A400",
+   "insn_count": 66,
+   "strings": [
+    "time_ds"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005A4E0",
+   "va": "0x1005A4E0",
+   "insn_count": 66,
+   "strings": [
+    "time_ds"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005A5C0",
+   "va": "0x1005A5C0",
+   "insn_count": 61,
+   "strings": [
+    "time_ds"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005A680",
+   "va": "0x1005A680",
+   "insn_count": 66,
+   "strings": [
+    "time_ds"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005A750",
+   "va": "0x1005A750",
+   "insn_count": 64,
+   "strings": [
+    "time_ds"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005A810",
+   "va": "0x1005A810",
+   "insn_count": 54,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005A8C0",
+   "va": "0x1005A8C0",
+   "insn_count": 37,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005A980",
+   "va": "0x1005A980",
+   "insn_count": 359,
+   "strings": [
+    "Set playing pos Zero!"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005AE10",
+   "va": "0x1005AE10",
+   "insn_count": 885,
+   "strings": [
+    ".wav",
+    "getNormalizerFilePath failed!",
+    ".mp3",
+    "SndFileImpl::Instance().Normalizefile failed!",
+    "SndFileImpl::Instance().Convertfile failed!",
+    "SndFileImpl::Instance().Channelfile failed!"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005BB10",
+   "va": "0x1005BB10",
+   "insn_count": 383,
+   "strings": [
+    "Set playing pos Zero!"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005C0A0",
+   "va": "0x1005C0A0",
+   "insn_count": 258,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005C3B0",
+   "va": "0x1005C3B0",
+   "insn_count": 229,
+   "strings": [
+    ".bak",
+    "h`~1",
+    "_SCANFILEIMPL_"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005C6A0",
+   "va": "0x1005C6A0",
+   "insn_count": 884,
+   "strings": [
+    ".wav",
+    "getNormalizerFilePath failed!",
+    ".mp3",
+    "SndFileImpl::Instance().Normalizefile failed!",
+    "SndFileImpl::Instance().Convertfile failed!",
+    "SndFileImpl::Instance().Channelfile failed!"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005D3A0",
+   "va": "0x1005D3A0",
+   "insn_count": 205,
+   "strings": [
+    "h`~1",
+    "_SCANFILEIMPL_"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005D640",
+   "va": "0x1005D640",
+   "insn_count": 122,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005D7B0",
+   "va": "0x1005D7B0",
+   "insn_count": 242,
+   "strings": [
+    "spx to pcm failed!"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005DAE0",
+   "va": "0x1005DAE0",
+   "insn_count": 56,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005DB90",
+   "va": "0x1005DB90",
+   "insn_count": 45,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005DC20",
+   "va": "0x1005DC20",
+   "insn_count": 59,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005DCD0",
+   "va": "0x1005DCD0",
+   "insn_count": 46,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0005DD60",
+   "va": "0x1005DD60",
+   "insn_count": 51,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0007F0F0",
+   "va": "0x1007F0F0",
+   "insn_count": 145,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0007F9E0",
+   "va": "0x1007F9E0",
+   "insn_count": 1540,
+   "strings": [
+    "New pReadBuffer failed!",
+    "resource/AccousticModel_16k.bin",
+    "VadImpl::AccousticModel_16k.bin Not Existed! file=",
+    "Loading Model failed!",
+    "Not 16k16bitMonoWave!",
+    "No Wav file!",
+    "New ppRawData failed!",
+    "New pRawDataBuffer failed!",
+    "New pResult failed! nRet = ",
+    "vad_type = four_threshold_model,vad_sample_rate = sample_rate_16k,vad_bos_margine = 200,vad_eos_margine = 200,vad_min_silence_len = 50,vad_min_speech_len = 100,vad_gmm_win_size = 500,vad_response_time_out = -1,vad_silence_wait = -1,vad_speech_memory_size = 10000,vad_silence_memory_size = 10000,vad_sensitivity = 0",
+    "scVADInitialize failed! nRet = ",
+    "scVADCreateInstance failed! nRet = ",
+    "scVADStart failed! nRet = ",
+    "[[-1,-1]]",
+    "scVADWriteData failed! nRet = ",
+    "scVADReadData failed! nRet = ",
+    "scVADStop failed! nRet = ",
+    "scVADDestroyInstance failed! nRet = ",
+    "scVADUnInitialize failed! nRet = "
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00084E20",
+   "va": "0x10084E20",
+   "insn_count": 165,
+   "strings": [
+    "SoundWorker::Pause false"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x00085040",
+   "va": "0x10085040",
+   "insn_count": 113,
+   "strings": [
+    "SoundWorker::Continue false"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0013F419",
+   "va": "0x1013F419",
+   "insn_count": 58,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0013F5E9",
+   "va": "0x1013F5E9",
+   "insn_count": 27,
+   "strings": [],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0013FB14",
+   "va": "0x1013FB14",
+   "insn_count": 41,
+   "strings": [
+    "bad allocation"
+   ],
+   "log_handlers": []
+  },
+  {
+   "rva": "0x0014113C",
+   "va": "0x1014113C",
+   "insn_count": 12,
+   "strings": [],
+   "log_handlers": []
+  }
+ ],
+ "action_candidates": [],
+ "log_handlers": [
+  "OnAQCWavfile",
+  "OnCheckAudio",
+  "OnCheckWovFile",
+  "OnCombineAndConvertWavToMp3",
+  "OnContinueAction",
+  "OnConvertfile",
+  "OnGetVolume",
+  "OnInitAction",
+  "OnLoadFileAction",
+  "OnPauseAction",
+  "OnPlayAction",
+  "OnRecordAction",
+  "OnSetVolume",
+  "OnUnInitAction",
+  "OnWovToWav"
+ ],
+ "plnonprocess": {
+  "rva": "0x00024300",
+  "insn_count": 742,
+  "extent_stop": "0x10181A00",
+  "string_refs": [
+   {
+    "va": "0x102B2184",
+    "string": "soundhelper.cpp"
+   },
+   {
+    "va": "0x102B2148",
+    "string": ", args->"
+   },
+   {
+    "va": "0x102B2194",
+    "string": "init"
+   },
+   {
+    "va": "0x102B219C",
+    "string": "loadfile"
+   },
+   {
+    "va": "0x102B21A8",
+    "string": "play"
+   },
+   {
+    "va": "0x102B21B0",
+    "string": "play ok."
+   },
+   {
+    "va": "0x102B21C4",
+    "string": "pause"
+   },
+   {
+    "va": "0x102B21CC",
+    "string": "pause ok."
+   },
+   {
+    "va": "0x102B21E0",
+    "string": "continue"
+   },
+   {
+    "va": "0x102B21EC",
+    "string": "continue ok."
+   },
+   {
+    "va": "0x102B2208",
+    "string": "stop"
+   },
+   {
+    "va": "0x100247EE",
+    "string": "h$\"+"
+   },
+   {
+    "va": "0x102B2210",
+    "string": "stop ok."
+   },
+   {
+    "va": "0x102B2224",
+    "string": "record"
+   },
+   {
+    "va": "0x10024865",
+    "string": "hD\"+"
+   },
+   {
+    "va": "0x102B222C",
+    "string": "record ok."
+   },
+   {
+    "va": "0x102B2244",
+    "string": "trace"
+   },
+   {
+    "va": "0x100248E1",
+    "string": "hl\"+"
+   },
+   {
+    "va": "0x102B224C",
+    "string": "recordtrace ok."
+   },
+   {
+    "va": "0x102B226C",
+    "string": "convertfile"
+   },
+   {
+    "va": "0x10024941",
+    "string": "hx\"+"
+   },
+   {
+    "va": "0x102B2278",
+    "string": "checkvoice"
+   },
+   {
+    "va": "0x102B2284",
+    "string": "aqcwavfile"
+   },
+   {
+    "va": "0x102B2290",
+    "string": "checkwovfile"
+   },
+   {
+    "va": "0x102B22A0",
+    "string": "destroy"
+   },
+   {
+    "va": "0x10024C15",
+    "string": "hH#+"
+   },
+   {
+    "va": "0x102B22DC",
+    "string": "soundhelper.cpp"
+   },
+   {
+    "va": "0x102B2338",
+    "string": "soundhelper.cpp"
+   },
+   {
+    "va": "0x102B2348",
+    "string": "setvolume"
+   },
+   {
+    "va": "0x10024C72",
+    "string": "hT#+"
+   },
+   {
+    "va": "0x102B2354",
+    "string": "getvolume"
+   },
+   {
+    "va": "0x10024CCF",
+    "string": "h`#+"
+   },
+   {
+    "va": "0x102B2360",
+    "string": "setvolzoom"
+   },
+   {
+    "va": "0x102B236C",
+    "string": "combineandconvertwavtomp3"
+   }
+  ],
+  "action_candidates": [
+   "aqcwavfile",
+   "checkvoice",
+   "checkwovfile",
+   "combineandconvertwavtomp3",
+   "continue",
+   "convertfile",
+   "destroy",
+   "getvolume",
+   "init",
+   "loadfile",
+   "pause",
+   "play",
+   "record",
+   "setvolume",
+   "setvolzoom",
+   "stop",
+   "trace"
+  ]
+ },
+ "stats": {
+  "exports": 33,
+  "funcs": 111,
+  "discovered": 411,
+  "bad_decode": 0,
+  "strings_indexed": 15453
+ }
+}

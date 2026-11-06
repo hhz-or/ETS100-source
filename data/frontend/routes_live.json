@@ -1,0 +1,1517 @@
+{
+ "summary": {
+  "old_routes": 91,
+  "old_chunks": 191,
+  "mapped": 186,
+  "missing": 5,
+  "live_files": 188
+ },
+ "routes": [
+  {
+   "path": "/jkPage",
+   "name": "jkPage",
+   "component_live": "JKPage-a549c006.js",
+   "chunks_live": [
+    "JKPage-a549c006.js",
+    "DynamicIframe-3deb8334.js"
+   ]
+  },
+  {
+   "path": "/homeworkList",
+   "name": "homeworkList",
+   "component_live": "HomeworkList-fcfb7b07.js",
+   "chunks_live": [
+    "HomeworkList-fcfb7b07.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useRouteState-97bcffb8.js",
+    "footerBtn-8782f723.js",
+    "ReviewItem-54645e8a.js",
+    "ReferenceBookAddDialog-6303d0aa.js",
+    "reference-0d099c01.js",
+    "reference_book_default-68961b04.js",
+    "usePhoneticResource-18246560.js",
+    "useResLock-e89468c2.js",
+    "useRemark-4d95e60d.js",
+    "useFoshanNonVip-c1014d45.js"
+   ]
+  },
+  {
+   "path": "/listeningSpeakingSynchronousDetail",
+   "name": "listeningSpeakingSynchronousDetail",
+   "component_live": "Practice-06d8d973.js",
+   "chunks_live": [
+    "Practice-06d8d973.js",
+    "ExamActionBar-a437b7da.js",
+    "MediaSettingPopover-f8ea70d6.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "ExamActionTips-9d0a849a.js",
+    "ExamHeaderProgress-d8060de0.js",
+    "LessonList-3dfc5c05.js",
+    null,
+    "Icon_Speaker-14af613f.js",
+    "exam-6ff42190.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "DynamicIframe-3deb8334.js",
+    "ExamAside-f010df98.js",
+    "useRouteState-97bcffb8.js",
+    "adjustWordColor-cea5ae41.js",
+    "mockExam-96ad84ce.js",
+    "mistakeAdder-d497aee5.js",
+    "html-8e3719a4.js",
+    "useStatusSound-81445271.js",
+    "useRecordResult-b85a83c5.js",
+    "useAudioSync-6847457c.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useMixSound-295236fd.js",
+    "useMistakeInspector-d75dbdc9.js"
+   ]
+  },
+  {
+   "path": "/listeningSpeakingSynchronousComprehensive",
+   "name": "listeningSpeakingSynchronousComprehensive",
+   "component_live": "Comprehensive-0abf64f4.js",
+   "chunks_live": [
+    "Comprehensive-0abf64f4.js",
+    "ExamActionBar-a437b7da.js",
+    "MediaSettingPopover-f8ea70d6.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "ExamActionTips-9d0a849a.js",
+    "ExamHeaderProgress-d8060de0.js",
+    "LessonList-3dfc5c05.js",
+    null,
+    "Icon_Speaker-14af613f.js",
+    "exam-6ff42190.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "useExamStepper-334a040d.js",
+    "html-8e3719a4.js",
+    "useRecordResult-b85a83c5.js",
+    "DynamicIframe-3deb8334.js",
+    "ExamAside-f010df98.js",
+    "useRouteState-97bcffb8.js",
+    "mockExam-96ad84ce.js",
+    "mistakeAdder-d497aee5.js",
+    "useExamResult-ba5ff50b.js",
+    "adjustWordColor-cea5ae41.js",
+    "useMixSound-295236fd.js",
+    null,
+    "useMistakeInspector-d75dbdc9.js",
+    "useAudioSync-6847457c.js"
+   ]
+  },
+  {
+   "path": "/eduLogin",
+   "name": "eduLogin",
+   "component_live": "EduLogin-73c31a78.js",
+   "chunks_live": [
+    "EduLogin-73c31a78.js",
+    "DynamicIframe-3deb8334.js"
+   ]
+  },
+  {
+   "path": "/eduSwLogin",
+   "name": "eduSwLogin",
+   "component_live": "EduSwLogin-4ed4fe34.js",
+   "chunks_live": [
+    "EduSwLogin-4ed4fe34.js",
+    "DynamicIframe-3deb8334.js"
+   ]
+  },
+  {
+   "path": "/mockExamList",
+   "name": "mockExamList",
+   "component_live": "MockExamList-25c4143d.js",
+   "chunks_live": [
+    "MockExamList-25c4143d.js",
+    "ContinueAlert-4a68ca54.js",
+    "ExamPageHeader-c73a9f1d.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "TabNav-e16d9dac.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/mockExamDetail",
+   "name": "mockExamDetail",
+   "component_live": "MockExamDetails-78614a2b.js",
+   "chunks_live": [
+    "MockExamDetails-78614a2b.js",
+    "ExamActionBar-a437b7da.js",
+    "MediaSettingPopover-f8ea70d6.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "ExamActionTips-9d0a849a.js",
+    "ExamHeaderProgress-d8060de0.js",
+    "useExamStepper-334a040d.js",
+    "html-8e3719a4.js",
+    "useRecordResult-b85a83c5.js",
+    "DynamicIframe-3deb8334.js",
+    "ExamAside-f010df98.js",
+    "ExamQuestionListItem-0897887a.js",
+    "ratingPage-8b746db9.js",
+    "useRemark-4d95e60d.js",
+    "link-94d1de3c.js",
+    "useRouteState-97bcffb8.js",
+    "mistakeAdder-d497aee5.js",
+    "mockExam-96ad84ce.js",
+    "useAudioSync-6847457c.js",
+    "useExamResult-ba5ff50b.js",
+    "adjustWordColor-cea5ae41.js",
+    "useMixSound-295236fd.js"
+   ]
+  },
+  {
+   "path": "/mockExamResult",
+   "name": "mockExamResult",
+   "component_live": "MockExamResult-e6fb13e0.js",
+   "chunks_live": [
+    "MockExamResult-e6fb13e0.js",
+    "ExamActionBar-a437b7da.js",
+    "ExamActionTips-9d0a849a.js",
+    "ExamHeaderProgress-d8060de0.js",
+    null,
+    "Icon_Speaker-14af613f.js",
+    "DynamicIframe-3deb8334.js",
+    "ExamAside-f010df98.js",
+    "ExamQuestionListItem-0897887a.js",
+    "useRouteState-97bcffb8.js",
+    "useExamResult-ba5ff50b.js",
+    "mockExam-96ad84ce.js",
+    "adjustWordColor-cea5ae41.js",
+    "html-8e3719a4.js",
+    "useMixSound-295236fd.js",
+    "mistakeAdder-d497aee5.js",
+    "useMistakeInspector-d75dbdc9.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/modelTestMode",
+   "name": "modelTestMode",
+   "component_live": "Examine-f27ec270.js",
+   "chunks_live": [
+    "Examine-f27ec270.js",
+    "useExamStepper-334a040d.js",
+    "html-8e3719a4.js",
+    "useRecordResult-b85a83c5.js",
+    "DynamicIframe-3deb8334.js",
+    "ratingPage-8b746db9.js",
+    "useRemark-4d95e60d.js",
+    "mockExam-96ad84ce.js",
+    "useRouteState-97bcffb8.js",
+    "exam-6ff42190.js",
+    "mistakeAdder-d497aee5.js",
+    "useAudioSync-6847457c.js"
+   ]
+  },
+  {
+   "path": "/readingWritingList",
+   "name": "readingWritingList",
+   "component_live": "ReadingWritingList-ad3abf8a.js",
+   "chunks_live": [
+    "ReadingWritingList-ad3abf8a.js",
+    "ExamPageHeader-c73a9f1d.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "TabNav-e16d9dac.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/readingWritingStart",
+   "name": "readingWritingStart",
+   "component_live": "ReadingWritingStart-8ee9bcb4.js",
+   "chunks_live": [
+    "ReadingWritingStart-8ee9bcb4.js",
+    "ExamPreview-a5532f67.js",
+    "FooterToolbar-3227fe06.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useRouteState-97bcffb8.js"
+   ]
+  },
+  {
+   "path": "/readingWritingDetails",
+   "name": "readingWritingDetails",
+   "component_live": "ReadingWritingDetails-a2a8de69.js",
+   "chunks_live": [
+    "ReadingWritingDetails-a2a8de69.js",
+    "ExamActionBar-a437b7da.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "ExamActionTips-9d0a849a.js",
+    "DynamicIframe-3deb8334.js",
+    "TabNav-e16d9dac.js",
+    "useRouteState-97bcffb8.js",
+    "useMistakeInspector-d75dbdc9.js",
+    "FooterToolbar-3227fe06.js",
+    "ExamResultHeader-9c72055d.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "QuestionListItem-37f32444.js",
+    "exam-6ff42190.js",
+    "useReadingWritingStructConverter-0e20e02c.js",
+    "html-8e3719a4.js",
+    "mistakeAdder-d497aee5.js",
+    "composition-afd7772e.js"
+   ]
+  },
+  {
+   "path": "/readingWritingResult",
+   "name": "readingWritingResult",
+   "component_live": "ReadingWritingResult-2e305f97.js",
+   "chunks_live": [
+    "ReadingWritingResult-2e305f97.js",
+    "FooterToolbar-3227fe06.js",
+    "ExamResultHeader-9c72055d.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useRouteState-97bcffb8.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "QuestionListItem-37f32444.js",
+    "exam-6ff42190.js",
+    "useMistakeInspector-d75dbdc9.js",
+    "useReadingWritingStructConverter-0e20e02c.js",
+    "mistakeAdder-d497aee5.js"
+   ]
+  },
+  {
+   "path": "/ecard-list",
+   "name": "ecardList",
+   "component_live": "EcardList-3c38c163.js",
+   "chunks_live": [
+    "EcardList-3c38c163.js",
+    "DynamicIframe-3deb8334.js",
+    "html-8e3719a4.js"
+   ]
+  },
+  {
+   "path": "/ecard-parent-buy",
+   "name": "ecardParentBuy",
+   "component_live": "EcardParentBuy-d5fa2d21.js",
+   "chunks_live": [
+    "EcardParentBuy-d5fa2d21.js",
+    "DynamicIframe-3deb8334.js"
+   ]
+  },
+  {
+   "path": "/ecard-introduce",
+   "name": "ecardIntroduce",
+   "component_live": "EcardIntroduce-59cb4d2d.js",
+   "chunks_live": [
+    "EcardIntroduce-59cb4d2d.js",
+    "DynamicIframe-3deb8334.js",
+    "image-67d27446.js",
+    "html-8e3719a4.js",
+    "useRouteState-97bcffb8.js",
+    "ecard_primary-ffa72599.js"
+   ]
+  },
+  {
+   "path": "/phonetic",
+   "name": "phonetic",
+   "component_live": "PhoneticView-4742fba6.js",
+   "chunks_live": [
+    "PhoneticView-4742fba6.js",
+    "DynamicIframe-3deb8334.js",
+    "html-8e3719a4.js"
+   ]
+  },
+  {
+   "path": "/phoneticDetail",
+   "name": "phoneticDetail",
+   "component_live": "PhoneticDetailView-90901ed6.js",
+   "chunks_live": [
+    "PhoneticDetailView-90901ed6.js",
+    "DynamicIframe-3deb8334.js"
+   ]
+  },
+  {
+   "path": "/phoneticPractice",
+   "name": "phoneticPractice",
+   "component_live": "PhoneticPracticeView-b5515c2e.js",
+   "chunks_live": [
+    "PhoneticPracticeView-b5515c2e.js",
+    "ExamActionBar-a437b7da.js",
+    "MediaSettingPopover-f8ea70d6.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "ExamActionTips-9d0a849a.js",
+    "DynamicIframe-3deb8334.js",
+    "useRecordResult-b85a83c5.js",
+    null,
+    "useMistakeInspector-d75dbdc9.js",
+    "mockExam-96ad84ce.js",
+    "mistakeAdder-d497aee5.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useMixSound-295236fd.js",
+    "FooterToolbar-3227fe06.js",
+    "ExamResultHeader-9c72055d.js",
+    "useRouteState-97bcffb8.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "useStatusSound-81445271.js"
+   ]
+  },
+  {
+   "path": "/phoneticNew",
+   "name": "phoneticNew",
+   "component_live": "PhoneticNewView-4ab36d35.js",
+   "chunks_live": [
+    "PhoneticNewView-4ab36d35.js",
+    "useHistoryAnchor-31593c9a.js"
+   ]
+  },
+  {
+   "path": "/phoneticNewDetail",
+   "name": "phoneticNewDetail",
+   "component_live": "PhoneticNewDetailView-9769eb6c.js",
+   "chunks_live": [
+    "PhoneticNewDetailView-9769eb6c.js",
+    "Icon_Next_Question_Disabled-300d410b.js",
+    "useHistoryAnchor-31593c9a.js",
+    "usePhoneticResource-18246560.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "useHomeworkListBack-b9008e03.js",
+    "useFinishedStageEntry-687f7050.js"
+   ]
+  },
+  {
+   "path": "/phoneticNewFinished",
+   "name": "phoneticNewFinished",
+   "component_live": "PhoneticNewFinishedView-dd13b0fb.js",
+   "chunks_live": [
+    "PhoneticNewFinishedView-dd13b0fb.js",
+    "useHistoryAnchor-31593c9a.js",
+    "usePhoneticResource-18246560.js",
+    "usePhoneticTest-12bac9fe.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "FooterToolbar-3227fe06.js",
+    "QuestionListItem-37f32444.js",
+    "exam-6ff42190.js",
+    "useFinishedStageEntry-687f7050.js"
+   ]
+  },
+  {
+   "path": "/phoneticNewPractice",
+   "name": "phoneticNewPractice",
+   "component_live": "PhoneticNewPracticeView-4681a432.js",
+   "chunks_live": [
+    "PhoneticNewPracticeView-4681a432.js",
+    "Icon_Next_Question_Disabled-300d410b.js",
+    "usePhoneticTest-12bac9fe.js",
+    "useHistoryAnchor-31593c9a.js",
+    "usePhoneticResource-18246560.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "MediaSettingPopover-f8ea70d6.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "useRecordResult-b85a83c5.js",
+    "useHomeworkListBack-b9008e03.js",
+    "usePhoneticHomeworkMeta-9dae3d07.js",
+    "useFinishedStageEntry-687f7050.js"
+   ]
+  },
+  {
+   "path": "/phoneticNewResult",
+   "name": "phoneticNewResult",
+   "component_live": "PhoneticNewResultView-781b8be1.js",
+   "chunks_live": [
+    "PhoneticNewResultView-781b8be1.js",
+    "usePhoneticHomeworkMeta-9dae3d07.js",
+    "useHomeworkListBack-b9008e03.js",
+    "useHistoryAnchor-31593c9a.js",
+    "usePhoneticTest-12bac9fe.js",
+    "usePhoneticResource-18246560.js",
+    "ExamResultHeader-9c72055d.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "FooterToolbar-3227fe06.js",
+    "QuestionListItem-37f32444.js",
+    "exam-6ff42190.js",
+    "useFinishedStageEntry-687f7050.js"
+   ]
+  },
+  {
+   "path": "/pkMatch",
+   "name": "pkMatch",
+   "component_live": "PKMatch-3b21d9b8.js",
+   "chunks_live": [
+    "PKMatch-3b21d9b8.js",
+    "pk_icon_opponent-c42979f4.js",
+    "pk_match_success-b89ec6c7.js",
+    "useRouteState-97bcffb8.js"
+   ]
+  },
+  {
+   "path": "/pkMatch_resource",
+   "name": "pkMatch_resource",
+   "component_live": "PKMatch-3b21d9b8.js",
+   "chunks_live": [
+    "PKMatch-3b21d9b8.js",
+    "pk_icon_opponent-c42979f4.js",
+    "pk_match_success-b89ec6c7.js",
+    "useWordCourseSource-660c9ffe.js",
+    "wordCourseSourceHelpers-db5db78d.js",
+    "useRouteState-97bcffb8.js",
+    "useWordResourceError-4f42410b.js"
+   ]
+  },
+  {
+   "path": "/pk",
+   "name": "pk",
+   "component_live": "PK-97724b3a.js",
+   "chunks_live": [
+    "PK-97724b3a.js",
+    "pk_icon_opponent-c42979f4.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "useRouteState-97bcffb8.js",
+    "wordCourseSourceHelpers-db5db78d.js",
+    "useWordResourceError-4f42410b.js",
+    "icon_audio_playing-57a3732e.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/pkRank",
+   "name": "pkRank",
+   "component_live": "PKRank-cb2cfd32.js",
+   "chunks_live": [
+    "PKRank-cb2cfd32.js"
+   ]
+  },
+  {
+   "path": "/pkResult",
+   "name": "pkResult",
+   "component_live": "PKResult-5826f7f9.js",
+   "chunks_live": [
+    "PKResult-5826f7f9.js",
+    "pk_icon_opponent-c42979f4.js",
+    "search_Normal-c6312e98.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "collect_Normal-1ab3690e.js",
+    "useWordCollect-b80f4ca2.js",
+    "wordCourseSourceHelpers-db5db78d.js",
+    "useRouteState-97bcffb8.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/recommendDub",
+   "name": "recommendDub",
+   "component_live": "DubHomePage-4839703b.js",
+   "chunks_live": [
+    "DubHomePage-4839703b.js",
+    "pagination-65e54f4b.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "tuozhan_Icon_pysuotou-04d0f2a7.js",
+    "dub-20e4eacf.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/dubDetailPage",
+   "name": "dubDetailPage",
+   "component_live": "DubDetailPage-0c80c887.js",
+   "chunks_live": [
+    "DubDetailPage-0c80c887.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useMixSound-295236fd.js",
+    "Icon_Speaker-14af613f.js",
+    "dub-20e4eacf.js",
+    null,
+    "DubCompoundUploadDialog-4f2beed0.js",
+    "useRouteState-97bcffb8.js"
+   ]
+  },
+  {
+   "path": "/dubPlayingPage",
+   "name": "dubPlayingPage",
+   "component_live": "DubPlayingPage-0017b0d6.js",
+   "chunks_live": [
+    "DubPlayingPage-0017b0d6.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "icon_audio_playing-57a3732e.js",
+    "word_recording-73cc9a20.js",
+    "dub-20e4eacf.js",
+    null,
+    "useMixSound-295236fd.js",
+    "useRecordResult-b85a83c5.js",
+    "DubCompoundUploadDialog-4f2beed0.js",
+    "useRouteState-97bcffb8.js"
+   ]
+  },
+  {
+   "path": "/dubFinishSavePage",
+   "name": "dubFinishSavePage",
+   "component_live": "DubFinishSavePage-dcd2a7d4.js",
+   "chunks_live": [
+    "DubFinishSavePage-dcd2a7d4.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    null,
+    "dub-20e4eacf.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/referenceBookList",
+   "name": "referenceBookList",
+   "component_live": "ReferenceBookList-d81c4987.js",
+   "chunks_live": [
+    "ReferenceBookList-d81c4987.js",
+    "reference_book_default-68961b04.js",
+    "ReferenceBookAddDialog-6303d0aa.js",
+    "reference-0d099c01.js"
+   ]
+  },
+  {
+   "path": "/referenceBookDetail",
+   "name": "referenceBookDetail",
+   "component_live": "ReferenceBookDetail-d076a9df.js",
+   "chunks_live": [
+    "ReferenceBookDetail-d076a9df.js",
+    "ExamPageHeader-c73a9f1d.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "TabNav-e16d9dac.js",
+    "ReferenceBookAddDialog-6303d0aa.js",
+    "reference-0d099c01.js",
+    "reference_book_default-68961b04.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/referenceBookTopicPreview",
+   "name": "referenceBookTopicPreview",
+   "component_live": "ReferenceBookTopicPreview-236df5f3.js",
+   "chunks_live": [
+    "ReferenceBookTopicPreview-236df5f3.js",
+    "ExamPreview-a5532f67.js",
+    "FooterToolbar-3227fe06.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useRouteState-97bcffb8.js"
+   ]
+  },
+  {
+   "path": "/speakListenLesson",
+   "name": "speakListenLesson",
+   "component_live": "index-0be937b4.js",
+   "chunks_live": [
+    "index-0be937b4.js",
+    "ExamActionBar-a437b7da.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "DynamicIframe-3deb8334.js",
+    "ExamAside-f010df98.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "rate-4ed993c7.js",
+    null,
+    "html-8e3719a4.js",
+    "sll-3577ab4f.js",
+    "useRecordResult-b85a83c5.js",
+    "useRouteState-97bcffb8.js"
+   ]
+  },
+  {
+   "path": "/specialList",
+   "name": "specialList",
+   "component_live": "SpecialListView-38695221.js",
+   "chunks_live": [
+    "SpecialListView-38695221.js",
+    "ContinueAlert-4a68ca54.js",
+    "ExamPageHeader-c73a9f1d.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "TabNav-e16d9dac.js",
+    "useResLock-e89468c2.js",
+    "image-67d27446.js",
+    "composition-afd7772e.js"
+   ]
+  },
+  {
+   "path": "/specialReadingWritingStart",
+   "name": "specialReadingWritingStart",
+   "component_live": "SpecialReadingWritingStart-bd8e19e5.js",
+   "chunks_live": [
+    "SpecialReadingWritingStart-bd8e19e5.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "composition-afd7772e.js"
+   ]
+  },
+  {
+   "path": "/studyPlanDetail",
+   "name": "studyPlanDetail",
+   "component_live": "studyPlanDetail-d4b9a7af.js",
+   "chunks_live": [
+    "studyPlanDetail-d4b9a7af.js",
+    "pagination-65e54f4b.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "footerBtn-8782f723.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/studyPlanHistoryDetail",
+   "name": "studyPlanHistoryDetail",
+   "component_live": "studyPlanDetail-d4b9a7af.js",
+   "chunks_live": [
+    "studyPlanDetail-d4b9a7af.js",
+    "pagination-65e54f4b.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "footerBtn-8782f723.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/textCourse",
+   "name": "textCourse",
+   "component_live": "index-0be937b4.js",
+   "chunks_live": [
+    "index-0be937b4.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "textCourse-9eda42f8.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/textInfo",
+   "name": "textInfo",
+   "component_live": "textInfo-1be6bded.js",
+   "chunks_live": [
+    "textInfo-1be6bded.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "mistakeAdder-d497aee5.js",
+    "greenCircle-de6abb38.js",
+    "countdown-76a8b819.js",
+    "redoTip-9d866b11.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "useRouteState-97bcffb8.js",
+    "useRecordResult-b85a83c5.js",
+    "adjustWordColor-cea5ae41.js",
+    "useAudioSync-6847457c.js"
+   ]
+  },
+  {
+   "path": "/readSentence",
+   "name": "readSentence",
+   "component_live": "readSentence-331639e8.js",
+   "chunks_live": [
+    "readSentence-331639e8.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "MediaSettingPopover-f8ea70d6.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "lowScore-24c4b0b7.js",
+    "countdown-76a8b819.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "textCourse-9eda42f8.js",
+    "greenCircle-de6abb38.js",
+    "useRouteState-97bcffb8.js",
+    "useRecordResult-b85a83c5.js",
+    "textSetting-b9e8dd61.js",
+    "mistakeAdder-d497aee5.js",
+    "adjustWordColor-cea5ae41.js",
+    "adjustRecordTime-9619cd1e.js"
+   ]
+  },
+  {
+   "path": "/readSentenceScoreInfo",
+   "name": "readSentenceScoreInfo",
+   "component_live": "readSentenceScoreInfo-20f8f45a.js",
+   "chunks_live": [
+    "readSentenceScoreInfo-20f8f45a.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "mistakeAdder-d497aee5.js",
+    "useMistakeInspector-d75dbdc9.js",
+    "adjustWordColor-cea5ae41.js",
+    "useRouteState-97bcffb8.js"
+   ]
+  },
+  {
+   "path": "/readAloud",
+   "name": "readAloud",
+   "component_live": "readAloud-58a66f95.js",
+   "chunks_live": [
+    "readAloud-58a66f95.js",
+    "ExamActionBar-a437b7da.js",
+    "MediaSettingPopover-f8ea70d6.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "ExamActionTips-9d0a849a.js",
+    "DynamicIframe-3deb8334.js",
+    "ExamAside-f010df98.js",
+    "rightArrow-2eab618a.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "redoTip-9d866b11.js",
+    "mistakeAdder-d497aee5.js",
+    "adjustWordColor-cea5ae41.js",
+    "html-8e3719a4.js",
+    "countdown-76a8b819.js",
+    "useRouteState-97bcffb8.js",
+    "useAudioSync-6847457c.js",
+    "useMistakeInspector-d75dbdc9.js",
+    "adjustRecordTime-9619cd1e.js",
+    "useRecordResult-b85a83c5.js"
+   ]
+  },
+  {
+   "path": "/textCourse_resource",
+   "name": "textCourse_resource",
+   "component_live": "index-0be937b4.js",
+   "chunks_live": [
+    "index-0be937b4.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "textCourse-9eda42f8.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/textInfo_resource",
+   "name": "textInfo_resource",
+   "component_live": "textInfo-1be6bded.js",
+   "chunks_live": [
+    "textInfo-1be6bded.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useReadSentence-0df07842.js",
+    "useRecordResult-b85a83c5.js",
+    "textSetting-b9e8dd61.js",
+    "mistakeAdder-d497aee5.js",
+    "mockExam-96ad84ce.js",
+    "adjustWordColor-cea5ae41.js",
+    "useRouteState-97bcffb8.js",
+    "redoTip-9d866b11.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "countdownDialog-50f109f3.js",
+    "textCourse-9eda42f8.js",
+    "useAudioSync-6847457c.js"
+   ]
+  },
+  {
+   "path": "/readSentence_resource",
+   "name": "readSentence_resource",
+   "component_live": "readSentence-331639e8.js",
+   "chunks_live": [
+    "readSentence-331639e8.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "MediaSettingPopover-f8ea70d6.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "lowScore-24c4b0b7.js",
+    "countdownDialog-50f109f3.js",
+    "mistakeAdder-d497aee5.js",
+    "useReadSentence-0df07842.js",
+    "useRecordResult-b85a83c5.js",
+    "textSetting-b9e8dd61.js",
+    "mockExam-96ad84ce.js",
+    "adjustWordColor-cea5ae41.js",
+    "useRouteState-97bcffb8.js",
+    "textCourse-9eda42f8.js",
+    "useMistakeInspector-d75dbdc9.js"
+   ]
+  },
+  {
+   "path": "/readSentenceScoreInfo_resource",
+   "name": "readSentenceScoreInfo_resource",
+   "component_live": "readSentenceScoreInfo-20f8f45a.js",
+   "chunks_live": [
+    "readSentenceScoreInfo-20f8f45a.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useRouteState-97bcffb8.js",
+    "mistakeAdder-d497aee5.js",
+    "useMistakeInspector-d75dbdc9.js",
+    "adjustWordColor-cea5ae41.js"
+   ]
+  },
+  {
+   "path": "/readAloud_resource",
+   "name": "readAloud_resource",
+   "component_live": "readAloud-58a66f95.js",
+   "chunks_live": [
+    "readAloud-58a66f95.js",
+    "ExamActionBar-a437b7da.js",
+    "MediaSettingPopover-f8ea70d6.js",
+    "ExamActionTextBtn-cd1b030d.js",
+    "ExamActionTips-9d0a849a.js",
+    null,
+    "Icon_Speaker-14af613f.js",
+    "DynamicIframe-3deb8334.js",
+    "ExamAside-f010df98.js",
+    "rightArrow-2eab618a.js",
+    "redoTip-9d866b11.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "html-8e3719a4.js",
+    "useMistakeInspector-d75dbdc9.js",
+    "mistakeAdder-d497aee5.js",
+    "useRouteState-97bcffb8.js",
+    "useRecordResult-b85a83c5.js",
+    "adjustWordColor-cea5ae41.js",
+    "mockExam-96ad84ce.js",
+    "countdownDialog-50f109f3.js",
+    "useAudioSync-6847457c.js"
+   ]
+  },
+  {
+   "path": "/wordStudy",
+   "name": "wordStudy",
+   "component_live": "WordStudy-1f49082a.js",
+   "chunks_live": [
+    "WordStudy-1f49082a.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "ExamAside-f010df98.js",
+    "useRouteState-97bcffb8.js",
+    "useMixSound-295236fd.js",
+    "useWordRecord-6d0fb135.js",
+    "word_recording-73cc9a20.js",
+    "useRecordResult-b85a83c5.js",
+    "useWordCourseSource-660c9ffe.js",
+    "wordCourseSourceHelpers-db5db78d.js",
+    "useWordCollect-b80f4ca2.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/wordPractice",
+   "name": "wordPractice",
+   "component_live": "WordPractice-8d0209aa.js",
+   "chunks_live": [
+    "WordPractice-8d0209aa.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "WordDetailDialog-e063b67a.js",
+    "collect_Normal-1ab3690e.js",
+    "useWordCollect-b80f4ca2.js",
+    "useRouteState-97bcffb8.js",
+    "wordsPractice-d786f89b.js"
+   ]
+  },
+  {
+   "path": "/wordPracticeResult",
+   "name": "wordPracticeResult",
+   "component_live": "WordPracticeResult-2383d4fa.js",
+   "chunks_live": [
+    "WordPracticeResult-2383d4fa.js",
+    "wordsPractice-d786f89b.js"
+   ]
+  },
+  {
+   "path": "/wordQuestion",
+   "name": "wordQuestion",
+   "component_live": "WordQuestion-0e4b92ce.js",
+   "chunks_live": [
+    "WordQuestion-0e4b92ce.js",
+    "WordDetailDialog-e063b67a.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "collect_Normal-1ab3690e.js",
+    "useWordCollect-b80f4ca2.js",
+    "word_close_music-2ad3b04e.js",
+    "useStatusSound-81445271.js",
+    "useMixSound-295236fd.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useWordRecord-6d0fb135.js",
+    "word_recording-73cc9a20.js",
+    "useRecordResult-b85a83c5.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "wordsPractice-d786f89b.js",
+    "wordPractice-7e170e85.js"
+   ]
+  },
+  {
+   "path": "/homeworkWordQuestion",
+   "name": "homeworkWordQuestion",
+   "component_live": "HomeworkWordQuestion-0176bb0a.js",
+   "chunks_live": [
+    "HomeworkWordQuestion-0176bb0a.js",
+    "WordDetailDialog-e063b67a.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "collect_Normal-1ab3690e.js",
+    "useWordCollect-b80f4ca2.js",
+    "word_close_music-2ad3b04e.js",
+    "useStatusSound-81445271.js",
+    "useMixSound-295236fd.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useWordRecord-6d0fb135.js",
+    "word_recording-73cc9a20.js",
+    "useRecordResult-b85a83c5.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "useRouteState-97bcffb8.js",
+    "useWordResourceError-4f42410b.js"
+   ]
+  },
+  {
+   "path": "/homeworkWordQuestionResult",
+   "name": "homeworkWordQuestionResult",
+   "component_live": "HomeworkWordQuestionResult-6dbbbe72.js",
+   "chunks_live": [
+    "HomeworkWordQuestionResult-6dbbbe72.js",
+    "FooterToolbar-3227fe06.js",
+    "ExamResultHeader-9c72055d.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useRouteState-97bcffb8.js",
+    "QuestionListItem-37f32444.js",
+    "exam-6ff42190.js",
+    "WordPageItem-67e029d3.js",
+    "search_Normal-c6312e98.js",
+    "collect_Normal-1ab3690e.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "useWordCollect-b80f4ca2.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "wordCourseSourceHelpers-db5db78d.js"
+   ]
+  },
+  {
+   "path": "/wordQuestionResult",
+   "name": "wordQuestionResult",
+   "component_live": "WordQuestionResult-34e63def.js",
+   "chunks_live": [
+    "WordQuestionResult-34e63def.js",
+    "wordsPractice-d786f89b.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "wordPractice-7e170e85.js"
+   ]
+  },
+  {
+   "path": "/wordList",
+   "name": "wordList",
+   "component_live": "WordList-81977402.js",
+   "chunks_live": [
+    "WordList-81977402.js",
+    "TabNav-e16d9dac.js",
+    "word_blank-22f3bde4.js",
+    "wordsPractice-d786f89b.js",
+    "radio-54c3cebe.js",
+    "WordPageItem-67e029d3.js",
+    "search_Normal-c6312e98.js",
+    "collect_Normal-1ab3690e.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "useWordCollect-b80f4ca2.js",
+    "wordPractice-7e170e85.js",
+    "ContinueAlert-4a68ca54.js"
+   ]
+  },
+  {
+   "path": "/wordList_resource",
+   "name": "wordList_resource",
+   "component_live": "WordList-81977402.js",
+   "chunks_live": [
+    "WordList-81977402.js",
+    "TabNav-e16d9dac.js",
+    "word_blank-22f3bde4.js",
+    "wordsPractice-d786f89b.js",
+    "radio-54c3cebe.js",
+    "WordPageItem-67e029d3.js",
+    "search_Normal-c6312e98.js",
+    "collect_Normal-1ab3690e.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "useWordCollect-b80f4ca2.js",
+    "wordCourseSourceHelpers-db5db78d.js",
+    "useWordCourseSource-660c9ffe.js",
+    "wordPractice-7e170e85.js",
+    "ContinueAlert-4a68ca54.js",
+    "useWordResourceError-4f42410b.js"
+   ]
+  },
+  {
+   "path": "/wordPractice_resource",
+   "name": "wordPractice_resource",
+   "component_live": "WordPractice-8d0209aa.js",
+   "chunks_live": [
+    "WordPractice-8d0209aa.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "WordDetailDialog-e063b67a.js",
+    "collect_Normal-1ab3690e.js",
+    "useWordCollect-b80f4ca2.js",
+    "useRouteState-97bcffb8.js",
+    "wordsPractice-d786f89b.js"
+   ]
+  },
+  {
+   "path": "/wordQuestion_resource",
+   "name": "wordQuestion_resource",
+   "component_live": "WordQuestion-0e4b92ce.js",
+   "chunks_live": [
+    "WordQuestion-0e4b92ce.js",
+    "WordDetailDialog-e063b67a.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "collect_Normal-1ab3690e.js",
+    "useWordCollect-b80f4ca2.js",
+    "word_close_music-2ad3b04e.js",
+    "useStatusSound-81445271.js",
+    "useMixSound-295236fd.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useWordRecord-6d0fb135.js",
+    "word_recording-73cc9a20.js",
+    "useRecordResult-b85a83c5.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "wordsPractice-d786f89b.js",
+    "wordCourseSourceHelpers-db5db78d.js",
+    "wordPractice-7e170e85.js"
+   ]
+  },
+  {
+   "path": "/wordQuestionResult_resource",
+   "name": "wordQuestionResult_resource",
+   "component_live": "WordQuestionResult-34e63def.js",
+   "chunks_live": [
+    "WordQuestionResult-34e63def.js",
+    "wordsPractice-d786f89b.js",
+    "NonVipMask-6418cf84.js",
+    null,
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "wordPractice-7e170e85.js"
+   ]
+  },
+  {
+   "path": "/wordPracticeResult_resource",
+   "name": "wordPracticeResult_resource",
+   "component_live": "WordPracticeResult-2383d4fa.js",
+   "chunks_live": [
+    "WordPracticeResult-2383d4fa.js",
+    "wordsPractice-d786f89b.js"
+   ]
+  },
+  {
+   "path": "/",
+   "name": "appStart",
+   "component_live": null,
+   "chunks_live": []
+  },
+  {
+   "path": "/auth",
+   "name": "authLayout",
+   "component_live": "Login-869fd087.js",
+   "chunks_live": [
+    "Login-869fd087.js",
+    "BaseInput-bdca6aba.js",
+    "login_account_Normal-b83c04c3.js",
+    "login_account_Pushed-73b993ca.js",
+    "login_pwd_Pushed-3cbdb060.js",
+    "login-86f40267.js",
+    "login_user_Pushed-c7e251d0.js",
+    "CodeInput-d3fcc26c.js",
+    "Navbar-3dbdc8ed.js",
+    "VerifyAccount-e94ba6c6.js",
+    "VerifyModel-cc1976da.js",
+    "ForgotPwd-194ef746.js",
+    "ECardLogin-50732c27.js",
+    "useRouteState-97bcffb8.js",
+    "SelectEduSystem-2fbb9725.js",
+    "Privacy-08fb0ece.js"
+   ]
+  },
+  {
+   "path": "/auth/login",
+   "name": "login",
+   "component_live": "Login-869fd087.js",
+   "chunks_live": [
+    "Login-869fd087.js",
+    "BaseInput-bdca6aba.js",
+    "login_account_Normal-b83c04c3.js",
+    "login_account_Pushed-73b993ca.js",
+    "login_pwd_Pushed-3cbdb060.js",
+    "login-86f40267.js",
+    "login_user_Pushed-c7e251d0.js",
+    "CodeInput-d3fcc26c.js",
+    "Navbar-3dbdc8ed.js"
+   ]
+  },
+  {
+   "path": "/auth/register",
+   "name": "register",
+   "component_live": "Login-869fd087.js",
+   "chunks_live": [
+    "Login-869fd087.js",
+    "BaseInput-bdca6aba.js",
+    "login_account_Normal-b83c04c3.js",
+    "login_account_Pushed-73b993ca.js",
+    "login_pwd_Pushed-3cbdb060.js",
+    "login-86f40267.js",
+    "login_user_Pushed-c7e251d0.js",
+    "CodeInput-d3fcc26c.js",
+    "Navbar-3dbdc8ed.js"
+   ]
+  },
+  {
+   "path": "/auth/verifyAccount",
+   "name": "verifyAccount",
+   "component_live": "VerifyAccount-e94ba6c6.js",
+   "chunks_live": [
+    "VerifyAccount-e94ba6c6.js",
+    "Navbar-3dbdc8ed.js",
+    "CodeInput-d3fcc26c.js"
+   ]
+  },
+  {
+   "path": "/auth/verifyModel",
+   "name": "verifyModel",
+   "component_live": "VerifyModel-cc1976da.js",
+   "chunks_live": [
+    "VerifyModel-cc1976da.js",
+    "Navbar-3dbdc8ed.js"
+   ]
+  },
+  {
+   "path": "/auth/forgetPwd",
+   "name": "forgetPwd",
+   "component_live": "ForgotPwd-194ef746.js",
+   "chunks_live": [
+    "ForgotPwd-194ef746.js",
+    "BaseInput-bdca6aba.js",
+    "Navbar-3dbdc8ed.js",
+    "login_account_Normal-b83c04c3.js",
+    "login_pwd_Pushed-3cbdb060.js",
+    "CodeInput-d3fcc26c.js",
+    "login_account_Pushed-73b993ca.js"
+   ]
+  },
+  {
+   "path": "/auth/eCardLogin",
+   "name": "eCardLogin",
+   "component_live": "ECardLogin-50732c27.js",
+   "chunks_live": [
+    "ECardLogin-50732c27.js",
+    "BaseInput-bdca6aba.js",
+    "Navbar-3dbdc8ed.js",
+    "login_account_Normal-b83c04c3.js",
+    "login_account_Pushed-73b993ca.js",
+    "login_pwd_Pushed-3cbdb060.js",
+    "CodeInput-d3fcc26c.js",
+    "login_user_Pushed-c7e251d0.js",
+    "useRouteState-97bcffb8.js"
+   ]
+  },
+  {
+   "path": "/auth/selectEduSystem",
+   "name": "selectEduSystem",
+   "component_live": "SelectEduSystem-2fbb9725.js",
+   "chunks_live": [
+    "SelectEduSystem-2fbb9725.js"
+   ]
+  },
+  {
+   "path": "/auth/privacy",
+   "name": "privacy",
+   "component_live": "Privacy-08fb0ece.js",
+   "chunks_live": [
+    "Privacy-08fb0ece.js",
+    "Navbar-3dbdc8ed.js"
+   ]
+  },
+  {
+   "path": "/setGoalOne",
+   "name": "setGoalOne",
+   "component_live": "SetGoalOnePage-90c4c591.js",
+   "chunks_live": [
+    "SetGoalOnePage-90c4c591.js",
+    "Navbar-3dbdc8ed.js"
+   ]
+  },
+  {
+   "path": "/setGoalTwo",
+   "name": "setGoalTwo",
+   "component_live": "SetGoalTwoPage-4f0599f8.js",
+   "chunks_live": [
+    "SetGoalTwoPage-4f0599f8.js",
+    "province_city_id-e7e4369d.js",
+    "radio-54c3cebe.js",
+    "Navbar-3dbdc8ed.js"
+   ]
+  },
+  {
+   "path": "/ecardBind",
+   "name": "ecardBind",
+   "component_live": "EcardBind-d0abccb8.js",
+   "chunks_live": [
+    "EcardBind-d0abccb8.js",
+    "province_city_id-e7e4369d.js",
+    "radio-54c3cebe.js",
+    "Navbar-3dbdc8ed.js",
+    "ecard-ff05be83.js"
+   ]
+  },
+  {
+   "path": "/main",
+   "name": "mainLayout",
+   "component_live": "Home-35455636.js",
+   "chunks_live": [
+    "Home-35455636.js",
+    "SyncSelectBookDialog-a416c4e7.js",
+    "image-67d27446.js",
+    "useResLock-e89468c2.js",
+    "reference_book_default-68961b04.js",
+    "reference-0d099c01.js",
+    "sll-3577ab4f.js",
+    "ContinueAlert-4a68ca54.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "AddEacrdForJoinClass-c11cf300.js",
+    "AbilityExpand-a180c611.js",
+    "tuozhan_Icon_pysuotou-04d0f2a7.js",
+    "MyEcard-e71b2e82.js",
+    "ecard-ff05be83.js",
+    "link-94d1de3c.js",
+    "province_city_id-e7e4369d.js",
+    "radio-54c3cebe.js",
+    "ecard_primary-ffa72599.js",
+    "DynamicIframe-3deb8334.js",
+    "ReferenceBookAddDialog-6303d0aa.js",
+    "WordsPage-7f153a4a.js",
+    "pagination-65e54f4b.js",
+    "WordPageItem-67e029d3.js",
+    "search_Normal-c6312e98.js",
+    "collect_Normal-1ab3690e.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "useWordCollect-b80f4ca2.js",
+    "useWordCourseSource-660c9ffe.js",
+    "wordCourseSourceHelpers-db5db78d.js",
+    "Review-e42fdf34.js",
+    "TabNav-e16d9dac.js",
+    "ReviewItem-54645e8a.js",
+    "growth-dbac2327.js",
+    "CorrectedList-34f4c861.js",
+    "Homework-b038d19d.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useRemark-4d95e60d.js",
+    "AddClass-02b4718e.js",
+    "BaseInput-bdca6aba.js",
+    "login_account_Pushed-73b993ca.js",
+    "MyProfile-5ac423c4.js",
+    null,
+    "CodeInput-d3fcc26c.js",
+    "login_pwd_Pushed-3cbdb060.js",
+    "login-86f40267.js",
+    "AccountBindPhone-8ea19ffc.js",
+    "login_account_Normal-b83c04c3.js"
+   ]
+  },
+  {
+   "path": "/main/home",
+   "name": "home",
+   "component_live": "Home-35455636.js",
+   "chunks_live": [
+    "Home-35455636.js",
+    "SyncSelectBookDialog-a416c4e7.js",
+    "image-67d27446.js",
+    "useResLock-e89468c2.js",
+    "reference_book_default-68961b04.js",
+    "reference-0d099c01.js",
+    "sll-3577ab4f.js",
+    "ContinueAlert-4a68ca54.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "AddEacrdForJoinClass-c11cf300.js"
+   ]
+  },
+  {
+   "path": "/main/abilityExpand",
+   "name": "abilityExpand",
+   "component_live": "AbilityExpand-a180c611.js",
+   "chunks_live": [
+    "AbilityExpand-a180c611.js",
+    "SyncSelectBookDialog-a416c4e7.js",
+    "image-67d27446.js",
+    "useResLock-e89468c2.js",
+    "tuozhan_Icon_pysuotou-04d0f2a7.js"
+   ]
+  },
+  {
+   "path": "/main/myEcard",
+   "name": "myEcard",
+   "component_live": "MyEcard-e71b2e82.js",
+   "chunks_live": [
+    "MyEcard-e71b2e82.js",
+    "image-67d27446.js",
+    "ecard-ff05be83.js",
+    "link-94d1de3c.js",
+    "province_city_id-e7e4369d.js",
+    "radio-54c3cebe.js",
+    "AddEacrdForJoinClass-c11cf300.js",
+    "ecard_primary-ffa72599.js",
+    "DynamicIframe-3deb8334.js",
+    "ReferenceBookAddDialog-6303d0aa.js",
+    "reference-0d099c01.js",
+    "reference_book_default-68961b04.js"
+   ]
+  },
+  {
+   "path": "/main/words",
+   "name": "words",
+   "component_live": "WordsPage-7f153a4a.js",
+   "chunks_live": [
+    "WordsPage-7f153a4a.js",
+    "pagination-65e54f4b.js",
+    "WordPageItem-67e029d3.js",
+    "search_Normal-c6312e98.js",
+    "collect_Normal-1ab3690e.js",
+    "AudioImgBtn-aa55ecd2.js",
+    "useWordCollect-b80f4ca2.js",
+    "useWordCourseSource-660c9ffe.js",
+    "wordCourseSourceHelpers-db5db78d.js"
+   ]
+  },
+  {
+   "path": "/main/review",
+   "name": "review",
+   "component_live": "Review-e42fdf34.js",
+   "chunks_live": [
+    "Review-e42fdf34.js",
+    "pagination-65e54f4b.js",
+    "TabNav-e16d9dac.js",
+    "ReviewItem-54645e8a.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/main/growthPath",
+   "name": "growthPath",
+   "component_live": "growth-dbac2327.js",
+   "chunks_live": [
+    "growth-dbac2327.js",
+    "DynamicIframe-3deb8334.js"
+   ]
+  },
+  {
+   "path": "/main/correctedList",
+   "name": "correctedList",
+   "component_live": "CorrectedList-34f4c861.js",
+   "chunks_live": [
+    "CorrectedList-34f4c861.js",
+    "pagination-65e54f4b.js",
+    "TabNav-e16d9dac.js",
+    "ReviewItem-54645e8a.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useResLock-e89468c2.js"
+   ]
+  },
+  {
+   "path": "/main/homework",
+   "name": "homework",
+   "component_live": "Homework-b038d19d.js",
+   "chunks_live": [
+    "Homework-b038d19d.js",
+    "pagination-65e54f4b.js",
+    "TabNav-e16d9dac.js",
+    "StarBar-0afdb577.js",
+    "rate-4ed993c7.js",
+    "useFoshanNonVip-c1014d45.js",
+    "useResLock-e89468c2.js",
+    "useRemark-4d95e60d.js"
+   ]
+  },
+  {
+   "path": "/main/addClass",
+   "name": "addClass",
+   "component_live": "AddClass-02b4718e.js",
+   "chunks_live": [
+    "AddClass-02b4718e.js",
+    "BaseInput-bdca6aba.js",
+    "login_account_Pushed-73b993ca.js",
+    "useResLock-e89468c2.js",
+    "useFoshanNonVip-c1014d45.js"
+   ]
+  },
+  {
+   "path": "/main/myProfile",
+   "name": "myProfile",
+   "component_live": "MyProfile-5ac423c4.js",
+   "chunks_live": [
+    "MyProfile-5ac423c4.js",
+    "BaseInput-bdca6aba.js",
+    null,
+    "CodeInput-d3fcc26c.js",
+    "login_pwd_Pushed-3cbdb060.js",
+    "useResLock-e89468c2.js",
+    "login-86f40267.js"
+   ]
+  },
+  {
+   "path": "/main/accountBindPhone",
+   "name": "AccountBindPhone",
+   "component_live": "AccountBindPhone-8ea19ffc.js",
+   "chunks_live": [
+    "AccountBindPhone-8ea19ffc.js",
+    null,
+    "BaseInput-bdca6aba.js",
+    "login_account_Normal-b83c04c3.js",
+    "login_pwd_Pushed-3cbdb060.js",
+    "CodeInput-d3fcc26c.js",
+    "login_account_Pushed-73b993ca.js"
+   ]
+  },
+  {
+   "path": "/studyMaterialList",
+   "name": "studyMaterialList",
+   "component_live": "StudyMaterialList-529b5e5c.js",
+   "chunks_live": [
+    "StudyMaterialList-529b5e5c.js",
+    "pagination-65e54f4b.js",
+    "reference_book_default-68961b04.js"
+   ]
+  }
+ ]
+}

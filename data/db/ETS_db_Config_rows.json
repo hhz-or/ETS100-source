@@ -1,0 +1,100 @@
+[
+ {
+  "Section": "System",
+  "Entry": "C_Version",
+  "Value": "5.7.9",
+  "Value_hex": "352E372E39",
+  "UpdateTime": "2024-04-17 18:52:04",
+  "Common_decoded": [
+   "utf8",
+   "客户端版本号"
+  ],
+  "Common_hex": "E5AEA2E688B7E7ABAFE78988E69CACE58FB7",
+  "value_type": "text",
+  "common_type": "text"
+ },
+ {
+  "Section": "System",
+  "Entry": "Update_Version",
+  "Value": "5079",
+  "Value_hex": "35303739",
+  "UpdateTime": "2024-04-17 18:52:04",
+  "Common_decoded": [
+   "utf8",
+   "更新版本号"
+  ],
+  "Common_hex": "E69BB4E696B0E78988E69CACE58FB7",
+  "value_type": "text",
+  "common_type": "text"
+ },
+ {
+  "Section": "UpdatePop",
+  "Entry": "Skip",
+  "Value": "0",
+  "Value_hex": "30",
+  "UpdateTime": "2024-04-17 18:52:04",
+  "Common_decoded": [
+   "utf8",
+   "是否跳过更新提示, 0-不跳过, 1-跳过"
+  ],
+  "Common_hex": "E698AFE590A6E8B7B3E8BF87E69BB4E696B0E68F90E7A4BA2C20302DE4B88DE8B7B3E8BF872C20312DE8B7B3E8BF87",
+  "value_type": "text",
+  "common_type": "text"
+ },
+ {
+  "Section": "System",
+  "Entry": "EnvType",
+  "Value": "1",
+  "Value_hex": "31",
+  "UpdateTime": "2024-04-17 18:52:04",
+  "Common_decoded": [
+   "utf8",
+   "1-正式, 2-灰度, 3-测试"
+  ],
+  "Common_hex": "312DE6ADA3E5BC8F2C20322DE781B0E5BAA62C20332DE6B58BE8AF95",
+  "value_type": "text",
+  "common_type": "text"
+ },
+ {
+  "Section": "System",
+  "Entry": "TestVersion",
+  "Value": "0",
+  "Value_hex": "30",
+  "UpdateTime": "2024-04-24 10:12:07",
+  "Common_decoded": [
+   "utf8",
+   "测试版本号"
+  ],
+  "Common_hex": "E6B58BE8AF95E78988E69CACE58FB7",
+  "value_type": "text",
+  "common_type": "text"
+ },
+ {
+  "Section": "System",
+  "Entry": "Port",
+  "Value": "",
+  "Value_hex": "",
+  "UpdateTime": "2024-04-24 10:12:07",
+  "Common_decoded": [
+   "utf8",
+   "主链接端口号，默认空"
+  ],
+  "Common_hex": "E4B8BBE993BEE68EA5E7ABAFE58FA3E58FB7EFBC8CE9BB98E8AEA4E7A9BA",
+  "value_type": "text",
+  "common_type": "text"
+ },
+ {
+  "Section": "UpdateLoginInfo",
+  "Entry": "LoginInfo",
+  "Value": "xxx",
+  "Value_hex": "787878",
+  "UpdateTime": null,
+  "Common_decoded": [
+   "utf8",
+   ""
+  ],
+  "Common_hex": "",
+  "value_type": "text",
+  "common_type": "null"
+ }
+]
