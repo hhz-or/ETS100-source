@@ -1,0 +1,609 @@
+{
+ "requests": [
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/index.html",
+   "method": "GET",
+   "headers": {
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/index-e7d07c24.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "Origin": "https://statics.ets100.com",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/style-8ef050ba.css",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/images/SplashScreen.png",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/page/refreshPage.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/stic/appcontroller.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/stic/shellhelper.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/page/splashScreen.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/stic/sqlitepln.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/clientDB.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/stic/filehelper.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/stic/sevenzip.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/stic/sndhelper.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/stic/httphelper.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/stic/sysconfig.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/stic/etshelper.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/crypto-js.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/plugins/gt4.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/images/Icon_Top_Tool_Close_Normal.png",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "http://file.fei.ets100.com/network_test",
+   "method": "HEAD",
+   "headers": {
+    "Cache-Control": "no-cache",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Referer": ""
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/Review-e42fdf34.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "",
+    "Origin": "https://statics.ets100.com",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/pagination-65e54f4b.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "",
+    "Origin": "https://statics.ets100.com",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/TabNav-e16d9dac.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "",
+    "Origin": "https://statics.ets100.com",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/ReviewItem-54645e8a.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "",
+    "Origin": "https://statics.ets100.com",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/StarBar-0afdb577.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "",
+    "Origin": "https://statics.ets100.com",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/rate-4ed993c7.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "",
+    "Origin": "https://statics.ets100.com",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/useResLock-e89468c2.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "",
+    "Origin": "https://statics.ets100.com",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/home_img_tx-1961ee87.png",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/icon_blank-24247279.png",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/index.html?tdt=1793970963",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://api.ets100.com/m/mistake/summary",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Accept": "application/json, text/plain, */*",
+    "Referer": "https://statics.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Content-Type": "application/json"
+   }
+  },
+  {
+   "url": "https://statics.ets100.com/ets-student-pc-web/assets/Icon_Loading-7f9de1fc.gif",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://statics.ets100.com/ets-student-pc-web/assets/style-8ef050ba.css",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://api.ets100.com/m/mistake/list",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Accept": "application/json, text/plain, */*",
+    "Referer": "https://statics.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Content-Type": "application/json"
+   }
+  },
+  {
+   "url": "http://teacher.ets100.com/dist/pc-entity.html",
+   "method": "GET",
+   "headers": {
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://teacher.ets100.com/dist/pc-entity.html",
+   "method": "GET",
+   "headers": {
+    "Upgrade-Insecure-Requests": "1",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/css/pc-entity-6ae4467008.css",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/plugin/opencc/full.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/js/convertLanguage-42acef0b57.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/plugin/jquery.min.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/plugin/vue-1.min.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/plugin/bluebird.min.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/js/pc-entity-206fe5136d.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/plugin/lodash.min.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/plugin/collect-rangers-v5.2.6.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/js/tracking-init-c008c992de.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://static.ets100.com/teacherend/dist/js/default-c2034ffd72.js",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://teacher.ets100.com/system/config",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+    "Referer": "https://teacher.ets100.com/dist/pc-entity.html?id=811867",
+    "X-Requested-With": "XMLHttpRequest",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+   }
+  },
+  {
+   "url": "https://teacher.ets100.com/teacher/center",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+    "Referer": "https://teacher.ets100.com/dist/pc-entity.html?id=811867",
+    "X-Requested-With": "XMLHttpRequest",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://teacher.ets100.com/set/entity-struct",
+   "method": "POST",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+    "Referer": "https://teacher.ets100.com/dist/pc-entity.html?id=811867",
+    "X-Requested-With": "XMLHttpRequest",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+   }
+  },
+  {
+   "url": "http://cdn.subject.ets100.com/entity/eb7fa478321a32de0f1b5e87b4ef8810/content2.json",
+   "method": "GET",
+   "headers": {
+    "Accept": "text/plain, */*; q=0.01",
+    "Referer": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "http://cdn.subject.ets100.com/entity/f73bb2dfe7db00095273dc003b7f56ae/content2.json",
+   "method": "GET",
+   "headers": {
+    "Accept": "text/plain, */*; q=0.01",
+    "Referer": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "http://cdn.subject.ets100.com/entity/7fb0539949161e6040cc8f55379732b5/content2.json",
+   "method": "GET",
+   "headers": {
+    "Accept": "text/plain, */*; q=0.01",
+    "Referer": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "http://cdn.subject.ets100.com/entity/f1e85f42911c062210b62328bb94147d/content2.json",
+   "method": "GET",
+   "headers": {
+    "Accept": "text/plain, */*; q=0.01",
+    "Referer": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "http://cdn.subject.ets100.com/entity/8943ce9d65a81a432a9613d43a69c97c/content2.json",
+   "method": "GET",
+   "headers": {
+    "Accept": "text/plain, */*; q=0.01",
+    "Referer": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "http://cdn.subject.ets100.com/entity/0729fb93c5da69ae6508aaf107c98b97/content2.json",
+   "method": "GET",
+   "headers": {
+    "Accept": "text/plain, */*; q=0.01",
+    "Referer": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "http://cdn.subject.ets100.com/entity/d320d0eb69fb3f7f0ae10ee954c2db84/content2.json",
+   "method": "GET",
+   "headers": {
+    "Accept": "text/plain, */*; q=0.01",
+    "Referer": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "http://cdn.subject.ets100.com/entity/b5e013c85d77f6f1f27c689dd95d46c0/content2.json",
+   "method": "GET",
+   "headers": {
+    "Accept": "text/plain, */*; q=0.01",
+    "Referer": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://cdn.subject.ets100.com/entity/f73bb2dfe7db00095273dc003b7f56ae/material/content.jpg",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "http://cdn.subject.ets100.com/entity/c868f0dab70da870d9906b381fe8771d/content2.json",
+   "method": "GET",
+   "headers": {
+    "Accept": "text/plain, */*; q=0.01",
+    "Referer": "",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://cdn.subject.ets100.com/entity/f1e85f42911c062210b62328bb94147d/material/content.jpg",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  },
+  {
+   "url": "https://cdn.subject.ets100.com/entity/c868f0dab70da870d9906b381fe8771d/material/content.jpg",
+   "method": "GET",
+   "headers": {
+    "sec-ch-ua": "\"Chromium\";v=\"91\"",
+    "Referer": "https://teacher.ets100.com/",
+    "sec-ch-ua-mobile": "?0",
+    "User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+   }
+  }
+ ]
+}

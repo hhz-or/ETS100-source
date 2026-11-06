@@ -197,3 +197,19 @@ CDP 返回 `Chrome/91.0.4472.124`、协议 1.3，与 `libcef.dll` 版本一致�
 
 - 探针仅调用只读 action；唯一写操作是 `setvolume`（系统音量 70→50），已立即 `setvolume(70)` 还原。
 - 未写文件、未发起业务写请求、未修改页面状态。
+
+### 10.5 运行时 HTTP 头（观察）
+
+对 `api.ets100.com` 的业务 POST 请求，CDP 捕获到的请求头只有：
+
+```
+Content-Type: application/json
+Accept: application/json, text/plain, */*
+User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) ... Chrome/91.0.4472.124
+Referer: https://statics.ets100.com/
+sec-ch-ua / sec-ch-ua-mobile
+```
+
+- **没有 `Authorization`、没有自定义鉴权头**：登录态 token 放在请求体 `params.token` 内（与 `03_api_protocol.md` 的信封一致），并由 `head.sign` 保护完整性。
+- GET 直连请求（`/point-service/account/trail`）把 `token` 放在 URL query 中。
+- 未捕获到 `ws://127.0.0.1:40001` 的 WebSocket 帧事件（CEF 91 的 CDP Network 域未上报该本地 WS；不影响结论，帧格式已由 `mq_server/main.js` 明文确定）。
