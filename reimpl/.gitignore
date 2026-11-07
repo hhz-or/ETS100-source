@@ -1,0 +1,6 @@
+# 运行期状态（token / 资源包缓存 / 日志 / 临时截图）
+.state/
+# Python
+__pycache__/
+*.pyc
+*.pyo
