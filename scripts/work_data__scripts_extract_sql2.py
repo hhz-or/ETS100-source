@@ -1,5 +1,5 @@
 import re
-p=r"D:\ets-rea\ETS\EtsUpdate.exe"
+p=r"ETS\EtsUpdate.exe"
 b=open(p,'rb').read()
 # find UTF-8/GBK strings containing CREATE TABLE
 css=[m.start() for m in re.finditer(rb"CREATE TABLE", b)]

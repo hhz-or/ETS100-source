@@ -1,6 +1,6 @@
 import re, base64, os
 
-root = r"D:\ets-rea\work\frontend\bundles"
+root = r"data/frontend\bundles"
 p = os.path.join(root, "001_statics.ets100.com__ets-student-pc-web__assets__index-dc0257dd.js")
 b = open(p, "rb").read()
 

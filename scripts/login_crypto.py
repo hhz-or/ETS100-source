@@ -1,6 +1,6 @@
 import re, os, glob
 
-root = r"D:\ets-rea\work\frontend\bundles"
+root = r"data/frontend\bundles"
 cands = glob.glob(os.path.join(root, "*Login-*.js")) + glob.glob(os.path.join(root, "*ECardLogin*.js"))
 print("files:", [os.path.basename(c) for c in cands])
 for p in cands:

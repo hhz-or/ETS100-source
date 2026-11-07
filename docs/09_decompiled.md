@@ -1,8 +1,13 @@
 # 09 原生反编译摘录与解读（Ghidra 12.1.4）
 
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **工具链**：Ghidra 12.1.4 + JDK 21+；反编译产物（`decompiled.c` 等）未随仓库发布，如需复跑见文末 §7。
+
 > 目的：把"原生层到底做了什么"从汇编级证据落到可读结论。
-> 工具：Ghidra 12.1.4（headless `analyzeHeadless`）+ JDK 21+；脚本 `work/ghidra_scripts/DumpDecomp.java`（导出 `decompiled.c` / `functions.tsv` / `strings.tsv`）。
-> 产物：`work/ghidra_out/<binary>/`。
+> 工具：Ghidra 12.1.4（headless `analyzeHeadless`）+ JDK 21+；导出脚本（未随仓库发布）输出 `decompiled.c` / `functions.tsv` / `strings.tsv`。
+> 产物：各二进制的 `decompiled.c` / `functions.tsv` / `strings.tsv`（反编译产物未随仓库发布）。
 > 说明：反编译输出不是原始源码；函数名多为 `FUN_xxxx`，变量名为反编译器生成。结论均标注【观察】/【推断】。
 
 ---
@@ -11,20 +16,20 @@
 
 | 二进制 | 规模 | 函数数（反编译数） | 产物 |
 |---|---|---|---|
-| `plugins\etshelper\etshelper.pln` | 497 KB | 2,669（1,801） | `work/ghidra_out/etshelper.pln/` |
-| `plugins\appcontroller\appcontroller.pln` | 552 KB | 2,862（2,030） | `work/ghidra_out/appcontroller.pln/` |
-| `plugins\filehelper\filehelper.pln` | 674 KB | 4,071（2,738） | `work/ghidra_out/filehelper.pln/` |
-| `plugins\window_control\window_control.pln` | 437 KB | 2,489（1,630） | `work/ghidra_out/window_control.pln/` |
-| `plugins\sqlitepln\sqlitepln.pln` | 345 KB | 2,078（1,196） | `work/ghidra_out/sqlitepln.pln/` |
-| `plugins\sevenzip\sevenzip.pln` | 467 KB | 3,243（1,890） | `work/ghidra_out/sevenzip.pln/` |
-| `plugins\shellhelper\shellhelper.pln` | 2.12 MB | 12,320（8,279） | `work/ghidra_out/shellhelper.pln/` |
-| `ETSShell.exe` | 2.19 MB | **9,109（5,966）** | `work/ghidra_out/ETSShell.exe/`（`decompiled.c` 7.3 MB） |
-| `EtsUpdate.exe` | 1.98 MB | **9,646（7,611）** | `work/ghidra_out/EtsUpdate.exe/`（`decompiled.c` 8.7 MB） |
+| `plugins\etshelper\etshelper.pln` | 497 KB | 2,669（1,801） | `（反编译产物未随仓库发布）` |
+| `plugins\appcontroller\appcontroller.pln` | 552 KB | 2,862（2,030） | `（反编译产物未随仓库发布）` |
+| `plugins\filehelper\filehelper.pln` | 674 KB | 4,071（2,738） | `（反编译产物未随仓库发布）` |
+| `plugins\window_control\window_control.pln` | 437 KB | 2,489（1,630） | `（反编译产物未随仓库发布）` |
+| `plugins\sqlitepln\sqlitepln.pln` | 345 KB | 2,078（1,196） | `（反编译产物未随仓库发布）` |
+| `plugins\sevenzip\sevenzip.pln` | 467 KB | 3,243（1,890） | `（反编译产物未随仓库发布）` |
+| `plugins\shellhelper\shellhelper.pln` | 2.12 MB | 12,320（8,279） | `（反编译产物未随仓库发布）` |
+| `ETSShell.exe` | 2.19 MB | **9,109（5,966）** | `（反编译产物未随仓库发布）`（`decompiled.c` 7.3 MB） |
+| `EtsUpdate.exe` | 1.98 MB | **9,646（7,611）** | `（反编译产物未随仓库发布）`（`decompiled.c` 8.7 MB） |
 
 > 合计 **9 个二进制、48,487 个函数、31,141 个函数已反编译**（约 41 MB C 伪代码）。
-> 未反编译：`httphelper.pln`（1.73 MB，OpenSSL 静态库占大头，结论已由导入表/字符串/日志覆盖）、`soundhelper.pln`（3.18 MB）、`Ets.exe`、`bugreport.exe`——Ghidra 工具链为临时安装，交付时已清理，如需补全可按 §7 复跑。
+> 未反编译：`httphelper.pln`（1.73 MB，OpenSSL 静态库占大头，结论已由导入表/字符串/日志覆盖）、`soundhelper.pln`（3.18 MB）、`Ets.exe`、`bugreport.exe`——Ghidra 工具链未随仓库发布；如需补全可按 §7 复跑。
 
-统一编译特征：32 位 MSVC（VS2012/2015 运行库混用）、`/GS` 栈保护（`__security_check_cookie`）、异常处理 `__CxxThrowException`、STL/MFC、无壳；字符串里保留完整源码路径（`D:\code\STIC\stic-misc\stic-pro_ets\...`）。
+统一编译特征：32 位 MSVC（VS2012/2015 运行库混用）、`/GS` 栈保护（`__security_check_cookie`）、异常处理 `__CxxThrowException`、STL/MFC、无壳；字符串里保留完整源码路径（`<BUILD_ROOT>\STIC\stic-misc\stic-pro_ets\...`）。
 
 ---
 
@@ -118,7 +123,7 @@ PlnUnInitialize
 
 ## 5. `ETSShell.exe` —— 壳与 CEF 框架
 
-> 反编译产物：`work/ghidra_out/ETSShell.exe/`（约 1.1 万函数级，见 `functions.tsv`）。
+> 反编译产物：`（反编译产物未随仓库发布）`（约 1.1 万函数级，见 `functions.tsv`）。
 
 【观察】关键字符串/符号：
 
@@ -134,9 +139,9 @@ PlnUnInitialize
 | `shell_upgrade.cpp` / `UpdateProduct` | 壳自升级 |
 | `shell.ini` 的 `FullScreen/WindowMaximize/LogLevel/DisableGPU/...` | 壳配置 |
 
-调试路径 `D:\code\STIC\stic-pro_ets\_bin\ETSShell.pdb` 说明该二进制是内部构建产物。
+调试路径 `<BUILD_ROOT>\STIC\stic-pro_ets\_bin\ETSShell.pdb` 说明该二进制是内部构建产物。
 
-### 5.1 插件装载器【观察】（native-analyst 独立反汇编交叉验证）
+### 5.1 插件装载器【观察】（独立反汇编交叉验证）
 
 `StiCorePlnManager` 对每个 `.pln`：
 
@@ -152,7 +157,7 @@ GetProcAddress(h, "PlnOnProcessMessage")
 
 ### 5.2 注入 renderer 的 JS 桥【观察】
 
-壳向每个页面注入 V8 扩展（`work/native/ETSShell/js_bridge_full.js`，17 个 `native function`）：
+壳向每个页面注入 V8 扩展（`壳注入 JS 桥全文（未随仓库发布）`，17 个 `native function`）：
 
 ```
 sendMessage / setMessageCallback / openFile / openFileCallback / removeMessageCallback
@@ -161,7 +166,7 @@ setRpkPwd / setCpkPwd / setRpkInfo / setRpkInfoList / releaseAllDb3
 setZoomLevel / getZoomLevel / setProxy
 ```
 
-与 `work/lead/shell_bridge_prelude.js`（从 ETSShell 字符串直接提取的 2130 字节）一致。
+与 `壳内嵌 JS 前导提取件（未随仓库发布）`（从 ETSShell 字符串直接提取的 2130 字节）一致。
 
 ### 5.3 安全观察【观察】
 
@@ -185,13 +190,13 @@ setZoomLevel / getZoomLevel / setProxy
 
 > 摘要：**插件机制 = 动态库 + 3 个固定导出 + 宿主回调注入**；schema 与 CEF 开关都可在反编译中直接定位，进一步佐证 `02_architecture.md`/`07_shell_update.md` 的结论。
 
-（ETSShell 函数级解读以 `work/ghidra_out/ETSShell.exe/decompiled.c` 为准；本报告只摘关键结论。）
+（ETSShell 函数级解读以反编译产物 `decompiled.c` 为准，该文件未随仓库发布；本报告只摘关键结论。）
 
 ---
 
 ## 6. `EtsUpdate.exe` —— 更新器
 
-【观察 + 已验证】`EtsUpdate.exe` 反编译产物 `work/ghidra_out/EtsUpdate.exe/`（9,646 函数 / 7,611 已反编译，`decompiled.c` 9.15 MB）。
+【观察 + 已验证】`EtsUpdate.exe` 反编译产物 `（反编译产物未随仓库发布）`（9,646 函数 / 7,611 已反编译，`decompiled.c` 9.15 MB）。
 
 关键函数 `FUN_0042f070`（签名上下文初始化）：
 
@@ -214,7 +219,7 @@ sign = MD5( "grlx" + time_seconds + base64(JSON body) + "555ffbe95ccf4e9535a1101
 - 入口 `main.cpp`（duilib UI）→ `WndUpdateFrame::发送更新请求` → `update_info.h` 构造 `head{version,sign,pid:"grlx",time}` + `body=Base64([{r:"client/mobile-update",params}])`
 - 响应 `[{code,msg,body{client_version,update[]}}]`，本地版本取自 `ETS.db.Update_Version`，相等即"不需要更新"（退出码 1）
 - 安装面：下载 `%.2f%%` → 备份/复制 → `update.dat` + `/Dir /CVer /UVer /Exe /File /Slient` → `RunOnce\ETS_UPDATE` → `taskkill` → `ExitWindowsEx`
-- 证明：`work/api/update_sign_proof.json`（3 组真实请求全部命中）；脚本 `work/scripts/update_sign_verify.py`
+- 证明：`data/api/update_sign_proof.json`（3 组真实请求全部命中）；脚本 `scripts/update_sign_verify.py`
 
 ---
 
@@ -222,11 +227,13 @@ sign = MD5( "grlx" + time_seconds + base64(JSON body) + "555ffbe95ccf4e9535a1101
 
 ```powershell
 # 反编译任意 PE（Ghidra 12.1.4 + JDK 21+）
-$env:JAVA_HOME="C:\Program Files\Zulu\zulu-25"
-& "<ghidra>\support\analyzeHeadless.bat" <projDir> <projName> `
-   -import "D:\ets-rea\ETS\plugins\xxx\xxx.pln" `
-   -scriptPath "D:\ets-rea\work\ghidra_scripts" `
-   -postScript DumpDecomp.java "D:\ets-rea\work\ghidra_out" -deleteProject
+# 说明：Ghidra 安装目录 <GHIDRA_HOME>、项目目录 <projDir> 由读者自备；
+#       DumpDecomp.java 未随仓库发布，可按本节“输出”描述的三个文件自行实现导出脚本。
+$env:JAVA_HOME="<JDK_HOME>"
+& "<GHIDRA_HOME>\support\analyzeHeadless.bat" <projDir> <projName> `
+   -import "<ETS_INSTALL_DIR>\plugins\xxx\xxx.pln" `
+   -scriptPath "<WORK_DIR>\ghidra_scripts" `
+   -postScript DumpDecomp.java "<WORK_DIR>\ghidra_out" -deleteProject
 ```
 
 输出：
@@ -237,6 +244,6 @@ $env:JAVA_HOME="C:\Program Files\Zulu\zulu-25"
 检索技巧：
 
 ```powershell
-Select-String -Path work\ghidra_out\etshelper.pln\decompiled.c -Pattern 'encode_api|sign_version|key_id'
-Select-String -Path work\ghidra_out\*\strings.tsv -Pattern '\[.*::On[A-Z]'
+Select-String -Path "<WORK_DIR>\ghidra_out\etshelper.pln\decompiled.c" -Pattern 'encode_api|sign_version|key_id'
+Select-String -Path "<WORK_DIR>\ghidra_out\*\strings.tsv" -Pattern '\[.*::On[A-Z]'
 ```

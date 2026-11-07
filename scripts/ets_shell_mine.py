@@ -1,6 +1,6 @@
 import re
 
-p = r"D:\ets-rea\work\ghidra_out\ETSShell.exe\decompiled.c"
+p = r"work/ghidra_out(未发布)\ETSShell.exe\decompiled.c"
 lines = open(p, encoding="utf-8", errors="replace").read().split("\n")
 heads = [(i, l) for i, l in enumerate(lines) if l.startswith("// ====")]
 print("lines", len(lines), "functions", len(heads))
@@ -43,5 +43,5 @@ for h in sorted(targets)[:8]:
     while end < len(lines) and not lines[end].startswith("// ===="):
         end += 1
     out.append("\n".join(lines[start:min(end, start + 260)]))
-open(r"D:\ets-rea\work\lead\ETSShell_loader.txt", "w", encoding="utf-8").write("\n\n".join(out))
+open(r"work/lead(未发布)\ETSShell_loader.txt", "w", encoding="utf-8").write("\n\n".join(out))
 print("wrote ETSShell_loader.txt")

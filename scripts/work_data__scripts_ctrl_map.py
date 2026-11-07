@@ -1,5 +1,5 @@
 import json,collections
-ctrl=json.load(open(r"D:\ets-rea\work\data\extracted\template_686\ctrl.json",encoding="utf-8"))
+ctrl=json.load(open(r"data\extracted\template_686\ctrl.json",encoding="utf-8"))
 c=collections.Counter()
 for e in ctrl:
     for j in e.get("model_pc",{}).get("jsparam",[]):

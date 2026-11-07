@@ -1,11 +1,11 @@
 import os
 hits=[
- (r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\f_000014", b"Pwd"),
- (r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\f_000012", b"pwd"),
- (r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\data_3", b"Pwd"),
- (r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\f_000002", b"Pwd"),
- (r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\f_000002", b"pwd"),
- (r"D:\ets-rea\ETS\temp\Cache_ETSShell\IndexedDB\https_statics.ets100.com_0.indexeddb.leveldb\000090.log", b"pwd"),
+ (r"ETS\temp\Cache_ETSShell\Cache\f_000014", b"Pwd"),
+ (r"ETS\temp\Cache_ETSShell\Cache\f_000012", b"pwd"),
+ (r"ETS\temp\Cache_ETSShell\Cache\data_3", b"Pwd"),
+ (r"ETS\temp\Cache_ETSShell\Cache\f_000002", b"Pwd"),
+ (r"ETS\temp\Cache_ETSShell\Cache\f_000002", b"pwd"),
+ (r"ETS\temp\Cache_ETSShell\IndexedDB\https_statics.ets100.com_0.indexeddb.leveldb\000090.log", b"pwd"),
 ]
 for p,t in hits:
     d=open(p,'rb').read()

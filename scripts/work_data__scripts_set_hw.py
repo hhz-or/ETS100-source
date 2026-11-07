@@ -1,7 +1,7 @@
 import sys,re
-sys.path.insert(0,r"D:\ets-rea\work\data\_scripts")
+sys.path.insert(0,r"data\_scripts")
 import leveldb_reader as L
-db=r"D:\ets-rea\ETS\temp\Cache_ETSShell\IndexedDB\https_statics.ets100.com_0.indexeddb.leveldb"
+db=r"ETS\temp\Cache_ETSShell\IndexedDB\https_statics.ets100.com_0.indexeddb.leveldb"
 m=L.read_db(db)
 pairs=set()
 for k,(seq,typ,v,src) in m.items():

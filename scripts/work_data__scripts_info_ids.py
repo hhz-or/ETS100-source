@@ -1,5 +1,5 @@
 import json,os,collections
-b=r"D:\ets-rea\work\data\extracted\content"
+b=r"data\extracted\content"
 seen={}
 for d in sorted(os.listdir(b)):
     p=os.path.join(b,d,"info.json")

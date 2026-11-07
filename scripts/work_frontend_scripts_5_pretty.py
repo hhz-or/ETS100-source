@@ -1,6 +1,6 @@
 import os,sys,json,re
-sys.path.insert(0,'D:\\ets-rea\\work\\frontend\\scripts')
-OUT=r'D:\ets-rea\work\frontend'; BUND=os.path.join(OUT,'bundles'); PRETTY=os.path.join(OUT,'pretty')
+sys.path.insert(0,'data/frontend\\scripts')
+OUT=r'data/frontend'; BUND=os.path.join(OUT,'bundles'); PRETTY=os.path.join(OUT,'pretty')
 os.makedirs(PRETTY,exist_ok=True)
 def fmt(src):
     out=[]; i=0; n=len(src); prev=''; linemap=[]

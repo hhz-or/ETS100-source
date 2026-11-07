@@ -1,5 +1,5 @@
 import sqlite3, json, os
-p = r"D:\ets-rea\ETS\localdata\ETS.db"
+p = r"ETS\localdata\ETS.db"
 con = sqlite3.connect("file:" + p.replace("\\","/") + "?mode=ro", uri=True)
 cur = con.cursor()
 cur.execute("select Section,Entry,Value,UpdateTime,Common,typeof(Value),typeof(Common),hex(cast(Common as blob)),hex(cast(Value as blob)) from Config")
@@ -16,4 +16,4 @@ for r in cur.fetchall():
     rows.append({"Section":sec,"Entry":ent,"Value":val,"Value_hex":hv,"UpdateTime":ut,
                  "Common_decoded":dec(hc),"Common_hex":hc,"value_type":tv,"common_type":tc})
 print(json.dumps(rows,ensure_ascii=False,indent=1))
-json.dump(rows,open(r"D:\ets-rea\work\data\db\ETS_db_Config_rows.json","w",encoding="utf-8"),ensure_ascii=False,indent=1)
+json.dump(rows,open(r"data\db\ETS_db_Config_rows.json","w",encoding="utf-8"),ensure_ascii=False,indent=1)

@@ -1,5 +1,5 @@
 import os,re,json,glob,collections
-root=r"D:\ets-rea\ETS"
+root=r"ETS"
 for f in glob.glob(os.path.join(root,"logs","*")):
     sz=os.path.getsize(f)
     raw=open(f,"rb").read(400000)

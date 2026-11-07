@@ -1,8 +1,8 @@
 import os, re
 
-root = r"D:\ets-rea\work\frontend\bundles"
+root = r"data/frontend\bundles"
 if not os.path.isdir(root):
-    root = r"D:\ets-rea\work\lead"
+    root = r"work/lead(未发布)"
 kws = [b"encrypt", b"decrypt", b"AES", b"aes", b"crypto", b"CryptoJS", b"RSA", b"privateKey",
        b"publicKey", b"forge", b"sm2", b"sm4", b"encrypted_phone", b"encryptPhone", b"password"]
 hits = {}
@@ -27,7 +27,7 @@ for f, c in sorted(hits.items(), key=lambda x: -sum(x[1].values()))[:20]:
 
 # show contexts for AES / encrypt in the main bundle if present
 mp = None
-for cand in [r"D:\ets-rea\work\frontend\bundles"]:
+for cand in [r"data/frontend\bundles"]:
     for dp, dn, fn in os.walk(cand):
         for f in fn:
             p = os.path.join(dp, f)

@@ -1,6 +1,6 @@
 import os, json, shutil, re
 
-ROOT = r"D:\ets-rea"
+ROOT = r"."
 PUB = os.path.join(ROOT, "publish")
 if os.path.exists(PUB):
     shutil.rmtree(PUB)

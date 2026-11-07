@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import os, json, collections
 
-OUT = r'D:\ets-rea\work\frontend'
-DOC = r'D:\ets-rea\docs\04_frontend.md'
+OUT = r'data/frontend'
+DOC = r'.\docs\04_frontend.md'
 
 man = json.load(open(os.path.join(OUT, 'manifest.json'), encoding='utf-8'))
 routes = json.load(open(os.path.join(OUT, 'routes.json'), encoding='utf-8'))
@@ -75,7 +75,7 @@ distinct_actions = len(set(a['action_key'] for a in acts['actions']))
 
 TEMPLATE = r'''# 04_frontend — ETS（E 听说学生端 PC）前端逆向分析
 
-> 目标：`D:\ets-rea\ETS`（只读）。远程 SPA：`https://statics.ets100.com/ets-student-pc-web/`（Vue3 + ElementPlus，Vite 构建）。
+> 目标：`ETS`（只读）。远程 SPA：`https://statics.ets100.com/ets-student-pc-web/`（Vue3 + ElementPlus，Vite 构建）。
 > 数据来源：CEF/Chromium 磁盘缓存的离线解析（`ETS\temp\Cache_ETSShell\Cache`），**未联网、未执行目标代码**。
 > 产物：`work/frontend/`（bundles / manifest.json / routes.json / action_keys.json / api_endpoints.json / stores.json / pretty / excerpts / scripts）。
 > 分析员：frontend-analyst；任务：task-2。生成时间：2026-11-06。
@@ -111,7 +111,7 @@ TEMPLATE = r'''# 04_frontend — ETS（E 听说学生端 PC）前端逆向分析
 
 ### 1.1 缓存目录结构
 
-`D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\`：
+`ETS\temp\Cache_ETSShell\Cache\`：
 
 | 文件 | 大小 | 含义 |
 |---|---|---|

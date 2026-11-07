@@ -11,7 +11,7 @@ def strings(path, minlen=4):
     out.sort(key=lambda x:x[0])
     return out
 pats = re.compile(r"(?i)password|pwd|7z|zip|extract|unzip|resources|content_|template_|passwd|解压|密码|资源")
-for f in [r"D:\ets-rea\ETS\ETSShell.exe", r"D:\ets-rea\ETS\Ets.exe", r"D:\ets-rea\ETS\EtsUpdate.exe"]:
+for f in [r"ETS\ETSShell.exe", r"ETS\Ets.exe", r"ETS\EtsUpdate.exe"]:
     print("="*30, os.path.basename(f))
     items = strings(f,4)
     print("total strings:", len(items))

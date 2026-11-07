@@ -8,23 +8,23 @@ import sys, os, re, json, hashlib, math, struct, datetime, collections
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'pylib'))
 import pefile
 
-OUT_ROOT = r"D:\ets-rea\work\native"
+OUT_ROOT = r"data/native"
 
 TARGETS = [
-    ("ETSShell",            r"D:\ets-rea\ETS\ETSShell.exe"),
-    ("Ets",                 r"D:\ets-rea\ETS\Ets.exe"),
-    ("EtsUpdate",           r"D:\ets-rea\ETS\EtsUpdate.exe"),
-    ("bugreport",           r"D:\ets-rea\ETS\bugreport\bugreport.exe"),
-    ("ets_mq_server",       r"D:\ets-rea\ETS\mq_server\ets_mq_server.exe"),
-    ("appcontroller",       r"D:\ets-rea\ETS\plugins\appcontroller\appcontroller.pln"),
-    ("etshelper",           r"D:\ets-rea\ETS\plugins\etshelper\etshelper.pln"),
-    ("filehelper",          r"D:\ets-rea\ETS\plugins\filehelper\filehelper.pln"),
-    ("httphelper",          r"D:\ets-rea\ETS\plugins\httphelper\httphelper.pln"),
-    ("sevenzip",            r"D:\ets-rea\ETS\plugins\sevenzip\sevenzip.pln"),
-    ("shellhelper",         r"D:\ets-rea\ETS\plugins\shellhelper\shellhelper.pln"),
-    ("soundhelper",         r"D:\ets-rea\ETS\plugins\soundhelper\soundhelper.pln"),
-    ("sqlitepln",           r"D:\ets-rea\ETS\plugins\sqlitepln\sqlitepln.pln"),
-    ("window_control",      r"D:\ets-rea\ETS\plugins\window_control\window_control.pln"),
+    ("ETSShell",            r"ETS\ETSShell.exe"),
+    ("Ets",                 r"ETS\Ets.exe"),
+    ("EtsUpdate",           r"ETS\EtsUpdate.exe"),
+    ("bugreport",           r"ETS\bugreport\bugreport.exe"),
+    ("ets_mq_server",       r"ETS\mq_server\ets_mq_server.exe"),
+    ("appcontroller",       r"ETS\plugins\appcontroller\appcontroller.pln"),
+    ("etshelper",           r"ETS\plugins\etshelper\etshelper.pln"),
+    ("filehelper",          r"ETS\plugins\filehelper\filehelper.pln"),
+    ("httphelper",          r"ETS\plugins\httphelper\httphelper.pln"),
+    ("sevenzip",            r"ETS\plugins\sevenzip\sevenzip.pln"),
+    ("shellhelper",         r"ETS\plugins\shellhelper\shellhelper.pln"),
+    ("soundhelper",         r"ETS\plugins\soundhelper\soundhelper.pln"),
+    ("sqlitepln",           r"ETS\plugins\sqlitepln\sqlitepln.pln"),
+    ("window_control",      r"ETS\plugins\window_control\window_control.pln"),
 ]
 
 MACHINE = {0x14c: "i386 (x86)", 0x8664: "AMD64", 0x1c0: "ARM", 0xaa64: "ARM64",

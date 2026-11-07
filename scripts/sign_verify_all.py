@@ -5,7 +5,7 @@ KS0 = bytes.fromhex("33353566666265393563636634653935333561313130313730623434356
 assert KS1 == "94cfbda3fbfef02b93693f8bc153be82"
 assert KS0 == "355ffbe95ccf4e9535a110170b445ab8"
 
-recs = json.load(open(r"D:\ets-rea\work\api\sign_samples.json", encoding="utf-8"))
+recs = json.load(open("data/api/sign_samples.json", encoding="utf-8"))
 ok = 0
 bad = []
 for r in recs:
@@ -49,14 +49,14 @@ def sign_v1(body_json_str: str, time_ms_str: str) -> str:
 if __name__ == "__main__":
     import json, sys
     # self-test against captured samples
-    recs = json.load(open(r"D:\\ets-rea\\work\\api\\sign_samples.json", encoding="utf-8"))
+    recs = json.load(open("data/api/sign_samples.json", encoding="utf-8"))
     n = 0
     for r in recs:
         if sign_v2(r["body_json_exact"], r["time"]) == r["sign"].lower():
             n += 1
     print(f"self-test {n}/{len(recs)}")
 '''
-open(r"D:\ets-rea\work\api\ets_sign.py", "w", encoding="utf-8").write(impl)
+open("ets_sign.generated.py", "w", encoding="utf-8").write(impl)
 print("wrote ets_sign.py")
 
 # also produce a compact proof table
@@ -68,5 +68,5 @@ for r in recs[:20]:
         "body_b64": b64, "sign": r["sign"],
         "md5(pcWin+time+b64+KEY)": hashlib.md5(("pcWin" + r["time"] + b64 + KS1).encode()).hexdigest(),
     })
-json.dump(proof, open(r"D:\ets-rea\work\api\sign_proof.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+json.dump(proof, open("sign_proof.generated.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 print("wrote sign_proof.json")

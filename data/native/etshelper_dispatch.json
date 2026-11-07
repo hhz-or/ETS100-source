@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\etshelper\\etshelper.pln",
+ "file": "ETS\\plugins\\etshelper\\etshelper.pln",
  "functions": [
   {
    "rva": "0x00002A70",
@@ -24,7 +24,7 @@
    "strings": [
     "logs\\shell_",
     ".log",
-    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\src\\common\\StiCorePlugin.h",
     "=============================================",
     "========StiCorePlugin.log starting==========="
    ],
@@ -35,7 +35,7 @@
    "va": "0x10005870",
    "insn_count": 378,
    "strings": [
-    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
     "[etshelper::OnInitAction] arguments: ",
     "[etshelper::OnInitAction] etshelper/init error:get id fail.",
     "[etshelper::OnInitAction] etshelper/init success.",
@@ -71,7 +71,7 @@
    "va": "0x10009270",
    "insn_count": 314,
    "strings": [
-    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
     "[etshelper::OnLogData] arguments: ",
     "type",
     "[ETS]"
@@ -89,7 +89,7 @@
    "va": "0x100096F0",
    "insn_count": 402,
    "strings": [
-    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
     "[etshelper::OnVideoMerge] invalid arguments: ",
     "[etshelper::OnVideoMerge] GenerateMergeCommand fail ",
     "[etshelper::OnVideoMerge] copy erasure video file fail ",
@@ -133,7 +133,7 @@
    "va": "0x10009E60",
    "insn_count": 375,
    "strings": [
-    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
     "[etshelper::OnEncodeAPIResp] invalid arguments.",
     "response",
     "[etshelper::OnEncodeAPIResp] invalid params: response",
@@ -175,7 +175,7 @@
    "va": "0x1000A410",
    "insn_count": 400,
    "strings": [
-    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
     "[etshelper::OnEncodeAPIBody] invalid json format.",
     "time",
     "body",
@@ -223,7 +223,7 @@
    "va": "0x1000AA70",
    "insn_count": 634,
    "strings": [
-    "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
+    "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp",
     "[etshelper::PlnOnProcessMessage] action->",
     "init",
     "dub_merge",
@@ -402,7 +402,7 @@
   "string_refs": [
    {
     "va": "0x10067AD8",
-    "string": "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp"
+    "string": "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\src\\plugins\\etshelper\\etshelper.cpp"
    },
    {
     "va": "0x100684C8",

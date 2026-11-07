@@ -1,6 +1,6 @@
 import os, re
 
-docs = r"D:\ets-rea\docs"
+docs = r".\docs"
 bad = []
 for f in sorted(os.listdir(docs)):
     if not f.endswith(".md"):
@@ -18,7 +18,7 @@ for f in sorted(os.listdir(docs)):
         cand = os.path.normpath(os.path.join(docs, target))
         if not os.path.exists(cand):
             # maybe relative to repo root
-            cand2 = os.path.normpath(os.path.join(r"D:\ets-rea", target))
+            cand2 = os.path.normpath(os.path.join(r".", target))
             if not os.path.exists(cand2):
                 bad.append((f, link))
 print("broken links:", len(bad))

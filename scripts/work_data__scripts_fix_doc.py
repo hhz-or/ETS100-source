@@ -1,4 +1,4 @@
-p=r"D:\ets-rea\docs\06_data.md"
+p=r".\docs\06_data.md"
 s=open(p,encoding="utf-8").read()
 fixes=[
 ("| `sb`/`os` | utf-8 | 8 | `Windows`（OS 类型） | |","| `os` | utf-8 | 8 | `Windows`（OS 类型） | |"),

@@ -1,7 +1,7 @@
 [
  {
   "name": "ETSShell",
-  "file": "D:\\ets-rea\\ETS\\ETSShell.exe",
+  "file": "ETS\\ETSShell.exe",
   "size": 2297440,
   "machine": "i386 (x86)",
   "is_dll": false,
@@ -23,7 +23,7 @@
    "sqlite3.dll",
    "ole32.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_ets\\_bin\\ETSShell.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_ets\\_bin\\ETSShell.pdb",
   "rtti": 166,
   "actions": 129,
   "strings_total": 6422,
@@ -31,7 +31,7 @@
  },
  {
   "name": "Ets",
-  "file": "D:\\ets-rea\\ETS\\Ets.exe",
+  "file": "ETS\\Ets.exe",
   "size": 485824,
   "machine": "i386 (x86)",
   "is_dll": false,
@@ -47,7 +47,7 @@
    "SHELL32.dll",
    "SHLWAPI.dll"
   ],
-  "pdb": "D:\\code\\STIC\\preshell_2\\Release\\preshell.pdb",
+  "pdb": "<BUILD_ROOT>\\preshell_2\\Release\\preshell.pdb",
   "rtti": 35,
   "actions": 1,
   "strings_total": 924,
@@ -55,7 +55,7 @@
  },
  {
   "name": "EtsUpdate",
-  "file": "D:\\ets-rea\\ETS\\EtsUpdate.exe",
+  "file": "ETS\\EtsUpdate.exe",
   "size": 2079784,
   "machine": "i386 (x86)",
   "is_dll": false,
@@ -86,7 +86,7 @@
  },
  {
   "name": "bugreport",
-  "file": "D:\\ets-rea\\ETS\\bugreport\\bugreport.exe",
+  "file": "ETS\\bugreport\\bugreport.exe",
   "size": 3614240,
   "machine": "i386 (x86)",
   "is_dll": false,
@@ -116,7 +116,7 @@
    "OLEACC.dll",
    "WINMM.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_ets\\src\\third_party\\bugreport\\build\\Release\\bugreport.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_ets\\src\\third_party\\bugreport\\build\\Release\\bugreport.pdb",
   "rtti": 623,
   "actions": 20,
   "strings_total": 9247,
@@ -124,7 +124,7 @@
  },
  {
   "name": "ets_mq_server",
-  "file": "D:\\ets-rea\\ETS\\mq_server\\ets_mq_server.exe",
+  "file": "ETS\\mq_server\\ets_mq_server.exe",
   "size": 12080168,
   "machine": "i386 (x86)",
   "is_dll": false,
@@ -151,7 +151,7 @@
  },
  {
   "name": "appcontroller",
-  "file": "D:\\ets-rea\\ETS\\plugins\\appcontroller\\appcontroller.pln",
+  "file": "ETS\\plugins\\appcontroller\\appcontroller.pln",
   "size": 552448,
   "machine": "i386 (x86)",
   "is_dll": true,
@@ -168,7 +168,7 @@
    "SHLWAPI.dll",
    "WINMM.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_ets\\build\\Release\\plugins\\appcontroller\\appcontroller.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_ets\\build\\Release\\plugins\\appcontroller\\appcontroller.pdb",
   "rtti": 90,
   "actions": 10,
   "strings_total": 1310,
@@ -176,7 +176,7 @@
  },
  {
   "name": "etshelper",
-  "file": "D:\\ets-rea\\ETS\\plugins\\etshelper\\etshelper.pln",
+  "file": "ETS\\plugins\\etshelper\\etshelper.pln",
   "size": 497664,
   "machine": "i386 (x86)",
   "is_dll": true,
@@ -192,7 +192,7 @@
    "sqlite3.dll",
    "WINMM.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\build\\Release\\plugins\\etshelper\\etshelper.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\build\\Release\\plugins\\etshelper\\etshelper.pdb",
   "rtti": 98,
   "actions": 32,
   "strings_total": 1364,
@@ -200,7 +200,7 @@
  },
  {
   "name": "filehelper",
-  "file": "D:\\ets-rea\\ETS\\plugins\\filehelper\\filehelper.pln",
+  "file": "ETS\\plugins\\filehelper\\filehelper.pln",
   "size": 674304,
   "machine": "i386 (x86)",
   "is_dll": true,
@@ -218,7 +218,7 @@
    "WINMM.dll",
    "sqlite3.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\filehelper\\filehelper.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\filehelper\\filehelper.pdb",
   "rtti": 112,
   "actions": 24,
   "strings_total": 1520,
@@ -226,7 +226,7 @@
  },
  {
   "name": "httphelper",
-  "file": "D:\\ets-rea\\ETS\\plugins\\httphelper\\httphelper.pln",
+  "file": "ETS\\plugins\\httphelper\\httphelper.pln",
   "size": 1730560,
   "machine": "i386 (x86)",
   "is_dll": true,
@@ -246,7 +246,7 @@
    "IPHLPAPI.DLL",
    "WINMM.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\lib\\httphelper.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\lib\\httphelper.pdb",
   "rtti": 50,
   "actions": 65,
   "strings_total": 9225,
@@ -254,7 +254,7 @@
  },
  {
   "name": "sevenzip",
-  "file": "D:\\ets-rea\\ETS\\plugins\\sevenzip\\sevenzip.pln",
+  "file": "ETS\\plugins\\sevenzip\\sevenzip.pln",
   "size": 467456,
   "machine": "i386 (x86)",
   "is_dll": true,
@@ -271,7 +271,7 @@
    "WINMM.dll",
    "OLEAUT32.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\sevenzip\\sevenzip.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\sevenzip\\sevenzip.pdb",
   "rtti": 133,
   "actions": 0,
   "strings_total": 1445,
@@ -279,7 +279,7 @@
  },
  {
   "name": "shellhelper",
-  "file": "D:\\ets-rea\\ETS\\plugins\\shellhelper\\shellhelper.pln",
+  "file": "ETS\\plugins\\shellhelper\\shellhelper.pln",
   "size": 2117632,
   "machine": "i386 (x86)",
   "is_dll": true,
@@ -309,7 +309,7 @@
    "COMDLG32.dll",
    "OLEAUT32.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\shellhelper\\shellhelper.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\shellhelper\\shellhelper.pdb",
   "rtti": 464,
   "actions": 11,
   "strings_total": 4857,
@@ -317,7 +317,7 @@
  },
  {
   "name": "soundhelper",
-  "file": "D:\\ets-rea\\ETS\\plugins\\soundhelper\\soundhelper.pln",
+  "file": "ETS\\plugins\\soundhelper\\soundhelper.pln",
   "size": 3175936,
   "machine": "i386 (x86)",
   "is_dll": true,
@@ -337,7 +337,7 @@
    "ole32.dll",
    "SHLWAPI.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\soundhelper\\soundhelper.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\soundhelper\\soundhelper.pdb",
   "rtti": 173,
   "actions": 128,
   "strings_total": 5348,
@@ -345,7 +345,7 @@
  },
  {
   "name": "sqlitepln",
-  "file": "D:\\ets-rea\\ETS\\plugins\\sqlitepln\\sqlitepln.pln",
+  "file": "ETS\\plugins\\sqlitepln\\sqlitepln.pln",
   "size": 345088,
   "machine": "i386 (x86)",
   "is_dll": true,
@@ -360,7 +360,7 @@
    "SHELL32.dll",
    "WINMM.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\lib\\sqlitepln.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\lib\\sqlitepln.pdb",
   "rtti": 45,
   "actions": 17,
   "strings_total": 996,
@@ -368,7 +368,7 @@
  },
  {
   "name": "window_control",
-  "file": "D:\\ets-rea\\ETS\\plugins\\window_control\\window_control.pln",
+  "file": "ETS\\plugins\\window_control\\window_control.pln",
   "size": 436736,
   "machine": "i386 (x86)",
   "is_dll": true,
@@ -384,7 +384,7 @@
    "SHLWAPI.dll",
    "WINMM.dll"
   ],
-  "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\window_control\\window_control.pdb",
+  "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\window_control\\window_control.pdb",
   "rtti": 88,
   "actions": 1,
   "strings_total": 1127,

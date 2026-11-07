@@ -1,6 +1,11 @@
 # E听说 PC 学生端 · 07 壳层 / 更新 / 音频转码链
 
-> 目标目录：`D:\ets-rea\ETS`（只读，未做任何修改）。分析日期：2026-11-06。
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **相关产物**：壳层时间线/更新日志解析（未随仓库发布）；结论依据的原始日志来自 `<ETS_INSTALL_DIR>` 的只读副本。
+
+> 目标目录：`<ETS_INSTALL_DIR>`（只读，未做任何修改）。分析日期：2026-11-06。
 > 本文只覆盖**壳层与周边组件**：启动链、进程模型、`shell.ini`、`stic://` 自定义协议、窗口控制桥、更新链路、崩溃上报、缓存清理、音频转码链。
 > 证据等级沿用总览约定：**【观察】**=文件字节/日志原文/工具输出；**【推断】**=由观察推理，附推理链；**【未知】**=证据不足，汇总在 §11。
 > PII 已脱敏：用户名、手机号、账号、JWT、机器名、GUID 中的账号相关值均以 `<user>`/`<redacted>` 代替。
@@ -11,7 +16,7 @@
 
 1. **启动链是两段式**：`Ets.exe`（485,824 B，PDB 显示 `preshell`）读取 `shell.ini`，用 `ShellExecuteExW` 拉起 `shell.ini` 里 `AppName=ETSShell.exe`；`ETSShell.exe`（2,297,440 B，STIC V3.0.76）初始化 CEF 91 并创建主窗口。**【观察 + 推断】**
 2. **进程模型是标准 CEF 多进程**：1 个 browser 主进程（`processName` 为空）+ `--type=gpu-process` + 2×`--type=utility` + 1~3×`--type=renderer`；另有 Node.js SEA 进程 `ets_mq_server.exe`（12,080,168 B）作为 WebSocket 广播总线（端口 40001，`packages\app.json`）。**【观察】**
-3. **外壳自己有一套自定义协议 `stic://`**，注册了 4 个 host：`shell.iflytek.com`、`file.iflytek.com`、`rpk.iflytek.com`、`cpk.iflytek.com`；`file.iflytek.com` 的 URL 直接映射到本机绝对路径（`stic://file.iflytek.com/C:\Users\<user>\AppData\Roaming\ETS\<set>\...`）。**【观察】**
+3. **外壳自己有一套自定义协议 `stic://`**，注册了 4 个 host：`shell.iflytek.com`、`file.iflytek.com`、`rpk.iflytek.com`、`cpk.iflytek.com`；`file.iflytek.com` 的 URL 直接映射到本地绝对路径（`stic://file.iflytek.com/<APPDATA_ETS>\<set>\...`）。**【观察】**
 4. **窗口控制是「JS 桥 + 原生插件」**：`packages\default\appcontroller.js` 定义 14 个 action（`init/close/maximize/minimize/restore/move/fullscreen/reduction/hide/show/get_win_pos/set_win_pos/startapp/idg_exist`），经 `cef.message.sendMessage(<callbackId>, 'appcontroller', <action>, <json>)` 调用原生 `appcontroller.pln`；`win_x/win_y = -1` 表示居中。**【观察】**
 5. **更新器是独立 EXE**：`EtsUpdate.exe`（根目录与 `temp\EtsUpdate.exe` **同 hash**），用 glog 写 `temp\update\log\INFO_uLOG_<date-time>.<pid>`；请求 `client/mobile-update`（`http://api.ets100.com`），比较 `Update_Version`（整数 5079）与服务器 `client_version`，相等即「不需要更新」并以**退出码 1** 退出。下载/安装/回滚/重启的能力面由字符串与 PE 导入完整还原（§6）。**【观察 + 推断】**
 6. **音频链是「原生录音 → mp3 + speex + 评测 xml → OSS 上传」**：`soundhelper.pln` 录音产出 `soundfiles\public_<32hex>_<epochms>.mp3` + 同名 `.mp3.spx` + 同名 `.xml`（iFlytek ISE 评测结果），三个文件都上传到 `https://ets60.oss-cn-hangzhou.aliyuncs.com`。系统另带 `lame.exe`（LAME 3.100）、`ffmpeg\ffmpeg.exe`（libavformat 58.42.101 ≈ FFmpeg 4.2.x）与 `process_ori.bat` 视频混音脚本、`7z.dll` + 7-Zip 解压链。**【观察 + 推断】**
@@ -24,8 +29,8 @@
 
 | 层 | 程序 | 关键证据 | 作用 |
 |---|---|---|---|
-| L0 | `Ets.exe` | `preshell.pdb`（`D:\code\STIC\preshell_2\Release\preshell.pdb`）、字符串 `.\shell.ini`、`ShellConfig`、`AppName`、`shell.exe`、`--shell-app-`、导入 `ShellExecuteExW` / `GetCommandLineW` / `ShellExecuteExW` | 读 `shell.ini` → 取 `[ShellConfig] AppName` → 拉起壳程序 |
-| L1 | `ETSShell.exe` | 字符串 `ETSShell.exe`、`D:\code\STIC\stic-pro_ets\_bin\ETSShell.pdb`、`shell::main`、`shell.cpp` 日志、`cef_initialize` / `cef_execute_process` / `cef_register_scheme_handler_factory` | STIC 壳：CEF 初始化、窗口/托盘、插件加载、JS 桥、日志、更新检查 |
+| L0 | `Ets.exe` | `preshell.pdb`（`<BUILD_ROOT>\STIC\preshell_2\Release\preshell.pdb`）、字符串 `.\shell.ini`、`ShellConfig`、`AppName`、`shell.exe`、`--shell-app-`、导入 `ShellExecuteExW` / `GetCommandLineW` / `ShellExecuteExW` | 读 `shell.ini` → 取 `[ShellConfig] AppName` → 拉起壳程序 |
+| L1 | `ETSShell.exe` | 字符串 `ETSShell.exe`、`<BUILD_ROOT>\STIC\stic-pro_ets\_bin\ETSShell.pdb`、`shell::main`、`shell.cpp` 日志、`cef_initialize` / `cef_execute_process` / `cef_register_scheme_handler_factory` | STIC 壳：CEF 初始化、窗口/托盘、插件加载、JS 桥、日志、更新检查 |
 | L2 | CEF 子进程 | `shell.cpp(56)` 的 `processName`：`--type=gpu-process`、`--type=utility`、`--type=renderer`；`--type=` 字符串 | GPU / 网络 / 音频 / 渲染 |
 | L2' | `ets_mq_server.exe` | `shellhelper.cpp(806/902)`（`reStart: true`、`processexist`）、`mq_server\main.js`、`mq_server\package.json`（`ws`） | Node.js WebSocket 广播总线（悬浮球/多窗口同步） |
 
@@ -56,7 +61,7 @@
 | 19:23:00 | `get_win_pos` → `SetWinPos` 900×600 @(510,240) | `appcontroller.cpp(466/150/170/190)` |
 | 19:23:05 | 第 2 个 renderer（业务页） | `shell.cpp(56)` |
 
-完整逐秒时间线见 `work/pkg/shell_timeline.md`。
+完整逐秒时间线见 `壳层时间线解析（未随仓库发布）`。
 
 ### 2.3 CEF 子进程与命令行开关
 
@@ -71,7 +76,7 @@
 | `--allow-running-insecure-content` | 允许 HTTPS 页面加载 HTTP 资源（与日志里大量 mixed-content 一致） |
 | `--ppapi-flash-version` + `--ppapi-flash-path` | PPAPI Flash：`plugins\pepflash\pepflashplayer32_28_0_0_161.dll`（注：该目录在文件清单中不存在，Flash 实际未加载） |
 | `--force-device-scale-factor` | 由 `shell.ini` 的 `ForceDeviceScale`/`WindowScale` 控制 |
-| `--disable-gpu` | 由 `shell.ini` 的 `DisableGPU=1` 触发（本机为 1 → 软件渲染；CEF 日志出现 `Passthrough is not supported, GL is swiftshader`） |
+| `--disable-gpu` | 由 `shell.ini` 的 `DisableGPU=1` 触发（该副本配置为 1 → 软件渲染；CEF 日志出现 `Passthrough is not supported, GL is swiftshader`） |
 | `--disable-pinch` | 禁用双指缩放 |
 | `--shell-app-` | 壳自身识别「由 preshell 启动」的参数前缀 |
 
@@ -115,13 +120,13 @@ flowchart TD
 | `StiCorePlugin.log starting` 组数 | 8 | 15 | 23 |
 | 日志时间跨度 | 10-28 18:55:56 → 10-31 18:37:32 | 11-04 19:22:55 → 11-06 19:32:03 | — |
 
-> 说明：10,396 条 WARNING **全部**来自 `sndUtilImpl.cpp(48)` 的录音环形缓冲逐帧日志（`Cache4RecData::Read/Write`），**不是异常**（两份日志中 `sndUtilImpl.cpp(48)` 计数恰好等于 WARNING 总数）；ERROR 189 条归一后只有 ~30 类「文件不存在」探测失败，无崩溃（详见 `work/pkg/shell_timeline.md` §5）。
+> 说明：10,396 条 WARNING **全部**来自 `sndUtilImpl.cpp(48)` 的录音环形缓冲逐帧日志（`Cache4RecData::Read/Write`），**不是异常**（两份日志中 `sndUtilImpl.cpp(48)` 计数恰好等于 WARNING 总数）；ERROR 189 条归一后只有 ~30 类「文件不存在」探测失败，无崩溃（详见 `壳层时间线解析（未随仓库发布）` §5）。
 
 ---
 
 ## 3. `shell.ini` 全字段语义
 
-文件：`ETS\shell.ini`（GBK，376 B）。格式为 INI：
+文件：`<ETS_INSTALL_DIR>\shell.ini`（GBK，376 B）。格式为 INI：
 
 ```ini
 [HomeUrl]
@@ -153,7 +158,7 @@ WindowScale=100.00
 |---|---|---|
 | `[HomeUrl] URL` | `https://statics.ets100.com/ets-student-pc-web/index.html` | 主页面地址。`ETSShell.exe` 字符串有 `HomeUrl`/`getHomeUrl`；CEF 日志 `network_delegate` 首请求即该 URL |
 | `FullScreen` | `1` | 全屏模式开关（原生键名 `FullScreen` 存在于 EXE 字符串） |
-| `ShowTray` | `0` | 是否显示托盘图标；`Shell_NotifyIconW`、`stic_tray`、`NativeTrayMenu`、`MenuList` 均在 EXE 内，本机为 0 → 不显示 |
+| `ShowTray` | `0` | 是否显示托盘图标；`Shell_NotifyIconW`、`stic_tray`、`NativeTrayMenu`、`MenuList` 均在 EXE 内，该副本配置为 0 → 不显示 |
 | `WindowMaximize` | `0` | 允许最大化（配合 `appcontroller.maximize`） |
 | `NoBorder` | `0` | 无边框窗口（配合 `UseShadow`；`CShadowUI` RTTI 存在） |
 | `UseShadow` | `0` | 窗口阴影（`CShadowUI`、`UpdateLayeredWindow`） |
@@ -204,7 +209,7 @@ CEF 控制台（`cef_2026-10-28.log`/`cef_2026-11-4.log` 的 `CONSOLE` 行）直
 ```
 Mixed Content: The page at 'https://statics.ets100.com/ets-student-pc-web/index.html?tdt=...' was loaded
 over HTTPS, but requested an insecure audio file
-'stic://file.iflytek.com/C:\Users\<user>\AppData\Roaming\ETS\747726\template_686\material\start.mp3'
+'stic://file.iflytek.com/<APPDATA_ETS>\747726\template_686\material\start.mp3'
 ```
 
 **【观察】scheme 名为 `stic`，host 为 4 个 `*.iflytek.com`。** scheme 被注册为「非安全内容」，因此在 HTTPS 页面里引用会触发 mixed-content 警告（日志中 67+134 条），但请求仍被放行（`--allow-running-insecure-content`）。
@@ -213,7 +218,7 @@ over HTTPS, but requested an insecure audio file
 
 | host | 语义 | 证据 |
 |---|---|---|
-| `file.iflytek.com` | 本地文件读取：`stic://file.iflytek.com/<本地绝对路径>` | `client_schema.cpp(439)` 打印 `domain_name size: <bytes>, //file.iflytek.com/C:\Users\...\ETS\<set>\...`（109 条）；控制台 URL |
+| `file.iflytek.com` | 本地文件读取：`stic://file.iflytek.com/<本地绝对路径>` | `client_schema.cpp(439)` 打印 `domain_name size: <bytes>, //file.iflytek.com/<APPDATA_ETS>\<set>\...`（109 条）；控制台 URL |
 | `shell.iflytek.com` | 壳能力/虚拟资源（壳自己的命名空间） | 字符串 `//shell.iflytek.com/` |
 | `rpk.iflytek.com` | 资源包（resource pack） | 字符串 + 命名推断 |
 | `cpk.iflytek.com` | 内容包（content pack） | 字符串 + 命名推断 |
@@ -251,7 +256,7 @@ over HTTPS, but requested an insecure audio file
 
 ## 5. 窗口控制桥（`packages\default\appcontroller.js` 全文解析）
 
-文件：`ETS\packages\default\appcontroller.js`（10,041 B，289 行）。这是**壳自带的 JS 桥库**，本地错误页 `error.html` 与远程页面共同使用。
+文件：`<ETS_INSTALL_DIR>\packages\default\appcontroller.js`（10,041 B，289 行）。这是**壳自带的 JS 桥库**，本地错误页 `error.html` 与远程页面共同使用。
 
 ### 5.1 消息协议（cef.message）
 
@@ -342,7 +347,7 @@ document.getElementById('jsRetry').onclick = () => history.back()
 
 | 能力 | 证据 | 结论 |
 |---|---|---|
-| 托盘图标/菜单 | `Shell_NotifyIconW`、`stic_tray`、`NativeTrayMenu`、`MenuList`、`CreatePopupMenu`/`AppendMenuW`/`TrackPopupMenu`、`Shell_TrayWnd`/`Shell_SecondaryTrayWnd` | **具备**；`ShowTray=0` 时关闭，本机不显示 |
+| 托盘图标/菜单 | `Shell_NotifyIconW`、`stic_tray`、`NativeTrayMenu`、`MenuList`、`CreatePopupMenu`/`AppendMenuW`/`TrackPopupMenu`、`Shell_TrayWnd`/`Shell_SecondaryTrayWnd` | **具备**；`ShowTray=0` 时关闭，该副本不显示 |
 | 全局快捷键 | `ETSShell.exe` 导入表中**没有** `RegisterHotKey`（导入 `USER32` 仅窗口/菜单/绘制相关）；但 `bugreport.exe` 作为 duilib 程序含 `CHotKeyUI/CHotKeyWnd` 类 | **壳层无全局热键注册**【观察/缺失证据】；`DragZoom` 为窗口拖动/缩放配置，不是热键 |
 | 页面缩放 | `setZoomLevel`/`getZoomLevel`/`SetZoomLevel`/`GetZoomLevel`、`zoom-level:` 日志前缀、`cef.message` | **具备**（JS 可调用） |
 | DevTools | `ShowDevTools` 动作字符串、`DevToolsActivePort=10086`、CEF 日志 `Cannot start http server for devtools` | **具备**（可远程调试 10086；本次启动失败为端口冲突） |
@@ -371,7 +376,7 @@ document.getElementById('jsRetry').onclick = () => history.back()
 |---|---|
 | 大小 / SHA-256 | 2,079,784 B / `6ecd0568d8bbe7f176e3f8e0ce71b18cbd6fc0c45af695ee5d5619e6dda9103f`（`temp\EtsUpdate.exe` 完全相同） |
 | 格式 | PE32（x86），无导出表（`inspect_native_exports`：0 exports） |
-| PDB | `D:\code\ets_git_code\stic_tools\ets_tool_stic\bin\EtsUpdate\Release\EtsUpdate.pdb` |
+| PDB | `<BUILD_ROOT>\ets_git_code\stic_tools\ets_tool_stic\bin\EtsUpdate\Release\EtsUpdate.pdb` |
 | 源码路径（字符串） | `frame\WndUpdateFrame.cpp`、`handler\UpdateHandler.cpp`、`app\process.cpp`、`app\exit_code.cpp`、`network\http_handler/update_info.h` |
 | UI 框架 | duilib（`CProgressUI`、`CWebBrowserUI` 等 RTTI + `WndUpdateFrame.xml` + `Update\*.png` 资源内嵌） |
 | HTTP | 静态链接 libcurl（`CURLOPT_*`、`curl_easy_perform` 字符串）+ WinINet 字符串；`WS2_32.dll` |
@@ -385,7 +390,7 @@ document.getElementById('jsRetry').onclick = () => history.back()
 
 ```
 I1028 18:56:01.948570 24720 main.cpp:36] [启动命令参数]--AppName=Ets.exe --AppTitle=讯飞E听说
- --AppDirectory=C:\Program Files (x86)\ETS\ --DetectionTimeout=2000 --ForceShow=0
+ --AppDirectory=<ETS_INSTALL_DIR>\ --DetectionTimeout=2000 --ForceShow=0
 ```
 
 完整参数集（`EtsUpdate.exe` 字符串）**【观察】**：
@@ -400,7 +405,7 @@ I1028 18:56:01.948570 24720 main.cpp:36] [启动命令参数]--AppName=Ets.exe -
 | `--AutoRun` | 未传（默认 0） | 是否开机自启/静默 |
 | `--AppName` | `Ets.exe` | 宿主程序名（用于日志/重启/RunOnce 注册） |
 | `--AppTitle` | `讯飞E听说` | 更新窗口标题 |
-| `--AppDirectory` | `C:\Program Files (x86)\ETS\` | 安装根目录（更新目标） |
+| `--AppDirectory` | `<ETS_INSTALL_DIR>\` | 安装根目录（更新目标） |
 | `--RequestURL` | 未传 → 默认 `http://api.ets100.com` | 更新接口 base |
 | `--NetworkTimeout` | 未传 → 默认值（推断 2000-5000ms 级） | 网络超时 |
 | `--DetectionTimeout` | `2000` | 检测超时（对应字符串 `[检测超时] 启动主程序！`） |
@@ -580,7 +585,7 @@ select value from Config where section='%s' and entry='%s'
 
 ```
 [1104/192259:INFO:etshelper.cpp(522)] [etshelper::PlnOnProcessMessage] action->check_update
-[1104/192259:INFO:UpdateAPI.cpp(78)] open database success. C:\Program Files (x86)\ETS\localdata\Ets.db
+[1104/192259:INFO:UpdateAPI.cpp(78)] open database success. <ETS_INSTALL_DIR>\localdata\Ets.db
 ```
 
 即：**壳只负责触发检查并打开本地库**；真正的网络检查/下载/安装由 `EtsUpdate.exe` 完成，因此 shell 日志里看不到更新 URL 与结果。
@@ -593,7 +598,7 @@ select value from Config where section='%s' and entry='%s'
 
 | 组件 | 证据 | 作用 |
 |---|---|---|
-| `dumpfile.cpp` | `ETSShell.exe` 字符串：`D:\code\STIC\stic-pro_ets\src\commonlib\dumpfile.cpp`、`dumpfile::GetDumpfilePath`、`dumpfile::RecordDumpLog`、`dumpfile::ExceptionFilter`、`dumpfile::RunBugReport` | 未处理异常过滤器 |
+| `dumpfile.cpp` | `ETSShell.exe` 字符串：`<BUILD_ROOT>\STIC\stic-pro_ets\src\commonlib\dumpfile.cpp`、`dumpfile::GetDumpfilePath`、`dumpfile::RecordDumpLog`、`dumpfile::ExceptionFilter`、`dumpfile::RunBugReport` | 未处理异常过滤器 |
 | 转储 API | `MiniDumpWriteDump`（`dbghelp.dll`）、`SetUnhandledExceptionFilter` | 写 minidump |
 | 目录 | `logs\dump\`、`logs\dumpback\dumpfile_`、`dumpshell_` 前缀 | dump 存放/备份 |
 | 上报 | `\bugreport\`、`bugreport.exe` | 拉起独立上报程序 |
@@ -625,7 +630,7 @@ CREATE TABLE DUMPFILEINFO(
   STATE INT, CLIENT_VERSION CHAR(16));
 ```
 
-配套 SQL（字符串）：`INSERT INTO DUMPFILEINFO(FILEPATH,STATE,CLIENT_VERSION) VALUES('%s','%d','%s')`、`INSERT INTO BURYPOINTDATABASE(PROCESSNAME,TIME,LASTERR,PID) ...`、`SELECT * FROM BURYPOINTDATABASE`、`UPDATE BURYPOINTDATABASE ...`、`DELETE ...`；当前两表均为空（0 行，说明本机未发生崩溃上报）。
+配套 SQL（字符串）：`INSERT INTO DUMPFILEINFO(FILEPATH,STATE,CLIENT_VERSION) VALUES('%s','%d','%s')`、`INSERT INTO BURYPOINTDATABASE(PROCESSNAME,TIME,LASTERR,PID) ...`、`SELECT * FROM BURYPOINTDATABASE`、`UPDATE BURYPOINTDATABASE ...`、`DELETE ...`；当前两表均为空（0 行，说明该副本未发生崩溃上报）。
 
 `BugReport_<date>` 的采集逻辑推断：**打包「三套日志 + dump + 客户端版本 + 用户描述」→ 上传**；上传 URL 未在二进制中明文出现（`bugreport.exe` 无 HTTP 明文常量），推测由壳层通过参数/配置注入（`--RequestURL`/`UpdateUrl` 之类）——**【未知】**。
 
@@ -686,7 +691,7 @@ CREATE TABLE DUMPFILEINFO(
 
 ```json
 {"recordTime":50,
- "filePath":"C:\\Program Files (x86)\\ETS\\soundfiles\\public_<32hex>_<epochms>.mp3",
+ "filePath":"<ETS_INSTALL_DIR>\\soundfiles\\public_<32hex>_<epochms>.mp3",
  "dataStreamType":"spx","spxQuality":"10","saveSpxFile":1,
  "id":"<GUID>"}
 ```
@@ -713,7 +718,7 @@ httphelper action->upload → apiUrl:https://ets60.oss-cn-hangzhou.aliyuncs.com
 ```
 
 - 录音时长单位：`recordTime:50`（推断为 50×10ms=500ms 分片 / 或 50 个回调周期；`time_len:50` 同步出现）。
-- 采样设备：WaveIn（`waveIn` API 系列），支持多设备枚举（本机 1~2 个）。
+- 采样设备：WaveIn（`waveIn` API 系列），支持多设备枚举（观察环境枚举到 1~2 个）。
 - `_SCANFILEIMPL_`/`_PLAYERIMPL_`/`_RECORDERIMPL_`/`_AUDIOCHECKERIMPL_` 四种 SoundWorker 实现（播放/录音/评测/文件扫描）。
 
 **产物**（`soundfiles\`，108 个文件，36 组）：
@@ -733,7 +738,7 @@ httphelper action->upload → apiUrl:https://ets60.oss-cn-hangzhou.aliyuncs.com
 
 | 项 | 值 |
 |---|---|
-| 路径/大小 | `ETS\lame.exe`（341,960 B） |
+| 路径/大小 | `<ETS_INSTALL_DIR>\lame.exe`（341,960 B） |
 | 版本证据 | 字符串 `LAME version %s (%s)`、`3.100`、`lame -V2 input.wav output.mp3`、`lame.sf.net` → **LAME 3.100** |
 | 用途 | **【推断】** 将 WAV/PCM 转 MP3（配合 `process_ori.bat` 或录音后处理）；日志中**没有** `lame` 被调用的记录 |
 
@@ -751,7 +756,7 @@ httphelper action->upload → apiUrl:https://ets60.oss-cn-hangzhou.aliyuncs.com
 
 结尾清理：删除 `video.mp4`、`video_nosound.mp4`、`video_bg.aac`、`remix.aac`、`remix_2.aac`、`*.wav`。
 
-**【推断】** `$replace$` 说明脚本是**运行时模板**：壳/前端把「用户录音混入原音轨」的 ffmpeg 命令替换进去（E听说有「跟读/配音」类业务：原视频 + 学生录音合成）。本机未见生成的 `video_final.mp4`，无法断言实际调用。
+**【推断】** `$replace$` 说明脚本是**运行时模板**：壳/前端把「用户录音混入原音轨」的 ffmpeg 命令替换进去（E听说有「跟读/配音」类业务：原视频 + 学生录音合成）。分析样本中未见生成的 `video_final.mp4`，无法断言实际调用。
 
 ### 8.4 7-Zip 解压链
 
@@ -762,7 +767,7 @@ httphelper action->upload → apiUrl:https://ets60.oss-cn-hangzhou.aliyuncs.com
 | `sevenzip` 插件日志 | `action->init`/`action->unzip`、`OnUnzip begin/end, unzip success.`（`sevenzip.cpp(13/82/84)`） |
 | bugreport 内置 7-Zip | `bugreport.exe` 内含 7-Zip 9.20（`-aoa -tzip -mx5 -y`、`7zCon.sfx`、`7z.dll`） |
 
-`7z.log` 中所有条目均为「成功」，无加密/分卷；`7z.log` 路径被硬编码（打印 `C:\Program Files (x86)\ETS\...`），说明 7z CLI 由壳/插件以固定工作目录调用。**【推断】**
+`7z.log` 中所有条目均为「成功」，无加密/分卷；`7z.log` 路径被硬编码（打印 `<ETS_INSTALL_DIR>\...`），说明 7z CLI 由壳/插件以固定工作目录调用。**【推断】**
 
 ### 8.5 `packages\examine\`（音频测试样本）
 
@@ -790,7 +795,7 @@ httphelper action->upload → apiUrl:https://ets60.oss-cn-hangzhou.aliyuncs.com
 
 ## 9. 可复现时序（端到端）
 
-> 复现前提：只读样本 `D:\ets-rea\ETS`；**不要运行任何 EXE**。以下每一步都可在给定日志/文件中找到对应行。
+> 复现前提：只读样本 `<ETS_INSTALL_DIR>`；**不要运行任何 EXE**。以下每一步都可在给定日志/文件中找到对应行。
 
 1. **环境识别**：`README.txt` → CEF 91.1.22；`shell.ini` → HomeUrl/AppName/DisableGPU；`localdata\ETS.db` → C_Version 5.7.9 / Update_Version 5079。
 2. **preshell 启动**：`Ets.exe` 读 `.\shell.ini`，取 `AppName=ETSShell.exe`，`ShellExecuteExW` 拉起（证据：Ets.exe 字符串 `ShellConfig`/`AppName`/`ShellExecuteExW`/`--shell-app-`）。
@@ -800,7 +805,7 @@ httphelper action->upload → apiUrl:https://ets60.oss-cn-hangzhou.aliyuncs.com
 6. **插件初始化**：`getconfig` → `shellhelper/httphelper/filehelper/etshelper init`（各插件 cpp）。
 7. **环境与会话**：`existfileorfolder(ets_mq_server.exe)`、`get_appdata_path`、`getvolume`、`processexist`、`getpcinfo`。
 8. **MQ 总线**：`startprocess reStart:true` → `ets_mq_server.exe` 监听 40001 → 写 `packages/app.json`。
-9. **更新检查**：`etshelper/check_update` → `UpdateAPI` 打开 `localdata\ETS.db`；若 `AutoUpgrade=1` 则会拉起 `EtsUpdate.exe`（本机更新日志证明已拉起过 2 次，均「不需要更新」退出码 1）。
+9. **更新检查**：`etshelper/check_update` → `UpdateAPI` 打开 `localdata\ETS.db`；若 `AutoUpgrade=1` 则会拉起 `EtsUpdate.exe`（该副本的更新日志证明已拉起过 2 次，均「不需要更新」退出码 1）。
 10. **缓存清理**：`getmd5(clear_cache.zip)` miss → `download` → `getbase64` → `sevenzip unzip` ×2 → `executecmd` 执行 `clean_cache.bat`。
 11. **资源准备**：按 `set_id` 下载 `content_*.zip`+`template_686.zip` → 解压到 `%APPDATA%\ETS\<set>`（`httphelper/sevenzip`）；页面用 `stic://file.iflytek.com/<绝对路径>` 引用。
 12. **窗口切换**：`get_win_pos` → `set_win_pos` 900×600 → 780×420 → 1000×680（`appcontroller.cpp(466/150/170/190/185)`）。
@@ -873,7 +878,7 @@ httphelper action->upload → apiUrl:https://ets60.oss-cn-hangzhou.aliyuncs.com
 | 缓存清理 | `temp\resources\clear_cache.zip`、`temp\tools\clean_cache.bat`、`temp\resources\clear_cache\clean_cache.bat`、`7z.log` |
 | 音频 | `plugins\soundhelper\soundhelper.pln`、`soundfiles\*`、`lame.exe`、`ffmpeg\ffmpeg.exe`、`ffmpeg\process_ori.bat`、`packages\examine\*` |
 | MQ | `mq_server\main.js`、`mq_server\package.json`、`packages\app.json` |
-| 解析产物 | `work/pkg\shell_timeline.md`、`shell_templates.txt`、`key_events.txt`、`shell_summary.txt`、`cef_analysis.txt`、`update_log_*.txt`、`update_strings.txt` |
+| 解析产物 | `shell_timeline.md`、`shell_templates.txt`、`key_events.txt`、`shell_summary.txt`、`cef_analysis.txt`、`update_log_*.txt`、`update_strings.txt`（均未随仓库发布） |
 
 ### 11.2 未知项（需进一步证据）
 
@@ -892,6 +897,6 @@ httphelper action->upload → apiUrl:https://ets60.oss-cn-hangzhou.aliyuncs.com
 
 ## 12. 脱敏与合规
 
-- 日志/DB 中的真实 `账号（SHM……）`、`手机号（199****105）`、`JWT token`、`C:\Users\<user>`、机器名（<hostname>）、`os_crypt.encrypted_key`、设备名等均已脱敏或省略。
+- 日志/DB 中的真实 `账号（SHM……）`、`手机号（199****105）`、`JWT token`、`<用户目录>`、机器名（<hostname>）、`os_crypt.encrypted_key`、设备名等均已脱敏或省略。
 - 本文只描述**结构与机制**，不包含绕过更新校验、伪造崩溃上报、破解授权或篡改评测结果的可用步骤。
 - 所有结论基于对目标文件的只读检查与目标自身写下的历史日志，**未运行目标程序**；静态分析不建立运行时执行事实。

@@ -1,0 +1,11 @@
+{"type": "send", "payload": "agent-start"}
+{"type": "send", "payload": "etshelper base=0x69f70000"}
+{"type": "send", "payload": "hooked etshelper"}
+{"type": "send", "payload": "OnEncodeAPIBody sel=0x0 json={\"body\":\"W3siciI6InN5c3RlbS90aW1lIiwicGFyYW1zIjp7InNuIjoidGVzdCJ9fV0=\",\"time\":\"1794033000000\"}"}
+{"type": "send", "payload": "sign_body sel=0x0 A=grlx B=1794033000000 C=W3siciI6InN5c3RlbS90aW1lIiwicGFyYW1zIjp7InNuIjoidGVzdCJ9fV0="}
+{"type": "send", "payload": "OnEncodeAPIResp sel=0x0 json={\"response\":\"W10=\",\"time\":\"1794033000000\"}"}
+{"type": "send", "payload": "sign_resp sel=0x0 A=grlx B=W10= C=test"}
+{"type": "send", "payload": "OnEncodeAPIBody sel=0x1 json={\"body\":\"W3siciI6InN5c3RlbS90aW1lIiwicGFyYW1zIjp7InNuIjoidGVzdCJ9fV0=\",\"time\":\"1794033000000\"}"}
+{"type": "send", "payload": "sign_body sel=0x1 A=pcWin B=1794033000000 C=W3siciI6InN5c3RlbS90aW1lIiwicGFyYW1zIjp7InNuIjoidGVzdCJ9fV0="}
+{"type": "send", "payload": "OnEncodeAPIResp sel=0x1 json={\"response\":\"W10=\",\"time\":\"1794033000000\"}"}
+{"type": "send", "payload": "sign_resp sel=0x1 A=pcWin B=W10= C=test"}

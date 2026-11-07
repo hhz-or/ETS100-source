@@ -1,7 +1,7 @@
 import os, re, gzip
 
-base = r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache"
-out = r"D:\ets-rea\work\lead"
+base = r"ETS\temp\Cache_ETSShell\Cache"
+out = r"work/lead(未发布)"
 os.makedirs(out, exist_ok=True)
 kws = [b"sign_protocol_selected", b"encode_api_body", b"encode_api_resp", b"head.sign", b"ETS-SIGN",
        b"sign_protocol", b"getmd5", b"md5(", b"ets_sign", b"api_body", b"parse_api_body",

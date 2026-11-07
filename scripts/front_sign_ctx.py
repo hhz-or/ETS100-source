@@ -1,6 +1,6 @@
 import re, os
 
-out = r"D:\ets-rea\work\lead"
+out = r"work/lead(未发布)"
 p = os.path.join(out, "cache_f_000002.txt")
 b = open(p, "rb").read()
 print("size", len(b))

@@ -2,8 +2,8 @@
 import os, json, re, hashlib, zlib, gzip, bz2, lzma, collections
 import xml.etree.ElementTree as ET
 
-D = r"D:\ets-rea\ETS\soundfiles"
-OUT = r"D:\ets-rea\work\data\soundfiles"
+D = r"ETS\soundfiles"
+OUT = r"data\soundfiles"
 os.makedirs(OUT, exist_ok=True)
 
 

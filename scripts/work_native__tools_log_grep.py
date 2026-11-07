@@ -3,7 +3,7 @@
 """Extract targeted lines from shipped ETS logs (read-only) for evidence."""
 import os, re, sys
 
-root = r"D:\ets-rea\ETS\logs"
+root = r"ETS\logs"
 out = []
 pats = [
     ("plugin-load", re.compile(r"Pln|plugin|Plugin|\.pln|StiCorePln", re.I)),
@@ -34,5 +34,5 @@ for fn in ["shell_2026-11-4.log", "ets_2026-11-4.log", "shell_2026-10-28.log", "
         for ln, l in hits[:25]:
             out.append("%7d| %s" % (ln, l.strip()[:240]))
     out.append("")
-open(r"D:\ets-rea\work\native\_logs_excerpt.txt", "w", encoding="utf-8").write("\n".join(out))
+open(r"data/native\_logs_excerpt.txt", "w", encoding="utf-8").write("\n".join(out))
 print("wrote", len(out), "lines")

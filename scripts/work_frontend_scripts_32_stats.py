@@ -1,5 +1,5 @@
 import os,re,json,collections
-OUT=r'D:\ets-rea\work\frontend'
+OUT=r'data/frontend'
 man=json.load(open(os.path.join(OUT,'manifest.json')))
 print('manifest entries',len(man),'unique sha',len(set(m['sha256'] for m in man)))
 c=collections.Counter(m['type'] for m in man)

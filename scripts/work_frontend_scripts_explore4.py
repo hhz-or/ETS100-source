@@ -1,5 +1,5 @@
 import os,struct
-base=r'D:\ets-rea\ETS\temp\Cache_ETSShell\Cache'
+base=r'ETS\temp\Cache_ETSShell\Cache'
 b=open(os.path.join(base,'data_3'),'rb').read()
 print('data_3 8160..8250')
 seg=b[8160:8256]

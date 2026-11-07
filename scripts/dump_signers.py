@@ -1,5 +1,5 @@
 import re
-p = r"D:\ets-rea\work\ghidra_out\etshelper.pln\decompiled.c"
+p = r"work/ghidra_out(未发布)\etshelper.pln\decompiled.c"
 lines = open(p, encoding="utf-8", errors="replace").read().split("\n")
 
 def dump(name, maxlines=600):

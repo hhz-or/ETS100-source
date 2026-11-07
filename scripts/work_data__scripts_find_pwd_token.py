@@ -1,5 +1,5 @@
 import os, re
-root = r"D:\ets-rea\ETS"
+root = r"ETS"
 needles = [b"RpkPwd", b"CpkPwd", b"rpkPwd", b"cpkPwd", b"RpkPwd".replace(b"R",b"r")]
 hits=[]
 for dp,dn,fn in os.walk(root):

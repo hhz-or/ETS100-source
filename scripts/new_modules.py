@@ -1,6 +1,6 @@
 import os, re, json
 
-CH = r"D:\ets-rea\work\runtime\chunks_full"
+CH = r"runtime\chunks_full"
 targets = ["WordList-bcf43dd5.js", "WordPractice-d0b845cb.js", "WordPracticeResult-af1120b8.js",
            "WordQuestion-b14a59b7.js", "WordQuestionResult-4b370b1e.js", "PKMatch-ae6925c3.js",
            "readAloud-7c86f494.js", "readSentence-a8cded72.js", "readSentenceScoreInfo-587c753e.js",
@@ -25,7 +25,7 @@ for name in targets:
     print(" endpoints:", eps[:12])
     print(" actions:", acts[:10])
     print(" cn:", cns[:8])
-json.dump(summary, open(r"D:\ets-rea\work\runtime\new_modules_analysis.json", "w", encoding="utf-8"),
+json.dump(summary, open(r"runtime\new_modules_analysis.json", "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
 
 # find route paths referencing these components in live main bundle

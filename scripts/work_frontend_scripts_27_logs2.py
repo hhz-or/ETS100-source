@@ -1,5 +1,5 @@
 import os,re,glob,collections
-base=r'D:\ets-rea\ETS\logs'
+base=r'ETS\logs'
 p=os.path.join(base,'ets_2026-11-4.log')
 txt=open(p,'rb').read().decode('utf-8','replace')
 lines=txt.split('\n')

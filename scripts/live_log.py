@@ -1,6 +1,6 @@
 import re, json, base64, hashlib, collections
 
-P = r"D:\ets-rea\ETS\logs\ets_2026-11-6.log"
+P = r"ETS\logs\ets_2026-11-6.log"
 t = open(P, "rb").read().decode("utf-8", "replace")
 lines = t.split("\n")
 print("lines", len(lines), "bytes", len(t))
@@ -54,14 +54,14 @@ for r in reqs:
 print(f"sign verify on live log: {ok} ok / {bad} bad")
 
 json.dump({"requests": reqs, "responses": resps,
-           "paths": paths.most_common()}, open(r"D:\ets-rea\work\runtime\live_requests.json", "w", encoding="utf-8"),
+           "paths": paths.most_common()}, open(r"runtime\live_requests.json", "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
 
 print("\n--- new paths (not in previous 51) ---")
 prev = set()
 try:
     import csv
-    for row in csv.DictReader(open(r"D:\ets-rea\work\api\endpoints.csv", encoding="utf-8-sig")):
+    for row in csv.DictReader(open(r"data/api\endpoints.csv", encoding="utf-8-sig")):
         prev.add((row.get("path") or "").strip())
 except Exception as e:
     print("csv err", e)

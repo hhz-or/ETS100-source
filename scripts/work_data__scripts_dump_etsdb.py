@@ -1,5 +1,5 @@
 import sqlite3, json, os, sys
-p = r"D:\ets-rea\ETS\localdata\ETS.db"
+p = r"ETS\localdata\ETS.db"
 con = sqlite3.connect("file:" + p.replace("\\","/") + "?mode=ro", uri=True)
 con.text_factory = lambda b: b.decode("utf-8", "replace")
 cur = con.cursor()
@@ -13,6 +13,6 @@ for row in cur.execute("select type,name,tbl_name,rootpage,sql from sqlite_maste
         out["tables"][t] = {"columns": cols, "rowcount": len(rows), "rows": rows}
 for t, d in out["tables"].items():
     print(f"TABLE {t}: {d['rowcount']} rows, cols={d['columns']}")
-json.dump(out, open(r"D:\ets-rea\work\data\db\ETS_db_dump.json","w",encoding="utf-8"), ensure_ascii=False, indent=1)
+json.dump(out, open(r"data\db\ETS_db_dump.json","w",encoding="utf-8"), ensure_ascii=False, indent=1)
 print("pragma page_size", cur.execute("pragma page_size").fetchone(), "user_version", cur.execute("pragma user_version").fetchone(), "journal", cur.execute("pragma journal_mode").fetchone())
 print("encoding", cur.execute("pragma encoding").fetchone())

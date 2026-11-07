@@ -4,7 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 BASE = "https://statics.ets100.com/ets-student-pc-web/"
 ASSETS = BASE + "assets/"
-OUT = r"D:\ets-rea\work\runtime\chunks_full"
+OUT = r"runtime\chunks_full"
 os.makedirs(OUT, exist_ok=True)
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 Chrome/91.0.4472.124 Safari/537.36"}
 
@@ -82,6 +82,6 @@ with ThreadPoolExecutor(max_workers=8) as ex:
 
 ok = sum(1 for v in manifest.values() if v["status"] == 200)
 print(f"downloaded {ok}/{len(manifest)} chunks, total {sum(v['size'] for v in manifest.values())/1048576:.1f} MB")
-json.dump(manifest, open(r"D:\ets-rea\work\runtime\chunks_manifest.json", "w", encoding="utf-8"), indent=1)
+json.dump(manifest, open(r"runtime\chunks_manifest.json", "w", encoding="utf-8"), indent=1)
 bad = {k: v for k, v in manifest.items() if v["status"] != 200}
 print("failed:", len(bad), list(bad)[:10])

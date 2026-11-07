@@ -1,5 +1,5 @@
 import os,json,re
-OUT=r'D:\ets-rea\work\frontend'
+OUT=r'data/frontend'
 man=json.load(open(os.path.join(OUT,'manifest.json')))
 main=[m for m in man if 'index-dc0257dd' in m['file'] and m['type']=='js'][0]
 lines=open(os.path.join(OUT,main['pretty']),encoding='utf-8',errors='replace').read().split('\n')

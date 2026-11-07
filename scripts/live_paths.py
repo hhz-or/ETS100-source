@@ -1,6 +1,6 @@
 import json, re, collections
 
-d = json.load(open(r"D:\ets-rea\work\runtime\live_requests.json", encoding="utf-8"))
+d = json.load(open(r"runtime\live_requests.json", encoding="utf-8"))
 reqs = d["requests"]
 paths = collections.Counter()
 for r in reqs:
@@ -15,7 +15,7 @@ for p, c in paths.most_common():
 old = set()
 import csv
 try:
-    for row in csv.DictReader(open(r"D:\ets-rea\work\api\endpoints.csv", encoding="utf-8-sig")):
+    for row in csv.DictReader(open(r"data/api\endpoints.csv", encoding="utf-8-sig")):
         old.add((row.get("path") or "").strip())
 except Exception as e:
     print("csv err", e)

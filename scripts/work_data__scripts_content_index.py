@@ -1,6 +1,6 @@
 import os, json, hashlib, glob, collections
-base=r"D:\ets-rea\work\data\extracted\content"
-tpl=r"D:\ets-rea\work\data\extracted\template_686"
+base=r"data\extracted\content"
+tpl=r"data\extracted\template_686"
 out={}
 for d in sorted(os.listdir(base)):
     p=os.path.join(base,d)
@@ -21,7 +21,7 @@ for d in sorted(os.listdir(base)):
     rec["info_json"]=[{"code_id":x.get("code_id"),"code_type":x.get("code_type"),"val_len":len(str(x.get("code_value","")))} for x in ij]
     rec["content_json_full"]=cj if len(json.dumps(cj))<3000 else {"_truncated":True}
     out[d]=rec
-json.dump(out,open(r"D:\ets-rea\work\data\resources_content_index.json","w",encoding="utf-8"),ensure_ascii=False,indent=1)
+json.dump(out,open(r"data\resources_content_index.json","w",encoding="utf-8"),ensure_ascii=False,indent=1)
 
 # aggregate
 st=collections.Counter(v["structure_type"] for v in out.values())

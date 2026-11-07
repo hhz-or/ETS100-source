@@ -1,6 +1,6 @@
 import os, hashlib, json, collections
 
-root = r"D:\ets-rea\ETS"
+root = r"ETS"
 KEY = [
     "ETSShell.exe", "Ets.exe", "EtsUpdate.exe", "Uninstall.exe", "libcef.dll",
     "chrome_100_percent.pak", "chrome_200_percent.pak", "chrome_elf.dll",
@@ -28,7 +28,7 @@ for k in KEY:
     p = os.path.join(root, k.replace("/", os.sep))
     if os.path.isfile(p):
         res[k] = {"size": os.path.getsize(p), "sha256": sha(p)}
-json.dump(res, open(r"D:\ets-rea\work\inventory_hashes.json", "w", encoding="utf-8"), indent=1)
+json.dump(res, open(r"work(未发布)\inventory_hashes.json", "w", encoding="utf-8"), indent=1)
 for k, v in res.items():
     print(f"{k}\t{v['size']}\t{v['sha256']}")
 

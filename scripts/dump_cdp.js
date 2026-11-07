@@ -1,11 +1,11 @@
 // Live CDP dump for ETS (CEF 91 / CDP 1.3)
 // usage: node dump_cdp.js <outDir> [reload]
-const WebSocket = require('D:/ets-rea/ETS/mq_server/node_modules/ws');
+const WebSocket = require('ETS/mq_server/node_modules/ws');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const OUT = process.argv[2] || 'D:/ets-rea/work/runtime';
+const OUT = process.argv[2] || 'runtime';
 const DO_RELOAD = process.argv[3] !== 'noreload';
 const PORT = 10086;
 fs.mkdirSync(OUT, { recursive: true });

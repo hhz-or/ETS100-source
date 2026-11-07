@@ -1,9 +1,14 @@
-# 04_frontend — ETS（E 听说学生端 PC）前端逆向分析
+# 04 前端逆向分析（E 听说学生端 PC）
 
-> 目标：`D:\ets-rea\ETS`（只读）。远程 SPA：`https://statics.ets100.com/ets-student-pc-web/`（Vue3 + ElementPlus，Vite 构建）。
-> 数据来源：CEF/Chromium 磁盘缓存的离线解析（`ETS\temp\Cache_ETSShell\Cache`），**未联网、未执行目标代码**。
-> 产物：`work/frontend/`（bundles / manifest.json / routes.json / action_keys.json / api_endpoints.json / stores.json / pretty / excerpts / scripts）。
-> 分析员：frontend-analyst；任务：task-2。生成时间：2026-11-06。
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **本文复核**：`python scripts/work_frontend_scripts_1_parse_cache.py` 等（缓存解析/导出/路由/action 提取脚本均在 `scripts/`）。
+
+> 目标：`<ETS_INSTALL_DIR>`（只读）。远程 SPA：`https://statics.ets100.com/ets-student-pc-web/`（Vue3 + ElementPlus，Vite 构建）。
+> 数据来源：CEF/Chromium 磁盘缓存的离线解析（`<ETS_INSTALL_DIR>\temp\Cache_ETSShell\Cache`），**未联网、未执行目标代码**。
+> 产物：已发布的机读数据在 `data/frontend/`（路由、action、端点、在线 chunk 清单等 JSON）；原始 bundle、可读化 bundle 与提取中间产物未随仓库发布，解析脚本在 `scripts/`。
+> 生成时间：2026-11-06。
 
 ---
 
@@ -28,7 +33,7 @@
 1. **Chromium blockfile 缓存格式**（`data_0..3` 块文件 + `index` + `f_*` 外部文件）被完整解码，所有 URL、响应头、响应体可还原（§1.2）。之前“f_ 文件只能靠魔数猜类型”的做法不再必要。
 2. **API 签名协议** v1/v2（`EtsSignatureAdapter`）：body 先 `JSON.stringify` 再 base64，`head.sign/pid/time` 由原生 `EtsHelper.encode_api_body[_v2]` 生成；v2 返回 `{pid,key_id,sign,sign_version:"2"}`，签名为 32 位 hex。实测日志显示当前客户端走 **v2、pid=pcWin**（§6.3）。
 3. **录音→评测链路**：录音由原生 `soundhelper` 完成（`record` 的 `recordTime` 单位为 0.1s，`dataStreamType` 为 `"10"` 或 `"spx"`），音频通过 `datastream_callback` 以 **40ms/6400B** 分片推给评测 SDK；引擎由 `ecard.engine_config` 规则表选择（AI2/AI_2MIX/AI_2INS/AI_2EXAM），结果写回 `/m/audio/sync-v2`（§8）。
-4. **日志/埋点三路**：`LoggerUtils` → 本地 `ws://127.0.0.1:<suspensionBallPort|40001>` → `ets_mq_server.exe` → `ETS\logs\ets_*.log`；阿里云 SLS `WebTrackerBrowser`（STS 凭证来自 `g/data/sls-config`）；`log_collector` 表单上报；崩溃/日志 zip 经 OSS 上传（§9）。
+4. **日志/埋点三路**：`LoggerUtils` → 本地 `ws://127.0.0.1:<suspensionBallPort|40001>` → `ets_mq_server.exe` → `<ETS_INSTALL_DIR>\logs\ets_*.log`；阿里云 SLS `WebTrackerBrowser`（STS 凭证来自 `g/data/sls-config`）；`log_collector` 表单上报；崩溃/日志 zip 经 OSS 上传（§9）。
 
 ---
 
@@ -36,7 +41,7 @@
 
 ### 1.1 缓存目录结构
 
-`D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\`：
+`<ETS_INSTALL_DIR>\temp\Cache_ETSShell\Cache\`：
 
 | 文件 | 大小 | 含义 |
 |---|---|---|
@@ -95,14 +100,14 @@ file_type = addr >> 28
 
 校验结果：353 个条目中 340 个响应头流地址按上式命中（其余 13 条指向 `data_1` 已淘汰/覆写的旧块，标“未知”）；48 个外部文件地址全部命中 `f_000001..f_000030`。
 
-解析脚本：`work/frontend/scripts/1_parse_cache.py`（解析）、`2_extract.py`（导出）、`4_dedupe.py`（去重）、`5_pretty.py`（格式化）、`12d_routes.py`/`30_routes_final.py`（路由）、`31_action_keys.py`（桥）、`22_api_stores.py`（API/store）、`40_make_doc.py`（本文生成）。
-证据：`work/frontend/cache_entries.json`（353 条原始条目：URL、hash、地址、大小、响应头）。
+解析脚本（均位于 `scripts/`）：`work_frontend_scripts_1_parse_cache.py`（解析）、`work_frontend_scripts_2_extract.py`（导出）、`work_frontend_scripts_4_dedupe.py`（去重）、`work_frontend_scripts_5_pretty.py`（格式化）、`work_frontend_scripts_12d_routes.py` / `work_frontend_scripts_30_routes_final.py`（路由）、`work_frontend_scripts_31_action_keys.py`（桥）、`work_frontend_scripts_22_api_stores.py`（API/store）、`work_frontend_scripts_40_make_doc.py`（本文生成）。
+证据：缓存条目清单（353 条原始条目：URL、hash、地址、大小、响应头；该清单未随仓库发布）。
 
 ### 1.3 提取产物
 
-- `work/frontend/bundles/`：**209** 个唯一文件，命名 `NNN_<host>__<path>.<ext>`；`NNN` 是缓存条目序号（与 manifest 对应）。
-- `work/frontend/manifest.json`：353 条清单，字段 `index/url/file/duplicate_of/cache_file/stored_size/size/gzip/sha256/type/content_type/status/headers/pretty/pretty_lines`。
-- `work/frontend/pretty/`：139 个文本资源的“可读/可引用行号”版本（仅在 `; { }` 后插入换行，**不改变字符序列**，因此可按行号引用；原始文件仍是单行 minified）。
+- **前端原始 bundle**（未随仓库发布）：**209** 个唯一文件，命名 `NNN_<host>__<path>.<ext>`；`NNN` 是缓存条目序号（与 manifest 对应）。
+- **前端资源清单**（`data/frontend/manifest.json`，未随仓库发布）：353 条清单，字段 `index/url/file/duplicate_of/cache_file/stored_size/size/gzip/sha256/type/content_type/status/headers/pretty/pretty_lines`。
+- **前端可读化 bundle**（未随仓库发布）：139 个文本资源的“可读/可引用行号”版本（仅在 `; { }` 后插入换行，**不改变字符序列**，因此可按行号引用；原始文件仍是单行 minified）。
 - 抓到的资源按 host 分布：
 
 | host | 条目数 |
@@ -177,7 +182,7 @@ file_type = addr >> 28
 
 ## 2. SPA 入口与运行时骨架
 
-入口 `index.html`（`work/frontend/pretty/000_...index.html`，39 行）：
+入口 `index.html`（可读化 bundle 的 `000_...index.html`，未随仓库发布；共 39 行）：
 
 - `<title>E听说</title>`（L7）；启动占位屏 `#placeholderScreen`（L17-20，文案“程序正在启动中…”）→ 由 `page/splashScreen.js` 移除。
 - L13：`<script type="module" crossorigin src="./assets/index-dc0257dd.js">` —— SPA 主 bundle（3,481,698 B，缓存中为**未压缩原始 JS**，即 `f_000002`）。
@@ -185,7 +190,7 @@ file_type = addr >> 28
 - L22-35：**在 module 前后加载 14 个 classic 脚本**（挂 window 全局，供 SPA 调用原生能力）：`page/refreshPage.js`、`plugins/stic/{appcontroller,shellhelper,sqlitepln,filehelper,sevenzip,sndhelper,httphelper,sysconfig,etshelper}.js`、`plugins/clientDB.js`、`plugins/crypto-js.js`、`plugins/gt4.js`。加载顺序即依赖顺序（`cef.message` 由 CEF 注入，见 §7）。
 - 启动流程：`refreshPage.js` 读取 `localStorage.clientConfig`（含 `EnvType`、`C_Version`、`Port` 等）与 `sessionStorage` → `splashScreen.js` 调 `ShellHelper.getconfig` 取窗口配置、移除占位屏 → SPA 挂载 `#app`（L36）。
 
-版本/环境线索：`envConfig` 内 `version$4="3.9.3"`（B:18387，构建版本字面量）；实际客户端版本来自 `clientConfig.C_Version`，函数 `envConfig("VITE_CLIENT_VERSION")`（B:18356-18362）；真实运行日志 `ETS\logs\ets_2026-11-4.log` 中 `global_client_version` 为 **5.7.9**。
+版本/环境线索：`envConfig` 内 `version$4="3.9.3"`（B:18387，构建版本字面量）；实际客户端版本来自 `clientConfig.C_Version`，函数 `envConfig("VITE_CLIENT_VERSION")`（B:18356-18362）；真实运行日志 `<ETS_INSTALL_DIR>\logs\ets_2026-11-4.log` 中 `global_client_version` 为 **5.7.9**。
 
 运行时全局：`EXE_PATH = cef.message.getExePath()`、`STIC_PATH="stic://file.iflytek.com/"`（B:50812）——本地资源（packages、soundfiles）通过自定义 scheme 访问。
 
@@ -203,7 +208,7 @@ file_type = addr >> 28
 
 ### 3.2 全量路由（91 条）
 
-列说明：`line` = `work/frontend/pretty/001_...index-dc0257dd.js` 行号；`module` = 来源模块数组（`main-router` 为主路由表）；`component` 为该路由组件 chunk；`meta` 为 `meta:{...}` 中的关键项（keepAlive/header 等）。
+列说明：`line` = 可读化 bundle 的 `001_...index-dc0257dd.js` 行号（可读化 bundle 未随仓库发布）；`module` = 来源模块数组（`main-router` 为主路由表）；`component` 为该路由组件 chunk；`meta` 为 `meta:{...}` 中的关键项（keepAlive/header 等）。
 
 | line | full_path | name | component | meta | module |
 |---|---|---|---|---|---|
@@ -421,7 +426,7 @@ file_type = addr >> 28
 - 失败重试：`SIGN_ATTEMPTS=3`，单次调用超时 `CALL_TIMEOUT=1200ms`（`invoke` 包 Promise + timeout）。
 - 签名格式校验：`SIGN_PATTERN=/^[a-f\d]{32}$/i`（B:56465）。
 - 响应签名：`signResponse(body, protocol)` → v2 走 `encode_api_resp_v2`，v1 走 `encode_api_resp`（请求里 `sign_response:1` 表示要求响应签名）。
-- 协议切换会写日志 `ets_sign_protocol_selected protocol=..., pid=...`（B:56655-56656）；实测日志：`ets_sign_protocol_selected protocol=v2, pid=pcWin`（`ETS\logs\ets_2026-11-4.log`）。
+- 协议切换会写日志 `ets_sign_protocol_selected protocol=..., pid=...`（B:56655-56656）；实测日志：`ets_sign_protocol_selected protocol=v2, pid=pcWin`（`<ETS_INSTALL_DIR>\logs\ets_2026-11-4.log`）。
 
 错误码处理 `errorHandler`（B:56556-56579）：
 
@@ -598,7 +603,7 @@ cef.message.sendMessage(s, "ShellHelper", "getroomid", "");
 | soundhelper | 14 |
 | sqlitepln | 6 |
 
-总计 **120** 处调用、**115** 个不同 `插件.action`，另有 2 个动态 action（`EtsHelper.encode_api_body_v2` / `encode_api_resp_v2`）。机器可读清单：`work/frontend/action_keys.json`（含 `plugin/action/method/params文案/文件/行号`）。
+总计 **120** 处调用、**115** 个不同 `插件.action`，另有 2 个动态 action（`EtsHelper.encode_api_body_v2` / `encode_api_resp_v2`）。机器可读清单：`data/frontend/action_keys.json`（含 `plugin/action/method/params文案/文件/行号`）。
 
 ### 7.3 action 全表
 
@@ -812,7 +817,7 @@ cef.message.sendMessage(s, "ShellHelper", "getroomid", "");
 
 ## 9. 日志与埋点上报链路
 
-### 9.1 本地日志（→ ETS\logs）
+### 9.1 本地日志（→ <ETS_INSTALL_DIR>\logs）
 
 `LoggerUtils`（B:50977-51017）：
 
@@ -824,7 +829,7 @@ cef.message.sendMessage(s, "ShellHelper", "getroomid", "");
 
 - 静态 WS 客户端：`ws://127.0.0.1:${(JSON.parse(cef.message.getAppConfig())||{}).suspensionBallPort||40001}`（B:50952-50955），5s 超时重试（`retryCount=3`）。
 - 进程守护：`processName = "ets_mq_server.exe"`（Windows）/`ets_mq_server`（Linux），启动路径 `EXE_PATH/mq_server/ets_mq_server.exe`，通过 `ShellHelper.processexist/startprocess` 检查并拉起（B:50905-50920）。
-- `sendMessage(str)` → WS 转发；mq_server 把收到的内容落盘为 `ETS\logs\ets_<M-D>.log`（实测日志格式：`[时间] [INFO] mq_server - received: [I] [TAG] ...`）。
+- `sendMessage(str)` → WS 转发；mq_server 把收到的内容落盘为 `<ETS_INSTALL_DIR>\logs\ets_<M-D>.log`（实测日志格式：`[时间] [INFO] mq_server - received: [I] [TAG] ...`）。
 - 前端日志文件族：`cef_<M-D>.log`（CEF 原生）、`shell_<M-D>.log`（ETSShell）、`ets_<M-D>.log`（前端经 mq_server）。
 
 ### 9.2 阿里云 SLS 埋点
@@ -872,20 +877,22 @@ cef.message.sendMessage(s, "ShellHelper", "getroomid", "");
 
 ## 11. 产物与证据索引
 
+> 下表标注（未随仓库发布）的产物不在仓库内；已发布的数据文件位于 `data/frontend/`。
+
 | 产物 | 说明 |
 |---|---|
-| `work/frontend/manifest.json` | 353 条资源清单（URL/类型/大小/sha256/缓存定位/pretty 路径） |
-| `work/frontend/bundles/` | 209 个去重后的原始资源（含 3.4MB 主 bundle、1.15MB CSS、原生插件 JS、图片等） |
-| `work/frontend/pretty/` | 139 个文本资源的可读版（插入换行，字符不变；用于行号引用） |
-| `work/frontend/routes.json` | 91 条路由（path/name/component/chunks/meta/module/line）+ 191 个 chunk 引用与命中情况 |
-| `work/frontend/action_keys.json` | 9 通道 115 个 action（含方法名、参数文案、文件、行号） |
-| `work/frontend/api_endpoints.json` | 118 个 API 端点 |
-| `work/frontend/stores.json` | 20 个 pinia store |
-| `work/frontend/cache_entries.json` | 353 条缓存条目原始解析结果（含响应头、地址） |
-| `work/frontend/bridge_calls.json` | 120 处 `sendMessage` 原始调用点 |
-| `work/frontend/excerpts/` | 关键代码窗口（带行号，便于复核）：`routenames/logger/uploadlogs/sls/snd1-4/ise4/oss/sigreq/consts/...` |
-| `work/frontend/scripts/` | 全部解析/提取/统计脚本（可复现，见 §1.2） |
-| `work/frontend/pretty/` 行号约定 | 所有 `文件:行号` 引用均指 `pretty/` 版本；原始 minified 为单行，行号=1 |
+| `data/frontend/routes.json` | 91 条路由（path/name/component/chunks/meta/module/line）+ 191 个 chunk 引用与命中情况 |
+| `data/frontend/action_keys.json` | 9 通道 115 个 action（含方法名、参数文案、文件、行号） |
+| 前端资源清单（未随仓库发布） | 353 条资源清单（URL/类型/大小/sha256/缓存定位/pretty 路径） |
+| 前端原始 bundle（未随仓库发布） | 209 个去重后的原始资源（含 3.4MB 主 bundle、1.15MB CSS、原生插件 JS、图片等） |
+| 前端可读化 bundle（未随仓库发布） | 139 个文本资源的可读版（插入换行，字符不变；用于行号引用） |
+| API 端点清单（未随仓库发布） | 118 个 API 端点（`data/frontend/api_endpoints.json`） |
+| Pinia store 清单（未随仓库发布） | 20 个 store（`data/frontend/stores.json`） |
+| 缓存条目清单（未随仓库发布） | 353 条缓存条目原始解析结果（含响应头、地址） |
+| 桥调用点清单（未随仓库发布） | 120 处 `sendMessage` 原始调用点 |
+| 关键代码窗口（未随仓库发布） | 关键代码窗口（带行号，便于复核）：`routenames/logger/uploadlogs/sls/snd1-4/ise4/oss/sigreq/consts/...` |
+| `scripts/work_frontend_scripts_*.py` | 全部解析/提取/统计脚本（可复现，见 §1.2） |
+| 行号约定（未随仓库发布） | 所有 `文件:行号` 引用均指可读化 bundle 版本；原始 minified 为单行，行号=1 |
 
 主要证据行号速查：
 

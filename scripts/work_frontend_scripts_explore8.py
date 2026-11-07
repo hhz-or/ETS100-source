@@ -1,5 +1,5 @@
 import os,struct
-base=r'D:\ets-rea\ETS\temp\Cache_ETSShell\Cache'
+base=r'ETS\temp\Cache_ETSShell\Cache'
 b=open(os.path.join(base,'data_3'),'rb').read()
 # block at 8192, payload at 8220, size 5776
 print('first',b[8220:8220+60])

@@ -4,7 +4,7 @@ K_UPDATE = "555ffbe95ccf4e9535a110170b445ab8"
 ok = 0
 total = 0
 samples = []
-for f in glob.glob(r"D:\ets-rea\ETS\temp\update\log\INFO_uLOG_*"):
+for f in glob.glob(r"ETS\temp\update\log\INFO_uLOG_*"):
     t = open(f, "rb").read().decode("utf-8", "replace")
     for line in t.split("\n"):
         if "update_info.h" not in line:

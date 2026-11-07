@@ -3,7 +3,7 @@
 """Build a compact overview of all scanned binaries for report writing."""
 import os, json, re, collections
 
-ROOT = r"D:\ets-rea\work\native"
+ROOT = r"data/native"
 BINS = ["ETSShell", "Ets", "EtsUpdate", "bugreport", "ets_mq_server",
         "appcontroller", "etshelper", "filehelper", "httphelper", "sevenzip",
         "shellhelper", "soundhelper", "sqlitepln", "window_control"]

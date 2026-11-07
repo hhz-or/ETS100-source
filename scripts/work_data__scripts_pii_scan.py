@@ -1,5 +1,5 @@
 import os,re,json
-D=r"D:\ets-rea\work\data"
+D=r"data"
 ACCT=re.compile(r"SHM3\d{7,}"); PHONE=re.compile(r"1[3-9]\d{9}"); JWT=re.compile(r"eyJ[A-Za-z0-9_\-]{20,}\.")
 bad=[]
 for dp,dn,fn in os.walk(D):

@@ -1,5 +1,5 @@
 import re, gzip, os
-base = r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache"
+base = r"ETS\temp\Cache_ETSShell\Cache"
 b = open(os.path.join(base, "f_000002"), "rb").read()
 print("f_000002 size", len(b))
 for pat in [b"vue", b"element-plus", b"ElementPlus", b"pinia", b"vue-router", b"axios", b"ets-student-pc-web", b"cef.message", b"__VUE"]:

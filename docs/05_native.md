@@ -1,10 +1,15 @@
 # 05 原生层（ETSShell / 插件 / 更新器 / 辅助进程）
 
-> 目标目录：`D:\ets-rea\ETS`（只读，全程未修改）
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **本文复核**：`python scripts/work_native__tools_pe_scan.py` 等（PE 扫描/反汇编工具在 `scripts/`）。
+
+> 目标目录：`<ETS_INSTALL_DIR>`（只读，全程未修改）
 > 分析日期：2026-11-06
-> 分析方式：**纯静态** PE 解析 + 递归下降反汇编 + 插件字符串/导出表/导入表/RTTI，对照目标自身写下的历史日志（`ETS\logs\*.log`，属"目标留下的运行时痕迹"，不是本次执行所得）
+> 分析方式：**纯静态** PE 解析 + 递归下降反汇编 + 插件字符串/导出表/导入表/RTTI，对照目标自身写下的历史日志（`<ETS_INSTALL_DIR>\logs\*.log`，属"目标留下的运行时痕迹"，不是本次执行所得）
 > 证据等级：**【观察】**=来自文件字节或工具输出；**【推断】**=由观察推理；**【未知】**=证据不足
-> 配套可机读产物：`work/native/<binary>/exports.json`、`imports.json`、`strings.txt`、`meta.json`、`dispatch.json`；汇总 `work/native/_summary.json`、`work/native/_overview.md`、`work/native/plugin_abi.json`
+> 配套可机读产物：`data/native/<binary>_exports.json`、`<binary>_imports.json`、`<binary>_dispatch.json` 与汇总 `data/native/_summary.json`、`data/native/plugin_abi.json`；关键字符串、完整元数据、RTTI 清单与反汇编等中间产物未随仓库发布。
 > 反编译摘录见 [09_decompiled.md](09_decompiled.md)；签名算法完整还原见 [08_signature.md](08_signature.md)，本文只补原生侧证据，不重复推导。
 
 ---
@@ -15,7 +20,7 @@
 2. 插件 ABI 极其固定：每个 `.pln` 都导出 **同名同序号的 4 个函数** `PlnInitiliaze`（注意多一个 `i`）、`PlnOnProcessMessage`、`PlnSetParam`、`PlnUnInitialize`，序号 1–4；`soundhelper.pln` 额外导出 29 个 `snd*` C 接口（序号 5–33）。【观察】
 3. 壳通过 `LoadLibrary` + `GetProcAddress("PlnInitiliaze"/"PlnSetParam"/"PlnOnProcessMessage")` 装载插件，并用 `PlnSetParam("LOG"|"WLOG"|"EXEC_CALLBACK", fn)` 向插件注入宿主回调；插件通过 `EXEC_CALLBACK` 把异步结果回传给 JS。【观察 + 推断】
 4. 前端与原生之间的桥是注入到 renderer 的 JS：`cef.message.sendMessage(uid, pluginKey, actionKey, args)`，另有 16 个 `cef.message.*` 原生函数（见 §四）。【观察】
-5. 构建血缘清晰：PDB 路径全部为 `D:\code\STIC\...`，存在**两代工具链**——`stic-pro_ets`（VS2019，linker 14.29，新壳/新插件）与 `stic-pro_2010`（VS2010，linker 10.0，多数老插件）。【观察】
+5. 构建血缘清晰：PDB 路径全部为 `<BUILD_ROOT>\STIC\...`，存在**两代工具链**——`stic-pro_ets`（VS2019，linker 14.29，新壳/新插件）与 `stic-pro_2010`（VS2010，linker 10.0，多数老插件）。【观察】
 6. 安全面：**未发现主动反调试逻辑**；壳/预启动器/更新器/崩溃器/mq_server 有 Authenticode 签名，**9 个插件全部未签名**；壳内部存在多个危险 CEF 开关（`ignore-certificate-errors`、`disable-web-security`）；`mq_server` 在 `0.0.0.0:40001` 无鉴权广播日志（含阿里云 STS 临时凭证）。【观察 + 推断】
 
 ---
@@ -26,13 +31,13 @@
 
 | 名称 | 类型 | 大小(B) | PE 时间戳(UTC) | 链接器 | PDB 路径（残留） | 整文件熵 | 签名 |
 |---|---|---|---|---|---|---|---|
-| `ETSShell.exe` | EXE/GUI | 2,297,440 | 2025-07-28 03:43:45 | 14.29 (VS2019) | `D:\code\STIC\stic-pro_ets\_bin\ETSShell.pdb` | 6.390 | 有，见 §八 |
-| `Ets.exe` | EXE/GUI | 485,824 | 2025-12-16 10:23:23 | 14.29 | `D:\code\STIC\preshell_2\Release\preshell.pdb` | 5.897 | 有（iFLYTEK/GlobalSign R45） |
-| `EtsUpdate.exe` | EXE/GUI | 2,079,784 | 2024-07-11 03:35:17 | 12.0 (VS2013) | `D:\code\ets_git_code\stic_tools\ets_tool_stic\bin\EtsUpdate\Release\EtsUpdate.pdb` | 6.645 | 有（结构见 §八，签名者未解析） |
-| `bugreport\bugreport.exe` | EXE/GUI | 3,614,240 | 2024-11-05 08:06:30 | 10.0 (VS2010) | `D:\code\STIC\stic-pro_ets\src\third_party\bugreport\build\Release\bugreport.pdb` | 6.411 | 有（未解析） |
-| `mq_server\ets_mq_server.exe` | EXE/CUI | 12,080,168 | 2016-06-23 13:35:12 | 12.0 | `c:\ws\Release\node.pdb` | 6.778 | 有（未解析） |
+| `ETSShell.exe` | EXE/GUI | 2,297,440 | 2025-07-28 03:43:45 | 14.29 (VS2019) | `<BUILD_ROOT>\STIC\stic-pro_ets\_bin\ETSShell.pdb` | 6.390 | 有，见 §八 |
+| `Ets.exe` | EXE/GUI | 485,824 | 2025-12-16 10:23:23 | 14.29 | `<BUILD_ROOT>\STIC\preshell_2\Release\preshell.pdb` | 5.897 | 有（iFLYTEK/GlobalSign R45） |
+| `EtsUpdate.exe` | EXE/GUI | 2,079,784 | 2024-07-11 03:35:17 | 12.0 (VS2013) | `<BUILD_ROOT>\ets_git_code\stic_tools\ets_tool_stic\bin\EtsUpdate\Release\EtsUpdate.pdb` | 6.645 | 有（结构见 §八，签名者未解析） |
+| `bugreport\bugreport.exe` | EXE/GUI | 3,614,240 | 2024-11-05 08:06:30 | 10.0 (VS2010) | `<BUILD_ROOT>\STIC\stic-pro_ets\src\third_party\bugreport\build\Release\bugreport.pdb` | 6.411 | 有（未解析） |
+| `mq_server\ets_mq_server.exe` | EXE/CUI | 12,080,168 | 2016-06-23 13:35:12 | 12.0 | `<BUILD_ROOT>\ws\Release\node.pdb` | 6.778 | 有（未解析） |
 | `plugins\appcontroller\appcontroller.pln` | DLL | 552,448 | 2024-10-28 09:29:09 | 14.29 | `...\stic-pro_ets\build\Release\plugins\appcontroller\appcontroller.pdb` | 6.613 | **无** |
-| `plugins\etshelper\etshelper.pln` | DLL | 497,664 | 2026-08-15 06:39:14 | 14.29 | `D:\code\STIC\stic-misc\stic-pro_ets\build\Release\plugins\etshelper\etshelper.pdb` | 6.605 | **无** |
+| `plugins\etshelper\etshelper.pln` | DLL | 497,664 | 2026-08-15 06:39:14 | 14.29 | `<BUILD_ROOT>\STIC\stic-misc\stic-pro_ets\build\Release\plugins\etshelper\etshelper.pdb` | 6.605 | **无** |
 | `plugins\filehelper\filehelper.pln` | DLL | 674,304 | 2024-10-29 03:33:46 | 10.0 | `...\stic-pro_2010\build\Release\plugins\filehelper\filehelper.pdb` | 6.462 | **无** |
 | `plugins\httphelper\httphelper.pln` | DLL | 1,730,560 | 2024-10-28 10:06:58 | 10.0 | `...\stic-pro_2010\build\Release\lib\httphelper.pdb` | 6.734 | **无** |
 | `plugins\sevenzip\sevenzip.pln` | DLL | 467,456 | 2024-10-28 12:24:58 | 10.0 | `...\stic-pro_2010\build\Release\plugins\sevenzip\sevenzip.pdb` | 6.453 | **无** |
@@ -46,7 +51,7 @@
 - `ETSShell.exe` 版本资源：`FileVersion/ProductVersion=5.0.91.329`，`ProductName=CCS`，`CompanyName=iflytek`，`FileDescription=shell.exe`，`OriginalFilename=shell.exe`，`LegalCopyright=Copyright (C) IFLYTEK 2023`，子系统 GUI，ImageBase `0x400000`，入口 `0x10D22D`。
 - `Ets.exe`：**无版本资源、无导出**，PDB 名为 `preshell.pdb`，字符串含 `shell.exe` 且仅导入 KERNEL32/USER32/GDI32/SHELL32/SHLWAPI →【推断】"预启动器/引导器"（pre-shell，负责拉起 `ETSShell.exe`，与 `07_shell_update.md` 的启动链一致）。
 - `EtsUpdate.exe`：`ProductName=E听说更新工具`，`CompanyName=广州讯飞易听说网络科技有限公司`。
-- `mq_server\ets_mq_server.exe`：**就是官方 `node.exe` 改名**——版本资源 `Node.js 5.12.0`、`OriginalFilename=node.exe`、PDB `c:\ws\Release\node.pdb`，导出表 1,429 项全是 V8/Node 的 C++ 符号；同目录 `main.js` 为明文源码，`node_modules` 实际安装的是 `ws@1.1.2`（`package.json` 声明 `^8.17.0`，与 `node@5.12` 不兼容，说明实际运行时以 `node_modules` 内已安装版本为准）。【观察 + 推断】
+- `mq_server\ets_mq_server.exe`：**就是官方 `node.exe` 改名**——版本资源 `Node.js 5.12.0`、`OriginalFilename=node.exe`、PDB `<BUILD_ROOT>\ws\Release\node.pdb`，导出表 1,429 项全是 V8/Node 的 C++ 符号；同目录 `main.js` 为明文源码，`node_modules` 实际安装的是 `ws@1.1.2`（`package.json` 声明 `^8.17.0`，与 `node@5.12` 不兼容，说明实际运行时以 `node_modules` 内已安装版本为准）。【观察 + 推断】
 - `bugreport\bugreport.exe`：导出 2,853 项几乎全是 Google Test/glog、DuiLib 的 C++ mangled 名，依赖 `dbghelp.dll`、`sqlite3.dll`，RTTI 含 `DuiLib::*`、`Sti::SevenZip::ZipHelper` →【推断】基于 gtest/glog + DuiLib 的内部崩溃上报工具，由壳的 `dumpfile::RunBugReport` 拉起（见 §六）。
 - 全部 14 个文件均**非加壳、未混淆**（节区可读、导入表完整、无 UPX/VMProtect 类节名）。【观察】
 
@@ -77,14 +82,14 @@
 
 - **链接器版本**（来自 PE 可选头，可靠）：`ETSShell`/`Ets`/`appcontroller`/`etshelper` = **14.29（VS2019 16.11）**；`EtsUpdate`/`mq_server` = 12.0（VS2013）；其余 7 个插件 + `bugreport` = **10.0（VS2010）**。
 - **Rich header**（全部 14 个均存在，key 各不相同）：解码后含多组 `(prodid, build)`，例如 `ETSShell` 出现 build `33140/30034/30319/31101`、`appcontroller` 出现 `27412/30034/30154`、`shellhelper`/`filehelper` 出现 `40219` 与 `30729` 混排 →【推断】主代码与第三方静态库（OpenSSL、7-Zip、glog/gtest 等）由不同年代 MSVC 编译后链接在一起；具体每个 prodid 对应的 VS 版本未逐一核对，标为【未知】。
-- **调试信息残留**：14 个文件均有 Debug Directory（type 2 CodeView），保留**原始 PDB 路径**（见上表）——泄露内网构建机目录结构 `D:\code\STIC\...`、`D:\code\ets_git_code\...`、`c:\ws\...`（Node 官方构建机）。【观察】
+- **调试信息残留**：14 个文件均有 Debug Directory（type 2 CodeView），保留**原始 PDB 路径**（见上表）——泄露内网构建机目录结构 `<BUILD_ROOT>\STIC\...`、`<BUILD_ROOT>\ets_git_code\...`、`<BUILD_ROOT>\ws\...`（Node 官方构建机）。【观察】
 - 所有文件 `.reloc` 完好、`DYNAMIC_BASE`+`NX_COMPAT` 均开启；均未设置 `NO_SEH`；**CFG（Control Flow Guard）只有 `etshelper.pln` 一个开启**（`DllCharacteristics & 0x4000`）。【观察】
 
 ---
 
 ## 三、插件 ABI（导出表、调用约定、参数）
 
-### 3.1 9 个插件的精确导出表（观察，`work/native/<pln>/exports.json`）
+### 3.1 9 个插件的精确导出表（观察，`data/native/<pln>_exports.json`）
 
 所有导出均为 **stdcall 序号连续、无 name ordinal 冲突**；`PlnSetParam`/`PlnUnInitialize` 在部分插件中指向同一 RVA（空桩）。
 
@@ -109,7 +114,7 @@
 
 ### 3.3 调用约定与参数（观察 + 推断）
 
-以 `appcontroller.pln` 为样本（`work/native/appcontroller/abi_stubs.txt`）：
+以 `appcontroller.pln` 为样本（`data/native/appcontroller_abi_stubs.txt（未随仓库发布）`）：
 
 - `PlnInitiliaze()`：**无参数**（函数体在 `ret` 前只用 `esp` 上的临时字符串），初始化插件日志：构造 `std::string "logs\shell.log"` 并调用日志器。【观察】
 - `PlnSetParam(const char* name, void* value)`：`push ebp; mov ebp,esp`，第一个参数 `[ebp+8]` 为名字，第二个 `[ebp+0xc]` 为值；内部对 `"LOG"`、`"WLOG"`、`"EXEC_CALLBACK"` 做逐字符比较，命中 `EXEC_CALLBACK` 时把 `[ebp+0xc]` 存入全局 `0x10085534`，最后 `ret`（cdecl）。【观察】→ 签名推断为 `void PlnSetParam(const char* key, void* value)`。
@@ -123,7 +128,7 @@
 
 ### 3.4 宿主侧装载器（观察）
 
-`ETSShell.exe` 内 `StiCorePlnManager.cpp`（PDB 路径字符串 `D:\code\STIC\stic-pro_ets\src\core\StiCorePlnManager.cpp`）相关函数（`work/native/ETSShell/plugin_loader_disasm.txt`）：
+`ETSShell.exe` 内 `StiCorePlnManager.cpp`（PDB 路径字符串 `<BUILD_ROOT>\STIC\stic-pro_ets\src\core\StiCorePlnManager.cpp`）相关函数（反汇编见壳插件装载器反汇编，未随仓库发布）：
 
 - `sub_004B084A`（251 指令）：`GetProcAddress(?, "PlnSetParam")`、`GetProcAddress(?, "PlnInitiliaze")`，随后 `GetProcAddress` 解析 `"WLOG"`、`"EXEC_CALLBACK"`；失败日志 `SYMBOL_INIT Fail:`、`SYMBOL_SETPARAM Fail:`。
 - `sub_004B0CC2`（104 指令）：`GetProcAddress(?, "PlnOnProcessMessage")`；失败日志 `SYMBOL_PROCMESSAGE Fail:`。
@@ -136,7 +141,7 @@
 
 ## 四、JS ↔ 原生桥（CEF 注入脚本，观察）
 
-`ETSShell.exe` 的 `.rdata` 中内嵌一段注入 renderer 的 JS（文件偏移 `0x17DD08`，2,130 字节，已提取为 `work/native/ETSShell/js_bridge_full.js`），声明 **17 个 native function**：
+`ETSShell.exe` 的 `.rdata` 中内嵌一段注入 renderer 的 JS（文件偏移 `0x17DD08`，2,130 字节，已提取为 `壳注入 JS 桥全文（未随仓库发布）`），声明 **17 个 native function**：
 
 ```
 cef.message.sendMessage(uid, pluginKey, actionKey, args)   // 主入口
@@ -156,9 +161,9 @@ cef.message.setProxy(server)
 ```
 
 - 该脚本以 `native function xxx();` 形式声明，由 `ClientHandler`/`ClientAppExtensionHandler`（RTTI：`Sti::Adapter::ClientHandler`、`Sti::Adapter::ClientAppExtensionHandler`、`Sti::Adapter::ClientApp`）注册到 V8。【观察 + 推断】
-- 前端实际用法（`ETS\packages\default\appcontroller.js` 与 `logs\ets_*.log`）：`uid = createGuid()`，然后 `sendMessage(uid, 'appcontroller', 'init', JSON.stringify(args))`；异步结果通过 `setMessageCallback(uid, cb)` 回来；`uid` 后缀 `@error/@init/@close/...` 是约定（`appcontroller.js` 第 5–19 行）。【观察】
+- 前端实际用法（`<ETS_INSTALL_DIR>\packages\default\appcontroller.js` 与 `logs\ets_*.log`）：`uid = createGuid()`，然后 `sendMessage(uid, 'appcontroller', 'init', JSON.stringify(args))`；异步结果通过 `setMessageCallback(uid, cb)` 回来；`uid` 后缀 `@error/@init/@close/...` 是约定（`appcontroller.js` 第 5–19 行）。【观察】
 - **actionKey 全小写**（`init`、`close`、`encode_api_body_v2`……）；`pluginKey` 形如 `appcontroller`/`etshelper`/`filehelper`/`httphelper`/`sevenzip`/`shellhelper`/`soundhelper`/`sqlitepln`/`window_control`（日志与 JS 双侧一致）。【观察】
-- 日志里 `mq_server` 收到的 `[H5_SOUND] ... audioUrl=stic://file.iflytek.com/C:\...mp3` 表明壳注册了自定义协议 `stic://` 把本地文件映射给 H5（`ClientSchemeHandler`/`UTClientSchemeHandler` RTTI）。【观察 + 推断】
+- 日志里 `mq_server` 收到的 `[H5_SOUND] ... audioUrl=stic://file.iflytek.com/<本地路径>mp3` 表明壳注册了自定义协议 `stic://` 把本地文件映射给 H5（`ClientSchemeHandler`/`UTClientSchemeHandler` RTTI）。【观察 + 推断】
 
 ---
 
@@ -181,7 +186,7 @@ cef.message.setProxy(server)
 
 ### 5.3 filehelper.pln —— 文件系统全能工具
 - 定位：读写/复制/移动/删除/重命名、目录遍历、文件对话框、MD5/Base64、`.rpk/.npk` 包读取、阿里云 OSS MD5 校验；含 **CppSQLite3**（导入 `sqlite3.dll` 17 API，含 `sqlite3_key` 加密库）。【观察】
-- action（30 个，逐字以 `work/native/filehelper/dispatch.json` 为准）：`aliyun_oss_md5, cleardir, closeshell, copyfileordirectory, createfolder, createnewfile, deletefileordirectory, ergodic, ergodicfiles, existfileorfolder, getbase64, getcode, getfoledersize, getmd5, getsystemdirs, isfileexisted, isfileuse, ncttools, openbrowsedialog, openfiledialog, readbinaryfile, readfile, readnpk, readrpk_kqlx, removefiletootherpath, renamefile, renamefolder, savefiledialog, writefile, writefilewithbinary`。【观察】
+- action（30 个，逐字以 `data/native/filehelper_dispatch.json` 为准）：`aliyun_oss_md5, cleardir, closeshell, copyfileordirectory, createfolder, createnewfile, deletefileordirectory, ergodic, ergodicfiles, existfileorfolder, getbase64, getcode, getfoledersize, getmd5, getsystemdirs, isfileexisted, isfileuse, ncttools, openbrowsedialog, openfiledialog, readbinaryfile, readfile, readnpk, readrpk_kqlx, removefiletootherpath, renamefile, renamefolder, savefiledialog, writefile, writefilewithbinary`。【观察】
 - 日志方法（23）：`OnGetMd5, OnGetBase64, OnGetAliyunMd5, OnReadFileContent(…), OnGetRpkContent_KQLX, OnGetNpkContent, OnErgodicFiles, OnErgoDic, OnExistFileOrFolder, OnGetFolederSize, OnCreateFolder, OnDeleteFileOrFolder, OnRenameFile, OnRenameFolder, OnRemoveFileToOtherPath, OnIsFileUse, OnGetOpenFile, OnSaveFileDir, OnSetFileContent, OnSaveContentWithBinary, OnGetFileContent, OnGetFileContentBinary` 等。【观察】
 - 备注：包含 `closeshell`（在文件动作里关闭壳）——权限最大，"前端可让进程退出"。【推断】
 
@@ -228,7 +233,7 @@ cef.message.setProxy(server)
 
 ## 六、导入依赖矩阵与 RTTI
 
-### 6.1 导入 DLL 矩阵（观察，`work/native/<name>/imports.json`）
+### 6.1 导入 DLL 矩阵（观察，`data/native/<name>_imports.json`）
 
 | DLL | 使用者（括号为该文件导入函数数） |
 |---|---|
@@ -247,7 +252,7 @@ cef.message.setProxy(server)
 - `EtsUpdate.exe` 走 **Windows CryptoAPI**（`ADVAPI32!CryptAcquireContextW/CryptHashData/CryptEncrypt` + RTTI `MD5_CTX`），与主客户端 OpenSSL 体系不同源。【观察 + 推断】
 - `sqlite3.dll` 导出被使用的 `sqlite3_key` 表明本地 DB 具备加密能力（`ETS.db` 是否加密见 `06_data.md`）。【观察】
 
-### 6.2 RTTI 类名（节选，观察，完整见 `work/native/<name>/rtti_classes.json`）
+### 6.2 RTTI 类名（节选，观察，完整清单未随仓库发布）
 
 - `ETSShell`（166 类）：`Sti::Core::StiCore`、`Sti::Core::StiCorePlnManager`、`Sti::Adapter::{ClientApp,ClientHandler,ClientSchemeHandler,ClientSchemeHandlerFactory,ClientAppExtensionHandler,RunFileDialogCallback,WindowBase,BrowserWindow}`、`Cef{V8Handler,Client,LifeSpanHandler,LoadHandler,RequestHandler,ResourceHandler,RenderHandler,RenderProcessHandler,DownloadHandler,ContextMenuHandler,DisplayHandler,DragHandler,KeyboardHandler}`、`CppSQLite3{DB,Query,Exception}`、`Json::{CharReader,StreamWriter,Writer,…}`、`_cef_*` 结构体；并含 `CefRunFileDialogCallback`。→ STIC 壳 = 标准 CEF client 实现 + 自研插件管理 + SQLite 文件管理器。【观察】
 - `EtsUpdate`（325 类）：`DuiLib::CWindowWnd/IListItemUI`、`HttpHandler`、`CppSQLite3*`、`MD5_CTX`、大量 `std::XH::*`（自研工具库命名空间）。【观察】
@@ -268,7 +273,7 @@ cef.message.setProxy(server)
 
 ## 七、`etshelper.pln` 签名相关原生证据（补充 08_signature.md）
 
-> 08_signature.md 已用日志 333/334 验证算法；此处给出**原生侧独立证据**与产物 `work/native/etshelper/sign_disasm.txt`（含 `OnEncodeAPIBody/OnEncodeAPIResp` 及其被调函数的 capstone 反汇编，字符串与 IAT 已注释）。
+> 08_signature.md 已用日志 333/334 验证算法；此处给出**原生侧独立证据**与产物 `data/native/etshelper_sign_disasm.txt（未随仓库发布）`（含 `OnEncodeAPIBody/OnEncodeAPIResp` 及其被调函数的 capstone 反汇编，字符串与 IAT 已注释）。
 
 1. **导入面**：仅 KERNEL32(135)/USER32(9)/SHELL32(4)/`sqlite3.dll`(6)/WINMM(1)。**无 `crypt32/advapi32/libssl` 导入**，无 `CryptAcquireContext`、无 OpenSSL 说明字符串。【观察】→ 签名所用 MD5 为**插件内静态实现**。
 2. **MD5 实现存在（算术证据）**：文件中出现 MD5 初始常量 `0x67452301/0xEFCDAB89/0x98BADCFE/0x10325476`（IV 表位于 RVA `0x6A540`，被 `movaps xmm0,[0x1006a540]` 引用），以及 CRC32 表常量 `0xEDB88320`；**未发现** SHA1/SHA256/HMAC/AES/SM4/TEA/Blowfish 常量，未发现 base64 字母表字符串（`ABCDEFGHIJKLMNOPQRSTUVWXYZ...` 在 etshelper 中 0 次命中，base64 由调用方 JS 完成）。【观察】
@@ -280,7 +285,7 @@ cef.message.setProxy(server)
    - `0x100051C0`（437 指令）：组装 v2 返回 JSON，引用字符串簇 `pid`、`202608`（=硬编码 `key_id`）、`key_id`、`sign_version`、`sign`；
    - `0x100050A0`（83 指令）：`MultiByteToWideChar`/`WideCharToMultiByte`（`0xFDE9`=CP_UTF8）UTF-8 转换。
 4. **"signature request rejected" 的语义（推断）**：`OnEncodeAPIBody` 在解析参数后先调一个"闸门"函数（`0x10013FC0`，47 指令），其中含 `lock cmpxchg` 全局状态、`GetTickCount`、阈值 `cmp ecx,0x400`（1024）、`cmp edx,0x1000000`（16MB）、冷却 `cmp ..,0x3E8`（1000ms），失败即走 `signature request rejected.` 日志；随后 MD5 环节失败才走 `signature generation failed.`。→【推断】该"request"是**本地请求合法性/频率限制**（防抖/大小上限/1 秒节流），不是网络请求；但 `10_unknowns.md` 可保留"是否存在其它签名服务路径"的验证项。
-5. **密钥形态（观察 + 引用）**：明文 `secret/appkey/hmac/key` 字符串在 `etshelper.pln` 中 **0 命中**；密钥为 `.rdata` 查表混淆 + FNV-1a 自校验（`work/scripts/keystream.py` 已验证），08_signature.md §2.2 已给出 v1/v2 派生值。本文独立确认：`.rdata` RVA `0x691C8–0x69310` 一带有 32×uint16 索引表与 0x32/0x3D×4 字节数据表，与 08 描述位置一致。【观察】
+5. **密钥形态（观察 + 引用）**：明文 `secret/appkey/hmac/key` 字符串在 `etshelper.pln` 中 **0 命中**；密钥为 `.rdata` 查表混淆 + FNV-1a 自校验（`scripts/keystream.py` 已验证），08_signature.md §2.2 已给出 v1/v2 派生值。本文独立确认：`.rdata` RVA `0x691C8–0x69310` 一带有 32×uint16 索引表与 0x32/0x3D×4 字节数据表，与 08 描述位置一致。【观察】
 6. **运行时佐证**：`logs\shell_2026-11-4.log` 共 192 条 `[etshelper::OnEncodeAPIBody] success`（etshelper.cpp:499）；`logs\ets_2026-11-4.log` 首行 `[I] [API_ETS] ets_sign_protocol_selected protocol=v2, pid=pcWin`，请求参数含 `sign_response:1`。→ 与本插件 v2 分支吻合。【观察】
 
 ---
@@ -294,7 +299,7 @@ cef.message.setProxy(server)
 - 危险命令行开关（字符串原文，是否实际传入需运行时验证）：`--enable-speech-input`、`--enable-media-source`、`--enable-media-stream`、`--allow-running-insecure-content`、`disable-web-security`、`allow-running-insecure-content`、`ignore-certificate-errors`、`enable-gpu-rasterization`、`--force-device-scale-factor`、`register-pepper-plugins`（`plugins\pepflash\pepflashplayer32_28_0_0_161.dll`、`plugins/pepflash/mpvjs.node;application/x-mpvjs`）、`--ppapi-flash-version`、`NetworkService,OutOfBlinkCors,SameSiteByDefaultCookies`。→【推断】壳为兼容老业务放宽了浏览器安全策略；`smoke` 结论是"客户端侧 TLS/同源策略保护不可依赖"。【观察 + 推断】
 - `shell.ini` 显示 `DisableGPU=1`、`FullScreen=1`、`ShowTray=0`、`MultiApp=1`（多实例）、`AutoUpgrade=1`、`MsgSize=50`、`AppName=ETSShell.exe`；`HomeUrl=https://statics.ets100.com/ets-student-pc-web/index.html`（远程加载 SPA，见 `04_frontend.md`）。【观察】
 - STIC 框架构成：`StiCore`（任务/消息中枢）、`StiCorePlnManager`（插件装载）、`StiAdapter`（CEF 外壳适配）、`StiCorePlugin.h`（插件日志/基类）、`dumpfile`（崩溃转储/拉起 bugreport）、`shellupgrade`（进程升级）、`FileManager`（rpk/upk 内存文件库）、`Sti::SevenZip::ZipHelper`（解包）、自定义节 `.fptable`/`Shared`。→【推断】STIC 是讯飞跨产品复用的"CEF 壳 + 原生插件总线"框架（版本 V3.0.76，产品外壳版本 5.0.91.329）。【观察 + 推断】
-- 自定义协议 `stic://<host>/<本地路径>` 把本地文件暴露给 H5（日志 `[H5_SOUND] audioUrl=stic://file.iflytek.com/C:\...mp3`），并由 `ClientSchemeHandler`/`UTClientSchemeHandler` 处理；`GetFileContent_WPK` 说明还支持 WPK 加密包内容读取。【观察 + 推断】
+- 自定义协议 `stic://<host>/<本地路径>` 把本地文件暴露给 H5（日志 `[H5_SOUND] audioUrl=stic://file.iflytek.com/<本地路径>mp3`），并由 `ClientSchemeHandler`/`UTClientSchemeHandler` 处理；`GetFileContent_WPK` 说明还支持 WPK 加密包内容读取。【观察 + 推断】
 
 ### 8.2 签名与完整性（观察）
 
@@ -352,26 +357,19 @@ cef.message.setProxy(server)
 | N5 | `EtsUpdate/bugreport/mq_server` 的签名者主体 | 仅知有 PKCS#7 | 用 REA `inspect_pe_certificates` 解析（本次未做，输出较大） |
 | N6 | `GetAsyncKeyState/SetWindowsHookExW` 的实际调用点 | 仅见导入 | Ghidra 交叉引用确认是否来自 DuiLib/输入法库 |
 | N7 | 壳是否在别处校验插件哈希/版本 | 加载器未见 | 搜索 `CryptHashData`/文件校验相关导入（ETSShell 无 crypt32，需看自研实现） |
-| N8 | `stic://` 协议对任意本地路径的访问边界 | 见日志可读 `C:\Users\...\*.mp3` | 分析 `ClientSchemeHandler` 的路径校验逻辑（在 Ghidra） |
+| N8 | `stic://` 协议对任意本地路径的访问边界 | 见日志可读 `<用户目录>\*.mp3` | 分析 `ClientSchemeHandler` 的路径校验逻辑（在 Ghidra） |
 
 ---
 
-## 十二、产物索引（全部在 `work/native/`）
+## 十二、产物索引（`data/native/` 与未发布产物）
+
+> 仓库发布 `data/native/` 下的导出/导入/分发统计与两个汇总 JSON；其余逐二进制产物（关键字符串、完整元数据、RTTI 清单、分发/签名反汇编、壳注入 JS 全文等）均未随仓库发布，可按本报告方法与自有安装副本重建。
 
 | 路径 | 内容 |
 |---|---|
-| `work/native/_summary.json` | 14 个二进制一行摘要（大小/时间戳/链接器/熵/导出/导入/PDB） |
-| `work/native/_overview.md` | 自动生成的逐二进制详情（节区、Rich、RTTI、导入、action） |
-| `work/native/plugin_abi.json` | 9 插件 ABI 汇总（导出+action+导入+日志方法+PDB） |
-| `work/native/<name>/exports.json` `imports.json` `strings.txt` `meta.json` | 每个二进制的导出/导入/关键字符串/完整元数据（strings 已去重、限 3000 行） |
-| `work/native/<plugin>/dispatch.json` | `PlnOnProcessMessage` 反汇编统计 + 字符串引用 + action 候选 + 各函数日志方法 |
-| `work/native/<plugin>/disasm_plnonprocessmessage.txt` | 分发函数全量注释反汇编（capstone） |
-| `work/native/etshelper/sign_disasm.txt` `sign_funcs.json` | 签名路径函数注释反汇编与函数摘要（含 `OnEncodeAPIBody`/`OnEncodeAPIResp` 调用树） |
-| `work/native/ETSShell/plugin_loader_disasm.txt` | `StiCorePlnManager` 装载/设参/分发函数注释反汇编 |
-| `work/native/ETSShell/js_bridge_full.js` | 从壳 `.rdata` 提取的注入 JS（17 个 native 函数全文） |
-| `work/native/ETSShell/js_bridge.txt` | 壳 `.rdata` 字符串窗口（CEF 开关/日志/dumpfile/upk 等） |
-| `work/native/appcontroller/abi_stubs.txt` | ABI 空桩与 `PlnSetParam` 证据反汇编 |
-| `work/native/_logs_excerpt.txt` | 从 `ETS\logs` 抽取的插件/action/签名/mq 证据行 |
-| `work/native/_tools/` | 本次使用的脚本：`pe_scan.py`（PE 全量扫描）、`disasm_tool.py`（插件分发反汇编）、`sig_dump.py`（函数边界+调用树）、`func_dump.py`、`peek.py`、`summarize.py`、`plugin_abi.py`（配套 `pylib/`：pefile 2024.8.26 + capstone 5.0.9） |
+| `data/native/_summary.json` | 14 个二进制一行摘要（大小/时间戳/链接器/熵/导出/导入/PDB） |
+| `data/native/plugin_abi.json` | 9 插件 ABI 汇总（导出+action+导入+日志方法+PDB） |
+| `data/native/<name>_exports.json` / `_imports.json` / `_dispatch.json` | 每个二进制的导出表、导入表、`PlnOnProcessMessage` 分发统计 |
+| `scripts/work_native__tools_*.py` | 本次使用的脚本：`pe_scan.py`（PE 全量扫描）、`disasm_tool.py`（插件分发反汇编）、`sig_dump.py`（函数边界+调用树）、`func_dump.py`、`peek.py`、`summarize.py`、`plugin_abi.py`（依赖 pefile 2024.8.26 + capstone 5.0.9） |
 
-> 工具说明：REA MCP 的 `inspect_native_exports` 已用于交叉验证 `etshelper.pln` 导出表（4 项、RVA 与本文一致）；`inspect_pe_certificates` 用于 `ETSShell.exe`/`Ets.exe` 签名解析。**REA 内置 `inspect_with_objdump` 在本机不可用**（未安装 GNU objdump，工具返回 `capability_unavailable`），因此本文反汇编均由 capstone 5.0.9 递归下降生成，非 GNU objdump 文本（输出格式不同，但指令与地址来自同一 PE）。
+> 工具说明：REA MCP 的 `inspect_native_exports` 已用于交叉验证 `etshelper.pln` 导出表（4 项、RVA 与本文一致）；`inspect_pe_certificates` 用于 `ETSShell.exe`/`Ets.exe` 签名解析。**REA 内置 `inspect_with_objdump` 在本次分析环境中不可用**（未安装 GNU objdump，工具返回 `capability_unavailable`），因此本文反汇编均由 capstone 5.0.9 递归下降生成，非 GNU objdump 文本（输出格式不同，但指令与地址来自同一 PE）。

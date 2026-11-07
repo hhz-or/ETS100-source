@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\appcontroller\\appcontroller.pln",
+ "file": "ETS\\plugins\\appcontroller\\appcontroller.pln",
  "functions": [
   {
    "rva": "0x00002100",
@@ -33,7 +33,7 @@
    "insn_count": 343,
    "strings": [
     ".log",
-    "D:\\code\\STIC\\stic-pro_ets\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_ets\\src\\common\\StiCorePlugin.h",
     "=============================================",
     "========StiCorePlugin.log starting==========="
    ],
@@ -53,7 +53,7 @@
    "va": "0x10002CC0",
    "insn_count": 285,
    "strings": [
-    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "<BUILD_ROOT>\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
     "[appcontroller::OnGetCurWinHandle] arguments: ",
     "win_name",
     "win_class"
@@ -71,7 +71,7 @@
    "va": "0x100030E0",
    "insn_count": 350,
    "strings": [
-    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "<BUILD_ROOT>\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
     "[appcontroller::OnInitAction] arguments: ",
     "[appcontroller::OnInitAction] appcontroller/init error:get id fail.",
     "error_callback_id"
@@ -94,7 +94,7 @@
    "va": "0x100038A0",
    "insn_count": 491,
    "strings": [
-    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "<BUILD_ROOT>\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
     "[appcontroller::SetWinPos] arguments: ",
     "[appcontroller::SetWinPos] utf8_args ",
     "[appcontroller::SetWinPos] device scale: ",
@@ -137,7 +137,7 @@
    "va": "0x10004020",
    "insn_count": 227,
    "strings": [
-    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "<BUILD_ROOT>\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
     "[appcontroller::ResizeForm] arguments: ",
     "height",
     "width"
@@ -155,7 +155,7 @@
    "va": "0x10004340",
    "insn_count": 433,
    "strings": [
-    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "<BUILD_ROOT>\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
     "[appcontroller::MoveWindows] arguments: ",
     "startPoint",
     "endPoint"
@@ -190,7 +190,7 @@
    "strings": [
     "init",
     "close",
-    "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
+    "<BUILD_ROOT>\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp",
     "maximize",
     "minimize",
     "restore",
@@ -472,7 +472,7 @@
    },
    {
     "va": "0x10076A80",
-    "string": "D:\\code\\STIC\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp"
+    "string": "<BUILD_ROOT>\\stic-pro_ets\\src\\plugins\\appcontroller\\appcontroller.cpp"
    },
    {
     "va": "0x10076E84",

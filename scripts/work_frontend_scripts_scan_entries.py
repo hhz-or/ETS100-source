@@ -1,5 +1,5 @@
 import os,struct,re,json
-base=r'D:\ets-rea\ETS\temp\Cache_ETSShell\Cache'
+base=r'ETS\temp\Cache_ETSShell\Cache'
 
 def scan(name):
     b=open(os.path.join(base,name),'rb').read()
@@ -37,4 +37,4 @@ for x in allh:
     for i,v in enumerate(x['ds']):
         if v>16000:
             print('BIG',x['file'],x['off'],'stream',i,'size',v,'addr',hex(x['da'][i]),x['key'][:80])
-json.dump(allh,open(r'D:\ets-rea\work\frontend\scripts\entries_raw.json','w'),ensure_ascii=False)
+json.dump(allh,open(r'data/frontend\scripts\entries_raw.json','w'),ensure_ascii=False)

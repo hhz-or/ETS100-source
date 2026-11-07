@@ -1,9 +1,9 @@
 // Runtime oracle: call native plugin actions from the live page via cef.message
-const WebSocket = require('D:/ets-rea/ETS/mq_server/node_modules/ws');
+const WebSocket = require('ETS/mq_server/node_modules/ws');
 const http = require('http');
 const fs = require('fs');
 
-const OUT = 'D:/ets-rea/work/runtime';
+const OUT = 'runtime';
 const PORT = 10086;
 
 function getJson(url) { return new Promise((res, rej) => { http.get(url, r => { let d=''; r.on('data',c=>d+=c); r.on('end',()=>{try{res(JSON.parse(d))}catch(e){rej(e)}}); }).on('error', rej); }); }

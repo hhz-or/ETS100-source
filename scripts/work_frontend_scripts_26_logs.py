@@ -1,5 +1,5 @@
 import os,re,glob,collections
-base=r'D:\ets-rea\ETS\logs'
+base=r'ETS\logs'
 pat=re.compile(r'(actionKey|sendMessage|soundhelper|etshelper|shellhelper|filehelper|encode_api_body|sign_version|key_id|评测|record)')
 for p in sorted(glob.glob(os.path.join(base,'ets_*.log'))):
     txt=open(p,'rb').read().decode('utf-8','replace')

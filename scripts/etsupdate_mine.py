@@ -1,6 +1,6 @@
 import re
 
-p = r"D:\ets-rea\work\ghidra_out\EtsUpdate.exe\decompiled.c"
+p = r"work/ghidra_out(未发布)\EtsUpdate.exe\decompiled.c"
 lines = open(p, encoding="utf-8", errors="replace").read().split("\n")
 heads = [(i, l) for i, l in enumerate(lines) if l.startswith("// ====")]
 print("lines", len(lines), "funcs", len(heads))

@@ -1,5 +1,5 @@
 import json
-d=json.load(open(r"D:\ets-rea\work\data\storage\chromium_misc.json",encoding="utf-8"))
+d=json.load(open(r"data\storage\chromium_misc.json",encoding="utf-8"))
 for k,v in d.items():
     if k in ("LocalPrefs.json","Network Persistent State"): continue
     print("="*10,k, json.dumps(v,ensure_ascii=False)[:600])

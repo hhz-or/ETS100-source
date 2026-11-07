@@ -1,5 +1,5 @@
 import os,re,json,collections
-OUT=r'D:\ets-rea\work\frontend'; PRETTY=os.path.join(OUT,'pretty')
+OUT=r'data/frontend'; PRETTY=os.path.join(OUT,'pretty')
 rows=json.load(open(os.path.join(OUT,'bridge_calls.json')))
 c=collections.Counter((r['plugin'],r['action']) for r in rows)
 items=sorted(c.items())

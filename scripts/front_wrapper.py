@@ -1,7 +1,7 @@
 import re, sys, io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-b = open(r"D:\ets-rea\work\lead\cache_f_000002.txt", "rb").read()
+b = open(r"work/lead(未发布)\cache_f_000002.txt", "rb").read()
 
 def show(a, z, label):
     print("\n=================", label, f"off {a}..{z}")

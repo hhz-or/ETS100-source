@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\sevenzip\\sevenzip.pln",
+ "file": "ETS\\plugins\\sevenzip\\sevenzip.pln",
  "sha256": "00a7d17d6c4ea737710ec65efd59396a1896bd9e3a3c2c872c4811a750372bb9",
  "image_base": "0x10000000",
  "export_dir": {

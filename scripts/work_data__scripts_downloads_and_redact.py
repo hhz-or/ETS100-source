@@ -1,8 +1,8 @@
 """Parse ETS resource download/update events from ets logs; redact PII in work/data JSON outputs."""
 import os, re, json, glob
 
-LOG = r"D:\ets-rea\ETS\logs"
-OUT = r"D:\ets-rea\work\data\logs"
+LOG = r"ETS\logs"
+OUT = r"data\logs"
 
 
 def dec(b):
@@ -97,7 +97,7 @@ def walk(o):
 
 targets = []
 for pat in ("work/data/logs/*.json", "work/data/storage/*.json", "work/data/db/*.json"):
-    targets += glob.glob(os.path.join(r"D:\ets-rea", pat))
+    targets += glob.glob(os.path.join(r".", pat))
 for t in targets:
     try:
         d = json.load(open(t, encoding="utf-8"))

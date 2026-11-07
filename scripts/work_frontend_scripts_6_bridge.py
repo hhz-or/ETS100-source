@@ -1,5 +1,5 @@
 import os,re,json,collections
-OUT=r'D:\ets-rea\work\frontend'; PRETTY=os.path.join(OUT,'pretty')
+OUT=r'data/frontend'; PRETTY=os.path.join(OUT,'pretty')
 man=json.load(open(os.path.join(OUT,'manifest.json')))
 jsfiles=[m for m in man if m['type']=='js' and m.get('pretty')]
 # bridge sendMessage patterns

@@ -1,4 +1,4 @@
-p=r"D:\ets-rea\docs\06_data.md"
+p=r".\docs\06_data.md"
 s=open(p,encoding="utf-8").read()
 fixes=[
 ("与 IndexedDB `wordDict`（28,322 条）互为源/缓存（差 1 条，词表版本差异）。",

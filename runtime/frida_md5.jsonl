@@ -1,0 +1,35 @@
+{"type": "send", "payload": "agent-start"}
+{"type": "send", "payload": "etshelper base=0x69f70000"}
+{"type": "send", "payload": "hooked md5update/keyfeed"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef58 s1=\"<err:Error: can't decode byte 0x00 in position 4>\" s2=\"grlx\""}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef60 s1=\"<big:1732584193>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef68 s1=\"<big:2562383102>\" s2=null"}
+{"type": "send", "payload": "KEYFEED sel=0x0"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef04 s1=\"<big:1778225672>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef04 s1=\"<big:1778225672>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef04 s1=\"<big:1778225672>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef04 s1=\"<big:1778225672>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef98 s1=\"<big:2562383102>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef90 s1=\"<big:1732584193>\" s2=null"}
+{"type": "send", "payload": "KEYFEED sel=0x0"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef3c s1=\"<big:1778225672>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef3c s1=\"<big:1778225672>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef3c s1=\"<big:1778225672>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef3c s1=\"<big:1778225672>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef90 s1=\"<big:1732584193>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef58 s1=\"<err:Error: can't decode byte 0x00 in position 5>\" s2=\"pcWin\""}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef60 s1=\"<big:1732584193>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef68 s1=\"<big:2562383102>\" s2=null"}
+{"type": "send", "payload": "KEYFEED sel=0x1"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef04 s1=\"<big:1778225936>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef04 s1=\"<big:1778225936>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef04 s1=\"<big:1778225936>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8ef70 edx=0x11d8ef04 s1=\"<big:1778225936>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef98 s1=\"<big:2562383102>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef90 s1=\"<big:1732584193>\" s2=null"}
+{"type": "send", "payload": "KEYFEED sel=0x1"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef3c s1=\"<big:1778225936>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef3c s1=\"<big:1778225936>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef3c s1=\"<big:1778225936>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef3c s1=\"<big:1778225936>\" s2=null"}
+{"type": "send", "payload": "MD5UPDATE ecx=0x11d8efa0 edx=0x11d8ef90 s1=\"<big:1732584193>\" s2=null"}

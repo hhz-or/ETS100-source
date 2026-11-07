@@ -1,7 +1,7 @@
 import json, base64, hashlib, itertools, collections, re
 
-SAMPLES = json.load(open(r"D:\ets-rea\work\api\ets_requests.json", encoding="utf-8"))
-OUT = r"D:\ets-rea\work\api"
+SAMPLES = json.load(open(r"data/api\ets_requests.json", encoding="utf-8"))
+OUT = r"data/api"
 
 
 def md5(s):

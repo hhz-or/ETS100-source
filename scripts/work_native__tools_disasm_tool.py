@@ -17,19 +17,19 @@ sys.path.insert(0, os.path.join(HERE, "pylib"))
 import pefile
 from capstone import Cs, CS_ARCH_X86, CS_MODE_32, CS_OP_IMM, CS_OP_MEM, CS_GRP_CALL, CS_GRP_JUMP, CS_GRP_RET
 
-OUT_ROOT = r"D:\ets-rea\work\native"
+OUT_ROOT = r"data/native"
 TARGETS = [
-    ("ETSShell",       r"D:\ets-rea\ETS\ETSShell.exe"),
-    ("Ets",            r"D:\ets-rea\ETS\Ets.exe"),
-    ("appcontroller",  r"D:\ets-rea\ETS\plugins\appcontroller\appcontroller.pln"),
-    ("etshelper",      r"D:\ets-rea\ETS\plugins\etshelper\etshelper.pln"),
-    ("filehelper",     r"D:\ets-rea\ETS\plugins\filehelper\filehelper.pln"),
-    ("httphelper",     r"D:\ets-rea\ETS\plugins\httphelper\httphelper.pln"),
-    ("sevenzip",       r"D:\ets-rea\ETS\plugins\sevenzip\sevenzip.pln"),
-    ("shellhelper",    r"D:\ets-rea\ETS\plugins\shellhelper\shellhelper.pln"),
-    ("soundhelper",    r"D:\ets-rea\ETS\plugins\soundhelper\soundhelper.pln"),
-    ("sqlitepln",      r"D:\ets-rea\ETS\plugins\sqlitepln\sqlitepln.pln"),
-    ("window_control", r"D:\ets-rea\ETS\plugins\window_control\window_control.pln"),
+    ("ETSShell",       r"ETS\ETSShell.exe"),
+    ("Ets",            r"ETS\Ets.exe"),
+    ("appcontroller",  r"ETS\plugins\appcontroller\appcontroller.pln"),
+    ("etshelper",      r"ETS\plugins\etshelper\etshelper.pln"),
+    ("filehelper",     r"ETS\plugins\filehelper\filehelper.pln"),
+    ("httphelper",     r"ETS\plugins\httphelper\httphelper.pln"),
+    ("sevenzip",       r"ETS\plugins\sevenzip\sevenzip.pln"),
+    ("shellhelper",    r"ETS\plugins\shellhelper\shellhelper.pln"),
+    ("soundhelper",    r"ETS\plugins\soundhelper\soundhelper.pln"),
+    ("sqlitepln",      r"ETS\plugins\sqlitepln\sqlitepln.pln"),
+    ("window_control", r"ETS\plugins\window_control\window_control.pln"),
 ]
 
 md = Cs(CS_ARCH_X86, CS_MODE_32)

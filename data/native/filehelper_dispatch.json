@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\filehelper\\filehelper.pln",
+ "file": "ETS\\plugins\\filehelper\\filehelper.pln",
  "functions": [
   {
    "rva": "0x00003990",
@@ -55,11 +55,11 @@
    "strings": [
     "logs\\shell_",
     ".log",
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "=============================================",
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "========StiCorePlugin.log starting===========",
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "============================================="
    ],
    "log_handlers": []

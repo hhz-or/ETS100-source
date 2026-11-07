@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\sqlitepln\\sqlitepln.pln",
+ "file": "ETS\\plugins\\sqlitepln\\sqlitepln.pln",
  "functions": [
   {
    "rva": "0x000016E0",
@@ -55,7 +55,7 @@
    "insn_count": 192,
    "strings": [
     "logs\\shell_",
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "=============================================",
     "========StiCorePlugin.log starting==========="
    ],

@@ -1,6 +1,6 @@
 import os, re, json
 
-root = r"D:\ets-rea\docs"
+root = r".\docs"
 patterns = {
     "phone": re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)"),
     "jwt": re.compile(r"eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}"),

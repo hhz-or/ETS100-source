@@ -1,8 +1,8 @@
 import re,os
-paths=[r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\data_3",
-       r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\f_000002",
-       r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\f_000001",
-       r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cache\f_000028"]
+paths=[r"ETS\temp\Cache_ETSShell\Cache\data_3",
+       r"ETS\temp\Cache_ETSShell\Cache\f_000002",
+       r"ETS\temp\Cache_ETSShell\Cache\f_000001",
+       r"ETS\temp\Cache_ETSShell\Cache\f_000028"]
 for p in paths:
     if not os.path.exists(p): continue
     d=open(p,'rb').read()

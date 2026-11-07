@@ -1,5 +1,5 @@
 import os,json,glob
-OUT=r'D:\ets-rea\work\frontend'
+OUT=r'data/frontend'
 for p in glob.glob(os.path.join(OUT,'*.json')):
     raw=open(p,'rb').read()
     try:

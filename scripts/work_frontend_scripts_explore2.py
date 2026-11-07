@@ -1,5 +1,5 @@
 import os,struct,json
-base=r'D:\ets-rea\ETS\temp\Cache_ETSShell\Cache'
+base=r'ETS\temp\Cache_ETSShell\Cache'
 b=open(os.path.join(base,'data_1'),'rb').read()
 print('size',len(b),'slots',len(b)//256)
 ok=[]

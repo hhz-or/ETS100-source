@@ -1,8 +1,13 @@
 # E听说 PC 学生端 · 全量逆向总报告
 
-> 目标：`D:\ets-rea\ETS`（E听说学生端 PC 5.7.9，STIC/CEF 壳，667 个文件 / 347 MB）
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **总报告**：各专题细节见 `docs/01`–`docs/11`；快速开始与目录结构见仓库 `README.md`。
+
+> 目标：`<ETS_INSTALL_DIR>`（E听说学生端 PC 5.7.9，STIC/CEF 壳，667 个文件 / 347 MB）
 > 方式：静态逆向 + 目标自身历史日志/缓存证据（**未执行目标、未连接厂商服务器**）
-> 产物：全部在 `D:\ets-rea`（`docs/` 报告体系 + `work/` 机读数据与脚本）；`ETS\` 全程只读未改
+> 产物：仓库内为 `docs/` 报告体系、`data/` 机读数据、`runtime/` 运行时证据与 `scripts/` 脚本；原分析工作区 `<WORK_DIR>` 的中间产物不随仓库发布。分析对象 `<ETS_INSTALL_DIR>` 全程只读未改。
 
 ---
 
@@ -39,7 +44,7 @@
 | [02_architecture.md](02_architecture.md) | 5 层架构、进程模型、启动链、JS↔Native 桥、scheme、数据流 |
 | [03_api_protocol.md](03_api_protocol.md) | mq_server 协议、HTTP 信封、51 个 API 路径、鉴权链、AI 评测/OSS/SLS |
 | [04_frontend.md](04_frontend.md) | 缓存格式解码、91 路由、20 store、118 端点、117 action、录音评测链 |
-| [05_native.md](05_native.md) | 14 个原生 PE 的身份/导出/导入/字符串/能力面（native-analyst 产出） |
+| [05_native.md](05_native.md) | 14 个原生 PE 的身份/导出/导入/字符串/能力面（原生层分析产出） |
 | [06_data.md](06_data.md) | DB/存储/资源包/评测 XML 全解 |
 | [07_shell_update.md](07_shell_update.md) | 壳层、窗口桥、更新、崩溃上报、音频/7z 链 |
 | [08_signature.md](08_signature.md) | **签名算法 + 字段加密 + 验证** |
@@ -47,18 +52,18 @@
 | [10_unknowns.md](10_unknowns.md) | 未知项、限制、后续验证 |
 | [11_runtime_live.md](11_runtime_live.md) | 运行时验证：Live CDP、全量 chunk、插件 JS 权威 action 表、活体协议 |
 
-### 机读数据/脚本（`work/`）
+### 机读数据/脚本（仓库内）
 
 | 路径 | 内容 |
 |---|---|
-| `work/inventory.json` / `inventory_hashes.json` | 667 文件清单、关键文件 SHA-256 |
-| `work/api/` | `endpoints.csv`、`sign_samples.json`（334 组）、`ets_sign.py`（参考实现）、`sign_proof.json` |
-| `work/frontend/` | 209 个资源、139 个可读版 bundle、`routes.json`、`action_keys.json`、`api_endpoints.json`、`stores.json` |
-| `work/native/` | 14 个二进制的 exports/imports/strings/meta |
-| `work/data/` | DB/存储导出、24 个 content 包 + common.zip 解包、评测 XML 解析、LevelDB 纯 Python 读取器 |
-| `work/ghidra_out/` | 各二进制 `decompiled.c` / `functions.tsv` / `strings.tsv` |
-| `work/pkg/` | shell 时间线、更新日志、窗口桥分析 |
-| `work/scripts/` | 本次全部可复现脚本（缓存解码、签名验证、密钥流提取、AES 验证、PE 解析…） |
+| `data/inventory_hashes.json` | 关键文件的 SHA-256；完整 667 文件清单未随仓库发布 |
+| `data/api/` | `endpoints.csv`、`sign_samples.json`（334 组）、`ets_sign.py`（参考实现）、`update_sign_proof.json` |
+| `data/frontend/` | `routes.json`、`action_keys.json`、插件 JS 权威 action 表、在线 chunk 清单 |
+| `data/native/` | 14 个二进制的导出/导入/分发统计与插件 ABI 汇总 |
+| `data/db/` | ETS.db 全表结构与 Config 数据 |
+| `runtime/` | 插件 JS 封装层、活体请求元数据 |
+| `scripts/` | 本次全部可复现脚本（缓存解码、签名验证、密钥流提取、AES 验证、PE 解析…） |
+| 未随仓库发布 | 原始 bundle、存储/题库包/评测 XML 导出、反编译产物、壳层时间线等中间产物 |
 
 ---
 
@@ -68,7 +73,7 @@
 |---|---|
 | 产品 | 讯飞易听说「E听说」学生端 PC 版（CCS / iflytek） |
 | 客户端 | **5.7.9**（`ETS.db` `C_Version`），更新号 5079，正式环境 |
-| 壳 | `ETSShell.exe` 5.0.91.329 / **STIC V3.0.76**，源码残留 `D:\code\STIC\stic-pro_ets\` |
+| 壳 | `ETSShell.exe` 5.0.91.329 / **STIC V3.0.76**，源码残留 `<BUILD_ROOT>\STIC\stic-pro_ets\` |
 | 内核 | CEF **91.1.22** / Chromium 91.0.4472.124 |
 | 前端 | Vue3 + Element Plus + Pinia + Vue Router + axios，远程 `statics.ets100.com` |
 | 原生 | 9 个 `.pln`（32 位 MSVC，无壳无混淆），统一 4 导出 ABI |
@@ -90,7 +95,7 @@ v1: PID_PREFIX="grlx",  KEY="355ffbe95ccf4e9535a110170b445ab8"
 - 由 `plugins\etshelper\etshelper.pln` 的 `OnEncodeAPIBody`（`0x1000a410`）实现；MD5 组装函数 `0x10014110`、密钥派生 `0x10013e00`/`0x10013d30`。
 - 密钥不是明文常量：藏在 `.rdata` 的两张 4 字节表 + 32 个索引中，经"查表/旋转/减/XOR"派生，并用 FNV-1a 自校验（0x32A7B273 / 0xB9EF3CD1）。本报告用 PE 直接提取并重算，校验值完全一致。
 - **333/334 真实请求命中**；唯一不中的是 `/user/login`（日志脱敏把 `password` 置空，签名原文不可见）。
-- 参考实现与验证脚本：`work/api/ets_sign.py`、`work/scripts/sign_verify_all.py`。
+- 参考实现与验证脚本：`data/api/ets_sign.py`、`scripts/sign_verify_all.py`。
 
 ### 4.2 字段级加密与内置私钥（安全问题）
 
@@ -119,8 +124,8 @@ v1: PID_PREFIX="grlx",  KEY="355ffbe95ccf4e9535a110170b445ab8"
 - 装载：壳 `StiCorePlnManager` 用 `GetProcAddress` 取三个 Pln* 函数，并注入宿主回调 `LOG` / `WLOG` / `EXEC_CALLBACK`（`appcontroller::PlnSetParam` 中三个 `strcmp` 实证）。
 - action 分发 = 字符串比较（action 名先做小写归一化）+ JSON 参数；所有 action 名可在二进制 `.rdata` + 前端 `action_keys.json` + 运行日志三方交叉验证。逐插件 action 数：filehelper 30、shellhelper 20、soundhelper 17、appcontroller 15、etshelper 12、httphelper 10、window_control 9、sqlitepln 6、sevenzip 2。
 - `etshelper` 的 MD5 为**内联实现**（IV 表 RVA `0x6A540`，常量 0x67452301…），无 crypt32/OpenSSL 导入；签名前有本地限流闸门（1024 次 / 16 MB 上限 + 1000 ms 节流）。
-- shell 注入 renderer 的 JS 桥共 17 个 native function，全文见 `work/native/ETSShell/js_bridge_full.js`。
-- Ghidra 反编译产物见 `09_decompiled.md` 与 `work/ghidra_out/`。
+- shell 注入 renderer 的 JS 桥共 17 个 native function，全文见 `壳注入 JS 桥全文（未随仓库发布）`。
+- Ghidra 反编译产物（未随仓库发布）见 `09_decompiled.md`。
 
 ### 4.7 运行时验证（2026-11-06）
 
@@ -130,12 +135,13 @@ v1: PID_PREFIX="grlx",  KEY="355ffbe95ccf4e9535a110170b445ab8"
 - **在线版本与缓存版本**：主 bundle 同为 3,481,698 B，仅懒加载 chunk 哈希重新打包；签名密钥、AES 密钥、RSA 私钥、协议结构逐字一致。
 - **活体协议验证**：新会话 72 请求/75 响应，带签名请求 **68/68** 命中 08 的公式；发现 4 条 GET 直连请求（token 在 query，无签名）。
 - **插件 JS 封装层**：9 个通道、115 个 (plugin, action) 的权威清单，精确 pluginKey 为 `EtsHelper`/`FileHelper`/`HttpHelper`/`SevenZip`/`ShellHelper`/`SysConfig`（首字母大写）与 `appcontroller`/`soundhelper`/`sqlitepln`（小写）。
-- **原生 oracle**：在真实页面直接调用 `EtsHelper.encode_api_body_v2`，原生返回的 sign 与 08 的公式**逐字节一致**（`work/runtime/sign_oracle.json`）；并对 `getpcinfo/getconfig/getvolume/checkadapter/getroomid/get_appdata_path/check_update` 等只读 action 做了运行时探针（参数 schema 与真实返回已记录）。
+- **原生 oracle**：在真实页面直接调用 `EtsHelper.encode_api_body_v2`，原生返回的 sign 与 08 的公式**逐字节一致**（`data/api/sign_oracle.json`）；并对 `getpcinfo/getconfig/getvolume/checkadapter/getroomid/get_appdata_path/check_update` 等只读 action 做了运行时探针（参数 schema 与真实返回已记录）。
+- **Frida 实机观测（2026-11-07）**：附着 CEF browser 进程，捕获 9 个插件的 `PlnOnProcessMessage` 分发（arg2=action、arg3=UTF-16 JSON），以及 `etshelper` 签名函数的真实入参；由此闭合**响应签名**公式 `MD5(pid + resp_b64 + KEY + sn)`（`6d3d8217…` 逐字节命中）。详见 `11_runtime_live.md` §十一。
 - 详见 `11_runtime_live.md`。
 
 ### 4.8 源码仓库（GitHub）
 
-`git@github.com:hhz-or/ETS100-source.git` 在分析时为**空仓库**（0 commits）；本报告体系与脱敏后的机读样本已按用户要求推送到该仓库（不含原始日志、PII、大体积二进制/反编译产物）。
+本报告体系与脱敏后的机读样本发布在 GitHub 仓库 `hhz-or/ETS100-source`（不含原始日志、PII、大体积二进制/反编译产物）。
 
 ---
 
@@ -190,24 +196,27 @@ v1: PID_PREFIX="grlx",  KEY="355ffbe95ccf4e9535a110170b445ab8"
 ## 八、复现指南
 
 ```powershell
+# 在仓库根目录执行；需要本地存在只读安装副本 <ETS_INSTALL_DIR> 时，
+# 请把脚本顶部的输入路径常量指向该副本。
+
 # 1) 重建 API 样本与签名验证（只读日志）
-python D:\ets-rea\work\scripts\extract_sign.py
-python D:\ets-rea\work\scripts\sign_verify_all.py      # 333/334
+python scripts\extract_sign.py
+python scripts\sign_verify_all.py      # 333/334
 
 # 2) 提取缓存资源（只读缓存）
-python D:\ets-rea\work\frontend\scripts\*.py            # 见 work/frontend/README.md
+python scripts\work_frontend_scripts_1_parse_cache.py   # 其余前端脚本见 scripts/
 
 # 3) 密钥流复算（只读 PE）
-python D:\ets-rea\work\scripts\keystream.py             # FNV MATCH
+python scripts\keystream.py             # FNV MATCH
 
 # 4) 字段加密验证（只读日志）
-python D:\ets-rea\work\scripts\aes_check.py
+python scripts\aes_check.py
 
 # 5) 题库包解密（只读 zip）
-#    见 work/data/_scripts/extract_content.py
+python scripts\work_data__scripts_extract_content.py
 ```
 
-Ghidra 复跑：`-import <binary> -postScript DumpDecomp.java <outRoot>`（脚本在 `work/ghidra_scripts/`，Ghidra 12.1.4 + JDK 21+）。
+Ghidra 复跑：`-import <binary> -postScript DumpDecomp.java <outRoot>`（Ghidra 12.1.4 + JDK 21+；导出脚本未随仓库发布，可按 `09_decompiled.md` §7 的说明自行实现）。
 
 ---
 

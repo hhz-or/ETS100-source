@@ -1,10 +1,10 @@
 """Dump ETS Chromium storage artifacts to work/data/storage/*.json with PII redaction."""
 import sys, os, json, sqlite3, re, hashlib, struct
-sys.path.insert(0, r"D:\ets-rea\work\data\_scripts")
+sys.path.insert(0, r"data\_scripts")
 import leveldb_reader as L
 
-BASE = r"D:\ets-rea\ETS\temp\Cache_ETSShell"
-OUT = r"D:\ets-rea\work\data\storage"
+BASE = r"ETS\temp\Cache_ETSShell"
+OUT = r"data\storage"
 os.makedirs(OUT, exist_ok=True)
 
 SENSITIVE = re.compile(r"(token|pwd|password|passwd|phone|mobile|account|secret|key|signature|authorization|cookie|session|credential|eCard|ecard|login|real_name|nickname|username|user_name|email|idcard|id_card|serial|mac|^ip$|device_?id|user_?id|student_no|birthday)", re.I)

@@ -1,10 +1,10 @@
 import hashlib, os, re, difflib
 
-live = r"D:\ets-rea\work\runtime\scripts\statics.ets100.com_ets-student-pc-web_assets_index-e7d07c24.js.js"
+live = r"runtime\scripts\statics.ets100.com_ets-student-pc-web_assets_index-e7d07c24.js.js"
 old = None
-for f in os.listdir(r"D:\ets-rea\work\frontend\bundles"):
+for f in os.listdir(r"data/frontend\bundles"):
     if "index-dc0257dd" in f:
-        old = os.path.join(r"D:\ets-rea\work\frontend\bundles", f)
+        old = os.path.join(r"data/frontend\bundles", f)
 print("live:", live, os.path.getsize(live))
 print("old :", old, os.path.getsize(old) if old else None)
 

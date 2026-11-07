@@ -1,6 +1,6 @@
 import json, os
 
-base = r"D:\ets-rea\work\runtime"
+base = r"runtime"
 m = json.load(open(os.path.join(base, "scripts_manifest.json"), encoding="utf-8"))
 print("scripts:", len(m))
 for x in m:

@@ -1,10 +1,14 @@
 # ETS 学生端 PC（STIC/CEF 壳）API 与协议分析（03）
 
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **本文复核**：`python scripts/extract_sign.py`（从只读日志重建样本）、`python scripts/sign_verify_all.py`（333/334）。
+
 - 版本：v1.0（2026-11-06）
-- 分析对象：`D:\ets-rea\ETS`（只读）
-- 分析者：api-analyst（Team Lead：lead）
-- 数据来源：`ETS/mq_server/main.js`（明文 Node 源码）、`ETS/packages/app.json`、`ETS/packages/default/appcontroller.js`、`ETS/logs/ets_2026-10-28.log`、`ets_2026-11-4.log`、`cef_2026-10-28.log`、`cef_2026-11-4.log`、`shell_2026-10-28.log`、`shell_2026-11-4.log`
-- 配套产物：`work/api/endpoints.csv`、`work/api/sign_samples.json`、`work/api/endpoint_samples.json`、`work/api/reports/`（证据报表）
+- 分析对象：`<ETS_INSTALL_DIR>`（只读）
+- 数据来源：`<ETS_INSTALL_DIR>/mq_server/main.js`（明文 Node 源码）、`<ETS_INSTALL_DIR>/packages/app.json`、`<ETS_INSTALL_DIR>/packages/default/appcontroller.js`、`<ETS_INSTALL_DIR>/logs/ets_2026-10-28.log`、`ets_2026-11-4.log`、`cef_2026-10-28.log`、`cef_2026-11-4.log`、`shell_2026-10-28.log`、`shell_2026-11-4.log`
+- 配套产物：`data/api/endpoints.csv`、`data/api/sign_samples.json`（334 组）、`data/api/ets_sign.py`（签名参考实现）；请求/响应样例与证据报表等中间产物未随仓库发布。
 
 标注约定：**【观察】**=日志/源码直接可见；**【推断】**=由多处观察推导，未直接证实；**【未知】**=现有数据不足。
 
@@ -12,9 +16,9 @@
 
 ## 0. 结论摘要
 
-1. **mq_server 不是命令型服务，而是无协议的“日志回传中继”**：`main.js` 只有 144 行，作用是把任意 WebSocket 客户端发来的文本**原样广播给所有连接**，并把每条收到的消息写入 `logs/ets_<年-月-日>.log`。**没有** log/config 等消息类型分发逻辑（任务书假设的“命令类型”不存在）。【观察】
+1. **mq_server 不是命令型服务，而是无协议的“日志回传中继”**：`main.js` 只有 144 行，作用是把任意 WebSocket 客户端发来的文本**原样广播给所有连接**，并把每条收到的消息写入 `logs/ets_<年-月-日>.log`。**没有** log/config 等消息类型分发逻辑（早期任务假设的“命令类型”不存在）。【观察】
 2. **端口 40001 起自增探测**，并把最终端口写回 `packages/app.json` 的 `suspensionBallPort` 字段；前端页面实际连接 `ws://127.0.0.1:40001/`。【观察】
-3. **前端→HTTP API 采用统一信封**：`{body:[{r,params}], head:{version,sign,pid,time,time_second}}`，`head.sign` 为 32 位小写十六进制（MD5 形态），签名协议版本 `v2`；签名代码在 **ETSShell.exe 原生层**（`etshelper/encode_api_body_v2`）。**签名算法本身尚未还原**，已准备 334 组“原文 body + sign + time + path”样本供验证。【观察 + 未知】
+3. **前端→HTTP API 采用统一信封**：`{body:[{r,params}], head:{version,sign,pid,time,time_second}}`，`head.sign` 为 32 位小写十六进制（MD5 形态），签名协议版本 `v2`；签名代码在 **ETSShell.exe 原生层**（`etshelper/encode_api_body_v2`）。**签名算法已由 [08_signature.md](08_signature.md) 完整还原并验证**（写作本文时尚未完成，此处保留当时的分析状态）；本文准备了 334 组“原文 body + sign + time + path”样本供验证。【观察 + 未知】
 4. 日志内共还原 **51 个 api.ets100.com 路径**（其中 2 个为仅出现在 cef 网络日志的点服 GET 路径），另有 **12 条非 api 主机端点**（collect 埋点 1 条 + CDN/OSS/SLS/第三方/静态页面 11 条）。全部业务 API 走 HTTPS；响应为 `[{msg,code,body}]` 信封，观察到的 335 个业务响应 `code` 全为 0。【观察】
 5. **鉴权链有 4 套独立凭证**：①登录 JWT（160 字符，HS256，`params.token`）；②资源平台 JWT（504 字符，RS256，`qm-ets-key`，走 URL query，用途未见）；③AI 评测 accessToken（137 字符，HS256，`aid=ksyyyxx-etszx`）；④阿里云 STS（OSS 直传 / SLS 日志）。【观察】
 6. **日志编码重要更正**：`ets_*.log`、`cef_2026-10-28.log` 为纯 UTF-8（0 个 U+FFFD、0 个“锟斤拷”）；`shell_*.log` 为 GB18030；`cef_2026-11-4.log` 仅 1 行非 UTF-8。此前看到的 `�ɹ�` 是 PowerShell 控制台/管道按 cp936 解码造成的显示假象，**不是数据本身损坏**，不要对 ets 日志做 GBK 二次解码（会破坏 sign 原文）。【观察】
@@ -25,12 +29,12 @@
 
 | 文件 | 大小 | 行数 | 编码 | 内容 |
 |---|---|---|---|---|
-| `ETS/logs/ets_2026-10-28.log` | 6,910,058 B | ≈1,979 | UTF-8 | mq_server 落盘日志（前端上报） |
-| `ETS/logs/ets_2026-11-4.log` | 5,255,123 B | ≈3,023 | UTF-8 | 同上（另一次启动/会话） |
-| `ETS/logs/cef_2026-10-28.log` | 15,703,293 B | 115,951 | UTF-8 | Chromium CEF 详细日志（含全部 URL 请求、无障碍树） |
-| `ETS/logs/cef_2026-11-4.log` | 1,407,391 B | 10,868 | UTF-8（1 行例外） | 同上 |
-| `ETS/logs/shell_2026-10-28.log` | 519,301 B | 6,727 | GB18030 | ETSShell.exe 原生日志（含 encode_api_body_v2） |
-| `ETS/logs/shell_2026-11-4.log` | 1,437,761 B | 19,496 | GB18030 | 同上 |
+| `<ETS_INSTALL_DIR>/logs/ets_2026-10-28.log` | 6,910,058 B | ≈1,979 | UTF-8 | mq_server 落盘日志（前端上报） |
+| `<ETS_INSTALL_DIR>/logs/ets_2026-11-4.log` | 5,255,123 B | ≈3,023 | UTF-8 | 同上（另一次启动/会话） |
+| `<ETS_INSTALL_DIR>/logs/cef_2026-10-28.log` | 15,703,293 B | 115,951 | UTF-8 | Chromium CEF 详细日志（含全部 URL 请求、无障碍树） |
+| `<ETS_INSTALL_DIR>/logs/cef_2026-11-4.log` | 1,407,391 B | 10,868 | UTF-8（1 行例外） | 同上 |
+| `<ETS_INSTALL_DIR>/logs/shell_2026-10-28.log` | 519,301 B | 6,727 | GB18030 | ETSShell.exe 原生日志（含 encode_api_body_v2） |
+| `<ETS_INSTALL_DIR>/logs/shell_2026-11-4.log` | 1,437,761 B | 19,496 | GB18030 | 同上 |
 
 日志核心计数（两文件合计）：
 
@@ -48,7 +52,7 @@
 
 ## 2. mq_server（WebSocket 日志中继）完整协议
 
-源码：`ETS/mq_server/main.js`（144 行，明文）；`package.json` 声明依赖 `ws@^8.17.0`，但 `ETS/mq_server/node_modules` 中实际存在 **log4js 0.6.38** 与 **ws 1.1.2**（旧版）；`ets_mq_server.exe`（12,080,168 B）为 pkg 打包产物、内部字符串不可见，运行时真正打包的版本【未知】。配置 `ETS/packages/app.json`，运行期内容恒为 `{"suspensionBallPort":40001}`。【观察】
+源码：`<ETS_INSTALL_DIR>/mq_server/main.js`（144 行，明文）；`package.json` 声明依赖 `ws@^8.17.0`，但 `<ETS_INSTALL_DIR>/mq_server/node_modules` 中实际存在 **log4js 0.6.38** 与 **ws 1.1.2**（旧版）；`ets_mq_server.exe`（12,080,168 B）为 pkg 打包产物、内部字符串不可见，运行时真正打包的版本【未知】。配置 `<ETS_INSTALL_DIR>/packages/app.json`，运行期内容恒为 `{"suspensionBallPort":40001}`。【观察】
 
 ### 2.1 启动与端口探测
 
@@ -69,7 +73,7 @@ createWebSocketServer("demo.log")        // main.js:11 参数被忽略（函数�
 
 ### 2.2 与 `packages/app.json` 的关系（端口注册表）
 
-`main.js:6` `configUrl = "../packages/app.json"`（相对 mq_server 的工作目录，即 `ETS/packages/app.json`）。
+`main.js:6` `configUrl = "../packages/app.json"`（相对 mq_server 的工作目录，即 `<ETS_INSTALL_DIR>/packages/app.json`）。
 
 ```text
 readAppConfig()  // main.js:34-49  读取失败/空 → "{}"；JSON.parse 异常也 resolve({})
@@ -181,11 +185,11 @@ payload：纯文本，或 JSON 对象文本（部分 TAG 混用）
 | MISC | `windows操作系统版本 env type: Microsoft Windows 11; device_name: D7480; device_code: 4437...; local_ip: ...` | `ets_2026-10-28.log:21` |
 | MISC | `当前资源平台token已过期；开始请求配置数据` | `ets_2026-10-28.log:55`、`ets_2026-11-4.log:66` |
 | MISC | `AI引擎token已过期；开始请求配置数据` | `ets_2026-10-28.log:163` |
-| MISC | `当前配置已过期；开始请求oss的配置数据` | 同日志多处（MISC 子类统计见 `reports/keywork_and_misc.txt`） |
+| MISC | `当前配置已过期；开始请求oss的配置数据` | 同日志多处（MISC 子类统计见证据报表 `keywork_and_misc.txt`，未随仓库发布） |
 | UI_PAGE | `从/app-start 页面跳转: /auth/login` | `ets_2026-10-28.log:17` |
 | PLG_STIC | `start download file: {"url":"https://cdnfeis.../file/...zip","local_file":"clear_cache.zip",...}` | `ets_2026-10-28.log:15` |
 | PLG_STIC | `{"optype":"ExistFileOrFolder","path":"...","result":false,"size":0}` | `ets_2026-10-28.log:397` |
-| H5_SOUND | `播放前：原地址： stic://file.iflytek.com/C:\...\1_desc.mp3, 播放地址：...` | `ets_2026-10-28.log:428` |
+| H5_SOUND | `播放前：原地址： stic://file.iflytek.com/<本地路径>\1_desc.mp3, 播放地址：...` | `ets_2026-10-28.log:428` |
 | ENG_SCORE | `id: 1793186560729, sdk:AI2 , 评测发送开始帧：{...}` | `ets_2026-10-28.log:479` |
 | FLOW_PRAC | `{"title":"套题流程: ","set_id":"...","entity_id":"...","order":"...","log_name":"exam_step"}` | `ets_2026-10-28.log:420` |
 
@@ -294,14 +298,14 @@ sequenceDiagram
 ### 3.3 签名（sign）协议 v2
 
 - 启动即声明：`ets_sign_protocol_selected protocol=v2, pid=pcWin`（`ets_2026-10-28.log:7`）。【观察】
-- `head.sign`：32 位小写 hex（MD5 长度），334 个请求全部存在且各不相同形态；样本见 `work/api/sign_samples.json`。【观察】
+- `head.sign`：32 位小写 hex（MD5 长度），334 个请求全部存在且各不相同形态；样本见 `data/api/sign_samples.json`。【观察】
 - 签名由**原生层**生成：`shell_2026-11-4.log` 中 `[etshelper::PlnOnProcessMessage] action->encode_api_body_v2` 出现 192 次、`[etshelper::OnEncodeAPIBody] success` 192 次；`shell_2026-10-28.log` 分别 157 次。与同日 ets 日志请求数（151 / 191）近似 1:1（差值可能为失败重试/未落盘请求）。【观察 + 推断】
-- **签名原文/算法未还原**：已按任务要求准备 **334 组**样本，字段：
+- **签名原文/算法（现已在 08 中还原）**：已准备 **334 组**样本，字段：
   - `body_json_exact`：从日志 `param` 中按括号配对**逐字节截取**的 `"body":[...]` 原文（334/334 与 `json.dumps(json.loads(...))` 无空格重序列化**完全一致**，可安全当原文用）；
   - `param_json_exact`：整个 `param` 原文；
   - `head_json_exact`、`sign`、`time`、`time_second`、`url`、`path`、`host`、`route`。
-  - 校验：`work/api/sign_samples.json` 每条均带 `body_exact_roundtrip: true`（334/334），即 `body_json_exact` 与按 JSON 重序列化结果逐字节一致。
-- 建议 Lead 验证方向（仅假设，未证实）：`md5(body_raw)` / `md5(body_raw+time)` / `md5(url+body_raw+time+密钥)` 等；`head.time` 与 `time_second` 同值说明参与签名的很可能是毫秒时间戳本身。【未知】
+  - 校验：`data/api/sign_samples.json` 每条均带 `body_exact_roundtrip: true`（334/334），即 `body_json_exact` 与按 JSON 重序列化结果逐字节一致。
+- 当时建议的验证方向（仅假设，未证实）：`md5(body_raw)` / `md5(body_raw+time)` / `md5(url+body_raw+time+密钥)` 等；`head.time` 与 `time_second` 同值说明参与签名的很可能是毫秒时间戳本身。【未知】
 
 ### 3.4 直接 HTTP（非信封）请求
 
@@ -316,8 +320,8 @@ sequenceDiagram
 
 ## 4. API 清单（按业务域）
 
-> 完整机读清单见 `work/api/endpoints.csv`（63 行 = 51 个 api.ets100.com 路径 + 1 个 collect.ets100.com 埋点 + 11 条 CDN/OSS/SLS/第三方/静态页面端点；`//` 前缀已归一化为 `/`，原文双斜杠见 §3.1）。
-> 请求/响应示例（已脱敏）见 `work/api/endpoint_samples.json`；证据区号为 `日志名:行号`。
+> 完整机读清单见 `data/api/endpoints.csv`（63 行 = 51 个 api.ets100.com 路径 + 1 个 collect.ets100.com 埋点 + 11 条 CDN/OSS/SLS/第三方/静态页面端点；`//` 前缀已归一化为 `/`，原文双斜杠见 §3.1）。
+> 请求/响应示例（已脱敏）见 `data/api/endpoint_samples.json（未随仓库发布）`；证据区号为 `日志名:行号`。
 
 ### 4.1 [API_ETS] 子类型统计
 
@@ -333,7 +337,7 @@ sequenceDiagram
 
 ### 4.2 业务端点总表
 
-> 完整机读清单见 `work/api/endpoints.csv`；下表按业务域分组，次数为两日日志中 `[API_ETS] ets request` 计数（cef URL 计数见 CSV 的 `cef_url_count` 列）。
+> 完整机读清单见 `data/api/endpoints.csv`；下表按业务域分组，次数为两日日志中 `[API_ETS] ets request` 计数（cef URL 计数见 CSV 的 `cef_url_count` 列）。
 
 **登录与账号**
 
@@ -653,7 +657,7 @@ keywork = ["engine_sdk_config","engine_sdk_config_primary","special_word_list_fo
 
 ## 9. CEF / 原生桥（与 HTTP 协议并列的另一套“协议”）
 
-`ETS/packages/default/appcontroller.js`（明文）给出 JS↔原生消息格式：
+`<ETS_INSTALL_DIR>/packages/default/appcontroller.js`（明文）给出 JS↔原生消息格式：
 
 ```js
 cef.message.setMessageCallback(callback_id, fn)                    // 注册回调
@@ -665,7 +669,7 @@ cef.message.createGuid() / removeMessageCallback()
 - 窗口控制 action（`appcontroller.js`）：`init/close/maximize/minimize/restore/move/fullscreen/reduction/hide/show/get_win_pos/set_win_pos/startapp/idg_exist`；`startapp` 附带 `apprun_callback_id`/`appexit_callback_id`。【观察】
 - 原生侧模块/action（shell 日志实证）：`etshelper(init/get_appdata_path/encode_api_body_v2/check_update)`、`filehelper(existfileorfolder/getbase64/getmd5)`、`soundhelper(record/setsound…；`saveSpxFile`)、`shellhelper(getvolume/getconfig/processexist/getpcinfo/startprocess/executecmd/setvolume)`、`httphelper(init/download/upload)`、`sqlitepln`、`appcontroller`。消息统一形如 `[<module>::PlnOnProcessMessage] action-><action>`，参数为 JSON（`appcontroller.cpp:150` `[appcontroller::SetWinPos] utf8_args {...}`）。【观察】
 - **`encode_api_body_v2` 就是 §3.3 的签名入口**（etshelper.cpp:522/499）；`httphelper/upload` 走 libcurl（`HttpProvider::uploadRequest`，`curl_easy_getinfo code:200`）。【观察】
-- 本地文件伪协议：页面音频地址 `stic://file.iflytek.com/<绝对路径>`，由原生 `client_schema.cpp` 解析（`shell_2026-11-4.log:763` `domain_name size: ... //file.iflytek.com/C:\...`）。【观察】
+- 本地文件伪协议：页面音频地址 `stic://file.iflytek.com/<绝对路径>`，由原生 `client_schema.cpp` 解析（`shell_2026-11-4.log:763` `domain_name size: ... //file.iflytek.com/<本地路径>`）。【观察】
 
 ---
 
@@ -708,7 +712,7 @@ cef.message.createGuid() / removeMessageCallback()
 
 | 主题 | 证据 |
 |---|---|
-| mq_server 源码 | `ETS/mq_server/main.js:6,11-13,15-32,34-59,61-70,72-85,87-141,143` |
+| mq_server 源码 | `<ETS_INSTALL_DIR>/mq_server/main.js:6,11-13,15-32,34-59,61-70,72-85,87-141,143` |
 | 端口写入 app.json | `ets_2026-10-28.log:1-4`、`ets_2026-11-4.log:1-2,26-27` |
 | app.json 被原生解析 | `shell_2026-10-28.log:84`（`josn::parse app.json, error: 2`）、`:73`（`action->getconfig`） |
 | mq_server 进程管理 | `shell_2026-10-28.log:67,72,75-76,80-81,6718` |
@@ -737,31 +741,31 @@ cef.message.createGuid() / removeMessageCallback()
 
 ---
 
-## 13. 未解问题（供 Lead 决策）
+## 13. 未解问题与后续验证
 
-1. **sign v2 算法未还原**：签名原文/算法在 ETSShell.exe（`etshelper::OnEncodeAPIBody`）。已备 334 组逐字节原文样本；需要 Lead 用样本反推（或由 native 队友反编译 `etshelper.cpp`/`encode_api_body_v2` 的 MD5 入参拼接顺序与密钥）。
+1. **sign v2 算法未还原**：签名原文/算法在 ETSShell.exe（`etshelper::OnEncodeAPIBody`）。已备 334 组逐字节原文样本；读者可用样本反推，或反编译 `etshelper.cpp`/`encode_api_body_v2` 核对 MD5 入参拼接顺序与密钥（结论见 [08_signature.md](08_signature.md)）。
 2. **RPC 接口 HTTP 方法**：日志未记录方法（只有 URL/body），`endpoints.csv` 标为“推断 POST”。
 3. **资源平台 token（504 RS256）用途**：日志中未见任何消费点（可能被原生或未记录的子系统使用）。
 4. **登录 token 过期后的刷新/重登流程**：无 401/relogin 观察；配置项 `relogin_if_no_common` 暗示存在重登策略，未见触发。
-5. **手机号/密码加密**：`code/send` 的 `phone` 为 base64 密文（`...==`），`getLoginInfo` 的 `phone/password` 亦为密文；加密算法（AES/密钥）未分析，需 native/前端补位。
+5. **手机号/密码加密**：`code/send` 的 `phone` 为 base64 密文（`...==`），`getLoginInfo` 的 `phone/password` 亦为密文；加密算法（AES/密钥）未在本文分析，需结合原生层/前端继续验证。
 6. **mq_server 是否有其它命令**：源码层面确认没有；但“`suspensionBallPort` 之外是否还有隐藏配置”取决于客户端读取逻辑（`shellhelper/getconfig` 的实现未反编译）。
 7. **Cookie 机制**：cef 只有 histogram，无实际 Cookie 头；是否完全不用 Cookie 需结合前端 bundle 确认。
 8. **双斜杠路径成因**：不同前端模块拼接 `baseURL(以/结尾)+path(以/开头)` 导致；服务端兼容，但作为还原细节保留。
-9. **`/system/config` 全量语义**：响应为 174 KB、数百个扁平键，本文只列关键项；完整键值需另做配置字典（可与 frontend 队友的代码分析对照）。
+9. **`/system/config` 全量语义**：响应为 174 KB、数百个扁平键，本文只列关键项；完整键值需另做配置字典（可与前端 bundle 分析对照）。
 10. **部分端点语义为推断**：如 `g/user/jkpt-info`（健康平台）、`m/product/list`（权益商品）、`point-service/account/trail`（积分试用）等，依据字段名与调用时机推断。
 
 ---
 
 ## 14. 产物与脱敏说明
 
-`work/api/`：
+`data/api/`：
 
 | 文件 | 内容 |
 |---|---|
 | `endpoints.csv` | 63 行端点清单：`path,method,host,count,cef_url_count,example_ref,example_requestId,purpose_inferred,confidence,method_evidence` |
 | `sign_samples.json` | **334 组**签名样本：`url/host/path/route/head_version/pid/time/time_second/sign/body_json_exact/head_json_exact/param_json_exact/body_reparsed`，`body_json_exact` 全部与重序列化逐字节一致 |
-| `endpoint_samples.json` | 52 个端点的请求/响应样例（`params_masked`、`head_masked`、响应体抽样，敏感值 `***`） |
-| `reports/` | 证据报表：`mq_server_lines.txt`、`stats.txt`、`urls_all.txt`、`resp_fields.txt`、`token_kinds.txt`、`axios_configs.json`、`errors.txt`、`eng_score.txt`、`oss_upload.txt`、`keywork_and_misc.txt`、`api_paths_union.txt`、`cef_shell_shapes.txt` 等 |
-| `raw/` | 中间解析目录（大响应已裁剪；`responses_trimmed.json`/`summary.txt`）。原始 `requests.json`/`responses.json` 等大文件已清理以减小体积；需要时运行 `work/api/extract.py` 从只读日志重建（`raw/` 为输出目录）。 |
+| `endpoint_samples.json`（未随仓库发布） | 52 个端点的请求/响应样例（`params_masked`、`head_masked`、响应体抽样，敏感值 `***`） |
+| `reports/`（未随仓库发布） | 证据报表：`mq_server_lines.txt`、`stats.txt`、`urls_all.txt`、`resp_fields.txt`、`token_kinds.txt`、`axios_configs.json`、`errors.txt`、`eng_score.txt`、`oss_upload.txt`、`keywork_and_misc.txt`、`api_paths_union.txt`、`cef_shell_shapes.txt` 等 |
+| `raw/` | 中间解析目录（大响应已裁剪；`responses_trimmed.json`/`summary.txt`）。原始 `requests.json`/`responses.json` 等大文件已清理以减小体积；需要时运行 `scripts/extract_sign.py` 从只读日志重建（`raw/` 为输出目录）。 |
 
-脱敏处理：doc/CSV/`endpoint_samples.json`/`reports/` 中姓名、手机号、账号、学校名、班级名、token/JWT、cookie、OSS/SLS 凭证、password 均替换为 `***`（保留字段名与格式）。**例外**：`sign_samples.json` 按任务要求保留“原始 body 字符串”（签名验证需要原文），其中可能包含请求参数原值（含 token、密文手机号、password 等）；该文件仅用于算法验证，勿对外传播。
+脱敏处理：文档、CSV、请求/响应样例与证据报表中的姓名、手机号、账号、学校名、班级名、token/JWT、cookie、OSS/SLS 凭证、password 均替换为 `***`（保留字段名与格式）。`data/api/sign_samples.json` 为签名验证保留了请求 `body` 的原文结构（`body_json_exact`），其中敏感字段已替换为 `***`；请勿将其用于验证之外的用途。

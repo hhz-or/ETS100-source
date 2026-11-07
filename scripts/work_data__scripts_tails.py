@@ -11,11 +11,11 @@ def show(p):
                      "keySerialNum":s(tail[176:304]),"thisAnswer":s(tail[304:336])},
           "tail40_hex":tail40.hex(),"tail40_text":s(tail40)}
     return info
-files=[r"D:\ets-rea\ETS\temp\resources\747716\content_811841.zip",
-       r"D:\ets-rea\ETS\temp\resources\747716\template_686.zip",
-       r"D:\ets-rea\ETS\temp\resources\common.zip",
-       r"D:\ets-rea\ETS\temp\resources\pc_xst_dict.zip",
-       r"D:\ets-rea\ETS\temp\resources\clear_cache.zip"]
+files=[r"ETS\temp\resources\747716\content_811841.zip",
+       r"ETS\temp\resources\747716\template_686.zip",
+       r"ETS\temp\resources\common.zip",
+       r"ETS\temp\resources\pc_xst_dict.zip",
+       r"ETS\temp\resources\clear_cache.zip"]
 res=[]
 for f in files:
     res.append(show(f))

@@ -1,5 +1,5 @@
 import re
-for p in [r'D:\ets-rea\ETS\logs\shell_2026-11-4.log', r'D:\ets-rea\ETS\logs\shell_2026-10-28.log']:
+for p in [r'ETS\logs\shell_2026-11-4.log', r'ETS\logs\shell_2026-10-28.log']:
     t=open(p,'rb').read().decode('gbk','replace')
     print('=====',p,len(t))
     for kw in ['mq_server','remote-debugging','10086','--shell-app-','launch','StartProcess','CreateProcess','plugin','.pln','upgrade']:

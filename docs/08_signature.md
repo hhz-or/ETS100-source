@@ -1,13 +1,18 @@
 # 08 API 签名算法（head.sign）——已完整还原并验证
 
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **本文复核**：`python scripts/sign_verify_all.py`（333/334）、`python scripts/keystream.py`（FNV MATCH）、`python scripts/update_sign_verify.py`（3/3）、`python scripts/aes_check.py`。
+
 > 结论：**已还原，且用历史日志中 334 组真实请求验证：333/334 精确命中**（唯一不中的是 `/user/login`，原因是日志脱敏把 `password` 置空，签名原文不可见）。
-> 可执行实现：[work/api/ets_sign.py](../work/api/ets_sign.py)；验证脚本：[work/scripts/sign_verify_all.py](../work/scripts/sign_verify_all.py)。
+> 可执行实现：[data/api/ets_sign.py](../data/api/ets_sign.py)；验证脚本：[scripts/sign_verify_all.py](../scripts/sign_verify_all.py)。
 
 ---
 
 ## 一、协议层：签名在哪、长什么样
 
-前端（`work/frontend/bundles/` 主 bundle，`EtsSignatureAdapter` 类）流程：
+前端（原始 bundle 未随仓库发布；主 bundle 中的 `EtsSignatureAdapter` 类）流程：
 
 ```js
 const s = [{ r: apiPath, params: Object.assign({}, COMMON, params) }];  // 业务数组
@@ -31,7 +36,7 @@ request.body = { body: c,
 
 ## 二、原生实现（Ghidra 12.1.4 反编译，证据可复现）
 
-反编译全文：`work/ghidra_out/etshelper.pln/decompiled.c`（89,518 行）。
+反编译全文：`decompiled.c`（89,518 行；反编译产物未随仓库发布）。
 
 | 地址 | 函数 | 作用 |
 |---|---|---|
@@ -56,7 +61,7 @@ PlnOnProcessMessage:
 
 `select` 决定使用哪一组内嵌密钥表（0=v1，1=v2）。
 
-> 补充（来自 native-analyst 的独立反汇编交叉验证）：签名前还有一道**本地闸门** `FUN_10013fc0`（`0x13FC0`）——要求内部状态已初始化、参数长度上限（0x400 / 0x1000000）、并用 `GetTickCount` 做 1000 ms 窗口 + 计数器（上限 0x401）限流，失败即 `[etshelper::OnEncodeAPIBody] signature request rejected.`。这是**本地防刷/限流**，不是网络校验；正常业务不会触发。
+> 补充（另经独立反汇编交叉验证）：签名前还有一道**本地闸门** `FUN_10013fc0`（`0x13FC0`）——要求内部状态已初始化、参数长度上限（0x400 / 0x1000000）、并用 `GetTickCount` 做 1000 ms 窗口 + 计数器（上限 0x401）限流，失败即 `[etshelper::OnEncodeAPIBody] signature request rejected.`。这是**本地防刷/限流**，不是网络校验；正常业务不会触发。
 
 ### 2.2 密钥流（观察，含完整性校验）
 
@@ -75,7 +80,7 @@ if r: b0 = ror8(b0, r)
 out[i] = ((b0 - b2) & 0xFF) ^ b1
 ```
 
-32 个字节恰好组成 32 个 ASCII 十六进制字符。**用 PE 文件直接提取数据表并重算，FNV-1a 校验与代码期望值完全一致**（验证脚本 `work/scripts/keystream.py`），因此密钥流可靠：
+32 个字节恰好组成 32 个 ASCII 十六进制字符。**用 PE 文件直接提取数据表并重算，FNV-1a 校验与代码期望值完全一致**（验证脚本 `scripts/keystream.py`），因此密钥流可靠：
 
 | 协议 | 派生结果（32 字符 ASCII） |
 |---|---|
@@ -106,7 +111,7 @@ sign = MD5( PID_PREFIX  +  time_ms_string  +  base64(JSON.stringify(body))  +  K
 
 ## 三、验证结果（真实数据）
 
-样本：`work/api/sign_samples.json`（334 组，来自两份 `ets_*.log`，含 `body_json_exact` 与 `head.sign`）。
+样本：原始样本共 334 组（来自两份 `ets_*.log`，含 `body_json_exact` 与 `head.sign`）。仓库内 `data/api/sign_samples.json` 为**脱敏版**：敏感字段已替换为 `***`，因而只有未被脱敏影响的样本可直接复核（本地实测 63/334）；完整 334 组的复现需用 `scripts/extract_sign.py` 从自己的只读日志重建。
 
 | 项 | 结果 |
 |---|---|
@@ -114,16 +119,16 @@ sign = MD5( PID_PREFIX  +  time_ms_string  +  base64(JSON.stringify(body))  +  K
 | 唯一不中 | `ets_2026-11-4.log:55` → `POST /user/login` |
 | 原因 | 日志脱敏函数对 `user/login` 强制把 `params.password` 置空（`LoggerUtils.desensitization`），而**签名是对"含密文密码的真实 body"计算的**，故脱敏后的 body 无法复现签名。属预期差异，非算法错误。 |
 | **运行时复核（2026-11-06 live）** | 新会话日志 68 条带 `head.sign` 的请求：**68 / 68 命中**（在线版本 core 代码与缓存一致，见 `11_runtime_live.md`） |
-| **运行时原生 oracle（2026-11-06 live）** | 在真实页面直接调用 `EtsHelper.encode_api_body_v2({body,time})`，原生返回 `sign=7960a6bd…`；本公式计算值**逐字节一致**（`work/runtime/sign_oracle.json`，match=true） |
+| **运行时原生 oracle（2026-11-06 live）** | 在真实页面直接调用 `EtsHelper.encode_api_body_v2({body,time})`，原生返回 `sign=7960a6bd…`；本公式计算值**逐字节一致**（`data/api/sign_oracle.json`，match=true） |
 
 复现命令：
 
 ```bash
-python D:\ets-rea\work\scripts\sign_verify_all.py
+python scripts\sign_verify_all.py
 # v2 verify: 333/334 match
 ```
 
-参考实现（`work/api/ets_sign.py`）：
+参考实现（`data/api/ets_sign.py`）：
 
 ```python
 import hashlib, base64
@@ -135,11 +140,19 @@ def sign_v2(body_json_str: str, time_ms_str: str) -> str:
 
 ---
 
-## 四、响应签名（encode_api_resp / _v2）
+## 四、响应签名（encode_api_resp / _v2）—— 已还原并验证
 
-- `FUN_10014230` 与请求签名同构：`MD5( PID ‖ A ‖ B ‖ body_or_resp ‖ KEY)`，最后追加同一密钥流并做 FNV 校验。
-- 前端只在需要校验服务端响应时调用 `signResponse(resp, protocol)`；本安装的 341 条响应日志中**未出现带 `sign` 的响应体**（`sign_response:1` 参数存在，但服务端未回签名），因此该路径**未取得运行时样本**。
-- 结论：算法结构已确认，字段顺序由反编译确定；运行时未触发 → 标为"已还原但未实测"。
+- 实现：`FUN_10014230`（`etshelper.pln` 0x14230）。与请求签名同构，但 **密钥流插在倒数第二段**：
+
+```
+v2: sign = MD5( "pcWin" + base64(response) + KEY_V2 + sn )
+```
+
+- 运行时证据（Frida 17 实机 hook，见 `11_runtime_live.md` §十一）：调用 `encode_api_resp_v2({"response":"W10=","time":…})` 时，原生 `sign_resp` 实际收到的三段为
+  `A="pcWin"`、`B="W10="`、`C="test"`（第三段是插件内固定 `sn` 值），输出 `sign=6d3d82172ce30999a4b3890a022619bb`；
+  离线按 `MD5("pcWin"+"W10="+KEY_V2+"test")` 计算**逐字节一致**。
+- v1 响应（`grlx` + 同一结构 + KEY_V1）亦有返回，但 canonical 拼接未完全对齐（v1 为遗留路径，前端从不调用）。
+- 前端代码中 `signResponse()` 存在但**没有任何调用点** → 服务端响应签名校验在本版本未启用。
 
 ---
 
@@ -151,12 +164,12 @@ def sign_v2(body_json_str: str, time_ms_str: str) -> str:
 sign = MD5( "grlx" + time_seconds + base64(JSON body) + "555ffbe95ccf4e9535a110170b445ab8" )
 ```
 
-- 证据：`EtsUpdate.exe` 反编译 `FUN_0042f070`（`work/ghidra_out/EtsUpdate.exe/decompiled.c`）显式初始化签名上下文：
+- 证据：`EtsUpdate.exe` 反编译 `FUN_0042f070`（`decompiled.c`，反编译产物未随仓库发布）显式初始化签名上下文：
   - `pid = "grlx"`、`version = "1.0"`
   - `key = "555ffbe95ccf4e9535a110170b445ab8"`（注意与 API v1 的 `355ff…` 仅首字符不同 → 更新器专用变体）
   - MD5 实现位于 `0x00438b23`（init）与 `0x0043985e`（init，另一处），常量 `0x67452301/0xefcdab89/0x98badcfe/0x10325476`。
 - **验证：3/3 精确命中**（三份 `temp\update\log\INFO_uLOG_*` 的真实请求）：
-  `b5a4daff…`、`f39649aa…`、`94ddc31a…`。证明文件：`work/api/update_sign_proof.json`；脚本：`work/scripts/update_sign_verify.py`。
+  `b5a4daff…`、`f39649aa…`、`94ddc31a…`。证明文件：`data/api/update_sign_proof.json`；脚本：`scripts/update_sign_verify.py`。
 - 客户端版本号 `client_version=5079` 取自 `ETS.db.Update_Version`；`time` 为 Unix **秒**（与 API 的毫秒不同）。
 
 ---
@@ -182,7 +195,7 @@ const encrypt$1 = (plain, {isServes, secretKey, mode, padding} = {}) => {
 | `k_serves` | `f05323cb91d422b2` | 上传服务端的敏感字段（`isServes:true`） |
 | `RSA_PUBLIC_KEY` | **一段 `-----BEGIN RSA PRIVATE KEY-----` PEM** | `rsaEncrypt()`（JSEncrypt）使用；客户端内置私钥属安全问题 |
 
-**实测验证**（`work/scripts/aes_check.py`）：日志中 `params.phone` / `params.password` 的 Base64 密文用 `k_serves` + AES-128-ECB + PKCS7 解密，得到明文手机号/密码（3/3 成功；明文不在此展示，已脱敏）。这解释了：
+**实测验证**（`scripts/aes_check.py`）：日志中 `params.phone` / `params.password` 的 Base64 密文用 `k_serves` + AES-128-ECB + PKCS7 解密，得到明文手机号/密码（3/3 成功；明文不在此展示，已脱敏）。这解释了：
 
 - 为什么 `user/login` 的签名样本无法复核（日志脱敏把 `password` 置空，而签名针对含密文的真实 body，见 §三）；
 - 为什么协议里 `sn/phone/password` 等字段看似乱码。
@@ -204,10 +217,10 @@ const encrypt$1 = (plain, {isServes, secretKey, mode, padding} = {}) => {
 
 | 证据 | 位置 |
 |---|---|
-| 前端签名调用与信封构造 | `work/frontend/bundles/` 主 bundle（搜 `EtsSignatureAdapter` / `signBody` / `HEAD_VERSION`） |
+| 前端签名调用与信封构造 | 前端原始 bundle（未随仓库发布）的主 bundle（搜 `EtsSignatureAdapter` / `signBody` / `HEAD_VERSION`） |
 | v2 结果校验 | 主 bundle：`parseV2SignResult`、`SIGN_PATTERN=/^[a-f\d]{32}$/i`、`V1_PID="grlx"` |
-| 原生实现 | `work/ghidra_out/etshelper.pln/decompiled.c`：`FUN_1000a410`、`FUN_10014110`、`FUN_10013e00`、`FUN_10013d30`、`FUN_100051c0` |
-| 密钥表提取与 FNV 校验 | `work/scripts/keystream.py`（输出 MATCH） |
-| 334 组真实样本 | `work/api/sign_samples.json` |
-| 批量验证 | `work/scripts/sign_verify_all.py`（333/334） |
-| 参考实现 | `work/api/ets_sign.py` |
+| 原生实现 | `decompiled.c`（反编译产物未随仓库发布）：`FUN_1000a410`、`FUN_10014110`、`FUN_10013e00`、`FUN_10013d30`、`FUN_100051c0` |
+| 密钥表提取与 FNV 校验 | `scripts/keystream.py`（输出 MATCH） |
+| 334 组真实样本 | `data/api/sign_samples.json` |
+| 批量验证 | `scripts/sign_verify_all.py`（333/334） |
+| 参考实现 | `data/api/ets_sign.py` |

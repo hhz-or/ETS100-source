@@ -1,5 +1,5 @@
 // restore system volume to 70 (undo side effect of probe)
-const WebSocket = require('D:/ets-rea/ETS/mq_server/node_modules/ws');
+const WebSocket = require('ETS/mq_server/node_modules/ws');
 const http = require('http');
 function getJson(u){return new Promise((res,rej)=>{http.get(u,r=>{let d='';r.on('data',c=>d+=c);r.on('end',()=>{try{res(JSON.parse(d))}catch(e){rej(e)}})}).on('error',rej)})}
 (async()=>{

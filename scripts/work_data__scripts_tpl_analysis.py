@@ -1,5 +1,5 @@
 import json, collections, os, re
-b=r"D:\ets-rea\work\data\extracted"
+b=r"data\extracted"
 # 1) diff content vs content2
 def diff(a,b,path=""):
     out=[]
@@ -56,4 +56,4 @@ json.dump({"res":res,"ctrl_stats":{"entries":len(ctrl),"filetype":dict(collectio
      "dirtype":dict(collections.Counter(e['dirtype'] for e in ctrl)),"htmlmodel":dict(models),
      "jsparam":{f"{k[0]}|{k[1]}":v for k,v in cls.items()},"subids":dict(subids),
      "fields":list(ctrl[0].keys())},"placeholders":ph,"info":info},
-     open(r"D:\ets-rea\work\data\resources_template_analysis.json","w",encoding="utf-8"),ensure_ascii=False,indent=1)
+     open(r"data\resources_template_analysis.json","w",encoding="utf-8"),ensure_ascii=False,indent=1)

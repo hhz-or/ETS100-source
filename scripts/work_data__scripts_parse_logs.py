@@ -1,9 +1,9 @@
 """Extract URLs, update info and resource download events from ETS logs (GBK decoded)."""
 import os, re, json, base64, collections
 
-LOG = r"D:\ets-rea\ETS\logs"
-UPD = r"D:\ets-rea\ETS\temp\update\log"
-OUT = r"D:\ets-rea\work\data\logs"
+LOG = r"ETS\logs"
+UPD = r"ETS\temp\update\log"
+OUT = r"data\logs"
 os.makedirs(OUT, exist_ok=True)
 
 def decode(b):

@@ -1,6 +1,6 @@
 import struct, hashlib
 
-PATH = r"D:\ets-rea\ETS\plugins\etshelper\etshelper.pln"
+PATH = r"ETS\plugins\etshelper\etshelper.pln"
 b = open(PATH, "rb").read()
 
 # --- parse PE ---

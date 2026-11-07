@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\shellhelper\\shellhelper.pln",
+ "file": "ETS\\plugins\\shellhelper\\shellhelper.pln",
  "sha256": "73b0e0f708607fd29814eef707e26972a5bbd156e4ea29db4ad3099bce08dda6",
  "image_base": "0x10000000",
  "export_dir": {

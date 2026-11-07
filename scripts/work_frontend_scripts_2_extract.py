@@ -1,6 +1,6 @@
 import os,struct,hashlib,gzip,json,re
-base=r'D:\ets-rea\ETS\temp\Cache_ETSShell\Cache'
-OUT=r'D:\ets-rea\work\frontend'; BUND=os.path.join(OUT,'bundles'); os.makedirs(BUND,exist_ok=True)
+base=r'ETS\temp\Cache_ETSShell\Cache'
+OUT=r'data/frontend'; BUND=os.path.join(OUT,'bundles'); os.makedirs(BUND,exist_ok=True)
 files={i:open(os.path.join(base,'data_%d'%i),'rb').read() for i in range(4)}
 BS={i:struct.unpack_from('<I',files[i],12)[0] for i in files}
 b=files[1]

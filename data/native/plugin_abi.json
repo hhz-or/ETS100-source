@@ -17,12 +17,12 @@
  },
  "plugins": {
   "appcontroller": {
-   "file": "D:\\ets-rea\\ETS\\plugins\\appcontroller\\appcontroller.pln",
+   "file": "ETS\\plugins\\appcontroller\\appcontroller.pln",
    "size": 552448,
    "sha256": "c90f70338cbc39446ae5bfb2d47263f78ec315572bd391fa343cf6933845c2f3",
    "timestamp_utc": "2024-10-28 09:29:09 UTC",
    "linker": "14.29",
-   "pdb": "D:\\code\\STIC\\stic-pro_ets\\build\\Release\\plugins\\appcontroller\\appcontroller.pdb",
+   "pdb": "<BUILD_ROOT>\\stic-pro_ets\\build\\Release\\plugins\\appcontroller\\appcontroller.pdb",
    "exports": [
     {
      "ordinal": 1,
@@ -114,12 +114,12 @@
    ]
   },
   "etshelper": {
-   "file": "D:\\ets-rea\\ETS\\plugins\\etshelper\\etshelper.pln",
+   "file": "ETS\\plugins\\etshelper\\etshelper.pln",
    "size": 497664,
    "sha256": "accb7e462a292b4cc143b0c4cf85eece2d2c7a1dfd7e070a903cf03397c32c8c",
    "timestamp_utc": "2026-08-15 06:39:14 UTC",
    "linker": "14.29",
-   "pdb": "D:\\code\\STIC\\stic-misc\\stic-pro_ets\\build\\Release\\plugins\\etshelper\\etshelper.pdb",
+   "pdb": "<BUILD_ROOT>\\stic-misc\\stic-pro_ets\\build\\Release\\plugins\\etshelper\\etshelper.pdb",
    "exports": [
     {
      "ordinal": 1,
@@ -202,12 +202,12 @@
    ]
   },
   "filehelper": {
-   "file": "D:\\ets-rea\\ETS\\plugins\\filehelper\\filehelper.pln",
+   "file": "ETS\\plugins\\filehelper\\filehelper.pln",
    "size": 674304,
    "sha256": "d83f497de20a946062f92af274cb77a23208aedd02651a3ee18338d928d98b61",
    "timestamp_utc": "2024-10-29 03:33:46 UTC",
    "linker": "10.0",
-   "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\filehelper\\filehelper.pdb",
+   "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\filehelper\\filehelper.pdb",
    "exports": [
     {
      "ordinal": 1,
@@ -338,12 +338,12 @@
    ]
   },
   "httphelper": {
-   "file": "D:\\ets-rea\\ETS\\plugins\\httphelper\\httphelper.pln",
+   "file": "ETS\\plugins\\httphelper\\httphelper.pln",
    "size": 1730560,
    "sha256": "49f00a8dd15944d929548159e2eca51db1923e07f08de8ca1e4eb7bb1a81f9ad",
    "timestamp_utc": "2024-10-28 10:06:58 UTC",
    "linker": "10.0",
-   "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\lib\\httphelper.pdb",
+   "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\lib\\httphelper.pdb",
    "exports": [
     {
      "ordinal": 1,
@@ -447,12 +447,12 @@
    ]
   },
   "sevenzip": {
-   "file": "D:\\ets-rea\\ETS\\plugins\\sevenzip\\sevenzip.pln",
+   "file": "ETS\\plugins\\sevenzip\\sevenzip.pln",
    "size": 467456,
    "sha256": "00a7d17d6c4ea737710ec65efd59396a1896bd9e3a3c2c872c4811a750372bb9",
    "timestamp_utc": "2024-10-28 12:24:58 UTC",
    "linker": "10.0",
-   "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\sevenzip\\sevenzip.pdb",
+   "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\sevenzip\\sevenzip.pdb",
    "exports": [
     {
      "ordinal": 1,
@@ -526,12 +526,12 @@
    ]
   },
   "shellhelper": {
-   "file": "D:\\ets-rea\\ETS\\plugins\\shellhelper\\shellhelper.pln",
+   "file": "ETS\\plugins\\shellhelper\\shellhelper.pln",
    "size": 2117632,
    "sha256": "73b0e0f708607fd29814eef707e26972a5bbd156e4ea29db4ad3099bce08dda6",
    "timestamp_utc": "2024-10-31 08:17:26 UTC",
    "linker": "10.0",
-   "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\shellhelper\\shellhelper.pdb",
+   "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\shellhelper\\shellhelper.pdb",
    "exports": [
     {
      "ordinal": 1,
@@ -705,12 +705,12 @@
    ]
   },
   "soundhelper": {
-   "file": "D:\\ets-rea\\ETS\\plugins\\soundhelper\\soundhelper.pln",
+   "file": "ETS\\plugins\\soundhelper\\soundhelper.pln",
    "size": 3175936,
    "sha256": "52c4e5d923cb0e873e9d15952d163a1969e06eca0cbca1c2ad4ce22ed20595f5",
    "timestamp_utc": "2025-08-26 03:59:04 UTC",
    "linker": "10.0",
-   "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\soundhelper\\soundhelper.pdb",
+   "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\soundhelper\\soundhelper.pdb",
    "exports": [
     {
      "ordinal": 1,
@@ -1021,12 +1021,12 @@
    ]
   },
   "sqlitepln": {
-   "file": "D:\\ets-rea\\ETS\\plugins\\sqlitepln\\sqlitepln.pln",
+   "file": "ETS\\plugins\\sqlitepln\\sqlitepln.pln",
    "size": 345088,
    "sha256": "77cefe026ce01e06e90b249f0aecd193bc50bd52d5e8b9168b8c4a9d0c8b763c",
    "timestamp_utc": "2024-10-28 12:39:12 UTC",
    "linker": "10.0",
-   "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\lib\\sqlitepln.pdb",
+   "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\lib\\sqlitepln.pdb",
    "exports": [
     {
      "ordinal": 1,
@@ -1105,12 +1105,12 @@
    ]
   },
   "window_control": {
-   "file": "D:\\ets-rea\\ETS\\plugins\\window_control\\window_control.pln",
+   "file": "ETS\\plugins\\window_control\\window_control.pln",
    "size": 436736,
    "sha256": "be0ca19b45fa6ba178754506b2bcdfc4afeceb52ad84bfbddab2f4ab1c1d9fc4",
    "timestamp_utc": "2024-10-28 12:39:58 UTC",
    "linker": "10.0",
-   "pdb": "D:\\code\\STIC\\stic-pro_2010\\build\\Release\\plugins\\window_control\\window_control.pdb",
+   "pdb": "<BUILD_ROOT>\\stic-pro_2010\\build\\Release\\plugins\\window_control\\window_control.pdb",
    "exports": [
     {
      "ordinal": 1,

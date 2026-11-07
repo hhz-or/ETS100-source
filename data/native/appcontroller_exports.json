@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\appcontroller\\appcontroller.pln",
+ "file": "ETS\\plugins\\appcontroller\\appcontroller.pln",
  "sha256": "c90f70338cbc39446ae5bfb2d47263f78ec315572bd391fa343cf6933845c2f3",
  "image_base": "0x10000000",
  "export_dir": {

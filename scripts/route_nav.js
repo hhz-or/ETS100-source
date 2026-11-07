@@ -1,12 +1,12 @@
 // Navigate live ETS SPA through routes via CDP, dump newly loaded chunks
-const WebSocket = require('D:/ets-rea/ETS/mq_server/node_modules/ws');
+const WebSocket = require('ETS/mq_server/node_modules/ws');
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const OUT = 'D:/ets-rea/work/runtime';
+const OUT = 'runtime';
 const PORT = 10086;
-const ROUTES = JSON.parse(fs.readFileSync('D:/ets-rea/work/frontend/routes.json', 'utf8'));
+const ROUTES = JSON.parse(fs.readFileSync('data/frontend/routes.json', 'utf8'));
 const routes = [...new Set(ROUTES.routes.map(r => r.full_path).filter(p => p && p.startsWith('/')))]
   .filter(p => !p.includes(':'));   // skip dynamic params (would 404)
 fs.mkdirSync(path.join(OUT, 'scripts_routes'), { recursive: true });

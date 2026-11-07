@@ -7,7 +7,7 @@ def strings(p, minlen=6):
     return asc + u16
 
 print("=== Ets.exe ===")
-ss = strings(r"D:\ets-rea\ETS\Ets.exe", 5)
+ss = strings(r"ETS\Ets.exe", 5)
 pat = re.compile(r"\.exe|mq_|plugin|update|start|path|http|ETS|ets|Shell|dll|cmd|wait|process|Create", re.I)
 seen = set()
 for s in ss:
@@ -18,7 +18,7 @@ for s in ss:
         print(s[:180])
 
 print("\n=== shell log: command line / cmdline ===")
-p = r"D:\ets-rea\ETS\logs\shell_2026-11-4.log"
+p = r"ETS\logs\shell_2026-11-4.log"
 t = open(p, "rb").read().decode("gbk", "replace")
 c = 0
 for line in t.split("\n"):

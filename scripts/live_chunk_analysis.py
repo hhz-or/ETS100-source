@@ -1,7 +1,7 @@
 import os, re, json, hashlib
 
-CH = r"D:\ets-rea\work\runtime\chunks_full"
-stub = open(r"D:\ets-rea\work\runtime\scripts_manifest.json", encoding="utf-8").read()
+CH = r"runtime\chunks_full"
+stub = open(r"runtime\scripts_manifest.json", encoding="utf-8").read()
 
 # 1. collect action calls across all live chunks
 act_pat = re.compile(r'sendMessage\([^,]{0,120},\s*"([A-Za-z0-9_]+)"\s*,\s*"([A-Za-z0-9_]+)"')
@@ -13,10 +13,10 @@ for f in os.listdir(CH):
     for m in act_pat.finditer(t):
         actions.setdefault((m.group(1), m.group(2)), set()).add(f)
 # also plugin stubs (already separate)
-for f in os.listdir(r"D:\ets-rea\work\runtime\scripts"):
+for f in os.listdir(r"runtime\scripts"):
     if "plugins_stic" not in f:
         continue
-    t = open(os.path.join(r"D:\ets-rea\work\runtime\scripts", f), encoding="utf-8", errors="replace").read()
+    t = open(os.path.join(r"runtime\scripts", f), encoding="utf-8", errors="replace").read()
     for m in act_pat.finditer(t):
         actions.setdefault((m.group(1), m.group(2)), set()).add("stub:" + f)
 print("distinct (plugin,action):", len(actions))
@@ -41,7 +41,7 @@ print("\npath-like strings:", len(ep))
 
 old = {"api_endpoints": set()}
 try:
-    d = json.load(open(r"D:\ets-rea\work\frontend\api_endpoints.json", encoding="utf-8"))
+    d = json.load(open(r"data/frontend\api_endpoints.json", encoding="utf-8"))
     if isinstance(d, dict):
         items = d.get("endpoints") or d.get("api_endpoints") or []
     else:
@@ -61,7 +61,7 @@ print("old missing in new live set (sample):", missing[:20])
 json.dump({"actions": {f"{p}|{a}": sorted(v) for (p, a), v in actions.items()},
            "plugins": {p: sorted(set(v)) for p, v in plugins.items()},
            "path_strings": sorted(ep)},
-          open(r"D:\ets-rea\work\runtime\live_analysis.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+          open(r"runtime\live_analysis.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 # 3. version markers
 for f in ["index-e7d07c24.js"]:

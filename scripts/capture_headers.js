@@ -1,8 +1,8 @@
 // capture runtime request headers + mq_server websocket frames
-const WebSocket = require('D:/ets-rea/ETS/mq_server/node_modules/ws');
+const WebSocket = require('ETS/mq_server/node_modules/ws');
 const http = require('http');
 const fs = require('fs');
-const OUT = 'D:/ets-rea/work/runtime';
+const OUT = 'runtime';
 function getJson(u){return new Promise((res,rej)=>{http.get(u,r=>{let d='';r.on('data',c=>d+=c);r.on('end',()=>{try{res(JSON.parse(d))}catch(e){rej(e)}})}).on('error',rej)})}
 (async()=>{
   const l=await getJson('http://127.0.0.1:10086/json/list');

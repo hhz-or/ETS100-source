@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\window_control\\window_control.pln",
+ "file": "ETS\\plugins\\window_control\\window_control.pln",
  "functions": [
   {
    "rva": "0x00001D60",
@@ -32,7 +32,7 @@
    "va": "0x10002010",
    "insn_count": 193,
    "strings": [
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "=============================================",
     "========StiCorePlugin.log starting==========="
    ],

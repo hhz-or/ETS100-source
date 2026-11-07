@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\httphelper\\httphelper.pln",
+ "file": "ETS\\plugins\\httphelper\\httphelper.pln",
  "functions": [
   {
    "rva": "0x00003330",
@@ -65,7 +65,7 @@
    "va": "0x10009AF0",
    "insn_count": 191,
    "strings": [
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "=============================================",
     "========StiCorePlugin.log starting==========="
    ],

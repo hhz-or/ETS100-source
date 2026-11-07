@@ -1,5 +1,5 @@
 import os,re,json
-D=r"D:\ets-rea\work\data"
+D=r"data"
 ACCT=re.compile(r"SHM\d{6,}")
 JWT=re.compile(r"eyJ[A-Za-z0-9_\-]{6,}(?:\.[A-Za-z0-9_\-]*){0,3}")
 PHONE=re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)")

@@ -1,5 +1,5 @@
 import re
-p=r"D:\ets-rea\ETS\EtsUpdate.exe"
+p=r"ETS\EtsUpdate.exe"
 b=open(p,'rb').read()
 i=b.find(b"ETS.db.sql")
 print("ctx",repr(b[i-120:i+160]))

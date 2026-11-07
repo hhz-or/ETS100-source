@@ -1,5 +1,5 @@
 import os, collections
-d=r"D:\ets-rea\ETS\soundfiles"
+d=r"ETS\soundfiles"
 rows=[]
 for f in sorted(os.listdir(d)):
     if f.endswith(".mp3"):

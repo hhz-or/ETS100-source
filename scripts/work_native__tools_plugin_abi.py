@@ -3,7 +3,7 @@
 """Consolidated plugin ABI + capability table -> work/native/plugin_abi.json"""
 import os, json
 
-ROOT = r"D:\ets-rea\work\native"
+ROOT = r"data/native"
 PLUGINS = ["appcontroller", "etshelper", "filehelper", "httphelper", "sevenzip",
            "shellhelper", "soundhelper", "sqlitepln", "window_control"]
 

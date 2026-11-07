@@ -1,5 +1,5 @@
 import os,json,hashlib,collections
-OUT=r'D:\ets-rea\work\frontend'; BUND=os.path.join(OUT,'bundles')
+OUT=r'data/frontend'; BUND=os.path.join(OUT,'bundles')
 man=json.load(open(os.path.join(OUT,'manifest.json')))
 byhash=collections.defaultdict(list)
 for m in man:

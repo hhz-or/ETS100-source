@@ -1,5 +1,5 @@
 import os,re,json,collections
-OUT=r'D:\ets-rea\work\frontend'
+OUT=r'data/frontend'
 man=json.load(open(os.path.join(OUT,'manifest.json')))
 files=[m['file'] for m in man]
 d=json.load(open(os.path.join(OUT,'routes.json')))

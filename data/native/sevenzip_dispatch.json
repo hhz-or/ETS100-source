@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\sevenzip\\sevenzip.pln",
+ "file": "ETS\\plugins\\sevenzip\\sevenzip.pln",
  "functions": [
   {
    "rva": "0x00001F20",
@@ -32,7 +32,7 @@
    "va": "0x10002200",
    "insn_count": 191,
    "strings": [
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "=============================================",
     "========StiCorePlugin.log starting==========="
    ],

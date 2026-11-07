@@ -1,5 +1,10 @@
 # 02 系统架构
 
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **相关脚本**：`scripts/` 下的日志/桥接分析脚本；本文结论以静态文件与历史日志为依据。
+
 ## 一、总体架构
 
 ```
@@ -57,7 +62,7 @@
 ## 三、启动链【观察 + 推断】
 
 ```
-Ets.exe（"preshell"，D:\code\STIC\preshell_2\Release\preshell.pdb）
+Ets.exe（"preshell"，<BUILD_ROOT>\STIC\preshell_2\Release\preshell.pdb）
   │ 读取 .\shell.ini（ShellConfig）
   │ 计算屏幕缩放 GetScreenScale device width=...（写 WindowScale）
   │ ShellExecuteExW → 拉起 shell.exe（ETSShell.exe）
@@ -80,7 +85,7 @@ CEF renderer 加载 https://statics.ets100.com/ets-student-pc-web/index.html
 
 ## 四、JS ↔ Native 桥
 
-`ETSShell.exe` 内嵌一段 **2130 字节的 V8 扩展 JS**（提取件：`work/lead/shell_bridge_prelude.js`），注册 `cef.message` 与 `cef.fs`：
+`ETSShell.exe` 内嵌一段 **2130 字节的 V8 扩展 JS**（提取件：`壳内嵌 JS 前导提取件（未随仓库发布）`），注册 `cef.message` 与 `cef.fs`：
 
 ```js
 cef.message.sendMessage(uid, pluginKey, actionKey, args)   // 发消息（异步，结果走回调）
@@ -167,7 +172,7 @@ Vue 组件 → axios 封装（前端）
 4. **日志是全量"自白"**：mq_server 广播 + 明文落盘，等于给逆向者提供了完整协议抓包（本报告大量证据来源）。
 5. **壳与业务解耦**：壳只负责窗口/CEF/插件/更新/自定义协议，换皮成本低。
 6. **壳默认放宽 Web 安全**：`ETSShell.exe` 中可见 Chromium 开关 `ignore-certificate-errors`、`disable-web-security`、`allow-running-insecure-content` — 这是为兼容旧 HTTP 资源而保留的高风险配置。
-7. **日志总线对外暴露**：`mq_server` 监听 `0.0.0.0:40001` 且**无鉴权**，任何本机/局域网客户端连上即可接收全部日志广播（日志中含 STS 凭证、token、账号信息）。
+7. **日志总线对外暴露**：`mq_server` 监听 `0.0.0.0:40001` 且**无鉴权**，任何同机或局域网客户端连上即可接收全部日志广播（日志中含 STS 凭证、token、账号信息）。
 8. **签名/加密不构成安全边界**：签名密钥、AES 密钥、RSA 私钥均可从客户端提取（见 08）。
 
 ## 十、安全观察（汇总）

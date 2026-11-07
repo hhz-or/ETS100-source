@@ -1,5 +1,5 @@
 import re,os
-LOG=r"D:\ets-rea\ETS\logs"
+LOG=r"ETS\logs"
 def dec(b):
     try:
         s=b.decode('utf-8')

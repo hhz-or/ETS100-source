@@ -1,5 +1,5 @@
 import os,struct,json,re
-base=r'D:\ets-rea\ETS\temp\Cache_ETSShell\Cache'
+base=r'ETS\temp\Cache_ETSShell\Cache'
 b=open(os.path.join(base,'data_1'),'rb').read()
 recs=[]
 for off in range(0,len(b)-256,256):

@@ -1,9 +1,14 @@
 # 06 本地数据与资源分析（讯飞 E 听说 PC 学生端 5.7.9 / ETSShell）
 
-> 范围：`D:\ets-rea\ETS` 下的本地持久化数据、Chromium（CEF）用户数据、`temp\resources` 资源包、`soundfiles` 录音与评测结果、更新/下载日志。
-> 目标目录全程只读，未做任何修改；所有解包/导出产物写入 `D:\ets-rea\work\data\`（约 39 MB）。
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **本文复核**：`python scripts/work_data__scripts_extract_content.py`（题库包解密）、`python scripts/work_data__scripts_leveldb_reader.py`（LevelDB 读取）。
+
+> 范围：`<ETS_INSTALL_DIR>` 下的本地持久化数据、Chromium（CEF）用户数据、`temp\resources` 资源包、`soundfiles` 录音与评测结果、更新/下载日志。
+> 目标目录全程只读，未做任何修改；所有解包/导出产物写入原分析工作区的 `data/` 目录（约 39 MB，未随仓库发布）。
 > 脱敏约定：账号统一 `SHM*******`、手机号 `1**********`、JWT/STS/密码字段 `***REDACTED`；文中数值/时间戳保持原样。
-> 证据路径均相对 `D:\ets-rea\`；`[ETS]` 表示只读源文件，`[W]` 表示本次产物。
+> 证据路径均相对 `<WORK_DIR>\`；`[ETS]` 表示只读源文件，`[W]` 表示本次产物。
 
 ---
 
@@ -22,23 +27,23 @@
 
 | 路径 `[ETS]` | 大小 | 说明 | 本次产物 `[W]` |
 |---|---|---|---|
-| `localdata\ETS.db` | 12,288 B | SQLite 配置库，仅 `Config` 表 | `work/data/db/ETS_db_dump.json`、`ETS_db_Config_rows.json` |
-| `SQL\ETS.db.sql` | **0 B** | 预期为 GBK 建库脚本，本次为空（缺口 §8） | 内嵌 SQL 证据：`work/data/db/EtsUpdate_SQL_region.txt` |
-| `bugreport\localdata\BuryPoint.db` | 16,384 B | 埋点库，`BURYPOINTDATABASE` 表 0 行 | `work/data/db/BuryPoint_db_dump.json` |
-| `temp\Cache_ETSShell\` | ~35 MB | CEF 用户数据（Cookie/LS/SS/IDB/Cache/Code Cache） | `work/data/storage/*.json` |
-| `temp\resources\` | 3×~2.7 MB | common/clear_cache/pc_xst_dict + 3 套套卷资源 | `work/data/extracted/**`、`resources_*.json` |
-| `soundfiles\` | 108 文件 | 36 组 mp3/spx/xml | `work/data/soundfiles/*.json` |
-| `logs\` | 6 文件 ~30 MB | shell/ets/cef 日志（GBK/UTF-8 混合） | `work/data/logs/*.json` |
+| `localdata\ETS.db` | 12,288 B | SQLite 配置库，仅 `Config` 表 | `data/db/ETS_db_dump.json`、`ETS_db_Config_rows.json` |
+| `SQL\ETS.db.sql` | **0 B** | 预期为 GBK 建库脚本，本次为空（缺口 §8） | 内嵌 SQL 证据：`EtsUpdate 内嵌 SQL 区段（未随仓库发布）` |
+| `bugreport\localdata\BuryPoint.db` | 16,384 B | 埋点库，`BURYPOINTDATABASE` 表 0 行 | `data/db/BuryPoint_db_dump.json（未随仓库发布）` |
+| `temp\Cache_ETSShell\` | ~35 MB | CEF 用户数据（Cookie/LS/SS/IDB/Cache/Code Cache） | `data/storage/*.json（未随仓库发布）` |
+| `temp\resources\` | 3×~2.7 MB | common/clear_cache/pc_xst_dict + 3 套套卷资源 | `data/extracted/**（未随仓库发布）`、`data/resources_*.json（未随仓库发布）` |
+| `soundfiles\` | 108 文件 | 36 组 mp3/spx/xml | `data/soundfiles/*.json（未随仓库发布）` |
+| `logs\` | 6 文件 ~30 MB | shell/ets/cef 日志（GBK/UTF-8 混合） | `data/logs/*.json（未随仓库发布）` |
 | `temp\update\log\` | 3×1,696 B | 客户端自动更新（EtsUpdate）日志 | 同上 |
 | `7z.log` | 15,949 B | 7z 解包日志（记录了原始安装路径与全部解包动作） | 引用 |
 
-工具：Python 3.13（标准库 sqlite3/json/ElementTree）、7-Zip 26.00、`ETS\ffmpeg\ffmpeg.exe`、自写纯 Python LevelDB 读取器（`work/data/_scripts/leveldb_reader.py`，含 Snappy 解压/SST/LOG 解析，**未依赖 pip**）。
+工具：Python 3.13（标准库 sqlite3/json/ElementTree）、7-Zip 26.00、`<ETS_INSTALL_DIR>\ffmpeg\ffmpeg.exe`、自写纯 Python LevelDB 读取器（`scripts/work_data__scripts_leveldb_reader.py`，含 Snappy 解压/SST/LOG 解析，**未依赖 pip**）。
 
 ---
 
 ## 2. SQLite 配置库（`localdata\ETS.db`）
 
-### 2.1 文件级事实（证据：`work/data/db/ETS_db_dump.json`）
+### 2.1 文件级事实（证据：`data/db/ETS_db_dump.json`）
 
 | 项 | 值 |
 |---|---|
@@ -68,7 +73,7 @@ CREATE UNIQUE INDEX [unique_ley] ON [Config] ([Section], [Entry]);
 | `UpdateTime` | 写入时间（本地时间） | 允许 NULL |
 | `Common` | 中文说明（帮助文案） | 更新时由 SQL 写入；本库为 UTF-8 中文 |
 
-### 2.2 全表数据（7 行，`work/data/db/ETS_db_Config_rows.json`）
+### 2.2 全表数据（7 行，`data/db/ETS_db_Config_rows.json`）
 
 | Section | Entry | Value | UpdateTime | Common（中文说明） | 用途解释 |
 |---|---|---|---|---|---|
@@ -84,7 +89,7 @@ CREATE UNIQUE INDEX [unique_ley] ON [Config] ([Section], [Entry]);
 
 ### 2.3 `SQL\ETS.db.sql` 为空时的补救证据（`EtsUpdate.exe`）
 
-`EtsUpdate.exe` 内嵌了完整更新流程与 SQL（`work/data/db/EtsUpdate_SQL_region.txt`，GBK 区段，偏移 0x182BC0–0x182FD0 附近）：
+`EtsUpdate.exe` 内嵌了完整更新流程与 SQL（`EtsUpdate 内嵌 SQL 区段（未随仓库发布）`，GBK 区段，偏移 0x182BC0–0x182FD0 附近）：
 
 | 证据字符串（`EtsUpdate.exe`） | 含义 |
 |---|---|
@@ -135,7 +140,7 @@ CREATE UNIQUE INDEX [unique_ley] ON [Config] ([Section], [Entry]);
 | `DevToolsActivePort` | 60 B | `10086\n/devtools/browser/e6be91f9-…`：**CEF 远程调试端口 10086 + 浏览器 GUID**（可 CDP 附加） |
 | `CURRENT/MANIFEST-000001/000003.log/LOG/LOG.old` | — | 顶层 LevelDB（实际无业务数据，`000003.log`=0 B） |
 
-### 3.2 Cookies（`work/data/storage/cookies.json`）
+### 3.2 Cookies（`data/storage/cookies.json（未随仓库发布）`）
 
 - SQLite `meta.version=14`，表 `cookies(creation_utc,host_key,name,value,path,expires_utc,is_secure,is_httponly,last_access_utc,has_expires,is_persistent,priority,encrypted_value,samesite,source_scheme,source_port,is_same_party)`，共 **11 条**。
 - **`value` 全部为空**，密文在 `encrypted_value`，前缀均为 `v10`（Chromium Windows DPAPI 方案：`v10` + nonce + AES-256-GCM 密文，密钥由 `Local State/LocalPrefs.json` 的 `os_crypt.encrypted_key`（`DPAPI`+密文）解出）。
@@ -153,13 +158,13 @@ CREATE UNIQUE INDEX [unique_ley] ON [Config] ([Section], [Entry]);
 
 结论：**登录态没有落在 Cookie**（无 `ets100` 域的身份 Cookie）；Cookie 侧只保留第三方风控/验证码/统计标识。DPAPI 密钥绑定 Windows 用户，离线无法解密（缺口 §8）。
 
-### 3.3 Local Storage（`work/data/storage/local_storage.json`）
+### 3.3 Local Storage（`data/storage/local_storage.json（未随仓库发布）`）
 
 LevelDB 记录 22 条。键值编码（实测）：
 
 - Key：`_` + `<origin>` + `0x00` + `0x01` + `<storage key>`；元数据键 `META:<origin>`；顶层 `VERSION`=`1`。
 - Value：首字节为编码标记——`0x01` + UTF-8 文本，或 `0x00` + UTF-16LE 文本；值本身多为 JSON 字符串。
-- 文件：`000005.ldb/000071.ldb/000073.ldb/000075.ldb/000077.ldb` + `000076.log`(414 KB)/`000078.log`；`work/data/_scripts/leveldb_reader.py` 按序列号合并取最新值。
+- 文件：`000005.ldb/000071.ldb/000073.ldb/000075.ldb/000077.ldb` + `000076.log`(414 KB)/`000078.log`；`scripts/work_data__scripts_leveldb_reader.py` 按序列号合并取最新值。
 
 | key（origin 均为 `https://statics.ets100.com`，另有一条 teacher 域空 META） | 值编码 | 大小 | 内容/用途 | 敏感 |
 |---|---|---|---|---|
@@ -186,7 +191,7 @@ LevelDB 记录 22 条。键值编码（实测）：
 | `META:https://statics.ets100.com` | — | 13 | LevelDB 层元数据（`08 9b d6 cb f4 83 c6 ef 17 10 fa a3 31`，protobuf 风格，语义未知） | |
 | `META:https://teacher.ets100.com` | — | 0 | 同上（空） | |
 
-### 3.4 Session Storage（`work/data/storage/session_storage.json`）
+### 3.4 Session Storage（`data/storage/session_storage.json（未随仓库发布）`）
 
 36 条 key，全部 **value 为空（删除/清空后的墓碑）**，说明会话级数据在退出时被清掉或只写 key。键格式（Chromium sessionStorage LevelDB）：
 
@@ -196,7 +201,7 @@ LevelDB 记录 22 条。键值编码（实测）：
 
 即前端把“路由/作业列表/错题/令牌”等放进 sessionStorage 的命名空间 map，进程退出后不保留值。
 
-### 3.5 IndexedDB（`work/data/storage/indexeddb.json`）
+### 3.5 IndexedDB（`data/storage/indexeddb.json（未随仓库发布）`）
 
 - 目录：`IndexedDB\https_statics.ets100.com_0.indexeddb.leveldb\`（origin `https://statics.ets100.com`，bucket 0）；5 个 `.ldb`（~1.5–2.2 MB）+ `000090.log`(648 KB)。
 - 规模：**200,945 条记录，值总字节约 13.1 MB**。
@@ -237,7 +242,7 @@ JWT payload（脱敏后）: {"create":1793792115,"id":"********","login":"1*****
 
 | 文件 | 事实 |
 |---|---|
-| `databases\Databases.db` | SQLite，仅 `meta(mmap_status=-1, version=2, last_compatible_version=1)`，无 WebSQL 库登记（`work/data/storage/databases_db.json`） |
+| `databases\Databases.db` | SQLite，仅 `meta(mmap_status=-1, version=2, last_compatible_version=1)`，无 WebSQL 库登记（`data/storage/databases_db.json（未随仓库发布）`） |
 | `Network Persistent State` | JSON：`http_server_properties.servers` 记录 `cdnfei.ets100.com / static.geetest.com / static.ets100.com / cdnfeis.ets100.com / www.aliyun.com / cloud.tencent.com` 支持 SPDY(HTTP/2)；`network_qualities` 记录 4G/Offline |
 | `Visited Links` | magic `VLnk`(0x6B6E4C56) v3，**URL 哈希**，不存明文，无法还原 |
 | `DevToolsActivePort` | `10086` + `/devtools/browser/e6be91f9-1267-4192-a618-7f125397b86f`（CEF 远程调试已开启过；端口取 `app.json` 的 `suspensionBallPort=40001` 之外的值） |
@@ -267,7 +272,7 @@ JWT payload（脱敏后）: {"create":1793792115,"id":"********","login":"1*****
 
 三个 `template_686.zip` 内容完全一致（SHA-256 `A252C1C9…AFC18`），说明模板按 **template_id** 缓存、多套套卷共用。
 
-`pc_xst_dict.json` 单条结构（`work/data/resources_dict_pc_xst_full.json`）：
+`pc_xst_dict.json` 单条结构（`data/resources_dict_pc_xst_full.json（未随仓库发布）`）：
 
 ```json
 {"Word":"analyse","Trans":"v.分析，剖析\n…","Spell_EN":"英 [/ˈænəl-aɪz/]","Spell_US":"美 [/ˈænəlaɪz/]",
@@ -280,7 +285,7 @@ JWT payload（脱敏后）: {"create":1793792115,"id":"********","login":"1*****
 
 现象：`7z l` 显示 `Encrypted = +`、`Method = ZipCrypto Deflate`；`7z x` 会要求口令，并在归档尾部报告 `Tail Size = 336`。
 
-口令算法（证据：HTTP 缓存 `f_000002` 偏移 ≈0xD93EA 的 Vite 打包 JS；可复现脚本见 `work/data/_scripts/extract_content.py`）：
+口令算法（证据：HTTP 缓存 `f_000002` 偏移 ≈0xD93EA 的 Vite 打包 JS；可复现脚本见 `scripts/work_data__scripts_extract_content.py`）：
 
 ```js
 function getPasswordFromPackage(buf) {                    // 336 字节口令块
@@ -294,7 +299,7 @@ parsePasswordInfo = (b) => ({ company: b[0:8], version: b[8:16], pwd: b[16:144],
 // 另有 getPasswordFromResourcePackage(): 取包尾 40 字节，decode 后 substring(8) 再做两级 MD5（用于 40 字节尾的旧/别种包）
 ```
 
-实测 `content_811841.zip` 尾部：`MSTCHINA` / `1.0` / pwd 字段(128 B) / `EPLAT` / keySerialNum(128 B) / thisAnswer(32 B)；按上式得到 64 位大写 hex 口令，`7z t -p<口令>` 全 4 文件 CRC 通过，24 个 content 包全部解包成功（`work/data/extracted/content/*`）。
+实测 `content_811841.zip` 尾部：`MSTCHINA` / `1.0` / pwd 字段(128 B) / `EPLAT` / keySerialNum(128 B) / thisAnswer(32 B)；按上式得到 64 位大写 hex 口令，`7z t -p<口令>` 全 4 文件 CRC 通过，24 个 content 包全部解包成功（`data/extracted/content/*（未随仓库发布）`）。
 
 > 注意：`common.zip`、`clear_cache.zip`、`pc_xst_dict.zip`、`template_686.zip` **不是** ZipCrypto 加密，也无 MSTCHINA 尾块——权限差异来自服务端打包方式，不是本地状态。
 
@@ -333,7 +338,7 @@ parsePasswordInfo = (b) => ({ company: b[0:8], version: b[8:16], pwd: b[16:144],
 | `ctrl.json` | 30,664 B | 播放/交互脚本 **76 步**（见下） |
 | `material\*.mp3` | 1.27 MB | 模板音频：`1_desc..5_desc.mp3`（指令）、`Di.mp3`（提示音）、`start.mp3`/`stop.mp3`（录音起止提示） |
 
-**res.json 字段表**（`work/data/resources_template_analysis.json`）：
+**res.json 字段表**（`data/resources_template_analysis.json（未随仓库发布）`）：
 
 | 路径 | 字段 | 示例/枚举 |
 |---|---|---|
@@ -374,7 +379,7 @@ parsePasswordInfo = (b) => ({ company: b[0:8], version: b[8:16], pwd: b[16:144],
 - 关系：`res.json` 用 `{{st1}}..{{st8}}` 定义 8 个槽位（5 朗读 + 1 交际应答 + 2 图片题）→ 按 `stid` 升序把 8 个 content 包依次绑定 `st1..st8`（推断）；`ctrl.json` 的 `subid={{stN}}_k` 驱动每个槽位的播放/录音步骤；`ctrl.json` 的 `jsparam(code_id)` 或在模板 `info.json`（`des*`）或在该槽位 content 包 `info.json`（`value/jiexi/ask1../pic1/analyze`）中取值。
   证据：每套 8 包结构类型顺序 = `read,read,read,read,read,dialogue,picture,picture`，与 `res.json` 的 `exam_type_collect` 顺序及 `ctrl.json` 的 subid 计数（st1 8 步、st2 4、st3 4、st4 8、st5 4、st6_0..5 每 6、st7 9、st8 7）一致。
 
-### 4.6 下载来源与结果（`work/data/logs/resources_download_table.json`、`resources_downloads.json`）
+### 4.6 下载来源与结果（`data/logs/resources_download_table.json`、`data/logs/resources_downloads.json`，均未随仓库发布）
 
 两类 URL：
 
@@ -398,7 +403,7 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 ```
 共 **36 组**（每组 3 文件）。`public_` 前缀 + 32 hex 推测为录音资源 UUID/命名空间，13 位毫秒为生成时间（如 `1793186570347` ≈ 2026-10-28 18:56 +08）；同一组的三个文件前缀与时间戳完全相同，可直接配对。
 
-### 5.2 mp3 / spx 二进制事实（`work/data/soundfiles/audio_pair_analysis.json`）
+### 5.2 mp3 / spx 二进制事实（`data/soundfiles/audio_pair_analysis.json（未随仓库发布）`）
 
 | 项 | mp3 | spx |
 |---|---|---|
@@ -409,7 +414,7 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 | spx/mp3 比 | — | 1.73–1.76（除 6,912 组 1.46） |
 | 推断 | 16 kHz 单声道 24 kbps 的 MP3 上传件 | 约 42 kbps 的 **Speex 宽带高码率裸流**（Speex WB q10≈42 kbps 与尺寸/时长吻合），按帧裸拼接无容器；也可能是加密副本——**未确认（缺口）** |
 
-### 5.3 xml 评测结果结构（36 个文件，`work/data/soundfiles/xml_parse.json`）
+### 5.3 xml 评测结果结构（36 个文件，`data/soundfiles/xml_parse.json（未随仓库发布）`）
 
 统一外壳 + 三类评测元素：
 
@@ -462,7 +467,7 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 ### 5.4 三件套与其它数据的关系
 
 - `xml` 中 `content` 是引擎对学生录音的识别文本/评分输入；音频本体即同名 `.mp3`。
-- IndexedDB `mockExam` 记录（36 条）保存：`xml`（`C:\...\ETS\soundfiles\public_*.xml`）、`audio`（同名 `.mp3`）、`upload_file_url`（如 `https://ets60.ets100.com/ugc/evaluate/mp3/middleApp/pc/2026/10/28/33888…`）——即 **mp3 上传到评测服务、xml 为返回结果、spx 为本地压缩副本**。
+- IndexedDB `mockExam` 记录（36 条）保存：`xml`（`<ETS_INSTALL_DIR>\soundfiles\public_*.xml`）、`audio`（同名 `.mp3`）、`upload_file_url`（如 `https://ets60.ets100.com/ugc/evaluate/mp3/middleApp/pc/2026/10/28/33888…`）——即 **mp3 上传到评测服务、xml 为返回结果、spx 为本地压缩副本**。
 - `uploadRecord`（432 条）另存本地 `filePath`（拍读/跟读等录音路径）与 `userId/type/preId/times`。
 - 命名中的 36 组与 `soundfiles` 目录一一对应，`public_` 前缀表示公共（非校本私有）资源域的录音。
 
@@ -472,7 +477,7 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 
 ### 6.1 客户端自动更新（`temp\update\log\INFO_uLOG_*`，3 份）
 
-- 文件格式：glog 风格 `I1104 19:22:59.143107 21152 main.cpp:36] …`；进程 `Ets.exe`；命令行 `--AppName=Ets.exe --AppTitle=讯飞E听说 --AppDirectory=C:\Program Files (x86)\ETS\ --DetectionTimeout=2000 --ForceShow=0`。
+- 文件格式：glog 风格 `I1104 19:22:59.143107 21152 main.cpp:36] …`；进程 `Ets.exe`；命令行 `--AppName=Ets.exe --AppTitle=讯飞E听说 --AppDirectory=<ETS_INSTALL_DIR>\ --DetectionTimeout=2000 --ForceShow=0`。
 - 更新请求（`update_info.h:28`，body 为 base64）：
 
 ```json
@@ -491,7 +496,7 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 
 ### 6.2 资源下载/解压事件（`logs\ets_2026-*.log`，PLG_STIC）
 
-- 共解析 **594 条**事件、**30 个本地文件**（`work/data/logs/resources_downloads.json`、`resources_download_table.json`）。
+- 共解析 **594 条**事件、**30 个本地文件**（`data/logs/resources_downloads.json`、`data/logs/resources_download_table.json`，均未随仓库发布）。
 - 事件序列（每个文件）：`start download file {size,url,local_file,exists}` → `下载成功（进度 n%）` → `解压成功` / `解压失败`；`exists.existZipFile=true` 时跳过重复下载；`下载前的解压本地旧包解压成功` 表示覆盖前先解旧包。
 - 30 个文件覆盖：`clear_cache.zip`、`common.zip`、`pc_xst_dict.zip`、3×`template_686.zip`、24×`content_*.zip`，全部 `下载成功 + 解压成功`。
 - 下载 URL 规则见 §4.6；`HttpProvider::downloadRequest::curl_easy_perform res:0` 表示成功。
@@ -506,7 +511,7 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 
 ### 6.4 `7z.log`
 
-- 记录 7z.dll 的解包动作与**原始安装路径** `C:\Program Files (x86)\ETS\temp\resources\…`；`common.zip`（276 文件）、`clear_cache.zip`、`pc_xst_dict.zip`、`template_686.zip` 与 24 个 content 包依次 `Extracting` 且 `Everything is Ok`；`content_811841.zip` 条目为 `content.json / content2.json / info.json / material\content.mp3`（4 files），与本次解包一致。
+- 记录 7z.dll 的解包动作与**原始安装路径** `<ETS_INSTALL_DIR>\temp\resources\…`；`common.zip`（276 文件）、`clear_cache.zip`、`pc_xst_dict.zip`、`template_686.zip` 与 24 个 content 包依次 `Extracting` 且 `Everything is Ok`；`content_811841.zip` 条目为 `content.json / content2.json / info.json / material\content.mp3`（4 files），与本次解包一致。
 - 与 `logs\shell_*.log` 中 `sevenzip.cpp` 的 `OnUnzip begin/end` 对应，说明解包由 ETSShell 内置 sevenzip 模块（`7z.dll` 950,272 B）完成。
 
 ---
@@ -530,7 +535,7 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 ## 8. 缺口与限制
 
 1. **`SQL\ETS.db.sql` 为 0 字节**：本次快照无法直接读到 GBK 建库脚本；已用 `EtsUpdate.exe` 内嵌 SQL/流程还原（§2.3），但脚本原文（含注释、完整 DDL）缺失。
-2. **Cookie 无法解密**：`LocalPrefs.json` 只有 DPAPI 包裹的 `os_crypt.encrypted_key`，其解开依赖原 Windows 用户的 DPAPI 主密钥；无 `Local State` 文件，离线不可还原明文（本机也非原始用户环境）。
+2. **Cookie 无法解密**：`LocalPrefs.json` 只有 DPAPI 包裹的 `os_crypt.encrypted_key`，其解开依赖原 Windows 用户的 DPAPI 主密钥；无 `Local State` 文件，离线不可还原明文（分析环境亦非原始用户环境）。
 3. **`.spx` 容器未确认**：无标准容器魔数、ffmpeg 不识别、熵≈7.97；按码率/尺寸推断为 Speex 宽带裸流（或加密副本），**未解码验证**。
 4. **IndexedDB 精确结构部分未知**：对象存储名来自库内 `currentSchema` 记录；`dbid→存储名` 映射按值内容推断（非元数据库表），`00 00` 类键的语义未完全解码。
 5. **`content2.json` 的用途**只有差异证据（对话题 `ask` 前缀 `ets_thN` → 序号），具体消费页面未在本快照中定位。
@@ -542,7 +547,9 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 
 ---
 
-## 9. 产物索引（`work/data`，约 39 MB）
+## 9. 产物索引（原分析工作区，约 39 MB）
+
+> 仓库仅发布 `data/db/` 下的两个 JSON；下表其余目录/文件均为原分析工作区的中间产物，未随仓库发布。
 
 | 目录/文件 | 内容 |
 |---|---|
@@ -558,4 +565,4 @@ public_<同上>.xml                          # 讯飞评测引擎返回的评分
 | `resources_dict_pc_xst_full.json` | `pc_xst_dict.json` 全文（28,323 词条，10.9 MB） |
 | `soundfiles/xml_parse.json`、`soundfiles/audio_pair_analysis.json` | 36 个 xml 解析（结构/属性/评分统计）、mp3/spx 配对与二进制特征 |
 | `logs/update_logs.json`、`logs/resources_downloads.json`、`logs/resources_download_table.json`、`logs/resource_events.json`、`logs/log_urls.json` | 更新请求/响应、594 条下载解压事件、30 文件下载表、资源相关日志行、743 URL 统计（均脱敏） |
-| `_scripts/` | 全部解析脚本（含纯 Python LevelDB 读取器、ZipCrypto 口令复现、日志/XML/DB 解析），可复跑 |
+| 解析脚本 | 已发布到仓库 `scripts/work_data__scripts_*.py`（含纯 Python LevelDB 读取器、ZipCrypto 口令复现、日志/XML/DB 解析），可复跑 |

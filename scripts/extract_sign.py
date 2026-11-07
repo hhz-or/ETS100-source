@@ -1,7 +1,7 @@
 import re, json, os, collections
 
-LOGS = [r"D:\ets-rea\ETS\logs\ets_2026-10-28.log", r"D:\ets-rea\ETS\logs\ets_2026-11-4.log"]
-OUT = r"D:\ets-rea\work\api"
+LOGS = [r"ETS\logs\ets_2026-10-28.log", r"ETS\logs\ets_2026-11-4.log"]
+OUT = r"data/api"
 os.makedirs(OUT, exist_ok=True)
 
 req_re = re.compile(r"\[API_ETS\] ets request \$api_name=(\S+) param=(\{.*\})\s*$")

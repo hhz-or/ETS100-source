@@ -1,6 +1,6 @@
 import json, glob, hashlib, os
 
-OUT = r"D:\ets-rea\work\runtime"
+OUT = r"runtime"
 files = sorted(glob.glob(os.path.join(OUT, "native_probe_*.json")))
 probe1 = json.load(open(files[0], encoding="utf-8")) if files else []
 body_b64 = "W3siciI6InN5c3RlbS90aW1lIiwicGFyYW1zIjp7InNuIjoidGVzdCJ9fV0="

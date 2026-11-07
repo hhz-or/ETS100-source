@@ -1,5 +1,5 @@
 import os,struct
-base=r'D:\ets-rea\ETS\temp\Cache_ETSShell\Cache'
+base=r'ETS\temp\Cache_ETSShell\Cache'
 b=open(os.path.join(base,'data_1'),'rb').read()
 rec=b[8704:8704+256]
 u32=struct.unpack_from('<64I',rec,0)

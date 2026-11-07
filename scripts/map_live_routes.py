@@ -1,6 +1,6 @@
 import os, re, json, collections
 
-CH = r"D:\ets-rea\work\runtime\chunks_full"
+CH = r"runtime\chunks_full"
 live = {}
 for f in os.listdir(CH):
     if f.endswith(".js"):
@@ -8,7 +8,7 @@ for f in os.listdir(CH):
         if m:
             live.setdefault(m.group(1), []).append(f)
 
-routes = json.load(open(r"D:\ets-rea\work\frontend\routes.json", encoding="utf-8"))
+routes = json.load(open(r"data/frontend\routes.json", encoding="utf-8"))
 old_chunks = set()
 for r in routes["routes"]:
     for c in r.get("chunks", []):
@@ -45,7 +45,7 @@ for r in routes["routes"]:
         comp = None
     out["routes"].append({"path": r.get("full_path"), "name": r.get("name"),
                           "component_live": comp, "chunks_live": chips})
-json.dump(out, open(r"D:\ets-rea\work\runtime\routes_live.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+json.dump(out, open(r"runtime\routes_live.json", "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
 # live-only chunks not referenced by old routes (new features?)
 used = {v for v in mapped.values()}

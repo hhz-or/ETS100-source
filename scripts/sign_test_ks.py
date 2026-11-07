@@ -3,7 +3,7 @@ import json, base64, hashlib, itertools
 KS1 = "94cfbda3fbfef02b93693f8bc153be82"   # selector 1 (v2)
 KS0 = "355ffbe95ccf4e9535a110170b445ab8"   # selector 0 (v1)
 
-recs = json.load(open(r"D:\ets-rea\work\api\sign_samples.json", encoding="utf-8"))
+recs = json.load(open(r"data/api\sign_samples.json", encoding="utf-8"))
 print("records:", len(recs))
 for r in recs:
     r["b64"] = base64.b64encode(r["body_json_exact"].encode("utf-8")).decode("ascii")

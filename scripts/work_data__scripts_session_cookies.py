@@ -1,7 +1,7 @@
 import sys, json, collections
-sys.path.insert(0,r"D:\ets-rea\work\data\_scripts")
+sys.path.insert(0,r"data\_scripts")
 import leveldb_reader as L
-db=r"D:\ets-rea\ETS\temp\Cache_ETSShell\Session Storage"
+db=r"ETS\temp\Cache_ETSShell\Session Storage"
 m=L.read_db(db)
 print("session entries:",len(m))
 for k,(seq,typ,v,src) in list(m.items())[:20]:
@@ -9,7 +9,7 @@ for k,(seq,typ,v,src) in list(m.items())[:20]:
 print()
 # cookies schema
 import sqlite3
-p=r"D:\ets-rea\ETS\temp\Cache_ETSShell\Cookies"
+p=r"ETS\temp\Cache_ETSShell\Cookies"
 con=sqlite3.connect("file:"+p.replace("\\","/")+"?mode=ro",uri=True)
 cur=con.cursor()
 print("COOKIES schema:")

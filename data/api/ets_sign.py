@@ -26,7 +26,7 @@ def sign_v1(body_json_str: str, time_ms_str: str) -> str:
 if __name__ == "__main__":
     import json, sys
     # self-test against captured samples
-    recs = json.load(open(r"D:\ets-rea\work\api\sign_samples.json", encoding="utf-8"))
+    recs = json.load(open(r"data/api\sign_samples.json", encoding="utf-8"))
     n = 0
     for r in recs:
         if sign_v2(r["body_json_exact"], r["time"]) == r["sign"].lower():

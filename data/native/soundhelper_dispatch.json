@@ -1,5 +1,5 @@
 {
- "file": "D:\\ets-rea\\ETS\\plugins\\soundhelper\\soundhelper.pln",
+ "file": "ETS\\plugins\\soundhelper\\soundhelper.pln",
  "functions": [
   {
    "rva": "0x00002680",
@@ -170,11 +170,11 @@
    "strings": [
     "logs\\shell_",
     ".log",
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "=============================================",
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "========StiCorePlugin.log starting===========",
-    "D:\\code\\STIC\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
+    "<BUILD_ROOT>\\stic-pro_2010\\src\\common\\StiCorePlugin.h",
     "============================================="
    ],
    "log_handlers": []

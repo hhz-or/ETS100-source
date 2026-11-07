@@ -1,5 +1,10 @@
 # 01 目标识别与文件清单
 
+> **前置条件**：Windows 10/11 x64；Python 3.10+；可选 Node.js 18+（阅读/运行 `mq_server` 与前端 JS）；可选 7-Zip（解包 zip/7z）。
+> **如何复现**：在仓库根目录执行 `python scripts/<脚本名>.py`；机读数据在 `data/`，运行时证据在 `runtime/`；分析对象为只读安装副本 `<ETS_INSTALL_DIR>`（全程不修改其中文件）。
+> **占位符**：`<ETS_INSTALL_DIR>`=目标程序安装目录；`<APPDATA_ETS>`=`%APPDATA%\ETS`；`<WORK_DIR>`=原分析工作区；`<BUILD_ROOT>`=厂商构建机路径前缀（二进制/日志内嵌字符串原文，仅作证据）。
+> **本文复核**：`python scripts/hashes.py`（关键文件 SHA-256 复核）。
+
 ## 一、目标识别
 
 ### 1.1 产品与版本
@@ -21,34 +26,34 @@
 `ETSShell.exe` 中保留了完整的开发路径与调试信息（未加壳、未混淆）：
 
 ```
-D:\code\STIC\stic-pro_ets\src\shell\shell.cpp
-D:\code\STIC\stic-pro_ets\src\adapter\StiAdapter.cpp
-D:\code\STIC\stic-pro_ets\src\adapter\ClientAppHandler.h
-D:\code\STIC\stic-pro_ets\src\adapter\cefclient\client_app.cpp
-D:\code\STIC\stic-pro_ets\src\adapter\cefclient\client_handler.cpp
-D:\code\STIC\stic-pro_ets\src\base\logging.cc
-D:\code\STIC\stic-pro_ets\src\base\json\string_escape.cc
-D:\code\STIC\stic-pro_ets\src\cef-custom-schema\client_schema.cpp
-D:\code\STIC\stic-pro_ets\src\common\StiCorePlugin.h
-D:\code\STIC\stic-pro_ets\src\commonlib\{dumpfile,shell_utils,shell_upgrade,shell_string,str_coding,shell_file}.cpp
-D:\code\STIC\stic-pro_ets\src\core\{StiCore,StiCorePlnManager}.cpp
-D:\code\STIC\stic-pro_ets\src\third_party\filememory\FileManager.cpp
-D:\code\STIC\stic-pro_ets\_bin\ETSShell.pdb
+<BUILD_ROOT>\STIC\stic-pro_ets\src\shell\shell.cpp
+<BUILD_ROOT>\STIC\stic-pro_ets\src\adapter\StiAdapter.cpp
+<BUILD_ROOT>\STIC\stic-pro_ets\src\adapter\ClientAppHandler.h
+<BUILD_ROOT>\STIC\stic-pro_ets\src\adapter\cefclient\client_app.cpp
+<BUILD_ROOT>\STIC\stic-pro_ets\src\adapter\cefclient\client_handler.cpp
+<BUILD_ROOT>\STIC\stic-pro_ets\src\base\logging.cc
+<BUILD_ROOT>\STIC\stic-pro_ets\src\base\json\string_escape.cc
+<BUILD_ROOT>\STIC\stic-pro_ets\src\cef-custom-schema\client_schema.cpp
+<BUILD_ROOT>\STIC\stic-pro_ets\src\common\StiCorePlugin.h
+<BUILD_ROOT>\STIC\stic-pro_ets\src\commonlib\{dumpfile,shell_utils,shell_upgrade,shell_string,str_coding,shell_file}.cpp
+<BUILD_ROOT>\STIC\stic-pro_ets\src\core\{StiCore,StiCorePlnManager}.cpp
+<BUILD_ROOT>\STIC\stic-pro_ets\src\third_party\filememory\FileManager.cpp
+<BUILD_ROOT>\STIC\stic-pro_ets\_bin\ETSShell.pdb
 ```
 
 RTTI 类名（`.?AV...`）保留了 C++ 类型：`Sti::Core::StiCore`、`Sti::Core::StiCorePlnManager`、`Adapter::ClientSchemeHandlerFactory`、`Adapter::UTClientSchemeHandler`、`Adapter::ClientSchemeHandler`、`CefSchemeHandlerFactory` 等。【观察】
 
 ### 1.3 安装形态
 
-- `logs\ets_*.log` 中的路径均指向 `C:\Program Files (x86)\ETS\...`（例如 `soundfiles\public_*.xml` 写入路径），说明 `D:\ETS` 是 **C 盘安装目录的完整副本**。
-- 补充：历史评估已核对 `ETSShell.exe / libcef.dll / Ets.exe` 与 `C:\Program Files (x86)\ETS` 下同名文件字节一致。
+- `logs\ets_*.log` 中的路径均指向 `<ETS_INSTALL_DIR>\...`（例如 `soundfiles\public_*.xml` 写入路径），说明该分析副本是 **默认安装目录树的完整拷贝**。
+- 补充：历史评估已核对 `ETSShell.exe / libcef.dll / Ets.exe` 与 `<ETS_INSTALL_DIR>` 下同名文件字节一致。
 
 ---
 
 ## 二、目录结构
 
 ```
-ETS\
+<ETS_INSTALL_DIR>\
 ├─ ETSShell.exe            2.19MB  STIC 壳主程序（CEF browser 进程）
 ├─ Ets.exe                 0.46MB  启动器（拉起 ETSShell + mq_server 等）
 ├─ EtsUpdate.exe           1.98MB  更新器
@@ -93,7 +98,7 @@ ETS\
 
 ## 三、关键文件指纹（SHA-256）
 
-完整清单见 `work/inventory.json`（667 条）与 `work/inventory_hashes.json`（关键文件）。
+完整清单见 `data/inventory.json（未随仓库发布）`（667 条）与 `data/inventory_hashes.json`（关键文件）。
 
 | 文件 | 大小 | SHA-256（前 32 位） |
 |---|---|---|

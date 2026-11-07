@@ -1,5 +1,5 @@
 import json
-b=r"D:\ets-rea\work\data\extracted\content"
+b=r"data\extracted\content"
 def load(p): return json.load(open(p,encoding="utf-8"))
 c=load(b+r"\content_811862\content.json"); c2=load(b+r"\content_811862\content2.json")
 print("content 811862:",json.dumps(c,ensure_ascii=False)[:1200])

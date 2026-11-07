@@ -1,5 +1,5 @@
 import os,struct
-base=r'D:\ets-rea\ETS\temp\Cache_ETSShell\Cache'
+base=r'ETS\temp\Cache_ETSShell\Cache'
 idx=open(os.path.join(base,'index'),'rb').read()
 print('index size',len(idx))
 print('header u32:',[hex(x) for x in struct.unpack_from('<16I',idx,0)])

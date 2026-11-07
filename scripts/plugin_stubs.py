@@ -1,6 +1,6 @@
 import os, re, json
 
-D = r"D:\ets-rea\work\runtime\scripts"
+D = r"runtime\scripts"
 out = []
 for f in sorted(os.listdir(D)):
     if "plugins_stic_" not in f and "plugins_clientDB" not in f:
@@ -21,7 +21,7 @@ for f in sorted(os.listdir(D)):
         actions.append({"plugin": plugin, "action": action, "args": ser})
     out.append({"file": f, "classes": cls, "actions": actions})
 
-json.dump(out, open(r"D:\ets-rea\work\runtime\plugin_stubs_analysis.json", "w", encoding="utf-8"),
+json.dump(out, open(r"runtime\plugin_stubs_analysis.json", "w", encoding="utf-8"),
           ensure_ascii=False, indent=1)
 
 total = 0
