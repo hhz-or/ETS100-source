@@ -1,0 +1,4 @@
+allowBuilds:
+  esbuild: true
+# pnpm 12 settings live in pnpm-workspace.yaml (the package.json "pnpm" field is ignored)
+# esbuild needs its postinstall to materialize the platform binary.

@@ -43,7 +43,8 @@ ETS100-source/
 │  └─ db/       ETS.db 全表结构与 Config 数据
 ├─ runtime/     运行时证据：插件 JS 封装层（plugin_js_stubs）、活体请求元数据
 ├─ scripts/     全部分析脚本（缓存解码、签名验证、密钥流、题库包解密、CDP 抓取…）
-└─ reimpl/      可运行的参考客户端（Python 后端 + 原生 Web UI，见 12_reimplementation.md）
+├─ reimpl/      可运行的参考客户端（Python 后端 + 原生 Web UI，见 12_reimplementation.md）
+└─ native-replica/ 同架构原生复刻（C++20/WebView2 + 插件 DLL + Vue3，见 13_native_replica.md）
 ```
 
 `scripts/` 已把绝对路径归一化为仓库相对约定：需要目标文件的脚本默认读取仓库根下的 `ETS/`（把你的 ETS 安装目录放/软链到这里），数据文件在 `data/`、运行时证据在 `runtime/`；详见 `scripts/README.md`。
@@ -107,6 +108,7 @@ python reimpl\tools\smoke_test.py  # 只读接口自动验收（16/16）
 | [10 未知项与后续](10_unknowns.md) | 未解问题、验证方法、风险与合规边界 |
 | [11 运行时验证（Live）](11_runtime_live.md) | 真实运行实例 CDP 抓取、在线前端全量 chunk、插件 JS 权威 action 表、活体协议验证、Frida 原生 hook |
 | [12 参考客户端](12_reimplementation.md) | 可运行的 ETS 复刻原型：架构映射、已实现/未实现矩阵、运行方式 |
+| [13 原生同架构复刻](13_native_replica.md) | C++20+WebView2 壳、7 插件 DLL、Vue3 前端、Node mq_server：映射、验证与限制 |
 
 ---
 

@@ -7,7 +7,7 @@
 ## 目录
 
 ```
-docs/                 14 篇中文报告（从 docs/REPORT.md 开始）
+docs/                 15 篇中文报告（从 docs/REPORT.md 开始）
 data/                 脱敏后的机读数据
   api/                端点清单、签名样本（已脱敏）、签名参考实现、运行时/更新器签名证明
   frontend/           路由、action 清单、插件 JS 权威 action 表、在线 chunk 清单
@@ -16,6 +16,7 @@ data/                 脱敏后的机读数据
 runtime/              运行时验证证据：插件 JS 封装层、活体请求元数据、Frida 抓取记录
 scripts/              分析脚本（缓存解码、签名验证、密钥流、题库包解密、CDP 抓取等）
 reimpl/               可运行的参考客户端（Python 后端 + 原生 Web UI）
+native-replica/       同架构原生复刻（C++20 + WebView2 壳 / 插件 DLL / Vue3 前端 / Node mq_server）
 ```
 
 ## 核心成果
