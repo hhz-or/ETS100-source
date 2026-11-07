@@ -172,9 +172,15 @@ async function selectUnit(unit) {
   unitInfo.value = null
   loading.value = true
   try {
+    const ctx = {
+      resource_id: (activeBook.value && activeBook.value.resource_id) || 363,
+      book_id: (activeBook.value && activeBook.value.id) || 0,
+      unit_id: unit.unit_id,
+      is_need_score: 1
+    }
     const [infoRes, modRes] = await Promise.allSettled([
-      api.getUnitInfo(unit.unit_id),
-      api.getModules(unit.unit_id)
+      api.getUnitInfo(ctx),
+      api.getModules(ctx)
     ])
     if (infoRes.status === 'fulfilled') unitInfo.value = (infoRes.value && infoRes.value.data) || null
     if (modRes.status === 'fulfilled') modules.value = (modRes.value && modRes.value.data) || []

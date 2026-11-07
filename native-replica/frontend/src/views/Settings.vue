@@ -62,6 +62,31 @@
             <div class="kv"><span>客户端版本</span><b>{{ pcinfo.Version || '5.7.9' }}</b></div>
           </div>
         </section>
+
+        <section class="panel">
+          <div class="panel-title">
+            <h3>设备指纹覆盖</h3>
+            <span class="hint">官方账号有设备绑定，复用同一 device_code 才能免验证登录</span>
+          </div>
+          <div class="kv-grid">
+            <div class="kv"><span>设备码 device_code</span>
+              <el-input v-model="deviceOverride.device_code" size="small" placeholder="如 4437D19B6B29BEEA" style="width: 190px" />
+            </div>
+            <div class="kv"><span>设备名 device_name</span>
+              <el-input v-model="deviceOverride.device_name" size="small" placeholder="如 D7480" style="width: 190px" />
+            </div>
+            <div class="kv"><span>本地 IP local_ip</span>
+              <el-input v-model="deviceOverride.local_ip" size="small" placeholder="如 192.168.1.38" style="width: 190px" />
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 12px">
+            <el-button size="small" type="primary" @click="saveOverride">保存并生效</el-button>
+            <el-button size="small" @click="clearOverride">清除覆盖</el-button>
+          </div>
+          <p class="small muted" style="margin-top: 8px">
+            保存后重新登录生效；值只存在本机 localStorage，不写入源码。值来源：官方客户端登录日志中的 device_code / device_name。
+          </p>
+        </section>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 16px">
@@ -206,5 +231,30 @@ async function logout() {
   router.replace('/login')
 }
 
-onMounted(loadEnv)
+const deviceOverride = ref({ device_name: '', device_code: '', local_ip: '' })
+
+function loadOverride() {
+  try {
+    const o = JSON.parse(localStorage.getItem('ets_device_override') || '{}') || {}
+    deviceOverride.value = { device_name: o.device_name || '', device_code: o.device_code || '', local_ip: o.local_ip || '' }
+  } catch { /* ignore */ }
+}
+
+function saveOverride() {
+  const o = {}
+  for (const k of ['device_name', 'device_code', 'local_ip']) {
+    const v = String(deviceOverride.value[k] || '').trim()
+    if (v) o[k] = v
+  }
+  try { localStorage.setItem('ets_device_override', JSON.stringify(o)) } catch { /* ignore */ }
+  ElMessage.success('已保存，重新登录后生效')
+}
+
+function clearOverride() {
+  try { localStorage.removeItem('ets_device_override') } catch { /* ignore */ }
+  deviceOverride.value = { device_name: '', device_code: '', local_ip: '' }
+  ElMessage.info('已清除设备覆盖')
+}
+
+onMounted(() => { loadEnv(); loadOverride() })
 </script>

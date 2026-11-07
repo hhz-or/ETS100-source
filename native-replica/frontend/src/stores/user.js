@@ -114,6 +114,10 @@ export const useUserStore = defineStore('user', {
     setActiveEcard(id) {
       this.activeEcardId = String(id || '')
       try { localStorage.setItem(ECARD_KEY, this.activeEcardId) } catch { /* ignore */ }
+      const card = this.ecards.find((e) => String(e.id) === String(this.activeEcardId))
+      if (card && card.parent_id) {
+        try { localStorage.setItem('ets_parent_account_id', String(card.parent_id)) } catch { /* ignore */ }
+      }
     },
 
     reset() {

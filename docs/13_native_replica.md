@@ -42,28 +42,31 @@ native-replica/
 | 7/7 插件加载、4 导出 ABI、worker 线程回调 | 壳日志 `loaded 7/7` |
 | JS→插件→回调（EtsHelper/FileHelper/ShellHelper/HttpHelper/SevenZip…） | 运行期探针全部返回 |
 | **真实 HTTPS 调 API**（HttpHelper + 签名） | `system/config` 返回 `code=0`、真实配置 |
-| 登录态 API（token） | `user/info` 返回 `code=0`，真实昵称/年级 |
-| 首页/作业/套卷/课程/错题/设置页面渲染 | 注入有效 token 后全部页面加载 |
-| 题库包解包（ZipCrypto） | 24 个真实 `content_*.zip` 全解，111 文件与 Python zipfile 逐字节一致（插件单测） |
+| **UI 登录**（页面输入手机号/密码→提交） | 跳转 `#/home`，token 长度 160，提示"登录成功" |
+| 设备指纹复用 | 官方账号有设备绑定；设置页填写 `device_code/device_name/local_ip` 后可免验证登录 |
+| 首页 | 真实昵称/年级/学校/学习卡剩余天数；1 份待完成作业、9 道待订正错题 |
+| 作业 | 待完成 1 / 已完成 3 / 已过期 0，可进入详情与开始练习 |
+| 套卷 / 同步课程 / 错题本 | 栏目 16 套、教材列表、错题 9 条（参数已对齐） |
+| 题库内容 + 音频 | 下载→ZipCrypto 解包→读 `content.json`→渲染朗读题；音频 `HTTP 200 / 127,362 B` |
 | 媒体服务 | `media_url` → `http://127.0.0.1:<port>/media?...`，GET 200 / Range 206 / 越界 403 |
-| mq_server WebSocket 日志中继 | 壳连上副本 mq_server（端口探测 40001→40002/40003） |
+| mq_server WebSocket 日志中继 | 壳连上副本 mq_server（端口探测，读 `app.json`） |
 | 优雅退出 | 关窗 exit 0，无崩溃 |
 
-## 4. 已知限制（与本轮未完成项）
+## 4. 已知限制
 
 | 项 | 说明 |
 |---|---|
-| 作业列表数据 | 前端 `g/homework/list` 的 `parent_account_id` 取值链路仍有一处未对齐（页面出现"没有找到有效班级"）；插件与接口本身已验证可用，属前端数据装配待修 |
+| 设备绑定 | 官方账号首次登录会提示"设备需要绑定免验证"；在设置页填入官方客户端的 `device_code` 即可，值只存本机 localStorage |
+| 单会话 | 副本登录会顶掉官方客户端会话（反之亦然），这是服务端策略 |
 | 录音 / ISE 评测 / 考试提交 / OSS / SLS / 更新器 | 与 Python 版一致：未实现，UI 明确标注 |
-| 壳的日志端口 | 已支持读 `mq_server/app.json` 端口；早期构建曾固定连 40001（会写进官方客户端日志），当前已修 |
 | 前端 mock | 浏览器直接打开 `dist/` 可用 mock 数据预览；WebView2 内自动走原生桥 |
 
 ## 5. 构建与运行
 
 ```powershell
 cd native-replica
-pwsh -File build.ps1            # MSVC + CMake + Vite；产物 .-build\bin\EtsReplica.exe
-.-build\bin\EtsReplica.exe
+pwsh -File build.ps1            # MSVC + CMake + Vite；产物 C:\ets-rea-build\bin\EtsReplica.exe
+C:\ets-rea-build\bin\EtsReplica.exe
 ```
 
 前置与排错见 `native-replica/docs/BUILD.md`；壳/插件/前端实现细节见 `native-replica/docs/{shell,plugins,frontend}_build.md`。

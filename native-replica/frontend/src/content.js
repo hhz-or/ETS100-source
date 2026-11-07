@@ -116,15 +116,22 @@ export function parseStructure(content) {
   return { type, kind, info }
 }
 
-/** 题目资源路径 → __core.media_url */
+/** 题目资源路径 → __core.media_url（content 包内素材通常在 material/ 下） */
 export async function resolveMedia(dir, name) {
   if (!name) return ''
   const raw = String(name)
-  const full = /^[a-zA-Z]:[\\/]/.test(raw) || /^https?:\/\//i.test(raw)
-    ? raw
-    : joinWin(dir, raw)
-  if (/^https?:\/\//i.test(full)) return full
-  return mediaUrl(full)
+  if (/^[a-zA-Z]:[\\/]/.test(raw) || /^https?:\/\//i.test(raw)) {
+    return /^https?:\/\//i.test(raw) ? raw : mediaUrl(raw)
+  }
+  const candidates = [joinWin(dir, raw), joinWin(dir, 'material', raw), joinWin(dir, 'material', raw.replace(/^material[\\/]/i, ''))]
+  for (const cand of candidates) {
+    try {
+      const r = await invokeJson('FileHelper', 'existfileorfolder', { filePath: cand }, 8000)
+      const exists = r && (r.result === true || r.exists === true || (typeof r === 'object' && r.result))
+      if (exists) return mediaUrl(cand)
+    } catch { /* try next */ }
+  }
+  return mediaUrl(candidates[1])
 }
 
 /** 把 "a</br>b" 之类文本转成安全的 HTML（仅保留 br/b/strong/em） */

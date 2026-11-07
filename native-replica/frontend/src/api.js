@@ -51,6 +51,18 @@ export function clearToken() {
   setToken('')
 }
 
+/** 当前学习卡的 parent_account_id（m/ecard/list 的 parent_id；作业/错题接口必需） */
+export function parentAccountId() {
+  try { return localStorage.getItem('ets_parent_account_id') || '' } catch { return '' }
+}
+
+export function setParentAccountId(id) {
+  try {
+    if (id) localStorage.setItem('ets_parent_account_id', String(id))
+    else localStorage.removeItem('ets_parent_account_id')
+  } catch { /* ignore */ }
+}
+
 let devicePromise = null
 
 /** 设备信息：ShellHelper.getpcinfo + getuniqueid，派生 device_name/device_code/local_ip */
@@ -71,6 +83,11 @@ export function getDeviceInfo() {
 
     let cached = {}
     try { cached = JSON.parse(localStorage.getItem(DEVICE_CACHE_KEY) || '{}') } catch { cached = {} }
+    // 设备指纹覆盖：官方客户端对账号做了设备绑定，复刻版必须复用同一 device_code 才能免验证登录。
+    // 可在设置页或开发者工具写入：localStorage['ets_device_override'] = {"device_name":"...","device_code":"...","local_ip":"..."}
+    let override = {}
+    try { override = JSON.parse(localStorage.getItem('ets_device_override') || '{}') || {} } catch { override = {} }
+    if (override.device_code) cached = { ...cached, ...override }
 
     let deviceCode = cached.device_code
     if (!deviceCode) {
@@ -307,18 +324,51 @@ export const api = {
   },
   getHomeworkInfo: (homeworkId) => sendRequest('m/homework/info', { homework_id: String(homeworkId) }),
   getMistakeSummary: (params = {}) => {
-    const parent = params.parent_account_id || params.parentAccountId || ''
+    const parent = params.parent_account_id || params.parentAccountId || parentAccountId()
     return sendRequest('m/mistake/summary', { parent_account_id: String(parent || '') })
   },
-  getMistakeList: (params = {}) => sendRequest('m/mistake/list', { page: 1, limit: 20, ...params }),
-  getEcardList: () => sendRequest('m/ecard/list'),
-  getColumns: (params = {}) => sendRequest('g/set/column-v2', { ...params }),
-  getSets: (params = {}) => sendRequest('g/set/list', { page: 1, limit: 20, ...params }),
-  getUnits: (params = {}) => sendRequest('g/set/unit-list', { ...params }),
-  getUnitInfo: (unitId) => sendRequest('g/set/unit-info', { unit_id: unitId }),
-  getModules: (unitId) => sendRequest('g/set/module-list', { unit_id: unitId }),
-  getBooks: (params = {}) => sendRequest('g/resource/book-list', { ...params }),
-  getGrades: () => sendRequest('g/resource/grade-list'),
+  getMistakeList: (params = {}) => {
+    const parent = params.parent_account_id || params.parentAccountId || parentAccountId()
+    return sendRequest('m/mistake/list', { parent_account_id: String(parent || ''), page: 1, limit: 20, ...params })
+  },
+    // m/ecard/list 的返回体在服务端不同版本下可能是：
+  //   { data: [ ... ] } / { data: { "0": {...} } } / { "0": {...}, "1": {...} }
+  // 统一成数组，避免上层拿到对象后 .find/.some 失效。
+  getEcardList: async () => {
+    const body = await sendRequest('m/ecard/list')
+    let list = []
+    const raw = body && body.data
+    if (Array.isArray(raw)) list = raw
+    else if (raw && typeof raw === 'object') list = Object.values(raw)
+    if (!list.length && body && typeof body === 'object') {
+      list = Object.values(body).filter(
+        (v) => v && typeof v === 'object' && (v.parent_id || v.number || v.id)
+      )
+    }
+    return { ...(body || {}), data: list }
+  },
+  getColumns: (params = {}) => sendRequest('g/set/column-v2', { resource_id: Number(params.resource_id || 363), tag_id: 1, hide_set_count: 1, ...params }),
+  getSets: (params = {}) => sendRequest('g/set/list', { resource_id: String(params.resource_id || 363), show_empty: 0, use_https: 1, ...params }),
+  getUnits: (params = {}) => sendRequest('g/set/unit-list', { is_need_score: 0, ...params }),
+  getUnitInfo: (args = {}) => {
+    const p = typeof args === 'object' && args !== null ? args : { unit_id: args }
+    return sendRequest('g/set/unit-info', {
+      resource_id: Number(p.resource_id || 363),
+      book_id: Number(p.book_id || 0),
+      unit_id: Number(p.unit_id || 0),
+      is_need_score: Number(p.is_need_score ?? 1)
+    })
+  },
+  getModules: (args = {}) => {
+    const p = typeof args === 'object' && args !== null ? args : { unit_id: args }
+    return sendRequest('g/set/module-list', {
+      resource_id: Number(p.resource_id || 363),
+      book_id: Number(p.book_id || 0),
+      unit_id: Number(p.unit_id || 0)
+    })
+  },
+  getBooks: (params = {}) => sendRequest('g/resource/book-list', { parent_resource_id: String(params.parent_resource_id || 274), ...params }),
+  getGrades: (params = {}) => sendRequest('g/resource/grade-list', { parent_resource_id: String(params.parent_resource_id || 274) }),
   getAdvertisements: (params = {}) => sendRequest('m/advertisement/list', { ...params })
 }
 

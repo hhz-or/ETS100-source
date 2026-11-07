@@ -154,7 +154,8 @@ async function load() {
         parentId = (arr[0] && arr[0].parent_id) || ''
       } catch { /* ignore */ }
     }
-    if (!parentId) throw new Error('没有找到有效班级（学习卡未绑定 parent_id）')
+    if (!parentId) throw new Error('没有找到有效班级（学习卡未绑定 parent_id，可在设置页填写设备指纹或重新登录）')
+    console.log('[hw] parentId=', parentId, 'ecards=', JSON.stringify((store.ecards || []).map(e => ({ id: e.id, pid: e.parent_id }))))
     // g/homework/list 需要 parent_account_id + 完整参数；状态 0/2/3 合并去重（与参考实现一致）
     const seen = new Set()
     const merged = []
