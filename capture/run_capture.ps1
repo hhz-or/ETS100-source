@@ -20,8 +20,8 @@ if (-not $ets) {
 }
 
 $procs = @()
-function Start-Child($name, $exe, $args, $log) {
-  $p = Start-Process -FilePath $exe -ArgumentList $args -RedirectStandardOutput (Join-Path $OutDir $log) -RedirectStandardError (Join-Path $OutDir ($log -replace '\.log$', '.err.log')) -PassThru -WindowStyle Hidden
+function Start-Child($name, $exe, $argList, $log) {
+  $p = Start-Process -FilePath $exe -ArgumentList $argList -RedirectStandardOutput (Join-Path $OutDir $log) -RedirectStandardError (Join-Path $OutDir ($log -replace '\.log$', '.err.log')) -PassThru -WindowStyle Hidden
   $script:procs += @{ name = $name; p = $p }
   return $p
 }
