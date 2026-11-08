@@ -12,7 +12,7 @@ import sys
 import time
 from datetime import datetime
 
-ETS_DIR = os.environ.get("ETS_DIR", r"D:\ets-rea\ETS")
+ETS_DIR = os.environ.get("ETS_DIR", str(Path(__file__).resolve().parent.parent / "ETS"))
 LOG_DIR = os.path.join(ETS_DIR, "logs")
 stop = {"v": False}
 

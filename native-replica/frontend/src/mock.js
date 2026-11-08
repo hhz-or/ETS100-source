@@ -29,21 +29,21 @@ export const MOCK_DEVICE = {
 
 export const MOCK_ECARDS = [
   {
-    id: '275389912', name: '上海九年级', grade: '九年级', grade_id: 5260, resource_id: '239',
+    id: '100000001', name: '上海九年级', grade: '九年级', grade_id: 5260, resource_id: '239',
     school_name: '上海市演示中学', class_name: '18', teacher_first_name: '王',
     expire_time: '2027-01-31 23:59:59', out_of_date: 0, actived: 1, rate_scale: 1,
     engine_area: 'shanghai', parent_resource_id: '274', cover: '', school_level: 1,
     class_number: 'C00000001', student_name: '演示同学', number: 'SHM00000001'
   },
   {
-    id: '275389910', name: '上海八年级', grade: '八年级', grade_id: 5259, resource_id: '240',
+    id: '100000002', name: '上海八年级', grade: '八年级', grade_id: 5259, resource_id: '240',
     school_name: '上海市演示中学', class_name: '18', teacher_first_name: '王',
     expire_time: '2026-12-31 23:59:59', out_of_date: 0, actived: 1, rate_scale: 1,
     engine_area: 'shanghai', parent_resource_id: '274', cover: '', school_level: 1,
     class_number: 'C00000001', student_name: '演示同学', number: 'SHM00000002'
   },
   {
-    id: '275389909', name: '上海七年级', grade: '七年级', grade_id: 5258, resource_id: '241',
+    id: '100000003', name: '上海七年级', grade: '七年级', grade_id: 5258, resource_id: '241',
     school_name: '上海市演示中学', class_name: '18', teacher_first_name: '王',
     expire_time: '2026-12-15 23:59:59', out_of_date: 0, actived: 1, rate_scale: 1,
     engine_area: 'shanghai', parent_resource_id: '274', cover: '', school_level: 1,

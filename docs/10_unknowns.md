@@ -20,8 +20,8 @@
 | U5 | 更新器 `EtsUpdate.exe` 的下载包校验 | 中 | **签名已解决**：`MD5("grlx"+time秒+base64(body)+"555ffbe95ccf4e9535a110170b445ab8")`，3/3 真实样本命中（`08_signature.md` §五）；**仍未知**：下载的 exe/update.dat 是否做 MD5/数字签名校验 | 反编译 `EtsUpdate.exe` 的下载/安装分支（产物已有）；或触发一次真实更新观察 |
 | U6 | `bugreport.exe` 上传地址/协议 | 低 | 二进制内无明文 URL（可能运行时拼接/加密） | 字符串+反编译；或断网抓包 |
 | U7 | `stic://` 自定义 scheme 的完整 host→路径映射 | 低 | 已确认 `shell`/`file`/`rpk`/`cpk` 等 host 与 `file` 直接映射绝对路径；边界规则未全验证 | 反编译 `client_schema.cpp` 对应函数（ETSShell 反编译产物中） |
-| U8 | `soundhelper` 33 个 `snd*` 导出语义 | 中 | 已从日志还原录音/播放/评测主流程；导出函数逐个语义未标注 | 反编译 + 日志行号交叉 |
-| U9 | `.spx` 真实容器格式 | 低 | 16 组 `.mp3.spx` 熵≈7.97、无标准魔数、ffmpeg 不识别；推断 Speex 宽带裸流 | 用 Speex 解码器尝试；或对比 `hd_stic_record_enable_speex=1` 分支 |
+| U8 | `soundhelper` 33 个 `snd*` 导出语义 | 中 | **已解决（2026-11-08）**：录音/评测主流程已通过真实练习抓包还原（编码参数、ISE protobuf、上传回传），见 `15_practice_protocol.md`；仅剩个别导出未逐个标注 | — |
+| U9 | `.spx` 真实容器格式 | 低 | **已解决（2026-11-08）**：`.spx` = 16kHz mono speex 裸流顺序拼接；quality 10 / CBR 84800 → 106B/帧，2 帧=212B 一个 WS 块；回放评测结果与原评测一致 | 见 `15_practice_protocol.md` §2/§6 |
 | U10 | 前端 `RSA_PUBLIC_KEY`（实为私钥 PEM）的实际调用点 | 低-中 | 已定位常量与 `rsaEncrypt()`，未定位业务调用 | 搜索 `rsaEncrypt(` 调用点；或看某接口字段 |
 | U11 | DPAPI 加密的 Cookie 值 | 低 | 11 条 Cookie 均为 v10(DPAPI)，脱离原用户不可解；且无身份 Cookie（登录态在 IndexedDB） | 非必要 |
 | U12 | IndexedDB 的 dbid→存储名全量映射 | 低 | 200,945 条、13 存储；键前缀编码只解到部分 | 用 Chromium 源格式或浏览器打开 profile |

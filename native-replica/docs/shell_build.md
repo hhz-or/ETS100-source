@@ -8,37 +8,37 @@
 ## 1. 构建（Windows / MSVC 14.51 / CMake + Ninja）
 
 > 注意：`C:\rea_tools\pylibs\bin\cmake.exe` 是不可用的 Python shim，
-> 必须使用 `C:\rea_tools\pylibs\cmake\data\bin\cmake.exe`。
+> 必须使用 `<CMAKE>`。
 > `ninja` 用 WinGet Links 下的 `ninja.exe`（`Get-Command ninja`）。
 
 ```bat
 :: 1) 配置（一次即可；CMakeLists.txt 由 Lead 维护，本目录不修改）
-cmd /c "call \"C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\Tools\VsDevCmd.bat\" -arch=x64 >nul && ^
-  \"C:\rea_tools\pylibs\cmake\data\bin\cmake.exe\" -S D:\ets-rea\native-replica -B C:\ets-rea-build -G Ninja ^
+cmd /c "call \"<VS_BUILDTOOLS>\Common7\Tools\VsDevCmd.bat\" -arch=x64 >nul && ^
+  \"<CMAKE>\" -S <REPO_ROOT>\native-replica -B <BUILD_DIR> -G Ninja ^
   -DCMAKE_BUILD_TYPE=Release ^
-  -DCMAKE_MAKE_PROGRAM=\"C:\Users\Administrator\AppData\Local\Microsoft\WinGet\Links\ninja.exe\""
+  -DCMAKE_MAKE_PROGRAM=\"<NINJA>\""
 
 :: 2) 只构建壳目标（插件由其他开发线实现，可能暂时编译失败，不影响壳验证）
-cmd /c "call \"C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\Tools\VsDevCmd.bat\" -arch=x64 >nul && ^
-  \"C:\rea_tools\pylibs\cmake\data\bin\cmake.exe\" --build C:\ets-rea-build --target EtsReplica --parallel"
+cmd /c "call \"<VS_BUILDTOOLS>\Common7\Tools\VsDevCmd.bat\" -arch=x64 >nul && ^
+  \"<CMAKE>\" --build <BUILD_DIR> --target EtsReplica --parallel"
 ```
 
 PowerShell 等价写法：
 
 ```powershell
-$vs    = 'C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\Tools\VsDevCmd.bat'
-$cmake = 'C:\rea_tools\pylibs\cmake\data\bin\cmake.exe'
-$ninja = 'C:\Users\Administrator\AppData\Local\Microsoft\WinGet\Links\ninja.exe'
-cmd /c "call `"$vs`" -arch=x64 >nul && `"$cmake`" -S D:\ets-rea\native-replica -B C:\ets-rea-build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=`"$ninja`""
-cmd /c "call `"$vs`" -arch=x64 >nul && `"$cmake`" --build C:\ets-rea-build --target EtsReplica --parallel"
+$vs    = '<VS_BUILDTOOLS>\Common7\Tools\VsDevCmd.bat'
+$cmake = '<CMAKE>'
+$ninja = '<NINJA>'
+cmd /c "call `"$vs`" -arch=x64 >nul && `"$cmake`" -S <REPO_ROOT>\native-replica -B <BUILD_DIR> -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=`"$ninja`""
+cmd /c "call `"$vs`" -arch=x64 >nul && `"$cmake`" --build <BUILD_DIR> --target EtsReplica --parallel"
 ```
 
 ### 实测结果（2026-11-07）
 
-- 配置：`-- Configuring done` / `-- Generating done`，`WEBVIEW2_SDK=C:/rea_tools/webview2/build/native`。
+- 配置：`-- Configuring done` / `-- Generating done`，`WEBVIEW2_SDK=<WEBVIEW2_SDK>`。
 - 构建：`--target EtsReplica --parallel` 退出码 **0**；7 个 TU（config/main/core_api/bridge/
   plugin_manager/media_server/ws_log）全部重新编译、链接成功，shell 源文件 **0 error / 0 warning**。
-- 产物：`C:\ets-rea-build\bin\EtsReplica.exe`（约 352 KB，静态链接 WebView2LoaderStatic，无额外 DLL 依赖）。
+- 产物：`<BUILD_DIR>\bin\EtsReplica.exe`（约 352 KB，静态链接 WebView2LoaderStatic，无额外 DLL 依赖）。
 - 工具链：MSVC 19.51.36260 x64（VS 18 BuildTools），CMake ≥3.25，Ninja。
 - 编译选项由根 `CMakeLists.txt` 统一提供：`/utf-8 /W3`、`UNICODE _UNICODE NOMINMAX WIN32_LEAN_AND_MEAN`。
 
@@ -47,13 +47,13 @@ cmd /c "call `"$vs`" -arch=x64 >nul && `"$cmake`" --build C:\ets-rea-build --tar
 ## 2. 运行
 
 ```powershell
-C:\ets-rea-build\bin\EtsReplica.exe
+<BUILD_DIR>\bin\EtsReplica.exe
 ```
 
 运行时期望的目录布局（`build.ps1` 负责生成 assets/web、plugins/、mq_server/）：
 
 ```
-C:\ets-rea-build\bin\
+<BUILD_DIR>\bin\
 ├─ EtsReplica.exe
 ├─ shell.ini                 # 可选，见 §3
 ├─ assets\web\index.html     # 前端构建产物（虚拟主机 https://app.ets.local/）
@@ -141,7 +141,7 @@ LogLevel=1
 | 编译 `--target EtsReplica` | 退出码 0，0 error / 0 warning（shell 源） |
 | 启动 / 窗口标题 | 窗口正常显示，标题 `E听说 · 复刻版`（来自默认 AppName） |
 | WebView2 初始化 + 虚拟主机 | `CreateCoreWebView2Environment` → controller → `https://app.ets.local/index.html` 导航 `hr=0` |
-| 插件装载 | 7/7 全部 LoadLibrary + PlnInitiliaze 成功（日志 `loaded plugin keys: ...`） |
+| 插件装载 | 8/8 全部 LoadLibrary + PlnInitiliaze 成功（日志 `loaded plugin keys: ...`） |
 | JS↔宿主 `__core` | `info` / `media_url` / `log` 全部回调正确（页面 selftest 回写日志验证） |
 | JS↔插件 | `ShellHelper.getconfig`、`EtsHelper.get_appdata_path`、`FileHelper.existfileorfolder` 在工作线程执行并正确回调 |
 | 媒体服务 | `GET /media?p=probe.txt` → 200 正文一致；`Range: bytes=0-4` → 206 + `Content-Range: bytes 0-4/13`；越界路径 → 403；`/health` → 200 |

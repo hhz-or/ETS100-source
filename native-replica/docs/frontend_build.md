@@ -10,7 +10,7 @@
 
 | 项 | 结果 |
 |---|---|
-| 依赖安装 | `pnpm install --store-dir C:\rea_tools\pnpm-store` 成功（72 包，esbuild postinstall 已执行） |
+| 依赖安装 | `pnpm install --store-dir <PNPM_STORE>` 成功（72 包，esbuild postinstall 已执行） |
 | 前端构建 | `pnpm run build` 成功，生成 `frontend/dist/`（Vite 8.3.6，1621 modules，约 3–5s） |
 | mq_server | `node main.js` 启动成功；40001；连接回 `hello mq_server!`；消息落盘并回显；40001 占用时自动 +1 到 40002 |
 | Mock 预览 | 浏览器直接访问构建产物可完整预览；11 条路由巡检 0 异常/0 console error（最终 Vite 8 构建对首页/练习/设置复检 0 异常） |
@@ -52,10 +52,10 @@ Element Plus 采用全量引入（`element-plus/dist/index.css` + 全量组件�
 ## 3. 构建命令
 
 ```powershell
-cd D:\ets-rea\native-replica\frontend
+cd <REPO_ROOT>\native-replica\frontend
 
 # D: 空间紧张，必须把 store 放到 C:
-pnpm install --store-dir C:\rea_tools\pnpm-store
+pnpm install --store-dir <PNPM_STORE>
 
 # 构建（输出 dist/）
 pnpm run build
@@ -88,16 +88,16 @@ pnpm run dev
 
    ```powershell
    pnpm approve-builds --all
-   pnpm install --store-dir C:\rea_tools\pnpm-store
+   pnpm install --store-dir <PNPM_STORE>
    ```
 
-2. **store 必须显式指定**：pnpm 12 不再读取 `package.json` 的 `pnpm` 字段；而跨盘（C: store → D: 工程）hardlink 会被拒绝。因此安装时务必带 `--store-dir C:\rea_tools\pnpm-store`。装好后 `pnpm run build` 不会再次联网安装（`node_modules` 与 lockfile 一致时）。
+2. **store 必须显式指定**：pnpm 12 不再读取 `package.json` 的 `pnpm` 字段；而跨盘（C: store → D: 工程）hardlink 会被拒绝。因此安装时务必带 `--store-dir <PNPM_STORE>`。装好后 `pnpm run build` 不会再次联网安装（`node_modules` 与 lockfile 一致时）。
 
 ### 3.2 与 build.ps1 的衔接
 
 `build.ps1` 的流程与本文一致：
 
-- `node_modules` 不存在时执行 `pnpm install --store-dir C:\rea_tools\pnpm-store`；
+- `node_modules` 不存在时执行 `pnpm install --store-dir <PNPM_STORE>`；
 - `pnpm run build`；
 - 把 `frontend/dist/*` 复制到 `assets/web`；
 - 把 `mq_server/*.js`、`package.json` 复制到 `bin/mq_server` 并在目标目录 `npm install`。
@@ -349,7 +349,7 @@ pnpm run preview
 ### 10.1 启动
 
 ```powershell
-cd D:\ets-rea\native-replica\mq_server
+cd <REPO_ROOT>\native-replica\mq_server
 npm install            # 安装 ws
 node main.js           # 或 npm start
 ```
@@ -391,7 +391,7 @@ write_app_config_success {"suspensionBallPort":40001}
 
 | 验证 | 命令/方式 | 结果 |
 |---|---|---|
-| 依赖安装 | `pnpm install --store-dir C:\rea_tools\pnpm-store` | 成功；esbuild postinstall Done |
+| 依赖安装 | `pnpm install --store-dir <PNPM_STORE>` | 成功；esbuild postinstall Done |
 | 生产构建 | `pnpm run build` | 成功；生成 `dist/index.html` + `dist/assets/*`；无 CSS 警告（已移除全局 CSS 中的 `:deep()`） |
 | Mock 首页 | Chrome headless CDP，`#/login?autologin=1` | 跳转 `#/home`，标题“首页 · E听说”，三卡/模块卡/学习卡均渲染 |
 | 全路由巡检 | `#/home`、`#/homework`、`#/homework/111203417`、`#/sets`、`#/courses`、3 个 `#/practice`（read/dialogue/picture）、`#/mistakes`、`#/settings`、`#/about` | 11 条路由均渲染，0 异常、0 console error、无 `.el-alert--error` |
@@ -405,19 +405,23 @@ write_app_config_success {"suspensionBallPort":40001}
 
 ---
 
-## 12. 未实现 / 明确降级项
+## 12. 已补齐项与明确降级 / 未实现项
+
+已补齐（录音评测链路，详见仓库 `docs/15_practice_protocol.md`）：
+
+- **录音与评测**：`recorder.js`（16k PCM 采集）→ `soundhelper.encode_speex`（speex 106B/帧）→ `ise.js`（protobuf WebSocket）→ 分数/逐词反馈。
+- **上传与回传**：`practiceFlow.js`（ffmpeg 生成 mp3 → OSS 三文件上传 → `/m/audio/sync-v2`）；`httphelper.upload` 已实现。
 
 以下能力**未实现或为桩**，已在 UI 中标注或返回 `{"code":-2,"msg":"not implemented"}`：
 
-1. **录音与评测**：`soundhelper.record`、波形/录音回调、双通道 ISE WebSocket、AI 评测、OSS/SLS 上传、`/m/audio/sync-v2` 评分回写均未实现。练习页只展示题干/答案/解析与示范音频。
-2. **真实 content 包 URL**：`g/homework/list` / `g/set/list` 的真实响应中 `url` 与 `base_url` 的拼装规则未完全验证；拿不到 URL 时练习页会提示错误并支持载入内置示例。
-3. **账号生命周期**：短信验证码 `code/send`、注册、改密、绑定手机、极验验证码、教育系统单点登录未实现。
-4. **页面**：音标、单词 PK、推荐配音、学习计划、模考、E 卡商城、成长路径、消息中心等未实现；首页以“未实现”标签展示部分入口。
-5. **日志/埋点**：仅通过 `__core.log` 交给壳/mq_server；阿里云 SLS、TalkingData、`log_collector` 未接入。
-6. **窗口/系统能力**：`appcontroller` 窗口控制、`FileHelper` 对话框/遍历/重命名、`HttpHelper.upload/downloadresource/downloadsdk`、`SevenZip.zip/test`、`SQLitePln` 业务表、`ShellHelper` 进程/授权码/剪贴板等为桩或未接线。
-7. **清理缓存 / 检查更新 / 麦克风检测**：设置页按钮为禁用或提示未实现。
-8. **分页/筛选**：作业与套卷按“一次拉取 100/50 条 + 前端筛选/分页”实现，未做服务端分页联动；真实接口的分页字段可能不同。
-9. **响应签名**：`sign_response:1` 已发送，但未校验/解析响应签名（`encode_api_resp_v2` 未接入）。
+1. **真实 content 包 URL**：`g/homework/list` / `g/set/list` 的真实响应中 `url` 与 `base_url` 的拼装规则未完全验证；拿不到 URL 时练习页会提示错误并支持载入内置示例。
+2. **账号生命周期**：短信验证码 `code/send`、注册、改密、绑定手机、极验验证码、教育系统单点登录未实现。
+3. **页面**：音标、单词 PK、推荐配音、学习计划、模考、E 卡商城、成长路径、消息中心等未实现；首页以“未实现”标签展示部分入口。
+4. **日志/埋点**：仅通过 `__core.log` 交给壳/mq_server；阿里云 SLS、TalkingData、`log_collector` 未接入。
+5. **窗口/系统能力**：`appcontroller` 窗口控制、`FileHelper` 对话框/遍历/重命名、`HttpHelper.downloadresource/downloadsdk`、`SevenZip.zip/test`、`SQLitePln` 业务表、`ShellHelper` 进程/授权码/剪贴板等为桩或未接线。
+6. **清理缓存 / 检查更新 / 麦克风检测**：设置页按钮为禁用或提示未实现。
+7. **分页/筛选**：作业与套卷按“一次拉取 100/50 条 + 前端筛选/分页”实现，未做服务端分页联动；真实接口的分页字段可能不同。
+8. **响应签名**：`sign_response:1` 已发送，但未校验/解析响应签名（`encode_api_resp_v2` 未接入）。
 
 ---
 
@@ -438,7 +442,7 @@ write_app_config_success {"suspensionBallPort":40001}
 
 | 现象 | 处理 |
 |---|---|
-| `vite: not recognized` / node_modules 不完整 | 删掉 `frontend/node_modules`，重新 `pnpm install --store-dir C:\rea_tools\pnpm-store` |
+| `vite: not recognized` / node_modules 不完整 | 删掉 `frontend/node_modules`，重新 `pnpm install --store-dir <PNPM_STORE>` |
 | `ERR_PNPM_IGNORED_BUILDS` | `pnpm approve-builds --all` 后重新 install（`pnpm-workspace.yaml` 已声明 esbuild） |
 | `pnpm run build` 触发重装并报 `.pnpm` 拒绝访问 | 关闭占用 `node_modules` 的进程（vite preview / 浏览器 / 杀软扫描），再删除并重装 |
 | 浏览器打开空白 | 确认通过 http（`pnpm run preview` / 静态服务）访问；直接双击 `index.html` 会因 module CORS 失败 |

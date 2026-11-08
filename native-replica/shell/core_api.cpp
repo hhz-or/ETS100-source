@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <cctype>
 #include <string>
+#include <vector>
 
 #include "common.h"
 #include "media_server.h"
@@ -133,6 +134,45 @@ std::string HandleOpenExternal(const CoreContext& /*ctx*/, const json& args) {
     return j.dump();
 }
 
+std::string HandleTool(const CoreContext& ctx, const json& args) {
+    const std::string name = Lower(StringField(args, "name"));
+    if (name.empty()) return ErrorReply("tool: missing 'name'");
+    auto exists = [](const std::wstring& p) -> bool {
+        if (p.empty()) return false;
+        DWORD attrs = GetFileAttributesW(p.c_str());
+        return attrs != INVALID_FILE_ATTRIBUTES && !(attrs & FILE_ATTRIBUTE_DIRECTORY);
+    };
+    std::vector<std::wstring> candidates;
+    if (name == "ffmpeg" || name == "ffmpeg.exe") {
+        wchar_t envBuf[MAX_PATH * 2] = {};
+        DWORD n = GetEnvironmentVariableW(L"ETS_FFMPEG", envBuf, _countof(envBuf));
+        if (n > 0 && n < _countof(envBuf)) candidates.push_back(envBuf);
+        const std::wstring appDir = Utf8ToWide(ctx.appDir);
+        candidates.push_back(appDir + L"\\tools\\ffmpeg.exe");
+        candidates.push_back(appDir + L"\\ffmpeg\\ffmpeg.exe");
+        wchar_t found[MAX_PATH * 2] = {};
+        if (SearchPathW(nullptr, L"ffmpeg.exe", nullptr, _countof(found), found, nullptr) > 0) {
+            candidates.push_back(found);
+        }
+    } else {
+        return ErrorReply("tool: unsupported tool '" + name + "'");
+    }
+    for (const auto& c : candidates) {
+        if (exists(c)) {
+            json j;
+            j["code"] = 0;
+            j["name"] = name;
+            j["path"] = WideToUtf8(c);
+            return j.dump();
+        }
+    }
+    json j;
+    j["code"] = -1;
+    j["name"] = name;
+    j["msg"] = "未找到工具 " + name + "：可设置环境变量 ETS_FFMPEG，或把 ffmpeg.exe 放到 <appDir>\\tools\\ 下";
+    return j.dump();
+}
+
 } // namespace
 
 std::string HandleCoreAction(const CoreContext& ctx, const std::string& action,
@@ -144,6 +184,7 @@ std::string HandleCoreAction(const CoreContext& ctx, const std::string& action,
         if (name == "media_url") return HandleMediaUrl(ctx, args);
         if (name == "log") return HandleLog(ctx, args);
         if (name == "open_external") return HandleOpenExternal(ctx, args);
+        if (name == "tool") return HandleTool(ctx, args);
         return ErrorReply("unknown __core action: " + name);
     } catch (const std::exception& e) {
         return ErrorReply(std::string("__core exception: ") + e.what());

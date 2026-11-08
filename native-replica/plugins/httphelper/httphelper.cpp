@@ -330,6 +330,15 @@ bool DoRequest(const std::string& url, const std::string& method, const std::str
     return true;
 }
 
+struct MultipartBody {
+    std::string body;
+    std::string contentType;
+};
+std::vector<uint8_t> ReadLocalFile(const std::string& path, std::string& err);
+std::string RandomHex(size_t bytes);
+MultipartBody BuildMultipart(const ets::json& fields, const std::string& fileName,
+                             const std::string& mime, const std::vector<uint8_t>& fileData);
+
 std::string Handle(const std::string& action, const ets::json& args) {
     using ets::json;
 
@@ -411,9 +420,124 @@ std::string Handle(const std::string& action, const ets::json& args) {
         return r.dump();
     }
 
+    if (action == "upload") {
+        const std::string url = ArgStr(args, "url", "https://ets60.oss-cn-hangzhou.aliyuncs.com/");
+        std::string fileName = ArgStr(args, "fileName", ArgStr(args, "filename"));
+        std::string mime = ArgStr(args, "mime", "application/octet-stream");
+        const std::string localFile = ArgStr(args, "localFile", ArgStr(args, "local_file"));
+        std::string fileB64 = ArgStr(args, "fileBase64", ArgStr(args, "file_base64"));
+        std::string err;
+        std::vector<uint8_t> data;
+        if (!localFile.empty()) {
+            data = ReadLocalFile(localFile, err);
+            if (!err.empty()) return ets::ErrReply(-1, err);
+            if (fileName.empty()) {
+                const size_t slash = localFile.find_last_of("\\/");
+                fileName = slash == std::string::npos ? localFile : localFile.substr(slash + 1);
+            }
+        } else if (!fileB64.empty()) {
+            data = ets::Base64Decode(fileB64);
+            if (data.empty()) return ets::ErrReply(-1, "fileBase64 decode failed");
+        } else {
+            return ets::ErrReply(-1, "upload: fileBase64 or localFile is required");
+        }
+        if (fileName.empty()) fileName = "upload.bin";
+
+        ets::json fields = ets::json::object();
+        if (args.contains("fields") && args["fields"].is_object()) {
+            fields = args["fields"];
+        } else {
+            // 兼容原始插件风格：OSS 字段直接平铺在 args 上
+            for (auto it = args.begin(); it != args.end(); ++it) {
+                const std::string k = it.key();
+                if (k == "url" || k == "localFile" || k == "local_file" || k == "fileBase64" ||
+                    k == "file_base64" || k == "fileName" || k == "filename" || k == "mime" ||
+                    k == "timeoutMs" || k == "fields")
+                    continue;
+                if (it.value().is_string() || it.value().is_number() || it.value().is_boolean())
+                    fields[k] = it.value();
+            }
+        }
+
+        const MultipartBody mp = BuildMultipart(fields, fileName, mime, data);
+        ets::json headers = ets::json::object();
+        headers["Content-Type"] = mp.contentType;
+        int timeoutMs = 120000;
+        if (args.contains("timeoutMs") && args["timeoutMs"].is_number())
+            timeoutMs = (int)args["timeoutMs"].get<double>();
+
+        std::string statusText, respBody, respHeaders;
+        DWORD status = 0;
+        if (!DoRequest(url, "POST", mp.body, headers, timeoutMs, statusText, status, respBody,
+                       respHeaders, err))
+            return ets::ErrReply(-1, err);
+        ets::json r;
+        r["status"] = (int)status;
+        r["body"] = BytesToUtf8(respBody, "text/plain");
+        r["size"] = data.size();
+        return r.dump();
+    }
+
     // upload / downloadresource / downloadsdk / monitornetspeed / isrpkexist / stopdownload
     LogWarn("httphelper: not implemented action: " + action);
     return ets::NotImplementedReply();
+}
+
+std::vector<uint8_t> ReadLocalFile(const std::string& path, std::string& err) {
+    std::ifstream ifs(fs::path(ets::Utf8ToWide(path)), std::ios::binary);
+    if (!ifs) {
+        err = "cannot open file: " + path;
+        return {};
+    }
+    ifs.seekg(0, std::ios::end);
+    const std::streamoff size = ifs.tellg();
+    ifs.seekg(0, std::ios::beg);
+    std::vector<uint8_t> data((size_t)size);
+    if (size > 0) ifs.read(reinterpret_cast<char*>(data.data()), size);
+    if (!ifs && !ifs.eof()) {
+        err = "read file failed: " + path;
+        return {};
+    }
+    return data;
+}
+
+std::string RandomHex(size_t bytes) {
+    std::string out;
+    out.reserve(bytes * 2);
+    for (size_t i = 0; i < bytes; ++i) {
+        char buf[3] = {};
+        snprintf(buf, sizeof(buf), "%02x", (unsigned)(GetTickCount64() ^ (GetCurrentProcessId() + i)) & 0xff);
+        out += buf;
+    }
+    return out;
+}
+
+MultipartBody BuildMultipart(const ets::json& fields, const std::string& fileName,
+                             const std::string& mime, const std::vector<uint8_t>& fileData) {
+    const std::string boundary = "----ETSReplicaBoundary" + RandomHex(12);
+    MultipartBody out;
+    out.contentType = "multipart/form-data; boundary=" + boundary;
+    auto addPart = [&](const std::string& name, const std::string& value) {
+        out.body += "--" + boundary + "\r\n";
+        out.body += "Content-Disposition: form-data; name=\"" + name + "\"\r\n\r\n";
+        out.body += value + "\r\n";
+    };
+    if (fields.is_object()) {
+        for (auto it = fields.begin(); it != fields.end(); ++it) {
+            const std::string v = it.value().is_string() ? it.value().get<std::string>()
+                                  : it.value().is_boolean() ? (it.value().get<bool>() ? "true" : "false")
+                                  : it.value().is_number() ? it.value().dump()
+                                                           : it.value().dump();
+            addPart(it.key(), v);
+        }
+    }
+    out.body += "--" + boundary + "\r\n";
+    out.body += "Content-Disposition: form-data; name=\"file\"; filename=\"" + fileName + "\"\r\n";
+    out.body += "Content-Type: " + (mime.empty() ? "application/octet-stream" : mime) + "\r\n\r\n";
+    out.body.append(reinterpret_cast<const char*>(fileData.data()), fileData.size());
+    out.body += "\r\n";
+    out.body += "--" + boundary + "--\r\n";
+    return out;
 }
 
 } // namespace

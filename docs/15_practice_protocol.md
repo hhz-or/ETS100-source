@@ -56,7 +56,7 @@
 ```
 f1  (message) SessionInfo
     f1 = clientId            "ksyyyxx-etszx"        # SDK/client id
-    f2 = accountId           "275389912"
+    f2 = accountId           "100000001"
     f3 = mac                 "00-00-00-00-00-00"
     f4 = appId               "ets_70"
     f5 = sdkKey              "SDK_pY1wOPU8"
@@ -64,7 +64,7 @@ f1  (message) SessionInfo
     f7 = accessToken         JWT（HS256，payload {"aid":"ksyyyxx-etszx","exp":...}）
     f8 = ""（空）
     f9 (repeated) map entry: f1=key, f2=value
-        uid=33888750, regionId=5269,5270,0, schoolId=7729, classId=1155123,
+        uid=100000002, regionId=5269,5270,0, schoolId=7729, classId=1155123,
         gradeId=90329, stageId=263833, tpl_region=shanghai,
         scene_type=homework, scene_id=<homework_id>, module=1,
         plat_type=Web, plat_ver=5.7.9
@@ -207,8 +207,12 @@ f4 = (message) { f1="result", f2=<XML 字符串> }
 | ISE WebSocket 协议（init/音频/结束/结果） | ✅ 前端 JS + Python 均跑通 |
 | speex 编码（16k/106B 帧/212B 块） | ✅ C++ 插件编码，评分链路验证 |
 | 麦克风采集（16k PCM） | ✅ WebView2 内 getUserMedia + 权限自动授予 |
-| 录音→编码→评测→显示分数 | ✅ Practice 页已接入 |
-| OSS 上传（STS 表单） | ✅ Python 参考实现验证（可直传 public-read） |
-| `/m/audio/sync-v2` 成绩回传 | ✅ 参数已还原；前端接入待完成 |
-| mp3 生成（上传所需） | ⏳ 需 ffmpeg/lame（可用安装目录自带工具） |
+| 录音→编码→评测→显示分数 | ✅ Practice 页已接入（朗读/问答/看图均可用） |
+| OSS 上传（STS 表单，mp3/spx/xml） | ✅ 前端 `httphelper.upload` 实测直传；Python 参考实现同样验证 |
+| mp3 生成（上传所需） | ✅ 调用 ffmpeg（`<appDir>\tools\ffmpeg.exe` 或 `ETS_FFMPEG`），24kbps，产物与抓包同量级 |
+| `/m/audio/sync-v2` 成绩回传 | ✅ 前端“上传并回传成绩”已接入；全流程 dry-run 验证，写操作由真实练习触发 |
 | 真实麦克风完整练习回归 | ⏳ 待用真实录音验证（避免自动化测试往评测服务发送环境音） |
+
+> 前端入口：作业 → 进题 → “录音评测”面板 → 开始录音 / 停止并评测 → 上传并回传成绩。
+> 回传失败常见原因：未登录/登录态过期、评测被拒绝（未识别到朗读）、ffmpeg 未找到（放到 `<appDir>\tools\ffmpeg.exe`）。
+

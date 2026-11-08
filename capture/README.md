@@ -8,7 +8,7 @@
 1. 官方客户端已启动，且窗口可见（CDP 端口 10086 可用）。
 2. `node` 可用；`ws` 模块用官方客户端自带的即可（脚本会回退到 `ETS/mq_server/node_modules/ws`）。
 3. Frida（原生采集用）：`python -m pip install frida`。
-   - 若之前装过，脚本会自动尝试 `C:\ets_park\work_pylibs` / `D:\ets-rea\work\pylibs` 等路径。
+   - 若之前装过，脚本会自动尝试 `<本地工具链目录>` 等路径。
 
 ## 一键运行
 
@@ -21,8 +21,8 @@ pwsh -File capture\run_capture.ps1
 | 采集器 | 抓什么 | 输出 |
 |---|---|---|
 | `cdp_capture.js` | 渲染进程网络、**WebSocket 帧**（ISE 评测）、console | `ws.jsonl`、`renderer_http.jsonl`、`console.jsonl` |
-| `native_capture.py` | `HttpHelper` 的 **WinHTTP 明文请求/响应**（HTTPS 解密前） | `native_http.jsonl` |
-| `log_tail.py` | 客户端 `logs/ets_*.log` 新增行 | `logs.jsonl` |
+| `native_capture.py` | 插件桥调用参数（Frida 只读 hook `PlnOnProcessMessage`：动作/参数/uid），如 `HttpHelper.upload`、`EtsHelper` 签名入参 | `native_http.jsonl` |
+| `log_tail.py` | 客户端 `logs/ets_*.log` 新增行（含 API_ETS 请求/响应、ENG_SCORE 评测结果） | `logs.jsonl` |
 | `files_watch.py` | 录音/音频/评测 xml/题库包等新文件 | `files.jsonl`、`files/fs/…` |
 
 看到提示后，**做一次完整练习**（建议 3-5 分钟）：
@@ -41,6 +41,10 @@ python capture\summarize.py capture\runs\<时间戳>
 ```
 
 生成 `REPORT.md`、`api_calls.json`、`ws_samples.json`、`files_index.json`（已脱敏：token/手机号/密码/姓名），把整个 `runs/<时间戳>` 目录或 `REPORT.md` 给 Lead 分析即可。
+
+> 已用于一次真实作业练习（10 题、10 次 ISE 评测、30 个上传文件）。协议还原与复刻实现见
+> [`docs/15_practice_protocol.md`](../docs/15_practice_protocol.md)：ISE protobuf、speex 编码参数、
+> OSS 上传、`/m/audio/sync-v2` 回传。
 
 ## 注意
 

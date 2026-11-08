@@ -25,7 +25,7 @@ def load_frida():
         return frida
     except Exception:
         pass
-    for cand in (r"C:\ets_park\work_pylibs", r"D:\ets-rea\work\pylibs", os.path.join(HERE, "pylibs")):
+    for cand in (os.environ.get("ETS_PYLIBS", ""), os.path.join(HERE, "pylibs"), os.path.join(HERE.parent, "work", "pylibs")):
         if os.path.isdir(cand) and cand not in sys.path:
             sys.path.insert(0, cand)
             try:

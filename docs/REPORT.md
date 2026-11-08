@@ -30,6 +30,8 @@
 | 8 | **本地数据全解**：SQLite/LevelDB/IndexedDB/Cookies、资源包、评测 XML | 见 `06_data.md` |
 | 9 | **壳层/更新/音频链**：启动链、进程模型、更新协议、转码链 | 见 `07_shell_update.md` |
 | 10 | **运行时验证（2026-11-06 live）**：CDP 抓取真实运行实例、补齐全部 188 个在线 chunk、插件 JS 权威 action 表、活体请求签名 68/68 | 见 `11_runtime_live.md` |
+| 11 | **练习/评测/上传全链路还原**（2026-11-08 真实练习抓包）：ISE protobuf WebSocket、speex 参数、OSS 三文件上传、sync-v2 回传 | 抓包回放逐词结果一致；上传公网 GET 200；见 `15_practice_protocol.md` |
+| 12 | **原生复刻端到端**：麦克风 → speex → ISE → 分数 → mp3/OSS → 回传（页面内实测） | `13_native_replica.md`、`native-replica/docs/VERIFY.md` |
 
 ---
 
@@ -51,6 +53,9 @@
 | [09_decompiled.md](09_decompiled.md) | Ghidra 反编译关键函数摘录与解读 |
 | [10_unknowns.md](10_unknowns.md) | 未知项、限制、后续验证 |
 | [11_runtime_live.md](11_runtime_live.md) | 运行时验证：Live CDP、全量 chunk、插件 JS 权威 action 表、活体协议 |
+| [12_reimplementation.md](12_reimplementation.md) | Python 参考客户端：架构映射、实现矩阵、运行方式 |
+| [13_native_replica.md](13_native_replica.md) | 原生同架构复刻：WebView2/插件/Vue3、录音评测、构建运行 |
+| [15_practice_protocol.md](15_practice_protocol.md) | 真实练习协议：ISE protobuf、speex、OSS 上传、sync-v2、复刻状态 |
 
 ### 机读数据/脚本（仓库内）
 
@@ -227,3 +232,18 @@ Ghidra 复跑：`-import <binary> -postScript DumpDecomp.java <outRoot>`（Ghidr
 - **"全功能等价复刻"**：不建议；服务端业务逻辑（判分、题库下发、班级/作业规则）不在客户端，需要服务端授权与合作。
 
 未解问题与后续验证建议见 [10_unknowns.md](10_unknowns.md)。
+
+---
+
+## 十、2026-11-08 补充：真实练习抓包与录音/评测/上传链路
+
+在真实账号的一次作业练习（10 题、10 次录音评测）中，用 `capture/` 工具链同时采集了 CDP WebSocket 帧、渲染进程 HTTP、插件桥调用、客户端日志与落盘文件，补齐了此前未知的写链路：
+
+| 链路 | 结论 | 文档 |
+|---|---|---|
+| 录音格式 | 16k mono speex，quality 10 / CBR 84800 → **106B/帧**；2 帧 = **212B** 一个 WS 块；本地 `.spx` 为所有块顺序拼接 | `15` §2/§6 |
+| ISE 评测 | `wss://oe-pub.eduaiplat.com/ws/v2/ise`，全 binary **protobuf**：init（会话信息 + token + 首块音频 + 16k/speex）→ 音频帧 → 结束帧 → 结果帧（XML） | `15` §2 |
+| 上传 | mp3/spx/xml 三件套经 STS 表单直传阿里云 OSS（`public-read`） | `15` §3 |
+| 成绩回传 | `/m/audio/sync-v2`（`mark_trace_id` + 三条 URL + `score_detail`）；末题标记完成并写 `submit_time` | `15` §4 |
+
+验证：用抓包 spx 回放 ISE，逐词结果与原评测一致（accuracy 0.0609 vs 0.0609）；原生复刻实现了麦克风采集、speex 编码、ISE 评测、mp3 生成、OSS 上传与成绩回传，页面内端到端跑通（`native-replica/docs/VERIFY.md`）。

@@ -21,6 +21,8 @@ from collections import Counter, defaultdict
 
 JWT = re.compile(r"eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}")
 PHONE = re.compile(r"(?<!\d)1[3-9]\d{9}(?!\d)")
+# 只遮蔽 JSON 里 "name":"..." 的姓名值，避免误伤普通中文文本
+NAME = re.compile(r'("(?:name|real_name|nickname|user_name)"\s*:\s*")[^"]{1,20}(")')
 SECRET_KEYS = {"token", "password", "passwd", "phone", "raw_phone", "bind_mobile", "mobile", "secret", "authorization"}
 
 
@@ -29,7 +31,7 @@ def mask_str(s):
         return s
     s = JWT.sub("***JWT***", s)
     s = PHONE.sub("1**********", s)
-    s = s.replace("陈一天", "***")
+    s = NAME.sub(r"\1***\2", s)
     return s
 
 

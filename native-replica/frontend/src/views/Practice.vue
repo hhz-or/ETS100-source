@@ -38,7 +38,7 @@
 
         <div v-if="info.audio && audioUrl" class="audio-box">
           <span class="audio-label">示范音频</span>
-          <audio controls preload="none" :src="audioUrl"></audio>
+          <audio controls preload="metadata" :src="audioUrl"></audio>
         </div>
 
         <!-- collector.read -->
@@ -46,34 +46,6 @@
           <div v-if="showAnswer" class="answer-box">
             <h4>参考原文</h4>
             <div class="rich-text">{{ info.value }}</div>
-          </div>
-
-          <!-- 录音 + ISE 评测 -->
-          <div class="answer-box" style="margin-top: 14px">
-            <h4>录音评测 <span class="small muted">（speex 16k → ISE WebSocket）</span></h4>
-            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 10px 0">
-              <el-button v-if="!recording" type="primary" @click="startRecord" :disabled="evaluating">
-                {{ evalResult ? '重新录音' : '开始录音' }}
-              </el-button>
-              <el-button v-else type="danger" @click="stopRecord">停止并评测</el-button>
-              <span class="small muted" v-if="recording">录音中… {{ recordSeconds }}s</span>
-              <span class="small muted" v-if="evaluating">评测中…</span>
-            </div>
-            <el-alert v-if="evalError" type="error" :closable="false" show-icon :title="evalError" />
-            <div v-if="evalResult && evalResult.scores" class="kv-grid">
-              <div class="kv"><span>准确度</span><b>{{ fmtScore(evalResult.scores.accuracy) }}</b></div>
-              <div class="kv"><span>流利度</span><b>{{ fmtScore(evalResult.scores.fluency) }}</b></div>
-              <div class="kv"><span>完整度</span><b>{{ fmtScore(evalResult.scores.integrity) }}</b></div>
-              <div class="kv"><span>总分</span><b>{{ fmtScore(evalResult.scores.total) }}</b></div>
-            </div>
-            <div v-if="evalResult && evalResult.scores && evalResult.scores.words && evalResult.scores.words.length"
-                 class="keypoint-chips" style="margin-top: 10px">
-              <span v-for="(w, i) in evalResult.scores.words" :key="i" class="keypoint-chip"
-                    :style="{ color: wordColor(w.score) }">{{ w.content }}</span>
-            </div>
-            <div v-if="evalResult && evalResult.scores && evalResult.scores.isRejected" class="small muted" style="margin-top: 8px">
-              评测被拒绝（except_info={{ evalResult.scores.exceptInfo }}），请重新录音朗读。
-            </div>
           </div>
         </template>
 
@@ -83,7 +55,7 @@
             <div class="ask" v-html="safeRichText(q.ask || q.value || '')"></div>
             <div v-if="askAudioUrls[i]" class="audio-box" style="margin: 10px 0">
               <span class="audio-label">问句音频</span>
-              <audio controls preload="none" :src="askAudioUrls[i]"></audio>
+              <audio controls preload="metadata" :src="askAudioUrls[i]"></audio>
             </div>
             <div v-if="showAnswer" class="std-list">
               <div v-for="(std, j) in q.std || []" :key="j" class="std-item">{{ std.value }}</div>
@@ -118,7 +90,6 @@
             </div>
           </div>
         </template>
-
         <template v-else>
           <el-alert
             type="info"
@@ -128,6 +99,46 @@
           />
           <pre class="mono small" style="white-space: pre-wrap; margin-top: 12px">{{ JSON.stringify(content, null, 2) }}</pre>
         </template>
+
+        <!-- 录音 + ISE 评测（朗读 / 情景问答 / 看图说话都支持） -->
+        <div v-if="['read', 'dialogue', 'picture'].includes(kind)" class="answer-box" style="margin-top: 14px">
+          <h4>录音评测 <span class="small muted">（speex 16k → ISE WebSocket）</span></h4>
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 10px 0">
+            <el-button v-if="!recording" type="primary" @click="startRecord" :disabled="evaluating">
+              {{ evalResult ? '重新录音' : '开始录音' }}
+            </el-button>
+            <el-button v-else type="danger" @click="stopRecord">停止并评测</el-button>
+            <span class="small muted" v-if="recording">录音中… {{ recordSeconds }}s</span>
+            <span class="small muted" v-if="evaluating">评测中…</span>
+          </div>
+          <el-alert v-if="evalError" type="error" :closable="false" show-icon :title="evalError" />
+          <div v-if="evalResult && evalResult.scores" class="kv-grid">
+            <div class="kv"><span>准确度</span><b>{{ fmtScore(evalResult.scores.accuracy) }}</b></div>
+            <div class="kv"><span>流利度</span><b>{{ fmtScore(evalResult.scores.fluency) }}</b></div>
+            <div class="kv"><span>完整度</span><b>{{ fmtScore(evalResult.scores.integrity) }}</b></div>
+            <div class="kv"><span>总分</span><b>{{ fmtScore(evalResult.scores.total) }}</b></div>
+          </div>
+          <div v-if="evalResult && evalResult.scores && evalResult.scores.words && evalResult.scores.words.length"
+               class="keypoint-chips" style="margin-top: 10px">
+            <span v-for="(w, i) in evalResult.scores.words" :key="i" class="keypoint-chip"
+                  :style="{ color: wordColor(w.score) }">{{ w.content }}</span>
+          </div>
+          <div v-if="evalResult && evalResult.scores && evalResult.scores.isRejected" class="small muted" style="margin-top: 8px">
+            评测被拒绝（except_info={{ evalResult.scores.exceptInfo }}），请重新录音朗读。
+          </div>
+
+          <div v-if="evalResult && evalResult.scores && !evalResult.scores.isRejected" style="margin-top: 12px">
+            <el-button type="success" :loading="uploadBusy" :disabled="uploadBusy || recording || evaluating"
+                       @click="uploadResult">上传并回传成绩</el-button>
+            <span class="small muted" style="margin-left: 10px">{{ uploadMsg }}</span>
+          </div>
+          <div v-if="syncInfo" class="kv-grid" style="margin-top: 10px">
+            <div class="kv"><span>本题得分</span><b>{{ fmtScore(syncInfo.point) }}</b></div>
+            <div class="kv"><span>完成度</span><b>{{ fmtScore(syncInfo.complete) }}</b></div>
+            <div class="kv" v-if="syncInfo.submitTime"><span>提交时间</span><b>{{ syncInfo.submitTime }}</b></div>
+          </div>
+        </div>
+
 
         <div v-if="showAnswer && info.analyze" class="analysis-box">
           <h4>解析</h4>
@@ -201,6 +212,7 @@ import { isMock } from '../bridge'
 import { loadContentPackage, parseStructure, resolveMedia, safeRichText } from '../content'
 import { PcmRecorder } from '../recorder'
 import * as ise from '../ise'
+import * as flow from '../practiceFlow'
 import { sendRequest } from '../api'
 import { useUserStore } from '../stores/user'
 
@@ -214,8 +226,15 @@ const recordSeconds = ref(0)
 const evaluating = ref(false)
 const evalResult = ref(null)
 const evalError = ref('')
+const uploadBusy = ref(false)
+const uploadMsg = ref('')
+const syncInfo = ref(null)
 let recorder = null
 let recordTimer = null
+let pcmBuffer = null
+let spxBytes = null
+let recordStartedAt = 0
+let evalSession = null
 
 function fmtScore(v) {
   return Number.isFinite(Number(v)) ? (Math.round(Number(v) * 100) / 100) : '—'
@@ -242,11 +261,16 @@ async function resolvePaperId() {
 async function startRecord() {
   evalError.value = ''
   evalResult.value = null
+  uploadMsg.value = ''
+  syncInfo.value = null
+  pcmBuffer = null
+  spxBytes = null
   try {
     recorder = new PcmRecorder({ sampleRate: 16000 })
     await recorder.start()
     recording.value = true
     recordSeconds.value = 0
+    recordStartedAt = Date.now()
     recordTimer = setInterval(() => { recordSeconds.value = Math.round(recorder.duration) }, 250)
   } catch (e) {
     evalError.value = '无法打开麦克风：' + (e && e.message ? e.message : e)
@@ -261,16 +285,23 @@ async function stopRecord() {
   try {
     const pcm = await recorder.stop()
     if (!pcm.length || pcm.length < 16000 * 0.6) throw new Error('录音太短（至少约 0.6 秒）')
+    pcmBuffer = pcm
     await userStore.bootstrap().catch(() => {})
     const paperId = await resolvePaperId()
+    const category = kind.value === 'read' ? 'read_sentence'
+      : kind.value === 'dialogue' ? 'simple_expression_ufi'
+      : kind.value === 'picture' ? 'topic' : 'read_sentence'
     const session = ise.buildSession(userStore, {
       sceneType: homeworkId.value ? 'homework' : 'practice',
       sceneId: homeworkId.value || setId.value || '',
       paperId,
-      category: kind.value === 'read' ? 'read_sentence' : kind.value,
+      category,
       region: 'shanghai'
     })
-    const result = await ise.evaluatePcm(pcm, session, { timeoutMs: 120000 })
+    evalSession = session
+    const enc = await ise.encodeSpeex(pcm)
+    spxBytes = enc.spx
+    const result = await ise.evaluateEncoded(enc.spx, session, { timeoutMs: 120000 })
     if (!result || !result.xml) throw new Error('评测服务未返回结果：' + ((result && result.msg) || ''))
     evalResult.value = result
     if (result.scores && result.scores.isRejected) {
@@ -282,6 +313,71 @@ async function stopRecord() {
     evalError.value = e && e.message ? e.message : String(e)
   } finally {
     evaluating.value = false
+  }
+}
+
+/** 上传 mp3/spx/xml 并回传成绩（/m/audio/sync-v2） */
+async function uploadResult() {
+  if (!evalResult.value || !pcmBuffer || !spxBytes) return
+  uploadBusy.value = true
+  uploadMsg.value = ''
+  syncInfo.value = null
+  try {
+    const scores = evalResult.value.scores || {}
+    if (scores.isRejected) throw new Error('评测被拒绝（未识别到有效朗读），不能回传成绩')
+    const resourceId = String(route.query.resource_id || '239')
+    const ppr = await resolvePaperInfo()
+    const category = kind.value === 'read' ? 'read_sentence'
+      : kind.value === 'dialogue' ? 'simple_expression_ufi'
+      : kind.value === 'picture' ? 'topic' : 'read_sentence'
+    const { urls, sync } = await flow.uploadAndSync({
+      pcm: pcmBuffer,
+      spxBytes,
+      xml: evalResult.value.xml,
+      traceId: evalResult.value.traceId,
+      scores,
+      homeworkId: homeworkId.value,
+      setId: setId.value,
+      entityId: ppr.entityId || stid.value,
+      order: ppr.order || 1,
+      resourceId,
+      firstColumnId: ppr.firstColumnId || '1',
+      questionTypeScore: ppr.questionTypeScore || '0.5',
+      graduation: ppr.graduation || '0.125',
+      category
+    })
+    syncInfo.value = { point: sync && sync.point, complete: sync && sync.complete, submitTime: sync && sync.submit_time, urls }
+    uploadMsg.value = `回传成功：得分 ${fmtScore(sync && sync.point)} / 完成度 ${fmtScore(sync && sync.complete)}`
+    ElMessage.success('成绩已回传')
+    if (sync && sync.is_complete_and_udpated) {
+      try {
+        await flow.mistakeUpdate({ homeworkId: homeworkId.value, setId: setId.value, resourceId })
+        await flow.setUseTime({ homeworkId: homeworkId.value, resourceId, useTime: (Date.now() - (recordStartedAt || Date.now())) / 1000 })
+        uploadMsg.value += '（已完成练习）'
+      } catch (e) { /* 非关键 */ }
+    }
+  } catch (e) {
+    uploadMsg.value = '回传失败：' + (e && e.message ? e.message : e)
+    ElMessage.error('回传失败')
+  } finally {
+    uploadBusy.value = false
+  }
+}
+
+async function resolvePaperInfo() {
+  try {
+    const body = await sendRequest('g/set/ppr-res', { batch: [{ entity_id: String(stid.value), order: '1' }] })
+    const item = ((body && body.batch) || [])[0] || {}
+    return {
+      entityId: item.entity_id || stid.value,
+      order: item.order || 1,
+      resId: item.res_id || '',
+      firstColumnId: '1',
+      questionTypeScore: '0.5',
+      graduation: '0.125'
+    }
+  } catch (e) {
+    return { entityId: stid.value, order: 1 }
   }
 }
 

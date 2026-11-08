@@ -43,17 +43,18 @@
 
 ---
 
-## 3. 未实现（UI 中明确标注，不伪造）
+## 3. 未实现 / 已补齐（UI 中明确标注，不伪造）
 
-| 能力 | 原因 |
+| 能力 | 状态 |
 |---|---|
-| 录音（麦克风采集 / `soundhelper.record`） | 需要原生音频栈；浏览器 MediaRecorder 无法等价 |
-| ISE / AI 双通道评测（`wss://oe-pub.eduaiplat.com`） | 需要评测服务与音频格式（spx/双通道 40ms 帧） |
-| 考试提交 / 作业完成上报 | 写接口会产生真实业务数据，参考实现只做只读浏览 |
-| OSS / SLS 上传 | 依赖 STS 凭证与签名策略 |
-| 自动更新器（EtsUpdate.exe） | 与客户端功能无关 |
-| 读写模拟题型 | 服务端返回的 `rw_data` 与 content 包结构不同 |
-| 生词本、预测分 | 需更多写接口/评测数据 |
+| 录音（麦克风采集） | 原生版已实现；Python 版不做采集，改用抓包得到的 spx 做协议验证 |
+| ISE / AI 评测 | ✅ 已补齐：`reimpl/ets_ise.py` 用纯标准库实现 protobuf + WebSocket；用抓包 spx 回放，逐词结果与原评测一致 |
+| OSS / SLS 上传 | ✅ OSS 已补齐：`reimpl/practice.py` 可获取 STS 并表单上传（public-read）；SLS 未接 |
+| `/m/audio/sync-v2` 成绩回传 | ✅ 已补齐：`practice.py sync`（默认 dry-run，`--apply` 才真正写） |
+| 考试提交 / 作业完成上报 | 写接口已还原（sync-v2 末题即提交），Python 端默认不自动写，避免污染真实作业记录 |
+| 自动更新器（EtsUpdate.exe） | 与客户端功能无关，未实现 |
+| 读写模拟题型 | 服务端返回的 `rw_data` 与 content 包结构不同，未实现 |
+| 生词本、预测分 | 需更多写接口/评测数据，未实现 |
 
 ---
 
@@ -67,6 +68,13 @@
 python reimpl/server.py            # http://127.0.0.1:8787/
 python reimpl/server.py --port 8790 --open
 python reimpl/tools/smoke_test.py  # 只读接口验收
+
+# 录音评测协议验证（用抓包里的 spx 回放，不写业务数据）
+python reimpl/ets_ise.py --capture-run <抓包目录> --spx <某个 .spx>
+# 上传/回传链路（默认 dry-run；--apply 才会真正上传/提交）
+python reimpl/practice.py sts
+python reimpl/practice.py upload --file <xml> --kind xml --apply
+python reimpl/practice.py sync --params <params.json> --apply
 ```
 
 **单会话行为**：同一账号在服务端是单会话。参考客户端登录会顶掉官方客户端（或反之），这是服务端策略而非实现缺陷；README 已说明如何切换 token。
@@ -86,7 +94,9 @@ python reimpl/tools/smoke_test.py  # 只读接口验收
 
 ```
 reimpl/
-├─ ets_client.py        # 协议库：签名/AES/信封/登录/token/25 个只读接口/资源包解密/音频缓存
+├─ ets_client.py        # 协议库：签名/AES/信封/登录/token/只读接口/资源包解密/音频缓存
+├─ ets_ise.py           # ISE 评测参考实现：protobuf + WebSocket + XML 分数（纯标准库）
+├─ practice.py          # 写链路：STS / OSS 上传 / sync-v2 / 错题 / 用时（默认 dry-run）
 ├─ server.py            # 本地 HTTP 服务 + 静态 UI + /api/*
 ├─ static/
 │  ├─ index.html
@@ -101,6 +111,6 @@ reimpl/
 
 ## 7. 与原作的功能对照结论
 
-- **能复刻的**：登录、会话、首页、作业/套卷/课程结构、题库内容与音频、错题摘要、E 卡/配置——已用真实账号跑通。
-- **不能复刻的**：原生音频采集与评测、写业务（考试/作业提交）、自动更新、OSS/SLS 上传——这些依赖服务端或原生栈，不属于"客户端协议"范畴。
-- 因此"功能几乎一样"在本项目中定义为：**客户端侧的信息架构与只读业务能力等价**；这一点已达成并可复现。
+- **能复刻的**：登录、会话、首页、作业/套卷/课程结构、题库内容与音频、错题摘要、E 卡/配置；**录音评测协议、OSS 上传、成绩回传**（协议与实现均已验证，见 docs/15）。
+- **不在复刻范围的**：自动更新器、SLS 日志、部分后台能力。服务端判分/题库规则仍由官方服务提供，复刻的是客户端链路。
+- 因此"功能几乎一样"在本项目中定义为：**客户端侧的信息架构、只读业务与练习/评测/回传链路等价**；这一点已达成并可复现。

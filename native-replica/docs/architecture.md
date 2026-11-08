@@ -7,7 +7,7 @@
 > |---|---|---|
 > | 浏览器壳 | CEF 91 + STIC V3.0.76 壳 | **WebView2（现代 Chromium，Windows 内建运行时）** |
 > | 原生语言/编译器 | C++/MSVC（VS2019 时代） | **C++20 / MSVC 14.51（VS2026 BuildTools）** |
-> | 插件机制 | 9 个 `.pln` DLL + 4 导出 ABI | 同样 4 导出 ABI（`PlnInitiliaze/PlnSetParam/PlnOnProcessMessage/PlnUnInitialize`），7 个插件 DLL |
+> | 插件机制 | 9 个 `.pln` DLL + 4 导出 ABI | 同样 4 导出 ABI（`PlnInitiliaze/PlnSetParam/PlnOnProcessMessage/PlnUnInitialize`），8 个插件 DLL（7 业务 + `soundhelper`） |
 > | 前端 | Vue3 + Element Plus + Pinia + Router（远程 SPA） | **Vue3 + Element Plus + Pinia + Vue Router + Vite（本地打包）** |
 > | 日志中间件 | `mq_server`（Node + ws，40001） | **Node 24 + ws，40001** |
 > | JS↔Native 桥 | `cef.message.sendMessage/setMessageCallback` | 同名 API（`window.cef.message` shim），底层走 WebView2 `postMessage` |
@@ -87,7 +87,7 @@ cef.message.setMessageCallback(uid, data => { /* data: JSON 字符串 */ });
 
 ```powershell
 pwsh -File native-replica\build.ps1          # MSVC + CMake + Vite 一键构建
-C:\ets-rea-build\bin\EtsReplica.exe         # 运行
+<BUILD_DIR>\bin\EtsReplica.exe         # 运行
 ```
 
 ## 6. 与 Python 版的关系

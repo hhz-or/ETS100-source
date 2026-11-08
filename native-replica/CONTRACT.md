@@ -139,7 +139,7 @@ pluginKey → DLL：`EtsHelper`→etshelper、`FileHelper`→filehelper、`HttpH
 | `encode_api_resp_v2` | `{"response":"<base64>","time":"..."}` | `{"pid","key_id","sign","sign_version"}`；`MD5("pcWin"+response+KEY_V2+"test")` |
 | `aes_ecb_encrypt` | `{"plain":"..."}` | `{"b64":"..."}`（AES-128-ECB/PKCS7，KEY=k_serves=`f05323cb91d422b2`） |
 | `aes_ecb_decrypt` | `{"b64":"..."}` | `{"plain":"..."}` |
-| `get_appdata_path` | `""` | `"C:\\...\\AppData\\Roaming"`（纯字符串 JSON 或文本均可，前端兼容） |
+| `get_appdata_path` | `""` | `"%APPDATA%"`（纯字符串 JSON 或文本均可，前端兼容） |
 | `log_data` | `{"tag","msg"}` | `{"ok":true}` |
 | `check_update` | `""` | `{"rncode":0,"rnmsg":"no newer version"}`（复刻桩） |
 
@@ -204,11 +204,11 @@ KEY_V2=`94cfbda3fbfef02b93693f8bc153be82`；KEY_V1=`355ffbe95ccf4e9535a110170b44
 
 `build.ps1` 流程：
 1. `call "<VS>\Common7\Tools\VsDevCmd.bat" -arch=x64`
-2. `C:\rea_tools\pylibs\bin\cmake.exe -S . -B C:\ets-rea-build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=...ninja.exe`
-3. `cmake --build C:\ets-rea-build`
-4. `pnpm -C frontend install --store-dir C:\rea_tools\pnpm-store` + `pnpm -C frontend build`
+2. `cmake -S . -B <BUILD_DIR> -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM=<NINJA>`
+3. `cmake --build <BUILD_DIR>`
+4. `pnpm -C frontend install` + `pnpm -C frontend build`
 5. 复制 `frontend/dist` → `assets/web`；插件 DLL → `plugins/<Name>/`
-6. 产物：`C:\ets-rea-build\bin\EtsReplica.exe`
+6. 产物：`<BUILD_DIR>\bin\EtsReplica.exe`
 
 ## 10. 约束
 

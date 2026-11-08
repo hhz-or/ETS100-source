@@ -8,7 +8,7 @@
  * 录音：浏览器 getUserMedia → 16k PCM → soundhelper.encode_speex（C++/speex CBR 84800）
  */
 import { invokeJson } from './bridge'
-import { sendRequest } from './api'
+import { sendRequest, getToken } from './api'
 
 const ISE_URL = 'wss://oe-pub.eduaiplat.com/ws/v2/ise'
 export const CHUNK_BYTES = 212
@@ -160,10 +160,18 @@ async function fetchAccessToken() {
 export function buildSession(store, opts = {}) {
   const profile = (store && store.profile) || {}
   const ecard = (store && store.activeEcard) || {}
+  // 登录 token 的 payload 里有账号 uid（形如 {"id":"<account-uid>"}）
+  let tokenUid = ''
+  try {
+    const tok = getToken() || ''
+    const part = tok.split('.')[1]
+    if (part) tokenUid = String(JSON.parse(atob(part.replace(/-/g, '+').replace(/_/g, '/'))).id || '')
+  } catch (e) { /* ignore */ }
+  const regions = [profile.province_id, profile.city_id, 0].filter(v => v !== undefined && v !== null && v !== '')
   const meta = {
-    uid: String(profile.id || profile.uid || profile.recent_account_id || ''),
-    regionId: String(profile.province_id || ecard.region_id || '5269'),
-    schoolId: String(ecard.school_area_id || ecard.school_id || ''),
+    uid: String(profile.id || profile.uid || tokenUid || profile.recent_account_id || ''),
+    regionId: regions.length ? regions.join(',') : '5269,5270,0',
+    schoolId: String(ecard.school_id || ecard.school_area_id || ''),
     classId: String(ecard.class_id || ''),
     gradeId: String(profile.grade_id || ecard.grade_id || ''),
     stageId: String(profile.school_year_id || ecard.stage_id || ''),
@@ -175,7 +183,9 @@ export function buildSession(store, opts = {}) {
     plat_ver: '5.7.9'
   }
   return {
-    clientId: 'ksyyyxx-etszx', accountId: meta.uid, mac: '00-00-00-00-00-00',
+    clientId: 'ksyyyxx-etszx',
+    accountId: String(profile.recent_account_id || tokenUid || ''),
+    mac: '00-00-00-00-00-00',
     appId: 'ets_70', sdkKey: 'SDK_pY1wOPU8', meta,
     params: {
       category: opts.category || 'read_sentence',
@@ -189,18 +199,33 @@ export function buildSession(store, opts = {}) {
   }
 }
 
-/** 用 16k mono PCM（Int16Array/Uint8Array）做一次 ISE 评测 */
-export async function evaluatePcm(pcmBytes, session, opts = {}) {
+/** 只做 speex 编码，返回 spx 字节与分块（上传/评测复用） */
+export async function encodeSpeex(pcmBytes) {
   const pcmB64 = bytesToB64(pcmBytes)
   const enc = await invokeJson('soundhelper', 'encode_speex', { pcm: pcmB64, quality: 10, bitrate: 84800 }, 180000)
   if (!enc || !enc.spx) throw new Error('speex 编码失败：' + JSON.stringify(enc).slice(0, 200))
   const spx = b64ToBytes(enc.spx)
   const chunks = []
   for (let off = 0; off < spx.length; off += CHUNK_BYTES) chunks.push(spx.slice(off, off + CHUNK_BYTES))
+  return { spx, chunks, frames: enc.frames, frameBytes: enc.frameBytes }
+}
+
+/** 用已编码的 spx 字节做 ISE 评测 */
+export async function evaluateEncoded(spx, session, opts = {}) {
+  const chunks = []
+  for (let off = 0; off < spx.length; off += CHUNK_BYTES) chunks.push(spx.slice(off, off + CHUNK_BYTES))
   if (!chunks.length) throw new Error('没有音频数据')
   const token = opts.token || await fetchAccessToken()
   if (!token) throw new Error('获取 ISE token 失败')
   return await evaluateChunks(chunks, session, token, opts)
+}
+
+/** 用 16k mono PCM（Int16Array/Uint8Array）做一次 ISE 评测（编码+评测） */
+export async function evaluatePcm(pcmBytes, session, opts = {}) {
+  const enc = await encodeSpeex(pcmBytes)
+  const result = await evaluateEncoded(enc.spx, session, opts)
+  result.spx = enc.spx
+  return result
 }
 
 function bytesToB64(bytes) {
@@ -248,4 +273,4 @@ export async function evaluatePcmUrl(url, session, opts = {}) {
   return evaluatePcm(buf, session, opts)
 }
 
-export default { evaluatePcm, evaluatePcmUrl, evaluateChunks, buildSession, parseScores, CHUNK_BYTES }
+export default { evaluatePcm, evaluatePcmUrl, evaluateEncoded, encodeSpeex, evaluateChunks, buildSession, parseScores, CHUNK_BYTES }

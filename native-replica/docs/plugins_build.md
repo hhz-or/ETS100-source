@@ -1,6 +1,6 @@
 # 插件实现与构建说明（plugins_build.md）
 
-> 范围：`native-replica/plugins/` 下 7 个插件 DLL 的实现说明、action 覆盖、编译与验证结果。
+> 范围：`native-replica/plugins/` 下 8 个插件 DLL（7 业务 + `soundhelper`）的实现说明、action 覆盖、编译与验证结果。
 > ABI 依据 `shared/stic_plugin.h`，接口契约依据 `CONTRACT.md` §3/§6。
 > 最后验证时间：2026-11-07（MSVC 14.51.36231 / CMake 4.4.4 / Ninja 1.13.2）。
 
@@ -159,16 +159,16 @@ CRC32 表驱动的 key0/key1/key2 流 + 12 B 加密头校验，随后对明文�
 
 > 已知环境问题：任务给出的 `C:\rea_tools\pylibs\bin\cmake.exe` 是 Python 启动器 shim，
 > 直接调用会 `ModuleNotFoundError: No module named 'cmake'`；
-> 真正的二进制在 `C:\rea_tools\pylibs\cmake\data\bin\cmake.exe`（`build.ps1` 也是优先用它）。
+> 真正的二进制在 `<CMAKE>`（`build.ps1` 也是优先用它）。
 > Ninja 用 `C:\rea_tools\pylibs\bin\ninja.exe` 可正常工作。
 
 实际使用的命令：
 
 ```bat
-call "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x64
-"C:\rea_tools\pylibs\cmake\data\bin\cmake.exe" -S D:\ets-rea\native-replica -B C:\ets-rea-build -G Ninja ^
+call "<VS_BUILDTOOLS>\Common7\Tools\VsDevCmd.bat" -arch=x64
+"<CMAKE>" -S <REPO_ROOT>\native-replica -B <BUILD_DIR> -G Ninja ^
   -DCMAKE_BUILD_TYPE=Release -DCMAKE_MAKE_PROGRAM="C:\rea_tools\pylibs\bin\ninja.exe"
-"C:\rea_tools\pylibs\cmake\data\bin\cmake.exe" --build C:\ets-rea-build --target ^
+"<CMAKE>" --build <BUILD_DIR> --target ^
   plugin_etshelper plugin_filehelper plugin_httphelper plugin_sqlitepln ^
   plugin_shellhelper plugin_sevenzip plugin_sysconfig --parallel
 ```
@@ -184,7 +184,7 @@ call "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\Tools
 
 ## 5. 功能验证（实测）
 
-测试 harness（仅构建目录，`C:\ets-rea-build\plugintest\test.cpp`，不在工程内）：`LoadLibrary`
+测试 harness（仅构建目录，`<BUILD_DIR>\plugintest\test.cpp`，不在工程内）：`LoadLibrary`
 + 构造 `PlnHost` + 依次调用多个 action，校验“每个 action 只回调一次”。
 
 | 插件 | 验证内容 | 结果 |
@@ -197,9 +197,16 @@ call "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools\Common7\Tools
 | SevenZip | 真实 `ETS/temp/resources/**/content_*.zip` 24 个（ZipCrypto）+ `template_686.zip`（未加密） | 24/24 解密解包成功；**111 个文件与 Python `zipfile`（同口令）逐字节 MD5 全部一致**；`template_686.zip` 11 个文件一致 |
 | SysConfig | init/未知 action | `{"ok":true}` / `code:-2` |
 
-## 6. 未实现项汇总（显式返回 `{"code":-2,"msg":"not implemented"}`）
+## 6. 已实现补充与未实现项
 
-- HttpHelper：`upload`、`downloadresource`、`downloadsdk`、`monitornetspeed`、`isrpkexist`、`stopdownload`（无下载任务句柄/断点续传）。
+已实现补充：
+
+- `soundhelper`（新增）：`encode_speex`（16k WB/q10/CBR 84800 → 106B/帧，供 ISE 使用）、`encode_mp3`（调用 ffmpeg，24kbps，供 OSS 上传）。
+- `HttpHelper.upload`：multipart 表单上传（支持 `fileBase64`/`localFile` + 自定义字段），用于 OSS 评测产物上传。
+
+以下 action 仍显式返回 `{"code":-2,"msg":"not implemented"}`：
+
+- HttpHelper：`downloadresource`、`downloadsdk`、`monitornetspeed`、`isrpkexist`、`stopdownload`（无下载任务句柄/断点续传）。
 - FileHelper：系统文件对话框、文件关联等契约外 action。
 - SQLitePln：事务/批量脚本 API、跨多库并发连接池、加密库。
 - ShellHelper：`cmd`、`gettoken`、`initActAuth`、`setproxy` 等。

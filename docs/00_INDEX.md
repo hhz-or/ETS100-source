@@ -35,7 +35,7 @@
 
 ```
 ETS100-source/
-├─ docs/        14 篇中文报告（本文件是导航；从 REPORT.md 开始读）
+├─ docs/        16 篇中文报告（00–15 + REPORT；本文件是导航；从 REPORT.md 开始读）
 ├─ data/        脱敏后的机读分析数据
 │  ├─ api/      端点清单、签名样本、签名参考实现、运行时/更新器签名证明
 │  ├─ frontend/ 路由、action、端点、在线 chunk 清单、插件 JS 权威 action 表
@@ -43,6 +43,7 @@ ETS100-source/
 │  └─ db/       ETS.db 全表结构与 Config 数据
 ├─ runtime/     运行时证据：插件 JS 封装层（plugin_js_stubs）、活体请求元数据
 ├─ scripts/     全部分析脚本（缓存解码、签名验证、密钥流、题库包解密、CDP 抓取…）
+├─ capture/     练习抓包工具（CDP WebSocket / Frida 插件调用 / 日志 / 文件监听 + 汇总）
 ├─ reimpl/      可运行的参考客户端（Python 后端 + 原生 Web UI，见 12_reimplementation.md）
 └─ native-replica/ 同架构原生复刻（C++20/WebView2 + 插件 DLL + Vue3，见 13_native_replica.md）
 ```
@@ -84,6 +85,13 @@ node scripts\dump_cdp.js
 #    凭据只放在仓库外的 <WORK_DIR>/secrets/，不要提交
 python reimpl\server.py            # 打开 http://127.0.0.1:8787/
 python reimpl\tools\smoke_test.py  # 只读接口自动验收（16/16）
+
+# 9) 原生复刻：录音 / ISE 评测 / 上传回传（需要 MSVC + WebView2 + ffmpeg，详见 docs/13）
+#    构建后运行 <BUILD_DIR>\bin\EtsReplica.exe，作业 → 进题 → “录音评测”面板
+
+# 10) 练习抓包（可选）：官方客户端登录后运行，做一次真实练习，回车停止并汇总
+pwsh -File capture\run_capture.ps1
+python capture\summarize.py capture\runs\<时间戳>
 ```
 
 > 脚本 1、2、3、4 依赖原安装副本或历史日志中的原始样本；仓库内 `data/api/` 提供已脱敏的样本与签名证明，可用于复核端点清单与算法结论；其中 `sign_samples.json` 为脱敏版，只有部分样本可直接复算签名，完整 334 组需用 `scripts/extract_sign.py` 从自己的日志重建。脚本 5、6 的输入同样来自 `<ETS_INSTALL_DIR>` 或 `<WORK_DIR>`，按脚本顶部常量调整后即可复跑。
@@ -108,7 +116,8 @@ python reimpl\tools\smoke_test.py  # 只读接口自动验收（16/16）
 | [10 未知项与后续](10_unknowns.md) | 未解问题、验证方法、风险与合规边界 |
 | [11 运行时验证（Live）](11_runtime_live.md) | 真实运行实例 CDP 抓取、在线前端全量 chunk、插件 JS 权威 action 表、活体协议验证、Frida 原生 hook |
 | [12 参考客户端](12_reimplementation.md) | 可运行的 ETS 复刻原型：架构映射、已实现/未实现矩阵、运行方式 |
-| [13 原生同架构复刻](13_native_replica.md) | C++20+WebView2 壳、7 插件 DLL、Vue3 前端、Node mq_server：映射、验证与限制 |
+| [13 原生同架构复刻](13_native_replica.md) | C++20+WebView2 壳、8 插件 DLL、Vue3 前端、Node mq_server：映射、验证与限制 |
+| [15 练习协议与录音评测](15_practice_protocol.md) | 一次真实练习抓包：ISE WebSocket protobuf、speex 参数、OSS 上传、sync-v2 回传与复刻状态 |
 
 ---
 

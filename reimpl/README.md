@@ -4,8 +4,9 @@
 它直接调用 `https://api.ets100.com` 的真实只读接口，使用真实登录 token、真实作业/套卷/题库资源包与音频，
 界面按原作（讯飞 E 听说 V5.7.9）的导航与页面结构做轻量复刻。
 
-> 定位：逆向研究 / 互操作性验证的原型，**不是官方客户端**。只读、只在本机运行；不实现录音、评测、提交、上传。
-> 所有页面只展示真实接口数据，不伪造分数；未实现能力在 UI 中明确标注“参考客户端未实现”。
+> 定位：逆向研究 / 互操作性验证的原型，**不是官方客户端**。UI 只读、只在本机运行；另提供两个协议级 CLI：
+> `ets_ise.py`（ISE 录音评测，已验证）与 `practice.py`（STS/OSS 上传 + sync-v2 回传，默认 dry-run）。
+> 所有页面只展示真实接口数据，不伪造分数；UI 未接入的能力在页面中明确标注。
 
 ---
 
@@ -17,7 +18,7 @@
 | Python | 3.10+（实测 3.13） |
 | 依赖 | 纯标准库即可运行；安装了 `requests` / `cryptography` 时自动优先使用（AES 有内置纯 Python 实现，二者均可选） |
 | 浏览器 | Chrome / Edge / Firefox 等现代浏览器 |
-| 凭据 | `D:\ets-rea\secrets\account.json`（账号登录）或 `D:\ets-rea\secrets\app_token.txt`（复用官方客户端 token） |
+| 凭据 | `<REPO_ROOT>\secrets\account.json`（账号登录）或 `<REPO_ROOT>\secrets\app_token.txt`（复用官方客户端 token） |
 | 网络 | 可访问 `api.ets100.com` / `cdnsubject.ets100.com` / `cdnfeis.ets100.com` / `ets60.ets100.com` |
 
 > **凭据不进入 `reimpl/`**：`reimpl/` 内没有账号、密码、token 副本；后端只在运行时从 `secrets/` 读取。
@@ -25,7 +26,7 @@
 
 ### 1.1 凭据文件格式（放在 `reimpl/` 之外，不要提交）
 
-`D:\ets-rea\secrets\account.json`：
+`<REPO_ROOT>\secrets\account.json`：
 
 ```json
 {
@@ -37,7 +38,7 @@
 }
 ```
 
-`D:\ets-rea\secrets\app_token.txt`：文件内容为官方客户端当前登录 token（一行 160 字符 JWT，无引号）。
+`<REPO_ROOT>\secrets\app_token.txt`：文件内容为官方客户端当前登录 token（一行 160 字符 JWT，无引号）。
 
 可用环境变量覆盖路径：
 
@@ -54,7 +55,7 @@
 ## 2. 运行步骤
 
 ```powershell
-cd D:\ets-rea
+cd <REPO_ROOT>
 
 # 1) 启动本地服务器（默认 127.0.0.1:8787，只监听本机）
 python reimpl\server.py
@@ -126,19 +127,37 @@ python reimpl\server.py --port 8790 --open
 - [x] **错误处理**：接口错误统一 JSON（不再崩溃）；单会话 code 20004 / token 失效 30001 给可读提示
 - [x] 纯本地 Web UI：原生 HTML/CSS/JS，无构建、无外部 CDN、无第三方运行时
 
-### 4.2 未实现（UI 中明确标注，不伪造）
+### 4.2 已补齐（协议级 CLI）
 
-- [ ] **录音采集**（麦克风 / SndHelper）
-- [ ] **ISE / AI 评测**（`wss://oe-pub.eduaiplat.com`，双通道、评分回写）
-- [ ] **考试提交 / 作业完成上报**（`m/audio/sync-v2`、`g/homework/checkstart`、`m/homework/set-use-time` 等写接口）
-- [ ] **阿里云 OSS / SLS 上传**（录音 mp3/spx/xml、埋点日志）
-- [ ] **自动更新器**（`EtsUpdate.exe` / `client/mobile-update`）
+- [x] **ISE / AI 评测**：`ets_ise.py` 纯标准库实现 protobuf + WebSocket；用抓包 spx 回放，逐词结果与原评测一致
+- [x] **OSS 上传**：`practice.py` 获取 STS → 表单上传 mp3/spx/xml（public-read）→ 公网 GET 200
+- [x] **成绩回传**：`practice.py sync` 生成 `/m/audio/sync-v2` 完整参数（默认 dry-run，`--apply` 才写）
+
+### 4.3 仍未实现（UI 中明确标注，不伪造）
+
+- [ ] **录音采集**（麦克风 / SndHelper；原生版已实现，Python 版用抓包 spx 验证协议）
+- [ ] **UI 内接入评测/上传/提交**（协议实现为 CLI，未接进 Web UI，避免误写真实作业数据）
+- [ ] **SLS 日志上传**、**自动更新器**（`EtsUpdate.exe` / `client/mobile-update`）
 - [ ] **读写模拟题型渲染**（服务端 `rw_data` 只有目录信息，无 content 包）
 - [ ] 生词本（只读接口清单未覆盖用户词表读写）
 - [ ] 预测分（原作成长接口未开放；首页显示“— 不伪造”）
 
-> 未实现 ≠ 不知道怎么做：签名、字段加密、资源包口令、评测链路、OSS 上传参数均已在逆向文档中还原，
-> 本参考客户端刻意**只读**，避免向 ETS 账号写入任何数据。
+> 未实现 ≠ 不知道怎么做：签名、字段加密、资源包口令、评测链路、OSS 上传参数均已还原并验证；
+> Web UI 刻意保持**只读**，写操作只在 `practice.py --apply` 时发生。
+
+### 4.4 练习协议 CLI（新增）
+
+```bash
+# ISE 评测：用抓包里的 spx 回放（只读、不写账号数据）
+python reimpl/ets_ise.py --capture-run <抓包目录> --spx <文件.spx> --xml-out result.xml
+
+# OSS STS / 单文件上传（--apply 才真正上传）
+python reimpl/practice.py sts
+python reimpl/practice.py upload --file <文件> --kind xml --apply
+
+# 成绩回传（参数按 docs/15 §4 构造；--apply 才调用 sync-v2）
+python reimpl/practice.py sync --params sync_params.json --apply
+```
 
 ---
 
@@ -146,7 +165,9 @@ python reimpl\server.py --port 8790 --open
 
 ```
 reimpl/
-├─ ets_client.py            # 纯逻辑库：签名 / AES / 信封 / 登录 / token / 25 个只读接口 / 资源包下载与 ZipCrypto 解密 / 音频缓存
+├─ ets_client.py            # 纯逻辑库：签名 / AES / 信封 / 登录 / token / 只读接口 / 资源包下载与 ZipCrypto 解密 / 音频缓存
+├─ ets_ise.py               # ISE 评测参考实现：protobuf + WebSocket + 结果 XML（纯标准库，--spx 回放验证）
+├─ practice.py              # 写链路参考：STS / OSS 表单上传 / sync-v2 / 错题更新 / 用时（默认 dry-run，--apply 才写）
 ├─ server.py                # ThreadingHTTPServer 127.0.0.1:8787：静态 UI + /api/* + 错误 JSON + Range 音频
 ├─ static/
 │  ├─ index.html            # 单页入口（顶栏 / 侧边导航 / 内容区 / toast / modal）
@@ -238,7 +259,7 @@ reimpl/
 ### 8.1 启动与 HTTP 自检
 
 ```powershell
-cd D:\ets-rea
+cd <REPO_ROOT>
 python reimpl\server.py
 # 另开终端：
 curl.exe -s -o NUL -w "%{http_code}`n" http://127.0.0.1:8787/

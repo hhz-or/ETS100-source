@@ -9,7 +9,7 @@
 |---|---|
 | 窗口标题 | `E听说 · 复刻版`（读 shell.ini） |
 | WebView2 环境/控制器 | 初始化成功，`navigate https://app.ets.local/index.html hr=0` |
-| 插件加载 | `plugin host initialized (loaded 7/7)`：EtsHelper、FileHelper、HttpHelper、SQLitePln、ShellHelper、SevenZip、SysConfig |
+| 插件加载 | `plugin host initialized (loaded 8/8)`：EtsHelper、FileHelper、HttpHelper、SQLitePln、ShellHelper、SevenZip、SysConfig、soundhelper |
 | `__core.info` | 返回 appDir/cacheDir/dataDir/mediaPort/platform=webview2/version |
 | `__core.media_url` | 返回 `http://127.0.0.1:<port>/media?...`；GET 200、Range 206、越界 403 |
 | 签名 | `EtsHelper.encode_api_body_v2` 与 Python/历史日志逐字节一致 |
@@ -41,7 +41,7 @@
 
 - "CEF→WebView2、STIC 插件→4 导出 DLL、远程 SPA→本地 Vue3、mq_server→Node" 的同架构复刻**跑通**；
 - 登录、首页、作业、套卷、同步课程、错题、题库内容、音频均以真实账号/真实接口验证；
-- 未实现：录音采集、ISE/AI 评测、考试提交、OSS/SLS 上传、自动更新器（UI 已标注）。
+- 未实现：SLS 日志上传、自动更新器；考试提交/OSS 上传已按抓包补齐（见 §5）。
 - 单会话说明：副本登录会顶掉官方客户端会话；反之亦然。设备指纹可在设置页填写以复用官方绑定。
 
 > 截图与运行日志含账号信息，未随仓库发布；本文件只保留可公开的验证结论。
@@ -58,5 +58,9 @@
 | ISE 评测（复刻前端 JS） | WebView2 页面内：media PCM → `soundhelper` 编码 → 浏览器 WebSocket protobuf → 返回 XML/分数（2.7s） |
 | 麦克风权限 | WebView2 自动授予：`getUserMedia` 打开 "麦克风阵列 (Realtek Audio)"，随后立即关闭 |
 | Practice 页录音评测 | 已接入：开始录音 → 停止并评测 → 显示准确度/流利度/完整度/总分与逐词颜色 |
+| mp3 生成 | `soundhelper.encode_mp3` 调 ffmpeg（`bin\tools\ffmpeg.exe`）：8.1s PCM → 32,988B base64（24,741B mp3），耗时 223ms |
+| OSS 三文件上传 | 页面内 STS → `httphelper.upload`：mp3/spx/xml 三传 404ms；公网 GET 200（24741/42930/25B） |
+| sync-v2 回传构造 | `practiceFlow.buildSyncParams` 与抓包参数逐项对齐（含 `mark_trace_id`、三条 URL、`score_detail`）；实写由真实练习触发 |
+| 上传页面 | Practice 页“上传并回传成绩”按钮 + 得分/完成度展示；录音/评测/上传均无 console error |
 
-未完成：mp3 生成（上传所需，可调用安装目录 ffmpeg/lame）、OSS 上传与 `sync-v2` 的前端接入（Python 参考实现已验证 OSS 上传）。
+未完成：真实麦克风完整练习回归（人工）、SLS 日志、自动更新器。

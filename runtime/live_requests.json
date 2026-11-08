@@ -317,7 +317,7 @@
    "body_len": 397
   },
   {
-   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=275389909&token=<JWT>",
+   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=100000004&token=<JWT>",
    "path": "/point-service/account/trail",
    "method": "POST",
    "sign": null,
@@ -326,7 +326,7 @@
    "body_len": 4
   },
   {
-   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=275389909&token=<JWT>",
+   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=100000004&token=<JWT>",
    "path": "/point-service/account/trail",
    "method": "POST",
    "sign": null,
@@ -407,7 +407,7 @@
    "body_len": 327
   },
   {
-   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=275389909&token=<JWT>",
+   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=100000004&token=<JWT>",
    "path": "/point-service/account/trail",
    "method": "POST",
    "sign": null,
@@ -416,7 +416,7 @@
    "body_len": 4
   },
   {
-   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=275389909&token=<JWT>",
+   "url": "https://api.ets100.com/point-service/account/trail?resource_id=239&id=100000004&token=<JWT>",
    "path": "/point-service/account/trail",
    "method": "POST",
    "sign": null,

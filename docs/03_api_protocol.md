@@ -182,7 +182,7 @@ payload：纯文本，或 JSON 对象文本（部分 TAG 混用）
 | API_ETS | `154ms ets response $api_name=... requestId=... return=[{...}]` | `ets_2026-10-28.log:16` |
 | API_ETS | `ets request {"url":"http://collect.ets100.com/log_collector","method":"post","data":"type=Event_Startup&..."}` | `ets_2026-10-28.log:95` |
 | MISC | `测试当前网络的 URL：http://file.fei.ets100.com/network_test, 网络状态: 正常, ...1.25MB/s` | `ets_2026-10-28.log:18` |
-| MISC | `windows操作系统版本 env type: Microsoft Windows 11; device_name: D7480; device_code: 4437...; local_ip: ...` | `ets_2026-10-28.log:21` |
+| MISC | `windows操作系统版本 env type: Microsoft Windows 11; device_name: D****; device_code: ***; local_ip: 192.0.2.10` | `ets_2026-10-28.log:21` |
 | MISC | `当前资源平台token已过期；开始请求配置数据` | `ets_2026-10-28.log:55`、`ets_2026-11-4.log:66` |
 | MISC | `AI引擎token已过期；开始请求配置数据` | `ets_2026-10-28.log:163` |
 | MISC | `当前配置已过期；开始请求oss的配置数据` | 同日志多处（MISC 子类统计见证据报表 `keywork_and_misc.txt`，未随仓库发布） |
@@ -474,7 +474,7 @@ sequenceDiagram
 ```json
 /* request.params */
 {"sign_response":1,"sn":"test","system":4,"global_client_version":"5.7.9",
- "phone":"***","password":"***","code":"***","device_name":"D7480","device_code":"***","account":"***","name":"***"}
+ "phone":"***","password":"***","code":"***","device_name":"D****","device_code":"***","account":"***","name":"***"}
 /* response.body（节选字段名，值脱敏） */
 {"recent_account_id":"***","user_type":0,"school_year_id":0,"school_year_name":"","grade_id":0,"name":"***",
  "phone":"***","raw_phone":"***","bind_mobile":"***","token":"***","expire":1794395112,"newUser":false,"partner":"common"}
@@ -563,11 +563,11 @@ keywork = ["engine_sdk_config","engine_sdk_config_primary","special_word_list_fo
 | `head.pid` | `pcWin` | 全部请求 |
 | `global_client_version` | `5.7.9`（= PC 客户端版本，MISC: `stic version: 5.7.9`） | 全部请求 |
 | `system` | `4` | 全部请求 |
-| `device_name` | 机器名（日志中为 `D7480`，脱敏为 `***`） | `user/login`、`register-or-login` |
-| `device_code` | 16 位大写十六进制（如 `4437D19B6B29BEEA`） | 同上 |
-| `local_ip` | 客户端本地 IP（日志示例为 `198.18.0.1`） | `user/login` |
+| `device_name` | 机器名（日志中为 `D****`，脱敏为 `***`） | `user/login`、`register-or-login` |
+| `device_code` | 16 位大写十六进制（如 `0123456789ABCDEF`（示例）） | 同上 |
+| `local_ip` | 客户端本地 IP（日志示例为 `192.0.2.10`） | `user/login` |
 | `uid` | 平台账号 id（AI 评测 extra、OSS 对象路径） | ENG_SCORE extra、OSS key |
-| `parent_account_id` / `account_id` / `sub_account_ids` | 学校/家长/子账号 ID（如 `275389912`、`275389909`…） | `user/info`、`m/resource/add-v2` |
+| `parent_account_id` / `account_id` / `sub_account_ids` | 学校/家长/子账号 ID（如 `100000001`、`100000002`…） | `user/info`、`m/resource/add-v2` |
 | `class_id` / `school_id` / `grade_id` / `regionId` / `stageId` | 班级/学校/年级/考区（AI extra） | ENG_SCORE 开始帧 |
 | `engine_area` / `tpl_region` | 例如 `shanghai` | 作业/套题响应、AI extra |
 | `sn` / `sign_response` | `test` / `1`（PC 端固定） | 全部请求 |

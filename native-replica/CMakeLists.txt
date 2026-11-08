@@ -14,9 +14,13 @@ if(MSVC)
   add_compile_definitions(UNICODE _UNICODE NOMINMAX)
 endif()
 
-# WebView2 SDK (default: local tool cache)
+# WebView2 SDK（通过 -DWEBVIEW2_SDK=<...>/build/native 或环境变量 WEBVIEW2_SDK 指定）
 if(NOT DEFINED WEBVIEW2_SDK)
-  set(WEBVIEW2_SDK "C:/rea_tools/webview2/build/native")
+  if(DEFINED ENV{WEBVIEW2_SDK})
+    set(WEBVIEW2_SDK "$ENV{WEBVIEW2_SDK}")
+  else()
+    message(FATAL_ERROR "WEBVIEW2_SDK 未设置：请用 -DWEBVIEW2_SDK=<Microsoft.Web.WebView2>/build/native 指定，或设置环境变量 WEBVIEW2_SDK")
+  endif()
 endif()
 message(STATUS "WEBVIEW2_SDK=${WEBVIEW2_SDK}")
 
