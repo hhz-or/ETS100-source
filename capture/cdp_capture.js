@@ -20,7 +20,6 @@ const http = require('http');
 function requireWs() {
   const candidates = [
     'ws',
-    'D:/ets-rea/ETS/mq_server/node_modules/ws',
     path.join(process.cwd(), 'node_modules', 'ws')
   ];
   for (const c of candidates) {
@@ -189,3 +188,4 @@ async function waitForPage(timeoutMs = 30000) {
   process.on('SIGINT', stop);
   process.on('SIGTERM', stop);
 })().catch(e => { console.error('[cdp] 失败:', e.message); process.exit(1); });
+

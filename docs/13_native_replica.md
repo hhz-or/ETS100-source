@@ -58,7 +58,8 @@ native-replica/
 |---|---|
 | 设备绑定 | 官方账号首次登录会提示"设备需要绑定免验证"；在设置页填入官方客户端的 `device_code` 即可，值只存本机 localStorage |
 | 单会话 | 副本登录会顶掉官方客户端会话（反之亦然），这是服务端策略 |
-| 录音 / ISE 评测 / 考试提交 / OSS / SLS / 更新器 | 与 Python 版一致：未实现，UI 明确标注 |
+| 录音 / ISE 评测 | ✅ 已实现：麦克风采集（WebView2 自动授权）→ speex 16k 编码（106B/帧）→ ISE WebSocket protobuf（init/音频/结束/结果）→ 解析 XML 分数并显示（docs/15）。 |
+| 考试提交 / OSS 上传 / SLS / 更新器 | 部分实现：OSS 上传与 sync-v2 协议已在 Python 参考实现验证（reimpl/practice.py）；前端上传/回传接入与 mp3 生成仍待完成。 |
 | 前端 mock | 浏览器直接打开 `dist/` 可用 mock 数据预览；WebView2 内自动走原生桥 |
 
 ## 5. 构建与运行
