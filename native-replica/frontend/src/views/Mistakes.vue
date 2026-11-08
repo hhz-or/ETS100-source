@@ -53,7 +53,7 @@
             <span>{{ item.set_name || '—' }}</span>
             <span>{{ item.create_time || '—' }}</span>
           </div>
-          <div v-if="showAnswer" class="answer-box" style="margin-top: 12px">
+          <div v-if="showAnswer && item.answer" class="answer-box" style="margin-top: 12px">
             <h4>参考答案</h4>
             <div class="rich-text">{{ item.answer || '—' }}</div>
             <div v-if="item.analyze" class="small muted" style="margin-top: 6px">{{ item.analyze }}</div>
@@ -107,21 +107,58 @@ const filtered = computed(() => {
     .filter((m) => typeFilter.value === 'all' || m.type === typeFilter.value)
 })
 
+function mapMistake(m, corrected) {
+  const st = (m && m.struct) || {}
+  const contents = Array.isArray(st.contents) ? st.contents : []
+  const first = contents[0] || {}
+  const detail = (m && Array.isArray(m.score_detail) && m.score_detail[0]) || {}
+  const readType = Number(m.read_type ?? first.read_type ?? 0)
+  return {
+    id: String(m.id || first.real_id || ''),
+    entity_id: String(first.real_id || ''),
+    set_id: String(st.set_id || m.set_id || ''),
+    content: first.group_name || first.first_type_name || st.set_name || m.question_type || '',
+    group_name: first.first_type_name || first.group_name || m.question_type || '',
+    set_name: st.set_name || '',
+    create_time: m.update_time || '',
+    score: Number(detail.total_point ?? m.total_point ?? 0),
+    full_score: Number(m.total_point ?? 5) || 5,
+    corrected: !!corrected,
+    type: readType === 5 ? 'audio' : 'read_write',
+    answer: first.answer || '',
+    analyze: ''
+  }
+}
+
 async function load() {
   loading.value = true
   error.value = ''
   try {
-    const [sumRes, listRes] = await Promise.allSettled([api.getMistakeSummary(), api.getMistakeList({ page: 1, limit: 100 })])
+    const [sumRes, todoRes, doneRes] = await Promise.allSettled([
+      api.getMistakeSummary(),
+      api.getMistakeList({ status: 0, type: 1, limit: 100 }),
+      api.getMistakeList({ status: 1, type: 1, limit: 100 })
+    ])
     if (sumRes.status === 'fulfilled' && sumRes.value) {
       const s = sumRes.value
       summary.to_correct_count = s.to_correct_count || { audio: 0, read_write: 0 }
       summary.corrected_count = s.corrected_count || { audio: 0, read_write: 0 }
     }
-    if (listRes.status === 'fulfilled' && listRes.value) {
-      const body = listRes.value
-      list.value = Array.isArray(body.data) ? body.data : Array.isArray(body.list) ? body.list : []
+    const mapped = []
+    const push = (res, corrected) => {
+      if (res.status !== 'fulfilled' || !res.value) return
+      const raw = Array.isArray(res.value.mistake) ? res.value.mistake
+        : Array.isArray(res.value.data) ? res.value.data
+        : Array.isArray(res.value.list) ? res.value.list : []
+      for (const m of raw) mapped.push(mapMistake(m, corrected))
     }
-    const bad = [sumRes, listRes].find((r) => r.status === 'rejected')
+    push(todoRes, false)
+    push(doneRes, true)
+    // 同一题既在待订正又在已订正时，以已订正为准
+    const byId = new Map()
+    for (const item of mapped) byId.set(item.id || item.entity_id + '_' + item.set_id, item)
+    list.value = [...byId.values()]
+    const bad = [sumRes, todoRes, doneRes].find((r) => r.status === 'rejected')
     if (bad) error.value = bad.reason && bad.reason.message ? bad.reason.message : String(bad.reason)
   } finally {
     loading.value = false

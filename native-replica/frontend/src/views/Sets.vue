@@ -43,7 +43,7 @@
         <el-empty v-if="!loading && filteredSets.length === 0" description="该栏目暂无套卷" />
 
         <div class="set-grid">
-          <article v-for="set in filteredSets" :key="set.set_id" class="set-card">
+          <article v-for="set in filteredSets" :key="set._key" class="set-card">
             <div>
               <div class="set-tags">
                 <el-tag size="small" effect="plain">{{ set.first_column_name || '套卷' }}</el-tag>
@@ -71,8 +71,11 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { api } from '../api'
+import { useUserStore } from '../stores/user'
 
 const router = useRouter()
+const userStore = useUserStore()
+const resourceId = computed(() => String(userStore.activeResourceId || '239'))
 const loading = ref(false)
 const error = ref('')
 const columns = ref([])
@@ -81,7 +84,12 @@ const baseUrl = ref('')
 const activeColumn = ref('all')
 const keyword = ref('')
 
-const totalCount = computed(() => columns.value.reduce((sum, c) => sum + (Number(c.column_set_count) || 0), 0))
+const totalCount = computed(() => {
+  const sum = columns.value.reduce((acc, c) => acc + (Number(c.column_set_count) || 0), 0)
+  // 服务端的 column_set_count 与实际返回条数可能略有差异（读写套卷在 rw_data 中）
+  if (activeColumn.value === 'all' && sets.value.length) return sets.value.length
+  return sum
+})
 
 const currentColumnName = computed(() => {
   if (activeColumn.value === 'all') return '全部套卷'
@@ -104,19 +112,53 @@ function difficultyText(rate) {
 }
 
 async function loadColumns() {
-  const body = await api.getColumns({})
+  const body = await api.getColumns({ resource_id: Number(resourceId.value) })
   columns.value = (body && body.data) || []
+  if (activeColumn.value !== 'all' && !columns.value.some((c) => String(c.column_id) === String(activeColumn.value))) {
+    activeColumn.value = 'all'
+  }
 }
 
 async function loadSets() {
   loading.value = true
   error.value = ''
   try {
-    const params = { page: 1, limit: 50 }
-    if (activeColumn.value !== 'all') params.column_id = activeColumn.value
-    const body = await api.getSets(params)
-    sets.value = (body && (body.data || body.list)) || []
-    baseUrl.value = (body && body.base_url) || ''
+    // g/set/list 必须带 first_column_id（数组），且一次只查一个栏目；
+    // “全部套卷”= 合并各栏目结果并去重。
+    const ids = activeColumn.value === 'all'
+      ? columns.value.map((c) => Number(c.column_id)).filter(Boolean)
+      : [Number(activeColumn.value)]
+    const merged = []
+    const colName = (cid) => {
+      const c = columns.value.find((x) => String(x.column_id) === String(cid))
+      return c ? c.column_name : '套卷'
+    }
+    for (const cid of ids) {
+      const body = await api.getSets({ first_column_id: [cid], page: 1, limit: 200, resource_id: resourceId.value })
+      if (!baseUrl.value) baseUrl.value = (body && body.base_url) || ''
+      // 听说/听力在 data；读写模拟在 rw_data
+      const rows = [
+        ...((body && (body.data || body.list)) || []),
+        ...((body && (body.rw_data || body.read_write_data)) || [])
+      ]
+      for (const s of rows) {
+        const st = (s && s.struct) || {}
+        const sid = String(s.set_id || st.set_id || s.id || s.serial_id || '')
+        if (!sid) continue
+        merged.push({
+          ...s,
+          _key: `${cid}_${sid}`,
+          set_id: sid,
+          set_name: s.set_name || st.set_name || '',
+          first_column_name: s.first_column_name || colName(cid),
+          set_module_name: s.set_module_name || st.module_name || '',
+          contents: Array.isArray(s.contents) ? s.contents : (Array.isArray(st.contents) ? st.contents : []),
+          difficulty_rate: s.difficulty_rate ?? st.difficulty_rate ?? 0,
+          avg_point: s.avg_point ?? 0
+        })
+      }
+    }
+    sets.value = merged
   } catch (e) {
     error.value = e && e.message ? e.message : String(e)
     sets.value = []
@@ -158,5 +200,8 @@ async function reload() {
 }
 
 watch(activeColumn, loadSets)
-onMounted(reload)
+onMounted(async () => {
+  await userStore.bootstrap().catch(() => {})
+  await reload()
+})
 </script>

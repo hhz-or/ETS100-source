@@ -35,6 +35,11 @@ export const useUserStore = defineStore('user', {
       return (ecard && ecard.grade) || (state.profile && state.profile.grade_name) || ''
     },
     activeEcard: (state) => state.ecards.find((e) => String(e.id) === String(state.activeEcardId)) || state.ecards[0] || null,
+    /** 当前学习卡对应的资源库 id（听说/读写/听力栏目资源），如 239/240/241/363 */
+    activeResourceId: (state) => {
+      const ecard = state.ecards.find((e) => String(e.id) === String(state.activeEcardId)) || state.ecards[0]
+      return ecard && ecard.resource_id ? String(ecard.resource_id) : ''
+    },
     schoolName: (state) => {
       const ecard = state.ecards.find((e) => String(e.id) === String(state.activeEcardId))
       return (ecard && ecard.school_name) || ''

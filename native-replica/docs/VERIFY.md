@@ -64,3 +64,14 @@
 | 上传页面 | Practice 页“上传并回传成绩”按钮 + 得分/完成度展示；录音/评测/上传均无 console error |
 
 未完成：真实麦克风完整练习回归（人工）、SLS 日志、自动更新器。
+
+## 6. 页面数据修复（2026-11-09）
+
+| 页面 | 问题 | 原因 / 修复 | 结果 |
+|---|---|---|---|
+| 作业详情 | “作业不存在” | `m/homework/info` 缺 `resource_id`/`version`；且名称/题目列表来自 `g/homework/list` 的 `struct`。改为 info 带 `resource_id=当前学习卡资源库`，再按作业列表合并结构 | 标题/得分/用时/6 道题正常 |
+| 套卷练习 | “该栏目暂无套卷” | `g/set/list` 必须带 `first_column_id`（数组），且读写套卷在 `rw_data`。改为按栏目逐个请求 + 合并 `data`/`rw_data` | 九年级 342 套（听说 104/读写 113/听力 111） |
+| 错题本 | “该分类下暂无错题” | `m/mistake/list` 返回 `mistake` 而非 `data`，且需要 `status/type/offset` 等参数。改为 status 0/1 分别拉取并映射 `struct.contents` | 15 条待订正错题正常展示 |
+| 资源库 | 套卷显示成六年级 | 之前固定 `resource_id=363`。改为读取当前学习卡 `resource_id`（九年级=239） | 与账号年级一致 |
+
+回归：三页均无 console error；截图见分析工作区（未随仓库发布）。

@@ -7,6 +7,8 @@ import App from './App.vue'
 import router from './router'
 import './styles.css'
 import * as ise from './ise'
+import * as apiMod from './api'
+window.__etsApi = apiMod
 
 const app = createApp(App)
 app.use(createPinia())

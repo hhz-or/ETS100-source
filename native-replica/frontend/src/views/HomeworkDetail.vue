@@ -103,10 +103,12 @@
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { api } from '../api'
+import { useUserStore } from '../stores/user'
 import { fmtDate, fmtSize, homeworkState, stateText } from '../utils'
 
 const route = useRoute()
 const router = useRouter()
+const userStore = useUserStore()
 const loading = ref(false)
 const error = ref('')
 const homework = ref(null)
@@ -158,10 +160,48 @@ async function load() {
   loading.value = true
   error.value = ''
   try {
-    const body = await api.getHomeworkInfo(route.params.id)
-    const hw = body && body.data && !Array.isArray(body.data) ? body.data : body
-    homework.value = hw || null
-    baseUrl.value = (body && body.base_url) || (hw && hw.base_url) || ''
+    await userStore.bootstrap().catch(() => {})
+    const parentId = (userStore.activeEcard && userStore.activeEcard.parent_id)
+      || (() => { try { return localStorage.getItem('ets_parent_account_id') } catch { return '' } })()
+    // 1) 作业详情（必须带 resource_id + version，否则服务端返回“作业不存在”）
+    let info = null
+    const resourceId = String(userStore.activeResourceId || '239')
+    try {
+      info = await api.getHomeworkInfo(route.params.id, { resource_id: resourceId })
+    } catch (e) {
+      if (!/作业不存在/.test(String(e && e.message))) throw e
+    }
+    // 2) 作业列表取结构（set_name/struct.contents），状态 0/2/3 合并
+    let item = null
+    if (parentId) {
+      for (const status of [0, 2, 3]) {
+        try {
+          const body = await api.getHomeworkList({ parent_account_id: parentId, status, limit: 100 })
+          const found = (body && body.data || []).find((h) => String(h.id) === String(route.params.id))
+          if (found) { item = found; baseUrl.value = (body && body.base_url) || found.base_url || ''; break }
+        } catch (e) { /* 某个状态不可用时继续 */ }
+      }
+    }
+    const st = (item && item.struct) || {}
+    const merged = {
+      ...(item || {}),
+      ...(info || {}),
+      id: String(route.params.id),
+      name: item?.set_name || st.set_name || `作业 ${route.params.id}`,
+      set_name: item?.set_name || st.set_name || '',
+      set_id: item?.set_id || st.set_id || info?.set_id || '',
+      structs: item?.struct ? [item.struct] : [],
+      contents: Array.isArray(st.contents) ? st.contents : [],
+      base_url: baseUrl.value || item?.base_url || '',
+      point: info?.point ?? item?.point ?? 0,
+      total_point: item?.total_point || 10,
+      submit: info?.submit ?? item?.submit ?? 0,
+      practise_count: info?.practise_count ?? item?.practise_count ?? 0,
+      score: info?.score || []
+    }
+    homework.value = merged
+    baseUrl.value = merged.base_url || ''
+    if (!info && !item) error.value = '作业不存在'
   } catch (e) {
     error.value = e && e.message ? e.message : String(e)
   } finally {

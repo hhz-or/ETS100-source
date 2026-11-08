@@ -322,14 +322,30 @@ export const api = {
       use_homework_privilege: 1
     })
   },
-  getHomeworkInfo: (homeworkId) => sendRequest('m/homework/info', { homework_id: String(homeworkId) }),
+  getHomeworkInfo: (homeworkId, params = {}) => sendRequest('m/homework/info', {
+    homework_id: String(homeworkId),
+    resource_id: String(params.resource_id || 363),
+    version: Number(params.version || 2),
+    ...(params.set_id ? { set_id: String(params.set_id) } : {})
+  }),
   getMistakeSummary: (params = {}) => {
     const parent = params.parent_account_id || params.parentAccountId || parentAccountId()
     return sendRequest('m/mistake/summary', { parent_account_id: String(parent || '') })
   },
   getMistakeList: (params = {}) => {
     const parent = params.parent_account_id || params.parentAccountId || parentAccountId()
-    return sendRequest('m/mistake/list', { parent_account_id: String(parent || ''), page: 1, limit: 20, ...params })
+    const type = Number(params.type ?? 1)
+    const status = Number(params.status ?? 0)
+    return sendRequest('m/mistake/list', {
+      parent_account_id: String(parent || ''),
+      status,
+      random: '0',
+      max_id: '0',
+      max_update_time: '',
+      type,
+      offset: Number(params.offset ?? 0),
+      limit: Number(params.limit ?? 20)
+    })
   },
     // m/ecard/list 的返回体在服务端不同版本下可能是：
   //   { data: [ ... ] } / { data: { "0": {...} } } / { "0": {...}, "1": {...} }
@@ -348,7 +364,11 @@ export const api = {
     return { ...(body || {}), data: list }
   },
   getColumns: (params = {}) => sendRequest('g/set/column-v2', { resource_id: Number(params.resource_id || 363), tag_id: 1, hide_set_count: 1, ...params }),
-  getSets: (params = {}) => sendRequest('g/set/list', { resource_id: String(params.resource_id || 363), show_empty: 0, use_https: 1, ...params }),
+  getSets: (params = {}) => {
+    const p = { resource_id: String(params.resource_id || 363), show_empty: 0, use_https: 1, ...params }
+    if (!p.first_column_id && params.column_id) p.first_column_id = [Number(params.column_id)]
+    return sendRequest('g/set/list', p)
+  },
   getUnits: (params = {}) => sendRequest('g/set/unit-list', { is_need_score: 0, ...params }),
   getUnitInfo: (args = {}) => {
     const p = typeof args === 'object' && args !== null ? args : { unit_id: args }

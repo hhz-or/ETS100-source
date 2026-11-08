@@ -325,7 +325,7 @@ async function uploadResult() {
   try {
     const scores = evalResult.value.scores || {}
     if (scores.isRejected) throw new Error('评测被拒绝（未识别到有效朗读），不能回传成绩')
-    const resourceId = String(route.query.resource_id || '239')
+    const resourceId = String(route.query.resource_id || userStore.activeResourceId || '239')
     const ppr = await resolvePaperInfo()
     const category = kind.value === 'read' ? 'read_sentence'
       : kind.value === 'dialogue' ? 'simple_expression_ufi'
