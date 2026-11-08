@@ -16,3 +16,7 @@ app.mount('#app')
 // 移除 index.html 的启动占位屏
 const placeholder = document.getElementById('placeholderScreen')
 if (placeholder) placeholder.remove()
+
+// 评测模块暴露到 window，便于自动化验证（CDP 自测/调试）
+import * as ise from './ise'
+window.__etsIse = ise

@@ -25,7 +25,7 @@ struct KnownPlugin {
 const KnownPlugin kKnownPlugins[] = {
     {"EtsHelper", "etshelper"}, {"FileHelper", "filehelper"}, {"HttpHelper", "httphelper"},
     {"SQLitePln", "sqlitepln"}, {"ShellHelper", "shellhelper"}, {"SevenZip", "sevenzip"},
-    {"SysConfig", "sysconfig"},
+    {"SysConfig", "sysconfig"}, {"soundhelper", "soundhelper"},
 };
 
 PluginManager* g_manager = nullptr;

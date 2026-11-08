@@ -45,3 +45,18 @@
 - 单会话说明：副本登录会顶掉官方客户端会话；反之亦然。设备指纹可在设置页填写以复用官方绑定。
 
 > 截图与运行日志含账号信息，未随仓库发布；本文件只保留可公开的验证结论。
+
+## 5. 录音 / ISE 评测（新增，2026-11-08）
+
+基于真实练习抓包（docs/15_practice_protocol.md）实现并验证：
+
+| 检查 | 结果 |
+|---|---|
+| speex 编码器参数 | 16k WB、quality 10、VBR off、bitrate=84800 → **106B/帧**，2 帧=212B 块（与抓包一致） |
+| C++ `soundhelper.encode_speex` | 通过桥调用编码 8.1s PCM（259200B）→ 405 帧 / 106B / 42930B spx，耗时 158ms |
+| ISE 评测（Python 参考实现） | 用抓包 spx 回放 → `code=000000`，逐词结果与原评测一致（accuracy 0.0609 vs 0.0609） |
+| ISE 评测（复刻前端 JS） | WebView2 页面内：media PCM → `soundhelper` 编码 → 浏览器 WebSocket protobuf → 返回 XML/分数（2.7s） |
+| 麦克风权限 | WebView2 自动授予：`getUserMedia` 打开 "麦克风阵列 (Realtek Audio)"，随后立即关闭 |
+| Practice 页录音评测 | 已接入：开始录音 → 停止并评测 → 显示准确度/流利度/完整度/总分与逐词颜色 |
+
+未完成：mp3 生成（上传所需，可调用安装目录 ffmpeg/lame）、OSS 上传与 `sync-v2` 的前端接入（Python 参考实现已验证 OSS 上传）。

@@ -47,6 +47,34 @@
             <h4>参考原文</h4>
             <div class="rich-text">{{ info.value }}</div>
           </div>
+
+          <!-- 录音 + ISE 评测 -->
+          <div class="answer-box" style="margin-top: 14px">
+            <h4>录音评测 <span class="small muted">（speex 16k → ISE WebSocket）</span></h4>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 10px 0">
+              <el-button v-if="!recording" type="primary" @click="startRecord" :disabled="evaluating">
+                {{ evalResult ? '重新录音' : '开始录音' }}
+              </el-button>
+              <el-button v-else type="danger" @click="stopRecord">停止并评测</el-button>
+              <span class="small muted" v-if="recording">录音中… {{ recordSeconds }}s</span>
+              <span class="small muted" v-if="evaluating">评测中…</span>
+            </div>
+            <el-alert v-if="evalError" type="error" :closable="false" show-icon :title="evalError" />
+            <div v-if="evalResult && evalResult.scores" class="kv-grid">
+              <div class="kv"><span>准确度</span><b>{{ fmtScore(evalResult.scores.accuracy) }}</b></div>
+              <div class="kv"><span>流利度</span><b>{{ fmtScore(evalResult.scores.fluency) }}</b></div>
+              <div class="kv"><span>完整度</span><b>{{ fmtScore(evalResult.scores.integrity) }}</b></div>
+              <div class="kv"><span>总分</span><b>{{ fmtScore(evalResult.scores.total) }}</b></div>
+            </div>
+            <div v-if="evalResult && evalResult.scores && evalResult.scores.words && evalResult.scores.words.length"
+                 class="keypoint-chips" style="margin-top: 10px">
+              <span v-for="(w, i) in evalResult.scores.words" :key="i" class="keypoint-chip"
+                    :style="{ color: wordColor(w.score) }">{{ w.content }}</span>
+            </div>
+            <div v-if="evalResult && evalResult.scores && evalResult.scores.isRejected" class="small muted" style="margin-top: 8px">
+              评测被拒绝（except_info={{ evalResult.scores.exceptInfo }}），请重新录音朗读。
+            </div>
+          </div>
         </template>
 
         <!-- collector.dialogue -->
@@ -171,9 +199,91 @@ import { ElMessage } from 'element-plus'
 import { getMockContent } from '../mock'
 import { isMock } from '../bridge'
 import { loadContentPackage, parseStructure, resolveMedia, safeRichText } from '../content'
+import { PcmRecorder } from '../recorder'
+import * as ise from '../ise'
+import { sendRequest } from '../api'
+import { useUserStore } from '../stores/user'
 
 const route = useRoute()
 const router = useRouter()
+const userStore = useUserStore()
+
+// ---- 录音评测状态 ----
+const recording = ref(false)
+const recordSeconds = ref(0)
+const evaluating = ref(false)
+const evalResult = ref(null)
+const evalError = ref('')
+let recorder = null
+let recordTimer = null
+
+function fmtScore(v) {
+  return Number.isFinite(Number(v)) ? (Math.round(Number(v) * 100) / 100) : '—'
+}
+function wordColor(score) {
+  const s = Number(score) || 0
+  if (s >= 4) return '#12b76a'
+  if (s >= 2.5) return '#e0a100'
+  return '#e5484d'
+}
+
+async function resolvePaperId() {
+  try {
+    const body = await sendRequest('g/set/ppr-res', {
+      batch: [{ entity_id: String(stid.value), order: '1' }]
+    })
+    const batch = (body && body.batch) || []
+    return (batch[0] && batch[0].res_id) || ''
+  } catch (e) {
+    return ''
+  }
+}
+
+async function startRecord() {
+  evalError.value = ''
+  evalResult.value = null
+  try {
+    recorder = new PcmRecorder({ sampleRate: 16000 })
+    await recorder.start()
+    recording.value = true
+    recordSeconds.value = 0
+    recordTimer = setInterval(() => { recordSeconds.value = Math.round(recorder.duration) }, 250)
+  } catch (e) {
+    evalError.value = '无法打开麦克风：' + (e && e.message ? e.message : e)
+  }
+}
+
+async function stopRecord() {
+  if (!recorder) return
+  recording.value = false
+  if (recordTimer) { clearInterval(recordTimer); recordTimer = null }
+  evaluating.value = true
+  try {
+    const pcm = await recorder.stop()
+    if (!pcm.length || pcm.length < 16000 * 0.6) throw new Error('录音太短（至少约 0.6 秒）')
+    await userStore.bootstrap().catch(() => {})
+    const paperId = await resolvePaperId()
+    const session = ise.buildSession(userStore, {
+      sceneType: homeworkId.value ? 'homework' : 'practice',
+      sceneId: homeworkId.value || setId.value || '',
+      paperId,
+      category: kind.value === 'read' ? 'read_sentence' : kind.value,
+      region: 'shanghai'
+    })
+    const result = await ise.evaluatePcm(pcm, session, { timeoutMs: 120000 })
+    if (!result || !result.xml) throw new Error('评测服务未返回结果：' + ((result && result.msg) || ''))
+    evalResult.value = result
+    if (result.scores && result.scores.isRejected) {
+      ElMessage.warning('本次录音被评测拒绝，请重试')
+    } else {
+      ElMessage.success('评测完成')
+    }
+  } catch (e) {
+    evalError.value = e && e.message ? e.message : String(e)
+  } finally {
+    evaluating.value = false
+  }
+}
 
 const stid = computed(() => String(route.query.stid || route.query.setid || '900101'))
 const setId = computed(() => String(route.query.setid || ''))

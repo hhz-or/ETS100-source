@@ -167,6 +167,15 @@ struct NewWindowHandler : ComHandler<ICoreWebView2NewWindowRequestedEventHandler
     }
 };
 
+struct PermissionHandler : ComHandler<ICoreWebView2PermissionRequestedEventHandler> {
+    std::function<HRESULT(ICoreWebView2*, ICoreWebView2PermissionRequestedEventArgs*)> fn;
+    HRESULT STDMETHODCALLTYPE Invoke(ICoreWebView2* sender,
+                                     ICoreWebView2PermissionRequestedEventArgs* args) override {
+        if (fn) return fn(sender, args);
+        return S_OK;
+    }
+};
+
 struct ProcessFailedHandler : ComHandler<ICoreWebView2ProcessFailedEventHandler> {
     std::function<HRESULT(ICoreWebView2*, ICoreWebView2ProcessFailedEventArgs*)> fn;
     HRESULT STDMETHODCALLTYPE Invoke(ICoreWebView2* sender,
@@ -210,11 +219,13 @@ struct AppContext {
     NewWindowHandler* newWindowHandler = nullptr;
     ProcessFailedHandler* processFailedHandler = nullptr;
     NavigationCompletedHandler* navHandler = nullptr;
+    PermissionHandler* permHandler = nullptr;
 
     EventRegistrationToken msgToken{};
     EventRegistrationToken newWindowToken{};
     EventRegistrationToken processFailedToken{};
     EventRegistrationToken navToken{};
+    EventRegistrationToken permToken{};
 
     bool shuttingDown = false;
     bool webviewFailed = false;
@@ -350,6 +361,26 @@ void SetupWebView(AppContext* app) {
     };
     wv->add_NavigationCompleted(app->navHandler, &app->navToken);
 
+    // Microphone (recording practice) — auto-grant for the bundled app.
+    app->permHandler = new PermissionHandler();
+    app->permHandler->fn = [app](ICoreWebView2* /*sender*/,
+                                 ICoreWebView2PermissionRequestedEventArgs* args) -> HRESULT {
+        COREWEBVIEW2_PERMISSION_KIND kind = COREWEBVIEW2_PERMISSION_KIND_UNKNOWN_PERMISSION;
+        args->get_PermissionKind(&kind);
+        std::wstring uri;
+        LPWSTR rawUri = nullptr;
+        if (SUCCEEDED(args->get_Uri(&rawUri)) && rawUri) {
+            uri = rawUri;
+            CoTaskMemFree(rawUri);
+        }
+        if (kind == COREWEBVIEW2_PERMISSION_KIND_MICROPHONE) {
+            args->put_State(COREWEBVIEW2_PERMISSION_STATE_ALLOW);
+            if (app->logger) app->logger->Info("webview", "microphone permission granted for " + ets::WideToUtf8(uri));
+        }
+        return S_OK;
+    };
+    wv->add_PermissionRequested(app->permHandler, &app->permToken);
+
     // Navigate: local virtual host by default, remote when shell.ini HomeUrl is remote.
     std::wstring navUrl = ets::Utf8ToWide(app->cfg.StartUrl());
     if (!hostMapped && !app->cfg.IsRemoteHome()) {
@@ -481,6 +512,7 @@ void DoShutdown(AppContext* app) {
         if (app->newWindowHandler) app->webview->remove_NewWindowRequested(app->newWindowToken);
         if (app->processFailedHandler) app->webview->remove_ProcessFailed(app->processFailedToken);
         if (app->navHandler) app->webview->remove_NavigationCompleted(app->navToken);
+        if (app->permHandler) app->webview->remove_PermissionRequested(app->permToken);
     }
     if (app->msgHandler) {
         app->msgHandler->Release();
@@ -497,6 +529,10 @@ void DoShutdown(AppContext* app) {
     if (app->navHandler) {
         app->navHandler->Release();
         app->navHandler = nullptr;
+    }
+    if (app->permHandler) {
+        app->permHandler->Release();
+        app->permHandler = nullptr;
     }
 
     if (app->controller) {

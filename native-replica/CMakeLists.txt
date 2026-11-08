@@ -79,3 +79,17 @@ if(SEVENZIP_SRC)
 endif()
 
 # copy plugin dependency: sqlite dll? (static amalgamation, none)
+
+# ---------------- speex (audio encoding for soundhelper) ----------------
+file(GLOB SPEEX_SRC "${THIRD_PARTY}/speex/libspeex/*.c")
+add_library(speex STATIC ${SPEEX_SRC})
+target_include_directories(speex PUBLIC "${THIRD_PARTY}/speex/include" "${THIRD_PARTY}/speex/include/speex")
+target_compile_definitions(speex PUBLIC HAVE_CONFIG_H)
+
+# soundhelper plugin: speex encode (recording pipeline)
+file(GLOB SOUNDHELPER_SRC "${CMAKE_SOURCE_DIR}/plugins/soundhelper/*.cpp")
+add_library(plugin_soundhelper SHARED ${SOUNDHELPER_SRC})
+target_include_directories(plugin_soundhelper PRIVATE "${SHARED}" "${THIRD_PARTY}/include" "${THIRD_PARTY}/speex/include")
+target_link_libraries(plugin_soundhelper PRIVATE ets_common speex)
+set_target_properties(plugin_soundhelper PROPERTIES OUTPUT_NAME "soundhelper" PREFIX ""
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/plugins/soundhelper")
